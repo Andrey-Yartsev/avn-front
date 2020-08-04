@@ -188,6 +188,11 @@ const actions = {
   },
   joinGroup({ dispatch, commit }, { productId, showMembers }) {
     return dispatch("_joinGroup", productId).then(() => {
+      commit(
+        "auth/addItemToUserConnectedData",
+        { key: "groups", id: productId },
+        { root: true }
+      );
       if (!showMembers) {
         commit("joinGroup", productId);
       } else {
@@ -199,6 +204,11 @@ const actions = {
   },
   leaveGroup({ dispatch, commit }, productId) {
     dispatch("_leaveGroup", productId).then(() => {
+      commit(
+        "auth/removeItemFromUserConnectedData",
+        { key: "groups", id: productId },
+        { root: true }
+      );
       commit("leaveGroup", productId);
     });
   },

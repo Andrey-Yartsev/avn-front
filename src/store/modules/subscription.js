@@ -33,8 +33,23 @@ const actions = {
       });
     });
   },
+  resubscribe({ commit, dispatch }, data) {
+    return dispatch("_resubscribe", data).then(res => {
+      commit(
+        "auth/addItemToUserConnectedData",
+        { key: "subscribe", id: data.userId },
+        { root: true }
+      );
+      return res;
+    });
+  },
   unsubscribe({ commit, dispatch }, data) {
     return dispatch("_unsubscribe", data).then(result => {
+      commit(
+        "auth/removeItemFromUserConnectedData",
+        { key: "subscribe", id: data.userId },
+        { root: true }
+      );
       commit("statusUpdate", {
         action: "unsubscribe",
         result,
@@ -184,7 +199,7 @@ createRequestAction({
 });
 
 createRequestAction({
-  prefix: "resubscribe",
+  prefix: "_resubscribe",
   apiPath: "subscriptions/resubscribe",
   state,
   mutations,

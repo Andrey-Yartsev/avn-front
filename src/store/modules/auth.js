@@ -1,5 +1,6 @@
 "use strict";
 
+import { createRequestAction } from "../utils/storeRequest";
 import BrowserStore from "store";
 import UserApi from "@/api/user";
 import Router from "@/router";
@@ -12,7 +13,12 @@ const state = {
   showCaptcha: false,
   token: "",
   user: null,
-  otpAuth: false
+  otpAuth: false,
+  connectedData: {
+    follow: [],
+    subscribe: [],
+    groups: []
+  }
 };
 
 const defaultUser = {
@@ -81,6 +87,12 @@ const actions = {
   setUser({ commit }, user) {
     commit("setUser", user);
     commit("gender/setCategory", user.categoryView, { root: true });
+  },
+
+  getUserConnectedData({ dispatch, commit }) {
+    dispatch("_getUserConnectedData").then(res => {
+      commit("setUserConnectedData", res);
+    });
   },
 
   extendUser({ state, dispatch }, user) {
@@ -224,8 +236,36 @@ const mutations = {
   },
   newCardToken(state, data) {
     state.user.paymentGateCustomerCardToken = data;
+  },
+  setUserConnectedData(state, data) {
+    state.connectedData = data;
+  },
+  addItemToUserConnectedData(state, { key, id }) {
+    state.connectedData = {
+      ...state.connectedData,
+      [key]: [...state.connectedData[key], parseInt(id)]
+    };
+  },
+  removeItemFromUserConnectedData(state, { key, id }) {
+    state.connectedData = {
+      ...state.connectedData,
+      [key]: state.connectedData[key].filter(item => item !== parseInt(id))
+    };
   }
 };
+
+createRequestAction({
+  prefix: "_getUserConnectedData",
+  apiPath: "users/me/connected",
+  state,
+  mutations,
+  actions,
+  throw400: true,
+  localError: true,
+  options: {
+    method: "GET"
+  }
+});
 
 export default {
   namespaced: true,

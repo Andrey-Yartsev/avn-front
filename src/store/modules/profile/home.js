@@ -106,13 +106,23 @@ const actions = {
   setSource({ commit }, source) {
     commit("setSource", source);
   },
-  follow({ dispatch }, userId) {
+  follow({ dispatch, commit }, userId) {
     dispatch("_follow", userId).then(() => {
+      commit(
+        "auth/addItemToUserConnectedData",
+        { key: "follow", id: userId },
+        { root: true }
+      );
       dispatch("extend", { followedBy: true });
     });
   },
-  unfollow({ dispatch }, userId) {
+  unfollow({ dispatch, commit }, userId) {
     dispatch("_unfollow", userId).then(() => {
+      commit(
+        "auth/removeItemFromUserConnectedData",
+        { key: "follow", id: userId },
+        { root: true }
+      );
       dispatch("extend", { followedBy: false });
     });
   },

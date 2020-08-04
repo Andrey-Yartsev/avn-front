@@ -32,6 +32,7 @@ const actions = {
           return;
         }
         dispatch("auth/setUser", response, { root: true });
+        dispatch("auth/getUserConnectedData", null, { root: true });
         resolve();
       });
     });

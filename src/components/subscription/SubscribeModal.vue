@@ -31,6 +31,11 @@ export default {
     subscribe({ months, price }) {
       const onSuccess = () => {
         this.$store.dispatch("subscription/success");
+        this.$store.commit(
+          "auth/addItemToUserConnectedData",
+          { key: "subscribe", id: this.profile.id },
+          { root: true }
+        );
         if (window.onSubscriptionSuccess) {
           window.onSubscriptionSuccess();
           window.onSubscriptionSuccess = null;

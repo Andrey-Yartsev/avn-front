@@ -7,6 +7,26 @@ const actions = {
     return dispatch("update", {
       deleteRequested: false
     });
+  },
+  follow({ commit, dispatch }, userId) {
+    return dispatch("_follow", userId).then(res => {
+      commit(
+        "auth/addItemToUserConnectedData",
+        { key: "follow", id: userId },
+        { root: true }
+      );
+      return res;
+    });
+  },
+  unfollow({ commit, dispatch }, userId) {
+    return dispatch("_unfollow", userId).then(res => {
+      commit(
+        "auth/removeItemFromUserConnectedData",
+        { key: "follow", id: userId },
+        { root: true }
+      );
+      return res;
+    });
   }
 };
 
@@ -93,7 +113,7 @@ createRequestAction({
 });
 
 createRequestAction({
-  prefix: "follow",
+  prefix: "_follow",
   apiPath: "subscriptions/follow",
   state,
   mutations,
@@ -110,7 +130,7 @@ createRequestAction({
 });
 
 createRequestAction({
-  prefix: "unfollow",
+  prefix: "_unfollow",
   apiPath: "subscriptions/unfollow",
   state,
   mutations,

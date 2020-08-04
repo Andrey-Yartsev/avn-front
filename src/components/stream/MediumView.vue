@@ -106,6 +106,9 @@ export default {
     },
     subsUpdate() {
       return this.$store.state.subscription.updated;
+    },
+    user() {
+      return this.$store.state.auth.user;
     }
   },
   watch: {
@@ -136,18 +139,48 @@ export default {
       this.imageSrc = `${this.post.thumbUrl}?v=${random}`;
     },
     checkPermission() {
-      if (this.post.type === "subscribers" && !this.post.user.subscribedBy) {
-        this.showLockIcon = true;
-        return;
-      } else if (this.post.type === "followers" && !this.post.user.followedBy) {
-        this.showLockIcon = true;
-        return;
-      } else if (this.post.type === "list") {
-        return;
+      if (!this.user) {
+        if (this.post.user.restrictLivePreview) {
+          this.showLockIcon = true;
+        } else {
+          this.interval = setInterval(() => {
+            this.updateMediaSrc();
+          }, 5000);
+        }
       } else {
-        this.interval = setInterval(() => {
-          this.updateMediaSrc();
-        }, 5000);
+        if (
+          this.post.type === "subscribers" &&
+          !this.$store.state.auth.connectedData.subscribe.includes(
+            this.post.user.id
+          ) &&
+          this.post.user.restrictLivePreview
+        ) {
+          this.showLockIcon = true;
+          return;
+        } else if (
+          this.post.type === "followers" &&
+          !this.$store.state.auth.connectedData.follow.includes(
+            this.post.user.id
+          ) &&
+          this.post.user.restrictLivePreview
+        ) {
+          this.showLockIcon = true;
+          return;
+        } else if (
+          this.post.type === "list" &&
+          this.post.listOptions.listType == "public" &&
+          !this.$store.state.auth.connectedData.groups.includes(
+            this.post.listOptions.listId
+          ) &&
+          this.post.user.restrictLivePreview
+        ) {
+          this.showLockIcon = true;
+          return;
+        } else {
+          this.interval = setInterval(() => {
+            this.updateMediaSrc();
+          }, 5000);
+        }
       }
     }
   },
