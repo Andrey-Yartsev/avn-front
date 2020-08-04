@@ -142,6 +142,8 @@ export default {
       } else if (this.post.type === "followers" && !this.post.user.followedBy) {
         this.showLockIcon = true;
         return;
+      } else if (this.post.type === "list") {
+        return;
       } else {
         this.interval = setInterval(() => {
           this.updateMediaSrc();
