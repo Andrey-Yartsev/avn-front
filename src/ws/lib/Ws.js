@@ -26,6 +26,7 @@ import header_stream from "./actions/header_stream";
 import updatedCreditBalance from "./actions/updatedCreditBalance";
 import newCardToken from "./actions/newCardToken";
 import contests from "./actions/contests";
+import groups from "./actions/groups";
 
 const actions = {
   chats,
@@ -52,7 +53,8 @@ const actions = {
   header_stream,
   updatedCreditBalance,
   newCardToken,
-  contests
+  contests,
+  groups
 };
 
 export default class Ws extends WsAbstract {
