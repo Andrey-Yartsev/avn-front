@@ -73,7 +73,7 @@ export default {
         members: this.group.members.map(item => item.id),
         welcomeMessage: {
           ...data,
-          mediaFiles: data.mediaFile
+          mediaFiles: data.mediaFile || []
         }
       };
       delete body.welcomeMessage.mediaFile;
