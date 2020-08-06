@@ -17,6 +17,7 @@
               :withTips="false"
               :multipleMedia="true"
               :initData="welcomeMessageData"
+              :sendButtonTooltip="'Save'"
             />
             <button
               type="button"
@@ -66,8 +67,6 @@ export default {
       this.$store.dispatch("modal/hide", { name: "groupWelcomeMessage" });
     },
     async submit(data) {
-      console.log(data);
-      // return;
       const body = {
         ...this.group,
         mediaFiles: this.group.media.map(item => ({ id: item.id })),

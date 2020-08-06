@@ -143,7 +143,7 @@
           @click="sendMessage"
           class="btn-send btn-send_default icn-item icn-size_lg"
           :disabled="!canSend"
-          v-tooltip="'Send'"
+          v-tooltip="sendButtonTooltip"
         ></button>
       </div>
     </div>
@@ -225,6 +225,10 @@ export default {
     },
     initData: {
       type: Object
+    },
+    sendButtonTooltip: {
+      type: String,
+      default: "Send"
     }
   },
 
@@ -448,8 +452,10 @@ export default {
     },
     init() {
       this.message = this.initData.text || "";
-      this.price = this.initData.price || "";
-      this.priceIsSet = !!this.initData.price;
+      this.price =
+        parseFloat(this.initData.price) > 0 ? this.initData.price : "";
+      this.priceIsSet =
+        !!this.initData.price && parseFloat(this.initData.price) > 0;
       this.preloadedMedias = (this.initData.mediaFiles || []).map(media => ({
         alreadySaved: true,
         fileContent: media.thumb?.source,
