@@ -111,7 +111,7 @@
         >
           <Draggable v-model="preloadedMedias" v-bind="dragOptions">
             <transition-group
-              class="addFileCollectionView"
+              class="addFileCollectionView postFileCollectionView"
               type="transition"
               name="flip-list"
             >
@@ -126,7 +126,7 @@
           </Draggable>
           <div class="block-thumbnails" v-if="showChooseThumbBlock">
             <div class="block-thumbnails__title">Choose cover</div>
-            <div class="addFileCollectionView">
+            <div class="addFileCollectionView postFileCollectionView">
               <div
                 v-for="thumb in preloadedMedias[0].thumbs"
                 :key="thumb.id"
@@ -367,7 +367,10 @@
             (isNew || (!isNew && mediaType !== 'audio'))
         "
       >
-        <Draggable v-model="preloadedMedias" class="addFileCollectionView">
+        <Draggable
+          v-model="preloadedMedias"
+          class="addFileCollectionView postFileCollectionView"
+        >
           <MediaPreview
             v-for="media in preloadedMedias"
             :media="media"
@@ -378,7 +381,7 @@
         </Draggable>
         <div class="block-thumbnails" v-if="showChooseThumbBlock">
           <div class="block-thumbnails__title">Choose cover</div>
-          <div class="addFileCollectionView">
+          <div class="addFileCollectionView postFileCollectionView">
             <div
               v-for="thumb in preloadedMedias[0].thumbs"
               :key="thumb.id"

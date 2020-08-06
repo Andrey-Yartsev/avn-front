@@ -3,9 +3,10 @@
   display: flex;
   flex-wrap: nowrap;
   position: relative;
-
-  @include media-breakpoint-down($tablet-breakpoint-dcrs) {
-    flex-wrap: wrap;
+  &.postFileCollectionView {
+    @include media-breakpoint-down($tablet-breakpoint-dcrs) {
+      flex-wrap: wrap;
+    }
   }
 }
 
