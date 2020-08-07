@@ -456,6 +456,7 @@ export default {
         parseFloat(this.initData.price) > 0 ? this.initData.price : "";
       this.priceIsSet =
         !!this.initData.price && parseFloat(this.initData.price) > 0;
+      this.showPaidMessageText = this.initData.showPaidMessageText || false;
       this.preloadedMedias = (this.initData.mediaFiles || []).map(media => ({
         alreadySaved: true,
         fileContent: media.thumb?.source,
