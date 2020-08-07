@@ -26,15 +26,13 @@
                   <div class="index table__cell">
                     {{ i + 1 }}
                   </div>
-                  <div class="user table__cell">
-                    <span class="userview-block">
-                      <span class="avatar avatar_sm">
-                        <span class="avatar__img">
-                          <img :src="group.image" v-if="group.image" />
-                        </span>
-                      </span>
-                      <div class="name">{{ group.title }}</div>
+                  <span class="avatar avatar_sm">
+                    <span class="avatar__img">
+                      <img :src="group.image" v-if="group.image" />
                     </span>
+                  </span>
+                  <div class="user table__cell">
+                    <div class="name">{{ group.title }}</div>
                   </div>
                   <div class="user table__cell delete">
                     <button
@@ -218,8 +216,12 @@ export default {
   }
 }
 .user.table__cell {
+  max-width: 200px;
   &.delete {
     margin-left: auto;
   }
+}
+.avatar {
+  margin: 0 10px;
 }
 </style>
