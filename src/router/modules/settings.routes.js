@@ -107,7 +107,7 @@ export const routes = [
     component: () =>
       import(/* webpackChunkName: "SettingsProductsPage" */ "@/components/pages/settings/products/Index"),
     meta: {
-      title: "My purchases",
+      title: "My Library",
       cssName: "settings"
     }
   },

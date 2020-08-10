@@ -252,7 +252,7 @@ export default {
           },
           {
             name: "products",
-            title: "My purchases"
+            title: "My Library"
           },
           {
             name: "payouts",

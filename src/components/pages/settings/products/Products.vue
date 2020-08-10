@@ -1,6 +1,6 @@
 <template>
   <div class="paymentsStatementsView settings-wrapper">
-    <h1 class="form-title settings-title">My purchases</h1>
+    <h1 class="form-title settings-title">My Library</h1>
     <div
       class="form-title table-header-title table-header-title_sticky bg-gradient bg-gradient_pseudo border-top"
     >
@@ -75,7 +75,7 @@
                 <div
                   class="amount table__cell table__cell_selected table__cell_align table__cell_align-hor-c table__cell_align-vert-c"
                 >
-                  ${{ v.price }}
+                  {{ showPrice(v.price) ? `$${v.price}` : "free access" }}
                 </div>
                 <!-- <div
                       class="status table__cell table__cell_align table__cell_align-vert-c"
@@ -129,6 +129,9 @@ export default {
     },
     infinityScrollGetDataMethod() {
       this.$store.dispatch("products/fetch");
+    },
+    showPrice(price) {
+      return parseFloat(price) > 0;
     }
   },
   created() {
