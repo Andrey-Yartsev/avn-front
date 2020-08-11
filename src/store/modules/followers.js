@@ -116,6 +116,31 @@ actions.unblock = ({ commit, dispatch }, userId) => {
   });
 };
 
+actions.paidBlock = ({ commit, dispatch }, { userId, price }) => {
+  dispatch("user/paidBlock", { userId, price }, { root: true }).then(r => {
+    if (r.success) {
+      commit("extendUser", {
+        userId,
+        data: {
+          isPaidBlocked: true,
+          followedOn: false,
+          subscribedOn: false
+        }
+      });
+    }
+  });
+};
+actions.paidUnblock = ({ commit, dispatch }, userId) => {
+  dispatch("user/paidUnblock", userId, { root: true }).then(r => {
+    if (r.success) {
+      commit("extendUser", {
+        userId,
+        data: { isPaidBlocked: false }
+      });
+    }
+  });
+};
+
 actions.mute = ({ commit, dispatch }, user) => {
   dispatch(`user/mute`, user.id, { root: true }).then(r => {
     if (r.success) {

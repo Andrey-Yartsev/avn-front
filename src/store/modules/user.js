@@ -63,6 +63,42 @@ createRequestAction({
 });
 
 createRequestAction({
+  prefix: "paidBlock",
+  apiPath: "users/{userId}/paid-block",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "POST"
+  },
+  resultKey: "paidBlock",
+  paramsToPath: function(params, path) {
+    return path.replace(/{userId}/, params.userId);
+  },
+  paramsToOptions: function(params, options) {
+    options.data = {
+      price: params.price
+    };
+    return options;
+  }
+});
+
+createRequestAction({
+  prefix: "paidUnblock",
+  apiPath: "users/{userId}/paid-block",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "DELETE"
+  },
+  resultKey: "paidUnblock",
+  paramsToPath: function(params, path) {
+    return path.replace(/{userId}/, params);
+  }
+});
+
+createRequestAction({
   prefix: "mute",
   apiPath: "users/{userId}/mute",
   state,
