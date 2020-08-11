@@ -17,8 +17,7 @@
                   <div class="row margin-0">
                     <div
                       :class="{
-                        'content-col': $mq === 'mobile',
-                        'col-1-2': $mq === 'desktop'
+                        'content-col': $mq === 'mobile'
                       }"
                     >
                       <div class="select-wrapper">
@@ -31,6 +30,7 @@
                           <option value="active">Active</option>
                           <option value="expired">Expired</option>
                           <option value="paid">Paid</option>
+                          <option value="followers">Following-Only</option>
                         </select>
                       </div>
                     </div>
@@ -96,7 +96,10 @@
             class="scheduled-message"
           >
             <div class="scheduled-message__header">
-              <div class="title">
+              <div class="title" v-if="message.recipients === 'followers'">
+                Message for <span>following-only</span> users
+              </div>
+              <div class="title" v-else>
                 Message for <span>{{ message.recipients }}</span> subscribers
               </div>
               <div class="time">
