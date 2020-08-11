@@ -9,6 +9,20 @@
       <div class="header-content bg-gradient bg-gradient_light">
         <h3 v-html="group.title" />
         <div class="header-content-description" v-html="group.description" />
+        <div class="header-content-media" v-if="showFreeAccessMedia">
+          <h4 class="title">Free Access</h4>
+          <div class="header-content-media-list">
+            <router-link
+              v-for="item in group.freeAccessMedia"
+              :key="item.id"
+              :to="getLinkUrl(item.id)"
+              class="header-content-media-list-item"
+            >
+              <img :src="item.image" class="media-preview-image" />
+              <span class="media-preview-title">{{ item.title }}</span>
+            </router-link>
+          </div>
+        </div>
         <div v-if="isOwner(profile.id)" class="header-content-settings">
           <Footer :group="group" />
           <div class="header-content-editButton" @click="openEditModal">
@@ -106,6 +120,12 @@ export default {
     },
     showUpgradeButton() {
       return parseFloat(this.group.price) > 0;
+    },
+    showFreeAccessMedia() {
+      return (
+        this.group.freeAccessMedia?.length &&
+        (this.isOwner(this.profile.id) || this.group.isMember)
+      );
     }
   },
   methods: {
@@ -177,6 +197,9 @@ export default {
           group: this.group
         }
       });
+    },
+    getLinkUrl(id) {
+      return `/media/${this.profile.username}/${id}`;
     }
   }
 };
