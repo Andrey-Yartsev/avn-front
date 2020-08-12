@@ -137,7 +137,7 @@ export default {
   },
   computed: {
     userExists() {
-      return !!this.activeUser.id;
+      return !!this.activeUser.id && this.activeUser.active;
     },
     fullUser() {
       return this.$store.state.chat.fetchFullActiveUserResult;
