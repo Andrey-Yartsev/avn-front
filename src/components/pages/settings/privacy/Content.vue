@@ -126,6 +126,7 @@
           </label>
         </div>
       </div>
+
       <div
         v-if="isMonetizedUser"
         class="form-title private-switcher-block private-profile-block border-top"
@@ -140,6 +141,26 @@
               name="restrictLivePreview"
               value="true"
               v-model="localUser.privacy.restrictLivePreview"
+            />
+            <span class="toggle-element_switcher"></span>
+          </label>
+        </div>
+      </div>
+
+      <div
+        v-if="isMonetizedUser"
+        class="form-title private-switcher-block private-profile-block border-top"
+      >
+        <div class="inner">
+          <span class="semi-transparent">
+            Restrict other AVN Stars from entering Live Streams
+          </span>
+          <label class="toggle-element">
+            <input
+              type="checkbox"
+              name="restrictLivePreview"
+              value="true"
+              v-model="localUser.privacy.restrictLiveForModels"
             />
             <span class="toggle-element_switcher"></span>
           </label>

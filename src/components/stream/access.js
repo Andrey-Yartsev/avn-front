@@ -94,6 +94,12 @@ export default {
               type: "warning"
             });
             break;
+          case 6:
+            this.$store.dispatch("global/flashToast", {
+              text: "The stream is not available for AVN Stars",
+              type: "warning"
+            });
+            break;
           default:
             break;
         }
