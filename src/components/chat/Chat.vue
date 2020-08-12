@@ -245,10 +245,12 @@ export default {
       }
       this.$store.commit("chat/setActiveUserId", activeUserId);
       this.$store.commit("chat/resetActiveUser");
-      this.$store.dispatch(
-        "chat/fetchFullActiveUser",
-        this.activeUser.username
-      );
+      if (this.activeUser?.active) {
+        this.$store.dispatch(
+          "chat/fetchFullActiveUser",
+          this.activeUser.username
+        );
+      }
       this.$store.commit("chat/resetMessages");
       this.fetchMessages();
       this.resetNotes();
@@ -327,7 +329,7 @@ export default {
       this.$refs.addMessageSection.$children[0].handleDroppedFiles(files);
     },
     togleNotes() {
-      if (this.notes.show) {
+      if (this.notes.show && this.activeUser?.active) {
         this.saveNotes();
       }
       this.notes.show = !this.notes.show;

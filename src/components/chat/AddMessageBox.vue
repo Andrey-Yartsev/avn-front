@@ -1,5 +1,5 @@
 <template>
-  <div class="addChatMessage" :class="{ disabled: isMuted }">
+  <div class="addChatMessage" :class="{ disabled: isMuted || isDeleted }">
     <template v-if="withFontSizeController">
       <FontSizeControls />
     </template>
@@ -288,6 +288,12 @@ export default {
         return false;
       }
       return this.withUser.isMuted;
+    },
+    isDeleted() {
+      if (!this.withUser) {
+        return false;
+      }
+      return !this.withUser.active;
     },
     activeUserId() {
       return this.$store.state.chat.activeUserId;

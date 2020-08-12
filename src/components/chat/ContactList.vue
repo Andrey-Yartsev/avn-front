@@ -36,7 +36,7 @@
         :class="{
           active: v.active,
           unread: !!v.unreadMessagesCount,
-          disabled: v.withUser.isMuted
+          disabled: v.withUser.isMuted || !v.withUser.active
         }"
       >
         <div
