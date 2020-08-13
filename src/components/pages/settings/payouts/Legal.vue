@@ -276,7 +276,7 @@
                 class="form-group-inner photo-form-group-inner"
                 :class="{ 'success icn-item': !!bankOwnershipProof }"
               >
-                <span class="label">Bank ownersheep statement</span>
+                <span class="label">Bank ownership statement</span>
 
                 <div class="photo-label-wrapper">
                   <label
