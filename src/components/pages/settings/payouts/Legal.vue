@@ -271,6 +271,32 @@
               </div>
             </template>
 
+            <div class="form-group form-group_with-label photo-form-group">
+              <div
+                class="form-group-inner photo-form-group-inner"
+                :class="{ 'success icn-item': !!bankOwnershipProof }"
+              >
+                <span class="label">Bank ownersheep statement</span>
+
+                <div class="photo-label-wrapper">
+                  <label
+                    for="bankOwnershipProof"
+                    class="btn btn_fix-width btn_block border photo-btn"
+                    >Upload</label
+                  >
+                </div>
+
+                <input
+                  type="file"
+                  id="bankOwnershipProof"
+                  accept=".jpg,.jpeg,.png,.tiff,.pdf"
+                  ref="bankOwnershipProof"
+                  name="bankOwnershipProof"
+                  @change="upload"
+                />
+              </div>
+            </div>
+
             <div class="form-group form-group_with-label">
               <label class="form-group-inner">
                 <span class="label">Address</span>
@@ -422,6 +448,7 @@
 import BirthDateSelect from "./BirthDateSelect";
 import Form from "@/mixins/form";
 import upload from "@/utils/upload";
+// import uploadDoc from "@/utils/uploadDoc";
 import { Datetime } from "vue-datetime";
 import { Settings, DateTime as LuxonDateTime } from "luxon";
 import moment from "moment";
@@ -453,6 +480,8 @@ export default {
       personalIdImage: null,
       personalIdImageBackside: null,
       selfieImage: null,
+      bankOwnershipProof: null,
+      bankOwnershipProofUploading: false,
       legalExisted: false,
       personalIdImageUploading: false,
       personalIdImageBacksideUploading: false,
@@ -554,7 +583,8 @@ export default {
       const refName = e.target.name;
       this[`${refName}Uploading`] = true;
       try {
-        this[refName] = await upload(this.$refs[refName].files[0]);
+        const type = refName === "bankOwnershipProof" ? "doc" : "image";
+        this[refName] = await upload(this.$refs[refName].files[0], type);
         this[`${refName}Uploading`] = false;
       } catch (error) {
         this[`${refName}Uploading`] = false;
@@ -589,6 +619,7 @@ export default {
         data.personalIdImage = this.personalIdImage;
         data.personalIdImageBackside = this.personalIdImageBackside;
         data.selfieImage = this.selfieImage;
+        data.bankOwnershipProof = this.bankOwnershipProof;
         data.backsideRequired = this.backsideDocRequired;
         data.docIdType = this.docIdType;
       }
