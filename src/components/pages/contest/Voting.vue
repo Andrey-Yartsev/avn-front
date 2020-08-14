@@ -170,7 +170,7 @@ export default {
     vote() {
       if (this.votes == 1 && this.emailNotConfirmed) {
         this.$store.dispatch("global/flashToast", {
-          text: "Please, confirm your email to user free vote",
+          text: "Please, confirm your email to use free vote",
           type: "warning"
         });
         return;
