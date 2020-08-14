@@ -29,7 +29,10 @@
             <div class="radio-wrapper icn-item">
               <input
                 :disabled="
-                  v.id == 1 && (props.freeVoteUsed || isSingleFreeVoteUsed)
+                  v.id == 1 &&
+                    (props.freeVoteUsed ||
+                      isSingleFreeVoteUsed ||
+                      emailNotConfirmed)
                 "
                 type="radio"
                 name="vote"
@@ -41,10 +44,19 @@
                 class="label"
                 :class="{
                   disabled:
-                    v.id == 1 && (props.freeVoteUsed || isSingleFreeVoteUsed)
+                    v.id == 1 &&
+                    (props.freeVoteUsed ||
+                      isSingleFreeVoteUsed ||
+                      emailNotConfirmed)
                 }"
                 >{{ v.title }}</span
               >
+            </div>
+            <div
+              v-if="v.id == 1 && emailNotConfirmed"
+              class="confirmEmailMessage"
+            >
+              confirm your email addres to use free vote
             </div>
           </label>
         </template>
@@ -144,6 +156,11 @@ export default {
         this.$store.state.contest.singleNominee &&
         this.$store.state.contest.singleFreeVoteUsed
       );
+    },
+    emailNotConfirmed() {
+      return (
+        this.$store.state.auth.user && !this.$store.state.auth.user.isVerified
+      );
     }
   },
   watch: {
@@ -225,7 +242,11 @@ export default {
     }
   },
   mounted() {
-    if (this.props.freeVoteUsed || this.isSingleFreeVoteUsed) {
+    if (
+      this.props.freeVoteUsed ||
+      this.isSingleFreeVoteUsed ||
+      this.emailNotConfirmed
+    ) {
       this.votes = this.votesOptions[1].id;
     } else {
       this.votes = this.votesOptions[0].id;
@@ -257,6 +278,13 @@ export default {
   }
 }
 .label.disabled {
+  opacity: 0.5;
+}
+.confirmEmailMessage {
+  font-size: 12px;
+  position: absolute;
+  left: 30px;
+  bottom: 0;
   opacity: 0.5;
 }
 </style>
