@@ -4,7 +4,14 @@ import { createRequestAction } from "@/store/utils/storeRequest";
 
 const state = {};
 const actions = {};
-const mutations = {};
+const mutations = {
+  updateData(state, { key, value }) {
+    state = {
+      ...state,
+      [key]: value
+    };
+  }
+};
 
 createRequestAction({
   prefix: "fetch",

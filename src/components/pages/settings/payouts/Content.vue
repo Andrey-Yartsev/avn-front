@@ -35,6 +35,8 @@ import Bank from "./Bank.vue";
 import BankMixin from "./bank.js";
 import Summery from "./Summery";
 import Unexpected from "./Unexpected";
+import IdDocsForm from "./IdDocsForm";
+import BankProofForm from "./BankProofForm";
 
 /*
 1. Account
@@ -61,12 +63,24 @@ export default {
   },
 
   computed: {
-    isShowW9From() {
+    isShowW9Form() {
       return (
-        this.user &&
-        this.user.payoutLegalApproveState === "approved" &&
-        this.legal &&
-        this.legal.isNeedW9
+        this.user?.payoutLegalApproveState === "approved" &&
+        this.legal?.isNeedW9
+      );
+    },
+    isShowIdDocsForm() {
+      return (
+        (this.user?.payoutLegalApproveState === "approved" ||
+          this.user?.payoutLegalApproveState === "pending") &&
+        this.legal?.isNeedIdDocs
+      );
+    },
+    isShowBankProofForm() {
+      return (
+        (this.user?.payoutLegalApproveState === "approved" ||
+          this.user?.payoutLegalApproveState === "pending") &&
+        this.legal?.isNeedBankProof
       );
     },
     innerComponent() {
@@ -84,10 +98,20 @@ export default {
           return Legal;
         }
         if (this.user.payoutLegalApproveState === "pending") {
-          return LegalPending;
+          if (this.isShowIdDocsForm) {
+            return IdDocsForm;
+          } else if (this.isShowBankProofForm) {
+            return BankProofForm;
+          } else {
+            return LegalPending;
+          }
         }
         if (this.user.payoutLegalApproveState === "approved") {
-          if (this.bankExists) {
+          if (this.isShowIdDocsForm) {
+            return IdDocsForm;
+          } else if (this.isShowBankProofForm) {
+            return BankProofForm;
+          } else if (this.bankExists) {
             return Summery;
           } else {
             // console.log("BANK NOT EXISTS", this.bankExists);
@@ -132,7 +156,6 @@ export default {
       return this.user.payoutLegalApproveState === "approved";
     },
     bankExists() {
-      // console.log(this.bank);
       return this.bank.isApprove;
     }
   },
@@ -144,9 +167,12 @@ export default {
   },
 
   watch: {
-    isShowW9From(value) {
-      if (value) {
-        this.$router.replace("/settings/w9");
+    isShowW9Form: {
+      immediate: true,
+      handler(value) {
+        if (value) {
+          this.$router.replace("/settings/w9");
+        }
       }
     }
   },

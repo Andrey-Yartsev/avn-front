@@ -596,7 +596,6 @@ export default {
         if (!r.type) {
           return;
         }
-
         if (
           !this.legalExisted ||
           this.user.payoutLegalApproveState === "rejected"
