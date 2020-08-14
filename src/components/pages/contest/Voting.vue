@@ -29,10 +29,7 @@
             <div class="radio-wrapper icn-item">
               <input
                 :disabled="
-                  v.id == 1 &&
-                    (props.freeVoteUsed ||
-                      isSingleFreeVoteUsed ||
-                      emailNotConfirmed)
+                  v.id == 1 && (props.freeVoteUsed || isSingleFreeVoteUsed)
                 "
                 type="radio"
                 name="vote"
@@ -44,20 +41,17 @@
                 class="label"
                 :class="{
                   disabled:
-                    v.id == 1 &&
-                    (props.freeVoteUsed ||
-                      isSingleFreeVoteUsed ||
-                      emailNotConfirmed)
+                    v.id == 1 && (props.freeVoteUsed || isSingleFreeVoteUsed)
                 }"
                 >{{ v.title }}</span
               >
             </div>
-            <div
+            <!-- <div
               v-if="v.id == 1 && emailNotConfirmed"
               class="confirmEmailMessage"
             >
               confirm your email addres to use free vote
-            </div>
+            </div> -->
           </label>
         </template>
         <div v-if="!showTwitterButton" class="form-group bottom-buttons">
@@ -174,6 +168,13 @@ export default {
       this.votes = votes;
     },
     vote() {
+      if (this.votes == 1 && this.emailNotConfirmed) {
+        this.$store.dispatch("global/flashToast", {
+          text: "Please, confirm your email to user free vote",
+          type: "warning"
+        });
+        return;
+      }
       this.votingInProgress = true;
 
       setTimeout(() => {
@@ -242,11 +243,7 @@ export default {
     }
   },
   mounted() {
-    if (
-      this.props.freeVoteUsed ||
-      this.isSingleFreeVoteUsed ||
-      this.emailNotConfirmed
-    ) {
+    if (this.props.freeVoteUsed || this.isSingleFreeVoteUsed) {
       this.votes = this.votesOptions[1].id;
     } else {
       this.votes = this.votesOptions[0].id;
