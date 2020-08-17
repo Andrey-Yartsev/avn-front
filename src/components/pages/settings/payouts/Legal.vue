@@ -592,7 +592,7 @@ export default {
         data.backsideRequired = this.backsideDocRequired;
         data.docIdType = this.docIdType;
       }
-      this.$store.dispatch("payouts/legal/save", data).then(r => {
+      this.$store.dispatch("payouts/legal/save", { data }).then(r => {
         if (!r.type) {
           return;
         }

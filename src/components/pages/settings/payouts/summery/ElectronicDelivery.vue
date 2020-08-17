@@ -77,7 +77,7 @@ export default {
       });
       data.eDelivery = value;
       data.eDeliveryUrl = this.localLegal.eDeliveryUrl;
-      this.$store.dispatch("payouts/legal/save", data).then(r => {
+      this.$store.dispatch("payouts/legal/save", { data }).then(r => {
         if (r.error) {
           return;
         }

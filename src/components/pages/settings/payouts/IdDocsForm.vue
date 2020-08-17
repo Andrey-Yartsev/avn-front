@@ -237,15 +237,20 @@ export default {
         backsideRequired: this.backsideDocRequired,
         docIdType: this.docIdType
       };
-      this.$store.dispatch("payouts/legal/save", data).then(r => {
-        if (!r.type) {
-          return;
-        }
-        this.$store.dispatch("payouts/legal", {
-          key: "isNeedIdDocs",
-          value: false
+      delete data.isNeedBankProof;
+      delete data.isNeedIdDocs;
+      delete data.isNeedW9;
+      this.$store
+        .dispatch("payouts/legal/save", { data, update: true })
+        .then(r => {
+          if (!r.type) {
+            return;
+          }
+          this.$store.commit("payouts/legal/updateData", {
+            key: "isNeedIdDocs",
+            value: false
+          });
         });
-      });
     },
     handleChangeDocIdType(e) {
       this.docIdType = e.target.selectedOptions[0].dataset.name;

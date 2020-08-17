@@ -6,8 +6,8 @@ const state = {};
 const actions = {};
 const mutations = {
   updateData(state, { key, value }) {
-    state = {
-      ...state,
+    state.fetchResult = {
+      ...state.fetchResult,
       [key]: value
     };
   }
@@ -35,9 +35,14 @@ createRequestAction({
     method: "POST"
   },
   paramsToOptions: function(params, options) {
-    options.data = params;
+    options.data = params.data;
     if (window.okev) {
       options.data.sentry = JSON.stringify(window.okev.all());
+    }
+    if (params.update) {
+      options.query = {
+        update: true
+      };
     }
     return options;
   }

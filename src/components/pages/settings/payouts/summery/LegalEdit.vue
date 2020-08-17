@@ -130,7 +130,7 @@ export default {
         data[k] = this.localLegal[k];
       });
 
-      this.$store.dispatch("payouts/legal/save", data).then(r => {
+      this.$store.dispatch("payouts/legal/save", { data }).then(r => {
         if (r.error) {
           return;
         }
