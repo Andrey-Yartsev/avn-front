@@ -102,14 +102,12 @@
             </div>
           </div>
         </div>
-        <div
-          v-if="group.isPublic"
-          class="b-check-state_full-width b-check-state-membersView"
-        >
-          <div class="btn-post">
-            <div>Show members</div>
-            <div class="form-group form-group_with-label radio-group">
-              <!-- <label class="form-group-inner">
+        <template v-if="group.isPublic">
+          <div class="b-check-state_full-width b-check-state-membersView">
+            <div class="btn-post">
+              <div>Show members</div>
+              <div class="form-group form-group_with-label radio-group">
+                <!-- <label class="form-group-inner">
                 <div class="radio-wrapper icn-item">
                   <input
                     type="radio"
@@ -122,35 +120,53 @@
                   </span>
                 </div>
               </label> -->
-              <label class="form-group-inner">
-                <div class="radio-wrapper icn-item">
-                  <input
-                    type="radio"
-                    name="storyAnswerType"
-                    value="10"
-                    v-model="group.membersViewAmount"
-                  />
-                  <span class="label">
-                    Top 10
-                  </span>
-                </div>
-              </label>
-              <label class="form-group-inner">
-                <div class="radio-wrapper icn-item">
-                  <input
-                    type="radio"
-                    name="storyAnswerType"
-                    value="none"
-                    v-model="group.membersViewAmount"
-                  />
-                  <span class="label">
-                    None
-                  </span>
-                </div>
-              </label>
+                <label class="form-group-inner">
+                  <div class="radio-wrapper icn-item">
+                    <input
+                      type="radio"
+                      name="storyAnswerType"
+                      value="10"
+                      v-model="group.membersViewAmount"
+                    />
+                    <span class="label">
+                      Top 10
+                    </span>
+                  </div>
+                </label>
+                <label class="form-group-inner">
+                  <div class="radio-wrapper icn-item">
+                    <input
+                      type="radio"
+                      name="storyAnswerType"
+                      value="none"
+                      v-model="group.membersViewAmount"
+                    />
+                    <span class="label">
+                      None
+                    </span>
+                  </div>
+                </label>
+              </div>
             </div>
           </div>
-        </div>
+          <div class="b-check-state_full-width b-check-state-subscribersOnly">
+            <div class="btn-post">
+              <div class="b-check-state b-check-state_post">
+                <label>
+                  <input
+                    class="is-free-post"
+                    type="checkbox"
+                    v-model="group.forSubscribersOnly"
+                  />
+                  <span class="b-check-state__icon icn-item icn-size_lg"></span>
+                  <span class="b-check-state__text"
+                    >Only available to existing subscribers</span
+                  >
+                </label>
+              </div>
+            </div>
+          </div>
+        </template>
         <div class="actions-controls">
           <label
             :class="['add-media-input', { disabled: cantAddMoreMedia }]"
@@ -244,7 +260,8 @@ const InitialState = {
     price: "",
     isActive: false,
     isPublic: false,
-    membersViewAmount: "none"
+    membersViewAmount: "none",
+    forSubscribersOnly: false
   },
   groupSnapshot: null,
   saving: false,
@@ -473,6 +490,12 @@ export default {
         padding-bottom: 0;
       }
     }
+  }
+}
+.b-check-state-subscribersOnly {
+  margin-bottom: 10px;
+  .b-check-state_post {
+    margin-left: 0;
   }
 }
 </style>

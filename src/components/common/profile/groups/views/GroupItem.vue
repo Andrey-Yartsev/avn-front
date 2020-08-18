@@ -139,7 +139,18 @@ export default {
         });
         return;
       }
-      this.openJoinGroupModal(renew);
+      if (
+        this.group.forSubscribersOnly &&
+        !this.profile.subscribedBy &&
+        !renew
+      ) {
+        this.$store.dispatch("global/flashToast", {
+          text: "This group is available for subscribers only",
+          type: "warning"
+        });
+      } else {
+        this.openJoinGroupModal(renew);
+      }
     },
     openJoinGroupModal(renew) {
       this.$store.dispatch("modal/show", {
