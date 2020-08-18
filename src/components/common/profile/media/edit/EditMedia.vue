@@ -124,7 +124,10 @@
             <div class="block-thumbnails__title">
               Edit photoset and choose cover
             </div>
-            <div class="addFileCollectionView thumbList">
+            <div
+              class="addFileCollectionView"
+              :class="{ thumbList: post.media.type !== 'photo' }"
+            >
               <div
                 v-for="item in preloadedMedias"
                 :key="item.id"
@@ -304,7 +307,7 @@
         <button
           type="submit"
           class="btn submit hidden-mobile"
-          :disabled="isMediaLoading"
+          :disabled="isMediaLoading || isMediaEmpty"
           @click.prevent="saveClickHandler"
           v-if="$mq === 'desktop'"
         >
@@ -500,6 +503,12 @@ export default {
         this.post.media.type &&
         this.preloadedMedias.length >= this.limits[this.post.media.type]
       );
+    },
+    isMediaEmpty() {
+      if (this.post.media.type === "photo") {
+        return !this.preloadedMedias.length ? true : false;
+      }
+      return false;
     }
   },
   watch: {
@@ -622,6 +631,7 @@ export default {
       }
       this.saving = true;
       console.log(this.getMediaDataToUpdate());
+      // return
       this.$store
         .dispatch("profile/media/updateMedia", this.getMediaDataToUpdate(), {
           root: true
@@ -632,7 +642,7 @@ export default {
         });
     },
     getMediaDataToUpdate() {
-      let customThumb, videoPreview, mediaCover, mediaSet;
+      let customThumb, videoPreview, mediaSet;
 
       if (this.post.media.type === "video") {
         customThumb = this.preloadedMedias.length
@@ -643,14 +653,17 @@ export default {
           : undefined;
       }
       if (this.post.media.type === "photo") {
-        mediaCover = { id: this.photosetCover };
-        mediaSet = this.preloadedMedias.map(item => ({ id: item.processId }));
+        mediaSet = this.preloadedMedias
+          .filter(item => item.processId != this.photosetCover)
+          .map(item => ({ id: item.processId }));
+        mediaSet.unshift({ id: this.photosetCover });
       }
 
       const data = {
         media: {
           ...this.media,
-          categories: this.media.categories.map(item => +item.id)
+          categories: this.media.categories.map(item => +item.id),
+          type: this.post.media.type
         },
         productId: this.$props.post.productId,
         type: this.post.media.type
@@ -667,11 +680,12 @@ export default {
         };
         data.media.removeVideoPreview = false;
       }
-      if (mediaCover) {
-        data.media.mediaCover = mediaCover;
-      }
+      // if (mediaCover) {
+      //   data.media.mediaCover = mediaCover;
+      // }
       if (mediaSet) {
-        data.media.mediaSet = mediaSet;
+        data.media.mediaFiles = mediaSet;
+        data;
       }
 
       return data;

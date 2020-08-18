@@ -7,26 +7,29 @@
     <div v-else class="content">
       <div class="content-types">
         <a
+          v-if="profile"
           class="btn-user-activity"
           :class="{ active: type === 'video' }"
           @click.prevent="changeType('video')"
-          :href="`/${user.username}/media/video`"
+          :href="`/${profile.username}/media/video`"
         >
           <span class="label"> Video </span>
         </a>
         <a
+          v-if="profile"
           class="btn-user-activity"
           :class="{ active: type === 'photo' }"
           @click.prevent="changeType('photo')"
-          :href="`/${user.username}/media/photo`"
+          :href="`/${profile.username}/media/photo`"
         >
           <span class="label"> Photo </span>
         </a>
         <a
+          v-if="profile"
           class="btn-user-activity"
           :class="{ active: type === 'audio' }"
           @click.prevent="changeType('audio')"
-          :href="`/${user.username}/media/audio`"
+          :href="`/${profile.username}/media/audio`"
         >
           <span class="label"> Audio </span>
         </a>
@@ -201,6 +204,9 @@ export default {
     media() {
       return this.$store.state.profile.media.media;
     },
+    profile() {
+      return this.$store.state.profile.home.profile;
+    },
     listLength() {
       return this.media.length;
     },
@@ -266,20 +272,20 @@ export default {
       }
     },
     categoriesList() {
-      if (!this.$store.state.profile.home.profile.mediaCategories) {
+      if (!this.$store.state.profile.home.profile.mediaCategories[this.type]) {
         return [];
       }
-      let list = this.$store.state.profile.home.profile.mediaCategories.map(
-        item => {
-          const transformedName = item.name.replace(/&amp;/g, "&");
-          return {
-            id: item.id,
-            name: transformedName,
-            amount: item.amount,
-            title: `${transformedName} (${item.amount})`
-          };
-        }
-      );
+      let list = this.$store.state.profile.home.profile.mediaCategories[
+        this.type
+      ].map(item => {
+        const transformedName = item.name.replace(/&amp;/g, "&");
+        return {
+          id: item.id,
+          name: transformedName,
+          amount: item.amount,
+          title: `${transformedName} (${item.amount})`
+        };
+      });
       list.sort((a, b) => {
         return a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1;
       });
@@ -305,6 +311,8 @@ export default {
       this.fetchMedia();
     },
     type(value) {
+      this.selectedCategory = defaultSelectedCategory;
+      this.filterType = "all";
       this.destroyObserver();
       this.isInitFetch = true;
       this.$store.commit("profile/media/clearMedia", null, { root: true });

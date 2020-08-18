@@ -71,14 +71,13 @@ const mutations = {
     }
   },
   updateMediaSrc(state, data) {
-    const isAudio = !data.width && !data.height;
     state.media = state.media.map(item => {
       if (item.productId == data.id) {
         return {
           ...item,
           media: {
             ...item.media,
-            type: isAudio ? "audio" : "video",
+            type: data.type,
             duration: data.duration,
             src: {
               source: data.url,
@@ -193,7 +192,7 @@ const actions = {
       commit("deleteMedia", mediaId);
       dispatch(
         "global/flashToast",
-        { text: "Video deleted successfully" },
+        { text: "Product item deleted successfully" },
         {
           root: true
         }
@@ -207,7 +206,7 @@ const actions = {
       commit("addMediaItem", res);
       dispatch(
         "global/flashToast",
-        { text: "New video successfully uploaded" },
+        { text: "New product item successfully uploaded" },
         {
           root: true
         }
@@ -333,14 +332,6 @@ createRequestAction({
   actions,
   options: {
     method: "GET"
-  },
-  paramsToOptions: function(params) {
-    const options = {
-      method: "GET",
-      query: {}
-    };
-    options.query.type = params.type || "audio";
-    return options;
   }
 });
 

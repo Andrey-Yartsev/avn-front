@@ -172,7 +172,7 @@ export default {
         video:
           "video/avi,video/mp4,video/mov,video/moov,video/m4v,video/mpg,video/mpeg,video/wmv",
         audio: "audio/mp3,audio/ogg,audio/wav",
-        photo: "photo/jpg,photo/jpeg,photo/png"
+        photo: "image/jpg,image/jpeg,image/png"
       },
       extensions: {
         video: "mp4,mov,moov,m4v,mpg,mpeg,wmv,avi",

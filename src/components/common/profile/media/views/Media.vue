@@ -28,7 +28,7 @@
       />
     </div>
     <template v-else>
-      <template v-if="post.mediaSet && post.mediaSet.length > 1">
+      <template v-if="post.mediaSet && post.mediaSet.length">
         <swiper
           ref="mySwiper"
           class="media-slider"
@@ -37,7 +37,7 @@
         >
           <swiperSlide :key="media.id" v-for="media in post.mediaSet">
             <component
-              :is="getMediaViewType(medias)"
+              :is="getMediaViewType(media)"
               :media="media"
               :postId="postId"
               :post="post"

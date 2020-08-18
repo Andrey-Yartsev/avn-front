@@ -244,10 +244,10 @@ export default {
 }
 .btn-buy {
   & > span {
-    transform: translateY(-6px);
-    @media (max-width: 575px) {
+    transform: translateY(-3px);
+    /* @media (max-width: 575px) {
       transform: translateY(-3px);
-    }
+    } */
   }
 }
 .buttonsContainer {
