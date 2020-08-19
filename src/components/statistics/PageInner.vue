@@ -6,7 +6,7 @@
       <div class="page-header-title cols">
         <div class="col col-1-2">
           <div class="page-name">Statistics</div>
-
+          {{ currentPeriodType }}
           <div
             class="more-functions"
             :class="{ open: periodOptionsOpened }"
@@ -542,6 +542,7 @@ export default {
     };
   },
   mounted() {
+    this.initCurrentPeriodType();
     this.initWs();
     this.buildScales();
     this.initLineCharts();
@@ -568,6 +569,15 @@ export default {
     }
   },
   methods: {
+    initCurrentPeriodType() {
+      const periodTypeNames = periodTypes.map(v => v.name);
+      if (this.$route.params._currentPeriodType) {
+        const type = this.$route.params._currentPeriodType;
+        if (periodTypeNames.indexOf(type) !== -1) {
+          this.currentPeriodType = type;
+        }
+      }
+    },
     initWs() {
       if (!ws.connected) {
         ws.connect();
@@ -1541,6 +1551,9 @@ export default {
         this[chartType + "Chart"].validateData();
       });
       this.updateTopFollowersFromCache();
+      if (this.$route.path !== "/statistics/" + this.currentPeriodType) {
+        this.$router.push("/statistics/" + this.currentPeriodType);
+      }
     }
   }
 };

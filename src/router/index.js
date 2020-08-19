@@ -118,7 +118,7 @@ const routes = [
   },
   {
     beforeEnter: Auth.requireAuth,
-    path: "/statistics",
+    path: "/statistics/:_currentPeriodType?",
     name: "StatisticPage",
     component: () =>
       import(/* webpackChunkName: "StatPage" */ "@/components/statistics/Page"),
