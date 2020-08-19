@@ -46,7 +46,7 @@ export default {
         data: { subscribedByProgress: true }
       });
       this.$store.dispatch("global/flashToast", {
-        text: "You have unsubscribed successfully"
+        text: "You has unsubscribed successfully"
       });
     },
     resubscribed(result) {

@@ -261,7 +261,7 @@ export default {
         subscribedByProgress: true
       });
       this.$store.dispatch("global/flashToast", {
-        text: "You have unsubscribed successfully"
+        text: "You has unsubscribed successfully"
       });
       this.$store.commit("profile/home/resetPosts");
       this.$store.dispatch("profile/home/getPosts");
