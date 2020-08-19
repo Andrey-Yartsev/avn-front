@@ -127,7 +127,7 @@
                       <div
                         class="signed table__cell table__cell_align table__cell_align-hor-c"
                       >
-                        Payed since
+                        Paid since
                       </div>
                       <div
                         class="spend table__cell table__cell_align table__cell_align-hor-c headerTitle"

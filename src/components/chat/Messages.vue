@@ -180,7 +180,7 @@
               >
                 <div class="message-time__written">
                   <span class="timeValue"
-                    >Payed {{ v.price }} {{ time(v.payedAt) }}</span
+                    >Paid {{ v.price }} {{ time(v.payedAt) }}</span
                   >
                 </div>
               </div>

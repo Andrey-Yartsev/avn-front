@@ -16,7 +16,7 @@
     </div>
     <div
       class="signed table__cell table__cell_align table__cell_align-hor-c"
-      data-title="Payed since"
+      data-title="Paid since"
     >
       {{ messageTime(profile.sinceDate) }}
     </div>

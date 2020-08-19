@@ -64,7 +64,7 @@ const requestsPeriods = ["weekly", "bi-weekly", "monthly"];
 const periodNames = {
   weekly: "Weekly",
   "bi-weekly": "Bi weekly",
-  monthly: "Montly"
+  monthly: "Monthly"
 };
 
 export default {
