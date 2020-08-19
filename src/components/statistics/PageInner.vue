@@ -582,7 +582,9 @@ export default {
       if (!ws.connected) {
         ws.connect();
         ws.on("connect", () => {
-          this.sendWsRequests();
+          setTimeout(() => {
+            this.sendWsRequests();
+          }, 100);
         });
       } else {
         this.sendWsRequests();
