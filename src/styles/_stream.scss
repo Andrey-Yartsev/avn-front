@@ -410,9 +410,20 @@
   }
 
   &__title {
-    color: #fff;
+    color: $white;
+    opacity: 0.5;
     padding: 0;
     padding-right: 10px;
+  }
+
+  &__sources {
+    color: $white;
+    margin-left: -7px;
+    margin-top: 15px;
+    margin-bottom: 0;
+    .label {
+      opacity: 0.5;
+    }
   }
 }
 

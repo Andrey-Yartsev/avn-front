@@ -25,12 +25,43 @@
         :disabled="!tipsGoal.amount || !tipsGoal.description"
       ></button>
     </form>
+    <div class="form-group-inner form-tipsGoal__sources">
+      <span class="label" :class="{ mobile: $mq === 'mobile' }">Sources:</span>
+      <span class="form-group form-group_clear-gaps">
+        <span class="form-field">
+          <multiselect
+            v-model="tipsGoal.sources"
+            :options="tipsGoal.sourceTypes"
+            :multiple="true"
+            :close-on-select="true"
+            :clear-on-select="false"
+            :preserve-search="true"
+            placeholder="Add source"
+            label="title"
+            track-by="value"
+          >
+            <template slot="selection" slot-scope="{ values, search, isOpen }"
+              ><span
+                class="multiselect__single"
+                v-if="tipsGoal.sources.length &amp;&amp; !isOpen"
+                >{{ tipsGoal.sources.length }} sources selected</span
+              ></template
+            >
+          </multiselect>
+        </span>
+      </span>
+    </div>
   </div>
 </template>
 
 <script>
+import Multiselect from "vue-multiselect";
+
 export default {
   name: "TipsGoalForm",
+  components: {
+    Multiselect
+  },
   props: {
     tipsGoal: {
       type: Object
