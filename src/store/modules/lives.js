@@ -110,8 +110,8 @@ const mutations = {
   goal(state, data) {
     state.currentLive.tipsGoal = {
       description: data.description || null,
-      amount: data.amount || null,
-      sources: data.sources || []
+      amount: data.amount || null
+      // sources: data.sources || []
     };
   },
 

@@ -22,7 +22,7 @@ export default {
       return this.$store.state.lives.currentLive.tipsGoal;
     },
     isTipsGoalExists() {
-      return this.activeTipsGoal.description && this.activeTipsGoal.amount;
+      return !!(this.activeTipsGoal.description && this.activeTipsGoal.amount);
     },
     startedStreamId() {
       return this.stream.id;
@@ -54,7 +54,7 @@ export default {
           this.$root.ws.ws.send(data);
           this.tipsGoal.amount = 0;
           this.tipsGoal.description = "";
-          this.tipsGoal.sources = [];
+          // this.tipsGoal.sources = [];
           this.showTipsGoalForm = false;
         });
     },
@@ -62,10 +62,10 @@ export default {
       if (!this.showTipsGoalForm && this.isTipsGoalExists) {
         this.tipsGoal.amount = this.activeTipsGoal.amount + "";
         this.tipsGoal.description = this.activeTipsGoal.description;
-        this.tipsGoal.sources = this.activeTipsGoal.sources?.map(item => {
-          const elem = this.tipsGoal.sourceTypes.find(i => i.value === item);
-          return elem;
-        });
+        // this.tipsGoal.sources = this.activeTipsGoal.sources?.map(item => {
+        //   const elem = this.tipsGoal.sourceTypes.find(i => i.value === item);
+        //   return elem;
+        // });
       }
       this.showTipsGoalForm = !this.showTipsGoalForm;
     }
