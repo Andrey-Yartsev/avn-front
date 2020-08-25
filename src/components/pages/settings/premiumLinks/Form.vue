@@ -37,7 +37,7 @@
                     required
                     name="snapchatPrice"
                     v-model="snapchatPrice"
-                    v-validate="'required|subscription-price'"
+                    v-validate="'required'"
                   />
                 </span>
                 <div class="error-info" v-if="fieldError('price')">
@@ -45,6 +45,9 @@
                 </div>
               </span>
             </label>
+            <div class="input-help hint-text-sm">
+              payment not recurring
+            </div>
           </div>
           <div class="form-group-btn">
             <button

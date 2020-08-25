@@ -15,6 +15,9 @@
           <div class="popup-alert__body">
             You are opening snapchat for {{ data.price }}
           </div>
+          <div class="input-help hint-text-sm">
+            payment not recurring
+          </div>
           <div class="popup-alert__footer">
             <button class="btn" @click.prevent="yes">Confirm</button>
             <button class="btn alt" @click.prevent="no">Cancel</button>
