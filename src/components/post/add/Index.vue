@@ -696,19 +696,23 @@ export default {
     }
   },
   methods: {
-    clickHandler() {
+    async clickHandler() {
       const postData = this.getPostData();
       if (!postData || this.saving) return;
 
-      if (this.isNew) {
-        this.$store.dispatch("post/createPost", postData);
-      } else {
-        this.$store.dispatch("post/updatePost", {
-          postId: this.post.id,
-          data: postData
-        });
-      }
       this.saving = true;
+      try {
+        if (this.isNew) {
+          await this.$store.dispatch("post/createPost", postData);
+        } else {
+          await this.$store.dispatch("post/updatePost", {
+            postId: this.post.id,
+            data: postData
+          });
+        }
+      } catch {
+        this.saving = false;
+      }
     },
     resetDatetime() {
       this.datetime = InitialState.datetime;
