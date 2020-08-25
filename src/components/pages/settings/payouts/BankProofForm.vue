@@ -8,6 +8,20 @@
       <form class="payouts-legal-form" v-on:submit.stop.prevent="save">
         <div class="border-top shadow-block">
           <div class="container">
+            <p class="subtext centered">
+              Please upload Proof of Ownership for the following bank account on
+              file:
+            </p>
+            <div class="form-group form-group_with-label payouts-personal-info">
+              <div
+                class="form-group form-group_clear-gaps-bottom form-group_with-label item"
+                v-for="v in bankFields"
+                :key="v.code"
+              >
+                <span class="title">{{ v.label }}</span>
+                <span class="value">{{ bank[v.code] }}</span>
+              </div>
+            </div>
             <div class="form-group form-group_with-label photo-form-group">
               <div
                 class="form-group-inner photo-form-group-inner"
@@ -57,10 +71,11 @@
 <script>
 import upload from "@/utils/upload";
 import UserMixin from "@/mixins/user";
+import Bank from "./bank";
 
 export default {
   name: "BankProofFormLegal",
-  mixins: [UserMixin],
+  mixins: [UserMixin, Bank],
   data() {
     return {
       bankOwnershipProof: null,
