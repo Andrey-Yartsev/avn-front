@@ -88,7 +88,7 @@ export default {
 
   data() {
     return {
-      period: "last_week",
+      period: "weekly",
       showDropdown: false
     };
   },
@@ -96,8 +96,8 @@ export default {
   created() {
     this.periodTitles = {
       today: "Today",
-      last_week: "Last week",
-      last_month: "Last month",
+      weekly: "Last week",
+      daily: "Last month",
       last_year: "Last year"
     };
   },

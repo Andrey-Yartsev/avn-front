@@ -13,11 +13,11 @@ export default {
         let unit = "days";
 
         switch (period) {
-          case "last_week":
-            scaleCount = 6;
+          case "weekly":
+            scaleCount = 7;
             displayFormat = "ddd";
             break;
-          case "last_month":
+          case "daily":
             periodCount = 5;
             displayFormat = "D.MM";
             break;
@@ -28,6 +28,21 @@ export default {
             format = "YYYY-MM";
             displayFormat = "MMM";
             break;
+        }
+
+        let startOfWeek = moment().startOf("week");
+        if (period === "weekly") {
+          for (let j = 1; j <= 7; j++) {
+            let currLabel = moment(startOfWeek)
+              .add(j, unit)
+              .format(displayFormat);
+            scaleHtml +=
+              "<span class=statistics-chart-scale__item>" +
+              currLabel +
+              "</span>";
+          }
+          container.innerHTML = scaleHtml;
+          return;
         }
 
         for (let j = scaleCount; j >= 0; j--) {

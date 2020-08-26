@@ -270,7 +270,7 @@ export default {
     ranges() {
       const ranges = [];
       let rangeNumber;
-      if (this.currentPeriodType === "last_month") {
+      if (this.currentPeriodType === "daily") {
         rangeNumber = 5;
         let step = Math.round(30 / rangeNumber);
         for (let i = 0; i < rangeNumber; i++) {
@@ -283,7 +283,7 @@ export default {
               .add((i + 1) * step, "day")
           ]);
         }
-      } else if (this.currentPeriodType === "last_week") {
+      } else if (this.currentPeriodType === "weekly") {
         rangeNumber = 7;
         for (let i = rangeNumber - 1; i >= 0; i--) {
           ranges.push([
@@ -316,9 +316,9 @@ export default {
   methods: {
     formatDate(date) {
       switch (this.currentPeriodType) {
-        case "last_month":
+        case "daily":
           return date.format("D MMM");
-        case "last_week":
+        case "weekly":
           return date.format("D MMM");
         case "last_year":
           return date.format("D MMM");
@@ -329,9 +329,9 @@ export default {
     formatTimestamp(timestamp) {
       const date = moment.unix(timestamp);
       switch (this.currentPeriodType) {
-        case "last_month":
+        case "daily":
           return date.format("D MMM");
-        case "last_week":
+        case "weekly":
           return date.format("D MMM");
         case "last_year":
           return date.format("D MMM");

@@ -24,19 +24,19 @@ const chartTypes = {
 };
 const periodTypes = [
   {
-    name: "today",
-    title: "Today",
-    moment: null
+    name: "daily",
+    title: "Daily",
+    moment: "month"
   },
   {
-    name: "last_week",
-    title: "Last week",
+    name: "weekly",
+    title: "Weekly",
     moment: "week"
   },
   {
-    name: "last_month",
-    title: "Last month",
-    moment: "month"
+    name: "today",
+    title: "Today",
+    moment: null
   },
   {
     name: "last_year",
@@ -89,12 +89,12 @@ const getScaleData = period => {
           .format("YYYY-MM-DD")
       ).unix();
       break;
-    case "last_week":
+    case "weekly":
       count = 167;
       periodType = "hours";
       // format = "YYYY-MM-DD HH";
       break;
-    case "last_month":
+    case "daily":
       count = 719;
       periodType = "hours";
       // format = "YYYY-MM-DD HH";

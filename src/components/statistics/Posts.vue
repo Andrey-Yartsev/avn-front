@@ -203,8 +203,8 @@ export default {
     initCharts() {
       this.charts = {
         today: {},
-        last_week: {},
-        last_month: {},
+        weekly: {},
+        daily: {},
         last_year: {}
       };
       this.barCount = 108;
