@@ -10,7 +10,21 @@
         text="Loading stream"
       />
       <div v-else-if="needToStartStream" class="refresh-block">
-        <div>Need to start stream</div>
+        <div class="stream_stop" v-if="isSelfStreamStopped">
+          <StreamObsStatistic
+            :close="
+              (haveToSave, haveToSaveComments) =>
+                close({}, haveToSave, haveToSaveComments)
+            "
+            :duration="time"
+            :streamDuration="0"
+            :streamStartTime="streamStartTime"
+            :canBeSaved="canBeSaved"
+            :loading="false"
+            :saving="saving"
+          />
+        </div>
+        <div v-else>Need to start stream</div>
         <!-- <div class="mediasTop">
           <div
             class="mediasTop__header stream-header mediasTop__header-underlined"
@@ -122,10 +136,14 @@ import TipsGoalForm from "./TipsGoalForm";
 import StreamViewers from "./Viewers";
 import User from "@/mixins/user";
 import TipsGoal from "@/mixins/tipsGoal";
+import StreamObsStatistic from "@/components/pages/stream/obs/StatisticObs";
+import StreamApi from "@/api/stream";
+import moment from "moment";
+import LoadScripts from "@/components/statistics/loadScripts";
 
 export default {
   name: "ObsChat",
-  mixins: [User, TipsGoal],
+  mixins: [User, TipsGoal, LoadScripts],
   components: {
     Loader,
     AccessFilter,
@@ -133,7 +151,8 @@ export default {
     AddComment,
     StreamerControls,
     StreamViewers,
-    TipsGoalForm
+    TipsGoalForm,
+    StreamObsStatistic
   },
   data() {
     return {
@@ -141,7 +160,9 @@ export default {
       filterSelected: false,
       asideType: "comments",
       joined: false,
-      stopDisabled: false
+      stopDisabled: false,
+      saving: false,
+      time: "00:00"
     };
   },
   computed: {
@@ -185,6 +206,28 @@ export default {
         amount += v.amount;
       });
       return amount;
+    },
+    isSelfStreamStopped() {
+      return this.$store.state.obs.selfStreamFinished;
+    },
+    finishedStreamData() {
+      return this.$store.state.obs.selfStreamFinishedData;
+    },
+    streamStartTime() {
+      if (!this.finishedStreamData) {
+        return 0;
+      }
+      return new Date(this.finishedStreamData.startedAt).getTime() / 1000;
+    },
+    canBeSaved() {
+      if (!this.finishedStreamData) {
+        return false;
+      }
+      return (
+        new Date(this.finishedStreamData.finishedAt).getTime() -
+          new Date(this.finishedStreamData.startedAt).getTime() >
+        5000
+      );
     }
   },
   methods: {
@@ -268,6 +311,21 @@ export default {
         streamId: this.stream.id,
         userId
       });
+    },
+    close(e, haveToSave, haveToSaveComments) {
+      this.$store.commit("lives/resetCurrentLive", null, { root: true });
+      if (haveToSave) {
+        this.saving = true;
+        StreamApi.saveStream(this.finishedStreamData.id, haveToSaveComments)
+          .then(() => {
+            this.$router.push("/");
+          })
+          .catch(() => {
+            this.$router.push("/");
+          });
+      } else {
+        this.$router.push("/");
+      }
     }
   },
   watch: {
@@ -304,6 +362,33 @@ export default {
           });
         }
       }
+    },
+    finishedStreamData(value) {
+      if (!value) {
+        return;
+      }
+      const streamEndTime = moment.unix(
+        new Date(this.finishedStreamData.finishedAt).getTime()
+      );
+      const streamStartTime = moment.unix(
+        new Date(this.finishedStreamData.startedAt).getTime()
+      );
+
+      const diffTime = streamEndTime.diff(streamStartTime);
+      const duration = moment.duration(diffTime / 1000);
+
+      let seconds = duration.seconds(),
+        minute = duration.minutes(),
+        hours = duration.hours();
+
+      const _hours = hours < 10 ? `0${hours}` : `${hours}`;
+      minute = minute < 10 ? `0${minute}` : `${minute}`;
+      seconds = seconds < 10 ? `0${seconds}` : `${seconds}`;
+
+      this.time =
+        hours > 0
+          ? _hours + ":" + minute + ":" + seconds //
+          : minute + ":" + seconds;
     }
   },
   mounted() {
@@ -312,7 +397,7 @@ export default {
   },
   beforeDestroy() {
     this.$store.commit("chat/blockNewMessagesHandling", false);
-    this.$root.ws.removeListener("connect", this.start);
+    // this.$root.ws.removeListener("connect", this.start);
     this.$store.commit("obs/started", false);
     this.$store.commit("obs/isRunning", false);
   }
