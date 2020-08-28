@@ -210,6 +210,10 @@ const modalTypes = [
   {
     storeName: "paidBlock",
     layoutOnlyModal: true
+  },
+  {
+    storeName: "paidUnblock",
+    layoutOnlyModal: true
   }
 ];
 

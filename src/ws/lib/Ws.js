@@ -27,6 +27,8 @@ import updatedCreditBalance from "./actions/updatedCreditBalance";
 import newCardToken from "./actions/newCardToken";
 import contests from "./actions/contests";
 import groups from "./actions/groups";
+import blockedWithPrice from "./actions/blockedWithPrice";
+import unblockedWithPrice from "./actions/unblockedWithPrice";
 
 const actions = {
   chats,
@@ -54,7 +56,9 @@ const actions = {
   updatedCreditBalance,
   newCardToken,
   contests,
-  groups
+  groups,
+  blockedWithPrice,
+  unblockedWithPrice
 };
 
 export default class Ws extends WsAbstract {

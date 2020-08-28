@@ -154,6 +154,7 @@ import Tip from "@/components/common/tip/User";
 import Comments from "@/components/common/streamComments/Index";
 import AddComment from "@/components/common/streamComments/AddComment";
 import { getCookie } from "@/components/pages/stream/debug";
+import PaidBlock from "@/mixins/paidBlock";
 
 export default {
   name: "ViewStremModal",
@@ -164,7 +165,7 @@ export default {
     Comments,
     AddComment
   },
-  mixins: [userMixin],
+  mixins: [userMixin, PaidBlock],
   data: () => ({
     loading: true,
     time: undefined,
@@ -352,6 +353,10 @@ export default {
           text: "To send chat comments, you have to login",
           type: "warning"
         });
+        return;
+      }
+      if (this.isPaidBlockedBy(this.streamer.id)) {
+        this.openPaidUnblockModal(this.streamer.id);
         return;
       }
       this.showCommentForm = !this.showCommentForm;

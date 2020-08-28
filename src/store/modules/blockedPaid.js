@@ -22,7 +22,7 @@ const mutations = {
 
 createRequestAction({
   prefix: "fetchBlocked",
-  apiPath: `users/blockedPaid`,
+  apiPath: `users/blocked-paid`,
   state,
   mutations,
   actions,

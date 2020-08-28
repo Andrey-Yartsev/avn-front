@@ -158,11 +158,12 @@ import TextareaAutosize from "@/components/common/TextareaAutosize";
 import User from "@/mixins/user";
 import Form from "@/mixins/form";
 import FontSizeControls from "./FontSizeControls";
+import PaidBlock from "@/mixins/paidBlock";
 
 export default {
   name: "ChatAddMesssageBox",
 
-  mixins: [FileUpload, User, Form],
+  mixins: [FileUpload, User, Form, PaidBlock],
 
   components: {
     MediaPreview,
@@ -338,6 +339,10 @@ export default {
             this.message = "";
           }, 1);
         }
+        return;
+      }
+      if (this.isPaidBlockedBy(this.withUser.id)) {
+        this.openPaidUnblockModal(this.withUser.id);
         return;
       }
       const message = this.message;
