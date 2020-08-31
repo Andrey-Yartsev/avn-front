@@ -1,6 +1,7 @@
 <template>
   <Loader v-if="scriptsLoading" :fullscreen="false" :inline="true" />
   <div class="boxes" v-else>
+    {{ currentPeriodType }}
     <div class="cols">
       <div class="col col-1-3">
         <div class="box" id="followers-box">
@@ -60,7 +61,7 @@ export default {
   },
   data() {
     return {
-      currentPeriodType: "weekly",
+      currentPeriodType: "daily",
       selectedLineChart: "",
       selectedLineName: ""
     };
@@ -80,12 +81,12 @@ export default {
       );
     },
     sendWsRequests() {
-      // this.subscribeUserStatistics(
-      //   "current_followers_detailed_histogram_" + this.currentPeriodType
-      // );
       this.subscribeUserStatistics(
-        "current_subscribers_detailed_histogram_" + this.currentPeriodType
+        "current_followers_detailed_histogram_" + this.currentPeriodType
       );
+      // this.subscribeUserStatistics(
+      //   "current_subscribers_detailed_histogram_" + this.currentPeriodType
+      // );
     }
   },
   mounted() {

@@ -213,9 +213,7 @@ const result = {
         };
       });
     },
-    commentsRequestFail(/* state, err */) {
-      // TODO;
-    },
+    commentsRequestFail(/* state, err */) {},
     postLikeSuccess(state, { postId, isFavorite, favoritesCount }) {
       state.posts = state.posts.map(post => {
         if (postId === post.id) {

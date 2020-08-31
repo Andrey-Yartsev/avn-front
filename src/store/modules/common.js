@@ -22,18 +22,15 @@ const mutations = {
 
 const actions = {
   getPages({ commit }) {
-    return (
-      CommonApi.getPages()
-        .then(response => {
-          if (response.status === 200) {
-            response.json().then(function(res) {
-              commit("pagesRequestSuccess", res);
-            });
-          }
-        })
-        // TODO
-        .catch(() => {})
-    );
+    return CommonApi.getPages()
+      .then(response => {
+        if (response.status === 200) {
+          response.json().then(function(res) {
+            commit("pagesRequestSuccess", res);
+          });
+        }
+      })
+      .catch(() => {});
   },
   setStoryList({ commit }, { storyList }) {
     commit("setStoryList", { storyList });

@@ -99,6 +99,11 @@ const getScaleData = period => {
       periodType = "hours";
       // format = "YYYY-MM-DD HH";
       break;
+    case "monthly":
+      count = 12;
+      periodType = "months";
+      // format = "YYYY-MM-DD HH";
+      break;
     case "last_year":
       count = 364;
       periodType = "days";
@@ -119,6 +124,34 @@ const dataProviderKeys = {
   stories: ["uploads", "views"]
 };
 
+const matchChartCode = code => {
+  const r = code.match(/(.*)_detailed_histogram_(.*)/);
+  if (!r) {
+    return false;
+  }
+  if (!lineTypes[r[1]]) {
+    return false;
+  }
+  const periodI = periodTypeNames.indexOf(r[2]);
+  if (periodI === -1) {
+    return false;
+  }
+  return {
+    chartType: lineTypes[r[1]].chartType,
+    chartName: lineTypes[r[1]].chartType + "Chart",
+    lineType: r[1],
+    lineTitle: lineTypes[r[1]].title,
+    periodType: periodTypes[periodI].name,
+    dataProviderKey: lineTypes[r[1]].dataProviderKey,
+    subKey: lineTypes[r[1]].countSubKey,
+    countPostfix: lineTypes[r[1]].countPostfix
+  };
+};
+
+const matchCodeByPrefix = (code, prefix) => {
+  return code.match(new RegExp(`${prefix}_(.*)`));
+};
+
 export {
   chartTypes,
   periodTypes,
@@ -127,5 +160,7 @@ export {
   chartDataSets,
   periodTypeNames,
   getScaleData,
-  dataProviderKeys
+  dataProviderKeys,
+  matchChartCode,
+  matchCodeByPrefix
 };

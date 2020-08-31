@@ -1,50 +1,6 @@
-import { chartOptions, mainColor, barCount } from "./chartVars";
+import { chartOptions, mainColor, altColor } from "./chartVars";
 import moment from "moment";
-import { dataProviderKeys } from "@/components/statistics/types";
-
-const getScaleData = period => {
-  const now = moment()
-    .utc()
-    .unix();
-
-  let periodType, count;
-  let startDate = now;
-
-  switch (period) {
-    case "today":
-      count = 1439;
-      periodType = "minutes";
-      // format = "YYYY-MM-DD HH:mm";
-      startDate = moment(
-        moment
-          .unix(now)
-          .add(1, "d")
-          .format("YYYY-MM-DD")
-      ).unix();
-      break;
-    case "weekly":
-      count = 167;
-      periodType = "hours";
-      // format = "YYYY-MM-DD HH";
-      break;
-    case "daily":
-      count = 719;
-      periodType = "hours";
-      // format = "YYYY-MM-DD HH";
-      break;
-    case "last_year":
-      count = 364;
-      periodType = "days";
-      // format = "YYYY-MM-DD";
-      break;
-  }
-
-  return {
-    count,
-    periodType,
-    startDate
-  };
-};
+import { dataProviderKeys, getScaleData } from "./utils";
 
 export default {
   methods: {
@@ -53,7 +9,6 @@ export default {
       if (name === this.selectedLineChart) {
         selectedLineName = this.selectedLineName;
       }
-
       switch (name) {
         case "followers":
           this.followersChart = window.AmCharts.makeChart(
@@ -83,7 +38,6 @@ export default {
             )
           );
           break;
-
         case "posts":
           this.postsChart = window.AmCharts.makeChart(
             "posts_chart",
@@ -120,7 +74,6 @@ export default {
             )
           );
           break;
-
         case "stories":
           this.storiesChart = window.AmCharts.makeChart(
             "stories_chart",
@@ -150,6 +103,147 @@ export default {
           );
           break;
       }
+    },
+    buildEarningsChart() {
+      this.earningsChart = window.AmCharts.makeChart("earnings_chart", {
+        name: "earnings",
+        type: "serial",
+        categoryField: "date",
+        fontFamily: "Open Sans",
+        color: "#7c8b96",
+        autoDisplay: false,
+        autoMargins: false,
+        marginBottom: 0,
+        marginTop: 0,
+        marginLeft: 0,
+        marginRight: 0,
+        addClassNames: true,
+        chartCursor: {
+          cursorAlpha: 0.1,
+          cursorColor: "#7C8B96",
+          tabIndex: -1,
+          valueLineAlpha: 0,
+          zoomable: false,
+          balloonPointerOrientation: "vertical",
+          bulletsEnabled: true,
+          bulletSize: 10,
+          categoryBalloonEnabled: false,
+          fullWidth: true,
+          leaveAfterTouch: false,
+          oneBalloonOnly: true
+        },
+        balloon: {
+          animationDuration: 0,
+          borderThickness: 0,
+          fadeOutDuration: 0,
+          fillAlpha: 1,
+          fillColor: altColor,
+          offsetX: 0,
+          fontSize: 15,
+          horizontalPadding: 8,
+          verticalPadding: 3,
+          shadowAlpha: 0
+        },
+        categoryAxis: {
+          autoGridCount: false,
+          labelsEnabled: false,
+          axisThickness: 0,
+          axisAlpha: 0.1,
+          gridAlpha: 0,
+          gridColor: "#7c8b96",
+          startOnAxis: true,
+          inside: true,
+          tickLength: 2,
+          offset: 1,
+          gridThickness: 2
+          // gridCount: barCount
+        },
+        valueAxes: [
+          {
+            labelsEnabled: false,
+            axisThickness: 0,
+            dashLength: 6,
+            tickLength: 0,
+            gridAlpha: 0.1,
+            stackType: "regular",
+            gridColor: "#7c8b96",
+            zeroGridAlpha: 0,
+            autoGridCount: false,
+            gridCount: 4
+          }
+        ],
+        graphs: [
+          {
+            bulletSize: 0,
+            bullet: "round",
+            bulletBorderThickness: 0,
+            minBulletSize: 0,
+            animationPlayed: true,
+            fillColors: ["#3abfd3", "#49eeca"],
+            type: "column",
+            valueField: "earn_referral",
+            fillAlphas: 1,
+            lineAlpha: 0,
+            fixedColumnWidth: 2,
+            cornerRadiusTop: 1,
+            balloon: {
+              color: "#3abfd3"
+            }
+          },
+          {
+            bulletSize: 0,
+            bullet: "round",
+            bulletBorderThickness: 0,
+            minBulletSize: 0,
+            animationPlayed: true,
+            fillColors: ["#67cc2e", "#b3f43a"],
+            type: "column",
+            valueField: "paid_chat_messages",
+            fillAlphas: 1,
+            lineAlpha: 0,
+            fixedColumnWidth: 2,
+            cornerRadiusTop: 1,
+            balloon: {
+              color: "#67cc2e"
+            }
+          },
+          {
+            bulletSize: 0,
+            bullet: "round",
+            bulletBorderThickness: 0,
+            minBulletSize: 0,
+            animationPlayed: true,
+            fillColors: ["#ff9500", "#ffcc00"],
+            type: "column",
+            valueField: "tips",
+            fillAlphas: 1,
+            lineAlpha: 0,
+            fixedColumnWidth: 2,
+            cornerRadiusTop: 1,
+            balloon: {
+              color: "#ff9500"
+            }
+          },
+          {
+            bulletSize: 0,
+            bullet: "round",
+            bulletBorderThickness: 0,
+            minBulletSize: 0,
+            animationPlayed: true,
+            fillColors: ["#FF3E33", "#FE3F8C"],
+            type: "column",
+            valueField: "paid_subscriptions",
+            fillAlphas: 1,
+            lineAlpha: 0,
+            fixedColumnWidth: 2,
+            cornerRadiusTop: 1,
+            balloon: {
+              color: "#FF3E33"
+            }
+          }
+        ],
+        dataProvider: []
+      });
     },
     getLinesChartGraph(lines, { selectedLineName }) {
       let _lines = lines.map(line => this.getLineChartGraph(line));
@@ -198,14 +292,14 @@ export default {
     },
     fillLineChartByEmptyPoints(name) {
       this[name + "Chart"].dataProvider = [];
-      const { periodType, count, startDate } = getScaleData(
+      const { periodType, count, startDate, barCount } = getScaleData(
         this.currentPeriodType
       );
       const keys = {};
-      console.log(">>>>>>>>>", periodType, moment.unix(startDate).toDate());
       dataProviderKeys[name].forEach(k => (keys[k] = 0));
 
       if (this.currentPeriodType === "weekly") {
+        // TODO возможен рефакторинг
         if (barCount !== 7) {
           // throw new Error("We need 7 days for weekly period");
         }
@@ -224,7 +318,10 @@ export default {
         return;
       }
 
+      console.log("======================", barCount);
+
       for (let i = barCount; i >= 1; i--) {
+        console.log("X");
         let currDate = moment
           .unix(startDate)
           .subtract((i * count) / barCount, periodType)

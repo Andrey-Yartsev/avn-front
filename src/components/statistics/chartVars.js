@@ -63,4 +63,24 @@ const mainColor = "#fff";
 const barCount = 7;
 const colorScheme = 1;
 
-export { chartOptions, altColor, mainColor, barCount, colorScheme };
+const colorSchemes = [
+  "#FF5979",
+  "#FF335A",
+  "#FA493E",
+  "#FF6726",
+  "#1ECA77",
+  "#00BF7C",
+  "#30B5F2",
+  "#0091F2",
+  "#6A3DF2",
+  "#47525A"
+];
+
+export {
+  chartOptions,
+  altColor,
+  mainColor,
+  barCount,
+  colorScheme,
+  colorSchemes
+};

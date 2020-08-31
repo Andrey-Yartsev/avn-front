@@ -12,7 +12,7 @@ import pluralize from "pluralize";
 import CalcCount from "./calcCount";
 import BuildScale from "./buildScale";
 
-import { chartTypes, getScaleData } from "./types";
+import { chartTypes, getScaleData } from "./utils";
 
 const altColor = "#16181A";
 

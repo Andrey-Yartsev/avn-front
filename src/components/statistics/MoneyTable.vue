@@ -64,7 +64,7 @@
 
 <script>
 import moment from "moment";
-import { chartTypes } from "./types";
+import { chartTypes } from "./utils";
 
 const dataTypes = [
   "earnSubscribes",

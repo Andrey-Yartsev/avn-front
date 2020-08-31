@@ -1,15 +1,16 @@
 import ws from "@/ws";
 import {
   chartTypes,
-  lineTypes,
   periodTypeNames,
-  periodTypes,
-  chartDataSets
-} from "@/components/statistics/types";
+  chartDataSets,
+  matchChartCode,
+  matchCodeByPrefix
+} from "./utils";
 import CalcCount from "./calcCount";
 import moment from "moment";
 import pluralize from "pluralize";
 import { barCount } from "./chartVars";
+import ChartDonutData from "./chartDonutData";
 
 //
 // abstract: currentPeriodType
@@ -28,32 +29,13 @@ Object.keys(chartTypes).forEach(chartType => {
   }
 });
 
-const matchChartCode = code => {
-  const r = code.match(/(.*)_detailed_histogram_(.*)/);
-  if (!r) {
-    return false;
-  }
-  if (!lineTypes[r[1]]) {
-    return false;
-  }
-  const periodI = periodTypeNames.indexOf(r[2]);
-  if (periodI === -1) {
-    return false;
-  }
-  return {
-    chartType: lineTypes[r[1]].chartType,
-    chartName: lineTypes[r[1]].chartType + "Chart",
-    lineType: r[1],
-    lineTitle: lineTypes[r[1]].title,
-    periodType: periodTypes[periodI].name,
-    dataProviderKey: lineTypes[r[1]].dataProviderKey,
-    subKey: lineTypes[r[1]].countSubKey,
-    countPostfix: lineTypes[r[1]].countPostfix
-  };
-};
+const topFollowersStorage = {};
+for (let periodType of periodTypeNames) {
+  topFollowersStorage[periodType] = {};
+}
 
 export default {
-  mixins: [CalcCount],
+  mixins: [CalcCount, ChartDonutData],
   data() {
     return {
       subscribedWsCodes: [],
@@ -121,24 +103,36 @@ export default {
           return;
         }
         data.statistics = this.shiftTimeZone(data.statistics);
-        this.setCounter(
-          "count_" + r.chartType + "_" + r.lineType,
-          r.lineTitle,
-          this.calcCount(statData, r.subKey || undefined),
-          r.countPostfix
-        );
 
         this.updateChart(
           this[r.chartName],
           statData,
           r.dataProviderKey,
           r.subKey || undefined,
-          data.statistics.code
+          // data.statistics.code,
+          total => {
+            this.setCounter(
+              "count_" + r.chartType + "_" + r.lineType,
+              r.lineTitle,
+              total,
+              r.countPostfix
+            );
+          }
         );
         if (store) {
           chartStorage[r.chartType][r.periodType].push(data);
         }
+        return;
       }
+      // ------------
+      r = matchCodeByPrefix(data.statistics.code, "top_followers_count");
+      if (r) {
+        this.updateTopFollowers(statData);
+        topFollowersStorage[this.currentPeriodType] = statData;
+        return;
+      }
+      // ------------
+      this.updateDonutData(data);
     },
     shiftTimeZone(statistics) {
       const data = {};
@@ -181,7 +175,7 @@ export default {
         value +
         "</span>";
     },
-    updateChart(chart, statData, dataProviderKey, statDataSubKey) {
+    updateChart(chart, statData, dataProviderKey, statDataSubKey, callback) {
       if (!this.updateChartAttempts[dataProviderKey]) {
         this.updateChartAttempts[dataProviderKey] = 0;
       }
@@ -191,13 +185,25 @@ export default {
       if (!chart.div) {
         setTimeout(() => {
           this.updateChartAttempts[dataProviderKey]++;
-          this.updateChart(chart, statData, dataProviderKey, statDataSubKey);
+          this.updateChart(
+            chart,
+            statData,
+            dataProviderKey,
+            statDataSubKey,
+            callback
+          );
         }, 1000);
       } else {
-        this._updateChart(chart, statData, dataProviderKey, statDataSubKey);
+        this._updateChart(
+          chart,
+          statData,
+          dataProviderKey,
+          statDataSubKey,
+          callback
+        );
       }
     },
-    _updateChart(chart, statData, dataProviderKey, statDataSubKey) {
+    _updateChart(chart, statData, dataProviderKey, statDataSubKey, callback) {
       const chartId = chart.div.id;
       const dataId = chart.div.id + "-" + dataProviderKey;
 
@@ -220,7 +226,8 @@ export default {
           chart,
           statData,
           dataProviderKey,
-          statDataSubKey || null
+          statDataSubKey || null,
+          callback
         );
       }, 1000);
 
@@ -232,63 +239,92 @@ export default {
         chart.validateData();
       }, 1000);
     },
-    _updateChartDataProvider(chart, statData, dataProviderKey, statDataSubKey) {
+    _updateChartDataProvider(
+      chart,
+      statData,
+      dataProviderKey,
+      statDataSubKey,
+      callback
+    ) {
       const approx = {};
-      const firstBarTime = chart.dataProvider[0].date.unix();
-      // console.log(statData);
 
-      // Дебаг дат баров
-      console.log(chart.dataProvider.length);
-      chart.dataProvider.map(v => {
-        console.log("DoFWEEK", new Date(v.date));
-      });
+      console.log(">>>", dataProviderKey);
+      let date;
 
-      // statData = {
-      //   1598216400: 1, // monday
-      //   1598302800: 2, // tusday
-      //   1598734800: 4 // sunday
-      // };
+      let total = 0;
 
-      for (let pointTime of Object.keys(statData)) {
-        console.log("POINT TIME", moment.unix(pointTime).toDate());
-        if (pointTime < firstBarTime) {
-          // Необходимо проверить имеет ли точка время меньшее чем первый бар
-          // И если так, мы игнорируем ее
-          console.error("POINT IS LESS THEN FIRST BAR TIME", {
-            pointTime,
-            firstBarTime
-          });
-          continue;
+      if (chart.dataProvider.length) {
+        date = chart.dataProvider[0].date;
+        if (typeof date === "number") {
+          date = moment.unix(date);
         }
-        let currIndex = 0;
-        let diff = 0;
-        // Для каждой точки ищем подходящее место в плоте
-        for (let j = 0; j < barCount; j++) {
-          let momentDiff = Math.abs(
-            chart.dataProvider[j].date.unix() - pointTime
-          );
-          // Находим бар, имеющий координаты немного меньше или равные точке
-          if (0 === j || diff >= momentDiff) {
-            diff = momentDiff;
-            currIndex = j;
+
+        // if (!chart.dataProvider[0].date.unix) {
+        //   console.log(dataProviderKey, chart.dataProvider[0].date);
+        // }
+        // // console.log(dataProviderKey, chart.dataProvider[0].date);
+        const firstBarTime = date.unix();
+
+        // console.log("firstBarTime: ", firstBarTime);
+
+        // // Дебаг дат баров
+        // console.log(chart.dataProvider.length);
+        // chart.dataProvider.map(v => {
+        //   console.log("DoFWEEK", new Date(v.date));
+        // });
+
+        // statData = {
+        //   1598216400: 1, // monday
+        //   1598302800: 2, // tusday
+        //   1598734800: 4 // sunday
+        // };
+
+        for (let pointTime of Object.keys(statData)) {
+          // console.log("POINT TIME", moment.unix(pointTime).toDate());
+          if (pointTime < firstBarTime) {
+            // Необходимо проверить имеет ли точка время меньшее чем первый бар
+            // И если так, мы игнорируем ее
+            console.log("POINT IS LESS THEN FIRST BAR TIME", {
+              pointTime,
+              firstBarTime
+            });
+            continue;
           }
+
+          let currIndex = 0;
+          let diff = 0;
+          // Для каждой точки ищем подходящее место в плоте
+          for (let j = 0; j < barCount; j++) {
+            date = chart.dataProvider[j].date;
+            if (typeof date === "number") {
+              date = moment.unix(date);
+            }
+            let momentDiff = Math.abs(date.unix() - pointTime);
+            // Находим бар, имеющий координаты немного меньше или равные точке
+            if (0 === j || diff >= momentDiff) {
+              diff = momentDiff;
+              currIndex = j;
+            }
+          }
+          let val =
+            "undefined" !== typeof approx[currIndex]
+              ? parseInt(approx[currIndex], 10)
+              : 0;
+          let v;
+          if (statDataSubKey) {
+            v = statData[pointTime][statDataSubKey];
+          } else {
+            v = statData[pointTime];
+          }
+          approx[currIndex] = val + v;
         }
-        let val =
-          "undefined" !== typeof approx[currIndex]
-            ? parseInt(approx[currIndex], 10)
-            : 0;
-        let v;
-        if (statDataSubKey) {
-          v = statData[pointTime][statDataSubKey];
-        } else {
-          v = statData[pointTime];
+        for (let i in approx) {
+          chart.dataProvider[i][dataProviderKey] = approx[i];
+          total += approx[i];
         }
-        approx[currIndex] = val + v;
       }
-      console.log({ approx });
-      for (let i in approx) {
-        chart.dataProvider[i][dataProviderKey] = approx[i];
-      }
+
+      callback(total);
     }
   }
 };
