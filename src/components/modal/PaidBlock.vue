@@ -39,7 +39,7 @@
             @click.prevent="block"
             :disabled="disabled || !price"
           >
-            Block user
+            Block
           </button>
           <button class="btn alt" @click.prevent="close" :disabled="disabled">
             Cancel
@@ -73,8 +73,8 @@ export default {
     block() {
       this.disabled = true;
       this.$store
-        .dispatch("followers/paidBlock", {
-          userId: this.modalData.id,
+        .dispatch(this.modalData.actionPrefix + "/paidBlock", {
+          userId: this.modalData.userId,
           price: this.price
         })
         .then(() => {})

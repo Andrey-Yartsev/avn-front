@@ -4,7 +4,15 @@ const state = {};
 
 const actions = {
   unblock({ dispatch }, userId) {
-    return dispatch("user/paidUnblock", userId, { root: true });
+    return dispatch("user/paidUnblock", userId, { root: true }).then(() => {
+      dispatch(
+        "global/flashToast",
+        {
+          text: "User unblocked"
+        },
+        { root: true }
+      );
+    });
   },
   filterBlocked({ commit }, userId) {
     commit("filterUsers", userId);

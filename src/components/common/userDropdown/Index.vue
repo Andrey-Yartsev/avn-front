@@ -50,7 +50,7 @@
                 class="more-functions__link"
               >
                 <span class="more-functions__option">
-                  Paid Block
+                  Paid block
                 </span>
               </a>
             </li>
@@ -161,7 +161,10 @@ export default {
     paidBlock() {
       this.$store.dispatch("modal/show", {
         name: "paidBlock",
-        data: this.profile
+        data: {
+          userId: this.profile.id,
+          actionPrefix: this.actionPrefix
+        }
       });
     },
     paidUnblock() {

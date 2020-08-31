@@ -342,7 +342,10 @@ export default {
         return;
       }
       if (this.isPaidBlockedBy(this.withUser.id)) {
-        this.openPaidUnblockModal(this.withUser.id);
+        this.openPaidUnblockModal({
+          userId: this.withUser.id,
+          username: this.withUser.username
+        });
         return;
       }
       const message = this.message;

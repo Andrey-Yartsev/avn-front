@@ -58,6 +58,28 @@
                 </span>
               </a>
             </li>
+            <li v-if="_user.isPaidBlocked" class="more-functions__item">
+              <a
+                href="#"
+                @click.prevent="paidUnblock"
+                class="more-functions__link"
+              >
+                <span class="more-functions__option">
+                  Paid unblock
+                </span>
+              </a>
+            </li>
+            <li class="more-functions__item" v-else>
+              <a
+                href="#"
+                @click.prevent="paidBlock"
+                class="more-functions__link"
+              >
+                <span class="more-functions__option">
+                  Paid block
+                </span>
+              </a>
+            </li>
           </template>
           <template v-if="userExists && _canMute(_user)">
             <li class="more-functions__item" v-if="_user.isMuted">
@@ -153,6 +175,20 @@ export default {
     },
     unblockActiveUser() {
       this.$store.dispatch("chat/unblockUser", this.activeUser.id);
+      this.chatOptionsOpened = false;
+    },
+    paidBlock() {
+      this.$store.dispatch("modal/show", {
+        name: "paidBlock",
+        data: {
+          userId: this.activeUser.id,
+          actionPrefix: "chat"
+        }
+      });
+      this.chatOptionsOpened = false;
+    },
+    paidUnblock() {
+      this.$store.dispatch("chat/paidUnblock", this.activeUser.id);
       this.chatOptionsOpened = false;
     },
     muteActiveUser() {

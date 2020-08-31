@@ -77,7 +77,7 @@
                 v-if="source === 'blockedPaid'"
                 class="table__cell table__cell_align table__cell_align-vert-c table__cell_align-hor-c table__cell_selected"
               >
-                <span>${{ v.unblockPrice }}</span>
+                <span>${{ v.price }}</span>
               </div>
               <div
                 class="table__cell table__cell_align table__cell_align-vert-c table__cell_align-hor-c actions"

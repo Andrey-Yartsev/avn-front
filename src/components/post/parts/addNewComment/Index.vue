@@ -115,7 +115,10 @@ export default {
   methods: {
     sendComment() {
       if (this.isPaidBlockedBy(this.author.id)) {
-        this.openPaidUnblockModal(this.author.id);
+        this.openPaidUnblockModal({
+          userId: this.author.id,
+          username: this.author.username
+        });
         return;
       }
       this.sendNewComment(this.message);

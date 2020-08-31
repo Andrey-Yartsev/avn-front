@@ -356,7 +356,10 @@ export default {
         return;
       }
       if (this.isPaidBlockedBy(this.streamer.id)) {
-        this.openPaidUnblockModal(this.streamer.id);
+        this.openPaidUnblockModal({
+          userId: this.streamer.id,
+          username: this.streamer.username
+        });
         return;
       }
       this.showCommentForm = !this.showCommentForm;

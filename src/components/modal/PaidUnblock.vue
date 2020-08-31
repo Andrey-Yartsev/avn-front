@@ -13,7 +13,7 @@
             Unblock
           </div>
           <div class="popup-alert__body">
-            You has been blocked by {{ data.user.username }}.
+            You has been blocked by {{ username }}
             <br />
             You can unblock youself for ${{ blockedPrice }}
           </div>
@@ -42,6 +42,9 @@ export default {
   computed: {
     userId() {
       return this.$store.state.modal.paidUnblock.data.userId;
+    },
+    username() {
+      return this.$store.state.modal.paidUnblock.data.username;
     },
     user() {
       return this.$store.state.auth.user;
