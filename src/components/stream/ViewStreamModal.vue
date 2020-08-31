@@ -213,7 +213,7 @@ export default {
     },
     stopWatching() {
       const token = this.$store.state.auth.token;
-      const id = this.$store.state.modal.stream.data.stream.id;
+      const id = this.$store.state.modal.stream.data.stream?.id;
       const userId = this.$store.state.modal.stream.data.stream.user.id;
 
       this.$root.ws.send({
