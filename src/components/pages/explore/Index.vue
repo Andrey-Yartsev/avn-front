@@ -390,6 +390,7 @@ export default {
     },
     getPageData() {
       this.lastYOffset = 0;
+      this.selectedMonth = 0;
 
       this.$store.dispatch("explore/resetPageState");
       this.$store.commit("topModels/reset");
@@ -453,8 +454,10 @@ export default {
       }
     },
     selectedMonth(value) {
-      this.$store.commit("topModels/reset");
-      this.$store.dispatch("topModels/getPosts", { month: value });
+      if (this.page === "topmodels") {
+        this.$store.commit("topModels/reset");
+        this.$store.dispatch("topModels/getPosts", { month: value });
+      }
     }
   },
   mounted() {
