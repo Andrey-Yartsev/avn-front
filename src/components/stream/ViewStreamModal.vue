@@ -75,7 +75,12 @@
         </div>
         <div class="stream-forms">
           <div class="form-comments">
-            <Comments :shownComments="shownComments" :count="comentsCount" />
+            <Comments
+              :shownComments="shownComments"
+              :count="comentsCount"
+              :allComments="comments"
+              :isStreamer="false"
+            />
             <AddComment
               v-if="showCommentForm && !isMyStream"
               ref="addComment"
