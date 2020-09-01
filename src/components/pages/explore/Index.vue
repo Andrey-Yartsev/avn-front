@@ -72,12 +72,30 @@
               userCollectionView: page === 'topmodels'
             }"
           >
-            <Users
-              v-if="page === 'topmodels'"
-              :items="topModels"
-              actionPrefix="topModels"
-              :top="true"
-            />
+            <template v-if="page === 'topmodels'">
+              <div class="form-group form-group_with-label month-options">
+                <label class="form-group-inner">
+                  <span class="label">Top models results</span>
+                  <div class="row">
+                    <div class="">
+                      <div class="select-wrapper">
+                        <select
+                          name="selectedMonth"
+                          class="default-disabled"
+                          v-model="selectedMonth"
+                        >
+                          <option value="0">Current month</option>
+                          <option value="202008" key="202008">
+                            August
+                          </option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </label>
+              </div>
+              <Users :items="topModels" actionPrefix="topModels" :top="true" />
+            </template>
             <div v-else-if="page === 'feed'" class="feed-wrapper">
               <PostCollection
                 :posts="posts"
@@ -209,7 +227,8 @@ export default {
   data() {
     return {
       storiesFetched: false,
-      livesFetched: false
+      livesFetched: false,
+      selectedMonth: 0
     };
   },
   created() {
@@ -364,7 +383,9 @@ export default {
       }
 
       if (this.type === "top") {
-        this.$store.dispatch("topModels/getPosts");
+        this.$store.dispatch("topModels/getPosts", {
+          month: this.selectedMonth
+        });
       }
     },
     getPageData() {
@@ -397,7 +418,9 @@ export default {
       }
 
       if (this.type === "top") {
-        this.$store.dispatch("topModels/getPosts");
+        this.$store.dispatch("topModels/getPosts", {
+          month: this.selectedMonth
+        });
       }
 
       if (!this.livesFetched) {
@@ -428,6 +451,10 @@ export default {
       if (newValue !== undefined && oldValue !== undefined) {
         this.init();
       }
+    },
+    selectedMonth(value) {
+      this.$store.commit("topModels/reset");
+      this.$store.dispatch("topModels/getPosts", { month: value });
     }
   },
   mounted() {
@@ -465,6 +492,17 @@ export default {
         color: #222b32;
       }
     }
+  }
+}
+.month-options {
+  margin-left: -20px;
+  /* padding: 10px 20px; */
+  @media (max-width: 991px) {
+    margin-left: 0px;
+    padding: 10px 20px;
+  }
+  select {
+    margin-left: 13px;
   }
 }
 </style>

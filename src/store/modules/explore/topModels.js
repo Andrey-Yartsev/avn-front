@@ -42,16 +42,20 @@ const mutations = {
 };
 
 const actions = {
-  getPosts({ dispatch, commit, state, rootState }) {
+  getPosts({ dispatch, commit, state, rootState }, { month }) {
     const { limit, offset, marker } = state;
     const category = rootState.gender.category;
 
     commit("postsRequest");
-    dispatch("topModelsRequest", { limit, offset, marker, category }).then(
-      r => {
-        commit("checkResult", r);
-      }
-    );
+    dispatch("topModelsRequest", {
+      limit,
+      offset,
+      marker,
+      category,
+      month
+    }).then(r => {
+      commit("checkResult", r);
+    });
   },
   follow({ commit, dispatch }, userId) {
     dispatch("user/follow", userId, { root: true }).then(() => {
@@ -116,6 +120,9 @@ createRequestAction({
     options.query.order_by = params.order_by || "revenue";
     options.query.order_type = params.order_type || "DESC";
     options.query.category = params.category || 1;
+    if (params.month) {
+      options.query.month = params.month;
+    }
     return options;
   },
   resultConvert: function(result, state) {
