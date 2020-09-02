@@ -13,9 +13,9 @@
             Unblock
           </div>
           <div class="popup-alert__body">
-            You has been blocked by {{ username }}
+            You have been blocked by {{ username }}
             <br />
-            You can unblock youself for ${{ blockedPrice }}
+            You can unblock yourself for ${{ blockedPrice }}
           </div>
           <div class="popup-alert__footer">
             <button class="btn" @click.prevent="yes">Confirm</button>
