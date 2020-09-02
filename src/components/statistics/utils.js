@@ -22,7 +22,9 @@ const chartTypes = {
     earn_referral: ["Referral", "earn_referral", [], "total", "$"]
   }
 };
+
 const periodTypes = [
+  // moment - используется для формирования периода графика, который отображается в заголовке
   {
     name: "daily",
     title: "Daily",
@@ -34,13 +36,13 @@ const periodTypes = [
     moment: "week"
   },
   {
-    name: "today",
-    title: "Today",
-    moment: null
+    name: "monthly",
+    title: "Monthly",
+    moment: "month"
   },
   {
-    name: "last_year",
-    title: "Last year",
+    name: "all",
+    title: "Yearly",
     moment: "year"
   }
 ];
@@ -69,19 +71,29 @@ Object.entries(chartTypes).forEach(v => {
 
 const periodTypeNames = periodTypes.map(v => v.name);
 
-const getScaleData = period => {
+const getScaleData = periodType => {
+  if (!getPeriodType(periodType)) {
+    throw new Error(`periodType ${periodType} does not exists`);
+  }
+
   const now = moment()
     .utc()
     .unix();
 
-  let periodType, count;
+  let units;
+  let count; // количество единиц типа units назад от текущего времени
   let startDate = now;
+  let barCount = 80;
+  let scaleCount = null;
+  let unitsInBar = 1; // количество единиц типа units в одном делении линейки
+  /// let barCount = 5;
+  let startFromFirstDayOfWeek = false;
+  let displayFormat = "YYYY-MM-DD";
 
-  switch (period) {
+  switch (periodType) {
     case "today":
       count = 1439;
-      periodType = "minutes";
-      // format = "YYYY-MM-DD HH:mm";
+      units = "minutes";
       startDate = moment(
         moment
           .unix(now)
@@ -89,39 +101,64 @@ const getScaleData = period => {
           .format("YYYY-MM-DD")
       ).unix();
       break;
-    case "weekly":
-      count = 167;
-      periodType = "hours";
-      // format = "YYYY-MM-DD HH";
-      break;
     case "daily":
-      count = 719;
-      periodType = "hours";
-      // format = "YYYY-MM-DD HH";
+      count = 30;
+      units = "days";
+      barCount = 30;
+      scaleCount = 15;
+      unitsInBar = 2;
+      displayFormat = "D";
+      break;
+    case "weekly":
+      count = 7;
+      units = "days";
+      barCount = 7;
+      startFromFirstDayOfWeek = true;
+      displayFormat = "ddd";
       break;
     case "monthly":
       count = 12;
-      periodType = "months";
-      // format = "YYYY-MM-DD HH";
+      units = "months";
+      barCount = 12;
+      unitsInBar = 1;
+      displayFormat = "MMM";
       break;
-    case "last_year":
-      count = 364;
-      periodType = "days";
-      // format = "YYYY-MM-DD";
+    // case "yearly":
+    case "all":
+      count = 5;
+      units = "years";
+      barCount = 5;
+      unitsInBar = 1;
+      displayFormat = "YYYY";
       break;
+  }
+
+  if (scaleCount === null) {
+    scaleCount = barCount;
   }
 
   return {
     count,
-    periodType,
-    startDate
+    units,
+    startDate,
+    barCount,
+    scaleCount,
+    unitsInBar,
+    displayFormat,
+    startFromFirstDayOfWeek
   };
 };
 
 const dataProviderKeys = {
   followers: ["followers", "subscribers"],
   posts: ["posts", "views", "likes", "comments"],
-  stories: ["uploads", "views"]
+  stories: ["uploads", "views"],
+  earnings: [
+    "paid_subscriptions",
+    "tips",
+    "paid_chat_messages",
+    "earn_referral"
+  ]
 };
 
 const matchChartCode = code => {

@@ -4,12 +4,13 @@ import {
   periodTypeNames,
   chartDataSets,
   matchChartCode,
-  matchCodeByPrefix
+  matchCodeByPrefix,
+  getScaleData
 } from "./utils";
 import CalcCount from "./calcCount";
 import moment from "moment";
 import pluralize from "pluralize";
-import { barCount } from "./chartVars";
+// import { barCount } from "./chartVars";
 import ChartDonutData from "./chartDonutData";
 
 //
@@ -98,6 +99,7 @@ export default {
         "NaN" === data.statistics.data ? 0 : data.statistics.data;
 
       let r = matchChartCode(data.statistics.code);
+
       if (r) {
         if (r.periodType !== this.currentPeriodType) {
           return;
@@ -172,7 +174,7 @@ export default {
         "</div>" +
         "<span>" +
         postfix +
-        value +
+        Math.round(value * 100) / 100 +
         "</span>";
     },
     updateChart(chart, statData, dataProviderKey, statDataSubKey, callback) {
@@ -253,7 +255,16 @@ export default {
 
       let total = 0;
 
+      const { barCount } = getScaleData(this.currentPeriodType);
+
+      // console.log(chart.dataProvider);
+
+      chart.dataProvider.forEach(v => {
+        console.log("Bar", moment.unix(v.date).format("DD.MM.YYYY"));
+      });
+
       if (chart.dataProvider.length) {
+        // Генерация пустых значений для dataProvider'а происходит в fillLineChartByEmptyPoints()
         date = chart.dataProvider[0].date;
         if (typeof date === "number") {
           date = moment.unix(date);
@@ -280,21 +291,23 @@ export default {
         // };
 
         for (let pointTime of Object.keys(statData)) {
-          // console.log("POINT TIME", moment.unix(pointTime).toDate());
+          console.log("Point time", moment.unix(pointTime).toDate());
           if (pointTime < firstBarTime) {
             // Необходимо проверить имеет ли точка время меньшее чем первый бар
             // И если так, мы игнорируем ее
-            console.log("POINT IS LESS THEN FIRST BAR TIME", {
-              pointTime,
-              firstBarTime
+            console.log("Point is less then first bar time", {
+              pointTime: moment.unix(pointTime).format("DD.MM.YYYY"),
+              firstBarTime: moment.unix(firstBarTime).format("DD.MM.YYYY")
             });
             continue;
           }
 
           let currIndex = 0;
           let diff = 0;
+
           // Для каждой точки ищем подходящее место в плоте
           for (let j = 0; j < barCount; j++) {
+            // todo заменить barCount на динамичный
             date = chart.dataProvider[j].date;
             if (typeof date === "number") {
               date = moment.unix(date);
@@ -323,6 +336,8 @@ export default {
           total += approx[i];
         }
       }
+
+      console.log("Final data provider", chart.dataProvider);
 
       callback(total);
     }

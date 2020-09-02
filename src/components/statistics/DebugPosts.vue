@@ -3,42 +3,37 @@
   <div class="boxes" v-else>
     {{ currentPeriodType }}<br /><br />
     <div class="cols">
-      <div class="col col-1-3">
-        <div class="box" id="followers-box">
+      <div class="col col-1-2">
+        <div class="box">
           <div class="charts-wrapper-outer">
             <div class="charts-data">
               <div
-                class="tab-stat tab-uploaded"
-                @click="selectLine('followers-followers')"
-                :class="{
-                  selected:
-                    selectedLineChart === 'followers' &&
-                    selectedLineName === 'followers'
-                }"
-                ref="count_followers_current_followers"
+                class="tab-stat tab-posts"
+                ref="count_earnings_paid_subscriptions"
               >
-                <div class="tab-stat__name">Followers</div>
-                <span>0</span>
+                Subscribers <span>0</span>
+              </div>
+              <div class="tab-stat tab-views" ref="count_earnings_tips">
+                Tipping <span>0</span>
               </div>
               <div
-                class="tab-stat tab-views"
-                @click="selectLine('followers-subscribers')"
-                :class="{
-                  selected:
-                    selectedLineChart === 'followers' &&
-                    selectedLineName === 'subscribers'
-                }"
-                ref="count_followers_current_subscribers"
+                class="tab-stat tab-likes"
+                ref="count_earnings_paid_chat_messages"
               >
-                <div class="tab-stat__name">Subscribers</div>
-                <span>0</span>
+                Message <span>0</span>
+              </div>
+              <div
+                class="tab-stat tab-comments"
+                ref="count_earnings_earn_referral"
+              >
+                Referrals <span>0</span>
               </div>
             </div>
             <div
-              id="followers_chart"
-              class="charts-wrapper charts-wrapper_followers"
+              id="earnings_chart"
+              class="charts-wrapper charts-wrapper_posts"
             ></div>
-            <div class="statistics-chart-scale" id="followers_scale"></div>
+            <div class="statistics-chart-scale" id="earnings_scale"></div>
           </div>
         </div>
       </div>
@@ -61,7 +56,7 @@ export default {
   },
   data() {
     return {
-      currentPeriodType: "daily",
+      currentPeriodType: "all",
       selectedLineChart: "",
       selectedLineName: ""
     };
@@ -75,15 +70,19 @@ export default {
         .utc()
         .unix();
       this.buildScale(
-        document.getElementById("followers_scale"),
+        document.getElementById("earnings_scale"),
         this.currentPeriodType,
         now
       );
     },
     sendWsRequests() {
       this.subscribeUserStatistics(
-        "current_followers_detailed_histogram_" + this.currentPeriodType
+        "tips_detailed_histogram_" + this.currentPeriodType
       );
+      this.subscribeUserStatistics(
+        "paid_chat_messages_detailed_histogram_" + this.currentPeriodType
+      );
+
       // this.subscribeUserStatistics(
       //   "current_subscribers_detailed_histogram_" + this.currentPeriodType
       // );
@@ -92,8 +91,8 @@ export default {
   mounted() {
     setTimeout(() => {
       this._buildScale();
-      this.buildChart("followers");
-      this.fillLineChartByEmptyPoints("followers");
+      this.buildChart("earnings");
+      this.fillLineChartByEmptyPoints("earnings");
       this.initWs();
     }, 1000);
   }

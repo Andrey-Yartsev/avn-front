@@ -384,8 +384,7 @@ import {
   periodTypes,
   getPeriodType,
   chartDataSets,
-  periodTypeNames,
-  getScaleData
+  periodTypeNames
 } from "./utils";
 
 const chartStorage = {};
@@ -400,8 +399,6 @@ const topFollowersStorage = {};
 for (let periodType of periodTypeNames) {
   topFollowersStorage[periodType] = {};
 }
-
-const barCount = 80;
 
 export default {
   name: "statistics-page",
@@ -426,7 +423,7 @@ export default {
     return {
       periodTypes,
       periodOptionsOpened: false,
-      currentPeriodType: "daily",
+      currentPeriodType: "monthly",
       //
       showedStats: {},
       profileMapData: [],
@@ -643,73 +640,13 @@ export default {
       this.buildChart("followers");
       this.buildChart("posts");
       this.buildChart("stories");
-      this.buildEarningsChart();
+      this.buildChart("earnings");
     },
     fillLineChartsByEmptyPoints() {
-      this.followersChart.dataProvider = [];
-      this.postsChart.dataProvider = [];
-      this.storiesChart.dataProvider = [];
-      this.earningsChart.dataProvider = [];
-
-      const { periodType, count, startDate } = getScaleData(
-        this.currentPeriodType
-      );
-
-      for (let i = barCount; i >= 1; i--) {
-        let currDate = moment
-          .unix(startDate)
-          .subtract((i * count) / barCount, periodType)
-          .unix();
-        this.followersChart.dataProvider.push({
-          date: currDate,
-          followers: 0,
-          subscribers: 0
-        });
-        this.postsChart.dataProvider.push({
-          date: currDate,
-          posts: 0,
-          views: 0,
-          likes: 0,
-          comments: 0
-        });
-        this.storiesChart.dataProvider.push({
-          date: currDate,
-          uploads: 0,
-          views: 0
-        });
-        this.earningsChart.dataProvider.push({
-          date: currDate,
-          paid_subscriptions: 0,
-          tips: 0,
-          paid_chat_messages: 0,
-          earn_referral: 0
-        });
-      }
-    },
-    updateMap(statData) {
-      const sortable = [];
-      for (let index in statData) {
-        if (statData.hasOwnProperty(index)) {
-          sortable.push([index, statData[index]]);
-        }
-      }
-      sortable.sort((a, b) => {
-        return b[1] - a[1];
-      });
-      if (sortable.length) {
-        let alpha = sortable[0][1];
-        sortable.forEach((item, i) => {
-          this.profileMapData[i] = {
-            id: item[0],
-            alpha: 0.3 + (item[1] * 0.7) / alpha,
-            value: item[1]
-          };
-        });
-      }
-      if (this.profileMapData.length) {
-        this.mapChart.dataProvider.areas = this.profileMapData;
-        this.mapChart.validateData();
-      }
+      this.fillLineChartByEmptyPoints("followers");
+      this.fillLineChartByEmptyPoints("posts");
+      this.fillLineChartByEmptyPoints("stories");
+      this.fillLineChartByEmptyPoints("earnings");
     },
     updateTotalBalance(data) {
       if (!data || !data[0]) {

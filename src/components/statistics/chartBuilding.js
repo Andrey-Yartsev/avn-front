@@ -102,6 +102,9 @@ export default {
             )
           );
           break;
+        case "earnings":
+          this.buildEarningsChart();
+          break;
       }
     },
     buildEarningsChart() {
@@ -292,9 +295,16 @@ export default {
     },
     fillLineChartByEmptyPoints(name) {
       this[name + "Chart"].dataProvider = [];
-      const { periodType, count, startDate, barCount } = getScaleData(
+      const { units, count, startDate, barCount } = getScaleData(
         this.currentPeriodType
       );
+
+      // console.log("barCount=", barCount);
+
+      if (!units) {
+        throw new Error("units is not defined");
+      }
+
       const keys = {};
       dataProviderKeys[name].forEach(k => (keys[k] = 0));
 
@@ -318,13 +328,12 @@ export default {
         return;
       }
 
-      console.log("======================", barCount);
+      // console.log("======================", units, barCount);
 
       for (let i = barCount; i >= 1; i--) {
-        console.log("X");
         let currDate = moment
           .unix(startDate)
-          .subtract((i * count) / barCount, periodType)
+          .subtract((i * count) / barCount, units)
           .unix();
 
         this[name + "Chart"].dataProvider.push(

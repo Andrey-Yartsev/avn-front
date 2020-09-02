@@ -60,7 +60,7 @@ const chartOptions = {
 };
 
 const mainColor = "#fff";
-const barCount = 7;
+// const barCount = 7;
 const colorScheme = 1;
 
 const colorSchemes = [
@@ -80,7 +80,7 @@ export {
   chartOptions,
   altColor,
   mainColor,
-  barCount,
+  // barCount,
   colorScheme,
   colorSchemes
 };

@@ -281,19 +281,26 @@
 
 .statistics-chart-scale {
   display: flex;
+  justify-content: space-between;
   font-size: 10px;
   color: #7c8b96;
-  padding: 11px 10px 19px 24px;
+  padding: 11px 0 19px 0;
 
   &__item {
-    flex: 0 1 100%;
+    // flex: 0 1 100%;
+    &:first-child {
+      padding-left: 5px;
+    }
+    &:last-child {
+      padding-right: 5px;
+    }
     text-align: center;
   }
 }
 
 #followers_scale.statistics-chart-scale {
-  padding-left: 0px;
-  padding-right: 0px;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .amcharts-main-div {

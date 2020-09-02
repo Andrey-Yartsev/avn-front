@@ -119,9 +119,19 @@ const routes = [
   {
     beforeEnter: Auth.requireAuth,
     path: "/statistics/debug",
-    name: "StatisticPage",
+    name: "StatisticPage2",
     component: () =>
       import(/* webpackChunkName: "StatPage" */ "@/components/statistics/Debug"),
+    meta: {
+      cssName: "statistics"
+    }
+  },
+  {
+    beforeEnter: Auth.requireAuth,
+    path: "/statistics/debug-posts",
+    name: "StatisticPage3",
+    component: () =>
+      import(/* webpackChunkName: "StatPage" */ "@/components/statistics/DebugPosts"),
     meta: {
       cssName: "statistics"
     }

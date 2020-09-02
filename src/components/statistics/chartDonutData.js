@@ -165,6 +165,31 @@ export default {
         }
       );
       this.topFollowers = await response.json();
+    },
+    updateMap(statData) {
+      const sortable = [];
+      for (let index in statData) {
+        if (statData.hasOwnProperty(index)) {
+          sortable.push([index, statData[index]]);
+        }
+      }
+      sortable.sort((a, b) => {
+        return b[1] - a[1];
+      });
+      if (sortable.length) {
+        let alpha = sortable[0][1];
+        sortable.forEach((item, i) => {
+          this.profileMapData[i] = {
+            id: item[0],
+            alpha: 0.3 + (item[1] * 0.7) / alpha,
+            value: item[1]
+          };
+        });
+      }
+      if (this.profileMapData.length) {
+        this.mapChart.dataProvider.areas = this.profileMapData;
+        this.mapChart.validateData();
+      }
     }
   }
 };

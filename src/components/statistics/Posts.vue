@@ -214,7 +214,7 @@ export default {
 
       let period = this.period;
 
-      const { periodType, count, startDate } = getScaleData(period);
+      const { units, count, startDate } = getScaleData(period);
 
       for (let type in chartColors) {
         if (!chartColors.hasOwnProperty(type)) {
@@ -228,7 +228,7 @@ export default {
         for (let j = this.barCount; j >= 1; j--) {
           let currDate = moment
             .unix(startDate)
-            .subtract((j * count) / this.barCount, periodType)
+            .subtract((j * count) / this.barCount, units)
             .unix();
           this.charts[period][type].dataProvider[y] = {};
           this.charts[period][type].dataProvider[y].date = currDate;
