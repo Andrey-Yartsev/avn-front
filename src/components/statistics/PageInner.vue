@@ -572,57 +572,6 @@ export default {
         value +
         "</span>";
     },
-    updateChart(chart, statData, dataProviderKey, statDataSubKey) {
-      if (!this.updateChartAttempts[dataProviderKey]) {
-        this.updateChartAttempts[dataProviderKey] = 0;
-      }
-      if (this.updateChartAttempts[dataProviderKey] > 5) {
-        return;
-      }
-      if (!chart.div) {
-        setTimeout(() => {
-          this.updateChartAttempts[dataProviderKey]++;
-          this.updateChart(chart, statData, dataProviderKey, statDataSubKey);
-        }, 1000);
-      } else {
-        this._updateChart(chart, statData, dataProviderKey, statDataSubKey);
-      }
-    },
-    _updateChart(chart, statData, dataProviderKey, statDataSubKey) {
-      const chartId = chart.div.id;
-      const dataId = chart.div.id + "-" + dataProviderKey;
-
-      if (this.updateDataTimeoutIds[dataId]) {
-        clearTimeout(this.updateDataTimeoutIds[dataId]);
-      }
-
-      this.updateDataTimeoutIds[dataId] = setTimeout(() => {
-        this.chartDataSets[chartId][dataProviderKey] = {};
-        this.chartDataSets[chartId][dataProviderKey].statData = statData;
-        this.chartDataSets[chartId][dataProviderKey].statDataSubKey =
-          statDataSubKey || null;
-
-        if (chartId === "earnings_chart") {
-          // change data for earnings table block
-          this.moneyTableData = { ...this.chartDataSets[chartId] };
-        }
-
-        this._updateChartDataProvider(
-          chart,
-          statData,
-          dataProviderKey,
-          statDataSubKey || null
-        );
-      }, 1000);
-
-      // updating chart
-      if (this.updateChartTimeoutIds[chartId]) {
-        clearTimeout(this.updateChartTimeoutIds[chartId]);
-      }
-      this.updateChartTimeoutIds[chartId] = setTimeout(() => {
-        chart.validateData();
-      }, 1000);
-    },
     buildScales() {
       const now = moment()
         .utc()

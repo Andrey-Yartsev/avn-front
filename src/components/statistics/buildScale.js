@@ -28,7 +28,6 @@ export default {
               "</span>";
           }
         } else {
-          console.log("displayFormat", displayFormat);
           for (let j = scaleCount - 1; j >= 0; j--) {
             let currLabel = moment
               .unix(moment.utc(moment.unix(now).format(format)).unix())

@@ -116,7 +116,7 @@ export default {
             this.setCounter(
               "count_" + r.chartType + "_" + r.lineType,
               r.lineTitle,
-              total,
+              Math.round(total * 100) / 100,
               r.countPostfix
             );
           }
@@ -250,7 +250,7 @@ export default {
     ) {
       const approx = {};
 
-      console.log(">>>", dataProviderKey);
+      // console.log(">>>", dataProviderKey);
       let date;
 
       let total = 0;
@@ -259,9 +259,9 @@ export default {
 
       // console.log(chart.dataProvider);
 
-      chart.dataProvider.forEach(v => {
-        console.log("Bar", moment.unix(v.date).format("DD.MM.YYYY"));
-      });
+      // chart.dataProvider.forEach(v => {
+      //   console.log("Bar", moment.unix(v.date).format("DD.MM.YYYY"));
+      // });
 
       if (chart.dataProvider.length) {
         // Генерация пустых значений для dataProvider'а происходит в fillLineChartByEmptyPoints()
@@ -291,7 +291,7 @@ export default {
         // };
 
         for (let pointTime of Object.keys(statData)) {
-          console.log("Point time", moment.unix(pointTime).toDate());
+          // console.log("Point time", moment.unix(pointTime).toDate());
           if (pointTime < firstBarTime) {
             // Необходимо проверить имеет ли точка время меньшее чем первый бар
             // И если так, мы игнорируем ее
@@ -337,7 +337,7 @@ export default {
         }
       }
 
-      console.log("Final data provider", chart.dataProvider);
+      // console.log("Final data provider", chart.dataProvider);
 
       callback(total);
     }
