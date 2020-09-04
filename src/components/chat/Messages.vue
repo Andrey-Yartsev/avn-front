@@ -56,10 +56,10 @@
               <div
                 class="messageWrapper"
                 :class="{
-                  tipsMessage: v.isTips,
+                  tipsMessage: v.paymentType,
                   lockedMessage: isLocked(v),
                   unlockedMessage: isUnlocked(v),
-                  'message-icon': isLocked(v) || v.isTips || !isLocked(v),
+                  'message-icon': isLocked(v) || v.paymentType || !isLocked(v),
                   mine: isMyMessage(v),
                   snapchatMessage: v.isSnapchat
                 }"
@@ -384,16 +384,29 @@ export default {
       return message.fromUser.id === this.user.id;
     },
     text(message) {
-      if (!message.isTips) {
+      if (!message.paymentType) {
         return message.text;
       } else {
-        if (this.isAuthor(message)) {
-          return (
-            "You have tipped " + this.withUser.name + " for " + message.text
-          );
-        } else {
-          return "You have been tipped " + message.text;
+        let text = "";
+        switch (message.paymentType) {
+          case "tip":
+            text = this.isAuthor(message)
+              ? `You have tipped ${this.withUser.name} for ${message.text}`
+              : `You have been tipped ${message.text}`;
+            break;
+          case "paidUnblock":
+            text = this.isAuthor(message)
+              ? `You have paid ${message.text} for ${
+                  this.withUser.name
+                } to unblock the account`
+              : `${this.fromUser.name} paid ${
+                  message.text
+                } to unblock the account`;
+            break;
+          default:
+            break;
         }
+        return text;
       }
     },
     lockedText(message) {
