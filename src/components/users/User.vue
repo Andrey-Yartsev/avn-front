@@ -71,7 +71,10 @@
         :class="{ 'user-num-list_first': num == 1 }"
         v-if="top"
       >
-        <span class="user-num-list__text">{{ num }}</span>
+        <span class="user-num-list__text">
+          <span class="rank">{{ num }}</span>
+          <span v-if="profile.prize" class="prize">${{ profile.prize }}</span>
+        </span>
       </div>
       <p
         class="profile-text"
