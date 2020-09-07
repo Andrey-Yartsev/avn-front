@@ -61,7 +61,7 @@ export default {
   },
   data() {
     return {
-      currentPeriodType: "daily",
+      currentPeriodType: "weekly",
       selectedLineChart: "",
       selectedLineName: ""
     };

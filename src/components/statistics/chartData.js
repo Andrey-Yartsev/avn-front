@@ -59,9 +59,9 @@ export default {
       ws.on("message", this.onData);
     },
     subscribeUserStatistics(code, params) {
-      if (this.subscribedWsCodes.indexOf(code) !== -1) {
-        return;
-      }
+      // if (this.subscribedWsCodes.indexOf(code) !== -1) {
+      //   return;
+      // }
       let data = {
         act: "get_statistics",
         code: code
@@ -69,6 +69,7 @@ export default {
       if ("undefined" !== typeof params) {
         data = Object.assign(data, params);
       }
+      // console.log("WS", data);
       ws.send(data);
       this.subscribedWsCodes.push(code);
     },
@@ -126,7 +127,6 @@ export default {
       // ------------
       r = matchCodeByPrefix(data.statistics.code, "top_followers_count");
       if (r) {
-        console.log("---------------");
         this.updateTopFollowers(statData);
         this.updateTopFollowersCache(statData);
         return;
@@ -331,7 +331,10 @@ export default {
         }
         for (let i in approx) {
           if (approx[i]) {
-            chart.dataProvider[i][dataProviderKey] = approx[i];
+            console.log(approx[i]);
+            let val = approx[i];
+            val = Math.round(approx[i] * 100) / 100;
+            chart.dataProvider[i][dataProviderKey] = val;
             total += approx[i];
           }
         }
@@ -340,6 +343,20 @@ export default {
       // console.log("Final data provider", chart.dataProvider);
 
       callback(total);
+    },
+
+    postsPeriodChange(period) {
+      this.sendWsRequestsByPeriod(period);
+      for (let v of chartStorage.posts[period]) {
+        this.processData(v);
+      }
+    },
+    buildChartPointsFromCache(name) {
+      this.fillLineChartByEmptyPoints(name);
+      for (let v of chartStorage[name][this.currentPeriodType]) {
+        this.processData(v, false);
+      }
+      this[name + "Chart"].validateData();
     }
   }
 };

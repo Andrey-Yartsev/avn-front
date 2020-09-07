@@ -11,7 +11,6 @@ for (let periodType of periodTypeNames) {
 export default {
   methods: {
     async updateTopFollowers(statData) {
-      console.log("XXX");
       let _ids = Object.keys(statData);
       if (!_ids.length) {
         return;

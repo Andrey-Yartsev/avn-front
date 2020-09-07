@@ -430,7 +430,6 @@ export default {
       topFollowers: null,
       // tempDataSet: [],
       dataCache: {}, // by period
-      subscribedWsCodes: [],
       //
       chartDataSets,
       updateDataTimeoutIds: {},
@@ -489,13 +488,6 @@ export default {
       this.currentPeriodType = name;
       this.periodOptionsOpened = false;
     },
-    postsPeriodChange(period) {
-      // this.buildScales();
-      this.sendWsRequestsByPeriod(period);
-      for (let v of chartStorage.posts[period]) {
-        this.processData(v);
-      }
-    },
     sendWsRequests() {
       this.sendWsRequestsByPeriod(this.currentPeriodType);
 
@@ -548,7 +540,7 @@ export default {
         "current_subscribers_detailed_histogram_" + period
       );
 
-      this.subscribeUserStatistics("top_followers_count_" + period);
+      this.subscribeUserStatistics("top_followers_count_all");
     },
     setCounter(ref, title, value, postfix) {
       if (title) {
@@ -617,13 +609,6 @@ export default {
       this[name + "Chart"].clear();
       this.buildChart(name);
       this.buildChartPointsFromCache(name);
-    },
-    buildChartPointsFromCache(name) {
-      this.fillLineChartByEmptyPoints(name);
-      for (let v of chartStorage[name][this.currentPeriodType]) {
-        this.processData(v, false);
-      }
-      this[name + "Chart"].validateData();
     }
   },
   watch: {
