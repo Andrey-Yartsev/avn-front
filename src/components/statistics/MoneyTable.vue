@@ -27,22 +27,6 @@
           <th><span>Votes</span></th>
           <th><span>Total</span></th>
         </thead>
-
-        <!--
-        <tbody>
-          <tr v-for="(v, i) in items" :key="i">
-            <td>
-              <span class="date-item">{{ formatDate(v.date) }}</span>
-            </td>
-            <td class="line-1">${{ v.earnSubscribes }}</td>
-            <td class="line-2">${{ v.earnTips }}</td>
-            <td class="line-3">${{ v.earnChatMessages }}</td>
-            <td class="line-4">${{ v.earnReferral }}</td>
-            <td>${{ v.total }}</td>
-          </tr>
-        </tbody>
-        -->
-
         <tbody>
           <tr v-for="(v, i) in items2" :key="i">
             <td>
@@ -314,18 +298,6 @@ export default {
     }
   },
   methods: {
-    formatDate(date) {
-      switch (this.currentPeriodType) {
-        case "daily":
-          return date.format("D MMM");
-        case "weekly":
-          return date.format("D MMM");
-        case "last_year":
-          return date.format("D MMM");
-        case "today":
-          return date.format("D MMM");
-      }
-    },
     formatTimestamp(timestamp) {
       const date = moment.unix(timestamp);
       switch (this.currentPeriodType) {
@@ -333,9 +305,11 @@ export default {
           return date.format("D MMM");
         case "weekly":
           return date.format("D MMM");
-        case "last_year":
-          return date.format("D MMM");
-        case "today":
+        case "monthly":
+          return date.format("MMM YYYY");
+        case "all":
+          return date.format("YYYY");
+        default:
           return date.format("D MMM");
       }
     },

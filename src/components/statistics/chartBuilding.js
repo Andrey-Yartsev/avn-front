@@ -136,31 +136,31 @@ export default {
           oneBalloonOnly: true
         },
         balloon: {
-          animationDuration: 0,
-          borderThickness: 0,
-          fadeOutDuration: 0,
-          fillAlpha: 1,
-          fillColor: altColor,
-          offsetX: 0,
-          fontSize: 15,
-          horizontalPadding: 8,
-          verticalPadding: 3,
-          shadowAlpha: 0
+          // animationDuration: 0,
+          // borderThickness: 0,
+          // fadeOutDuration: 0,
+          // fillAlpha: 1,
+          fillColor: altColor
+          // offsetX: 0,
+          // fontSize: 15,
+          // horizontalPadding: 8,
+          // verticalPadding: 3,
+          // shadowAlpha: 0
         },
-        categoryAxis: {
-          autoGridCount: false,
-          labelsEnabled: false,
-          axisThickness: 0,
-          axisAlpha: 0.1,
-          gridAlpha: 0,
-          gridColor: "#7c8b96",
-          startOnAxis: true,
-          inside: true,
-          tickLength: 2,
-          offset: 1,
-          gridThickness: 2
-          // gridCount: barCount
-        },
+        // categoryAxis: {
+        //   autoGridCount: false,
+        //   labelsEnabled: false,
+        //   axisThickness: 0,
+        //   axisAlpha: 0.1,
+        //   gridAlpha: 0,
+        //   gridColor: "#7c8b96",
+        //   startOnAxis: true,
+        //   inside: true,
+        //   tickLength: 2,
+        //   offset: 1,
+        //   gridThickness: 2
+        //   // gridCount: barCount
+        // },
         valueAxes: [
           {
             labelsEnabled: false,
@@ -168,7 +168,7 @@ export default {
             dashLength: 6,
             tickLength: 0,
             gridAlpha: 0.1,
-            stackType: "regular",
+            // stackType: "regular",
             gridColor: "#7c8b96",
             zeroGridAlpha: 0,
             autoGridCount: false,
@@ -299,7 +299,7 @@ export default {
         this.currentPeriodType
       );
 
-      // console.log("barCount=", barCount);
+      console.log("barCount=", barCount);
 
       if (!units) {
         throw new Error("units is not defined");

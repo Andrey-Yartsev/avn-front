@@ -38,6 +38,10 @@
         </div>
       </div>
     </div>
+    <div
+      id="chartdiv"
+      style="width:300px; height:300px; border: 1px solid #fff"
+    ></div>
   </div>
 </template>
 

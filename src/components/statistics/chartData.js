@@ -332,8 +332,10 @@ export default {
           approx[currIndex] = val + v;
         }
         for (let i in approx) {
-          chart.dataProvider[i][dataProviderKey] = approx[i];
-          total += approx[i];
+          if (approx[i]) {
+            chart.dataProvider[i][dataProviderKey] = approx[i];
+            total += approx[i];
+          }
         }
       }
 
