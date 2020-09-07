@@ -61,7 +61,7 @@ export default {
     }
   },
   mounted() {
-    this.params.client_id = this.$store.state.init.data.loginSettings.google.publicKey;
+    this.params.client_id = this.$store.state.init.data?.loginSettings.google.publicKey;
   }
 };
 </script>

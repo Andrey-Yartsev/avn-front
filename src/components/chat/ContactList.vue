@@ -78,7 +78,7 @@
                 <span class="message semi-transparent">User is typing...</span>
               </template>
               <template v-else-if="v.lastMessage">
-                <span v-if="v.lastMessage.isTips" class="type-msg-icn">
+                <span v-if="v.lastMessage.paymentType" class="type-msg-icn">
                   <span class="icn-tips icn-item"></span>
                 </span>
                 <span class="type-msg-icn" v-if="!v.lastMessage.isFree">

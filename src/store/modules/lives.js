@@ -40,7 +40,8 @@ const initState = {
     },
     tipsGoal: {
       description: null,
-      amount: null
+      amount: null,
+      sources: []
     }
   }
 };
@@ -110,6 +111,7 @@ const mutations = {
     state.currentLive.tipsGoal = {
       description: data.description || null,
       amount: data.amount || null
+      // sources: data.sources || []
     };
   },
 
@@ -222,12 +224,32 @@ const actions = {
     }
 
     commit("tip", { tip, who });
+  },
+  setTipsGoal({ dispatch }, data) {
+    return dispatch("_sendTipsGoal", data);
   }
 };
 
 createRequestAction({
   prefix: "block",
   apiPath: "streams/block",
+  requestType: "token",
+  defaultLoading: true,
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "POST"
+  },
+  paramsToOptions: function(params, options) {
+    options.data = params;
+    return options;
+  }
+});
+
+createRequestAction({
+  prefix: "_sendTipsGoal",
+  apiPath: "goals",
   requestType: "token",
   defaultLoading: true,
   state,

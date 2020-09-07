@@ -72,12 +72,34 @@
               userCollectionView: page === 'topmodels'
             }"
           >
-            <Users
-              v-if="page === 'topmodels'"
-              :items="topModels"
-              actionPrefix="topModels"
-              :top="true"
-            />
+            <template v-if="page === 'topmodels'">
+              <div class="form-group form-group_with-label month-options">
+                <label class="form-group-inner">
+                  <span class="label">Top models results</span>
+                  <div class="row">
+                    <div class="">
+                      <div class="select-wrapper">
+                        <select
+                          name="selectedMonth"
+                          class="default-disabled"
+                          v-model="selectedMonth"
+                        >
+                          <option value="0">Current month</option>
+                          <option
+                            v-for="month in prevMonths"
+                            :key="month.value"
+                            :value="month.value"
+                          >
+                            {{ month.name }}
+                          </option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </label>
+              </div>
+              <Users :items="topModels" actionPrefix="topModels" :top="true" />
+            </template>
             <div v-else-if="page === 'feed'" class="feed-wrapper">
               <PostCollection
                 :posts="posts"
@@ -183,6 +205,7 @@ import GenderFilter from "@/components/common/GenderFilter";
 import MediaMedium from "@/components/common/profile/media/views/MediaMedium";
 import MediaSmall from "@/components/common/profile/media/views/MediaSmall";
 import BrowserStore from "store";
+import moment from "moment";
 // import mockStories from "@/mock/stories";
 
 export default {
@@ -209,7 +232,8 @@ export default {
   data() {
     return {
       storiesFetched: false,
-      livesFetched: false
+      livesFetched: false,
+      selectedMonth: 0
     };
   },
   created() {
@@ -324,6 +348,21 @@ export default {
     },
     isEnableGayVoting() {
       return this.$store.state.init.data.enableGayVoting;
+    },
+    prevMonths() {
+      let dateStart = moment("2020-8-31");
+      let dateEnd = moment();
+      const months = [];
+
+      while (dateStart.format("M") !== dateEnd.format("M")) {
+        const item = {
+          value: dateStart.format("YYYY") + "" + dateStart.format("MM"),
+          name: dateStart.format("MMMM")
+        };
+        months.push(item);
+        dateStart.add(1, "month");
+      }
+      return months.reverse();
     }
   },
   methods: {
@@ -364,11 +403,14 @@ export default {
       }
 
       if (this.type === "top") {
-        this.$store.dispatch("topModels/getPosts");
+        this.$store.dispatch("topModels/getPosts", {
+          month: this.selectedMonth
+        });
       }
     },
     getPageData() {
       this.lastYOffset = 0;
+      this.selectedMonth = 0;
 
       this.$store.dispatch("explore/resetPageState");
       this.$store.commit("topModels/reset");
@@ -397,7 +439,9 @@ export default {
       }
 
       if (this.type === "top") {
-        this.$store.dispatch("topModels/getPosts");
+        this.$store.dispatch("topModels/getPosts", {
+          month: this.selectedMonth
+        });
       }
 
       if (!this.livesFetched) {
@@ -427,6 +471,12 @@ export default {
     ["$route.params.category"](newValue, oldValue) {
       if (newValue !== undefined && oldValue !== undefined) {
         this.init();
+      }
+    },
+    selectedMonth(value) {
+      if (this.page === "topmodels") {
+        this.$store.commit("topModels/reset");
+        this.$store.dispatch("topModels/getPosts", { month: value });
       }
     }
   },
@@ -465,6 +515,17 @@ export default {
         color: #222b32;
       }
     }
+  }
+}
+.month-options {
+  margin-left: -20px;
+  /* padding: 10px 20px; */
+  @media (max-width: 991px) {
+    margin-left: 0px;
+    padding: 10px 20px;
+  }
+  select {
+    margin-left: 13px;
   }
 }
 </style>

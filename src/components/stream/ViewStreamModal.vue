@@ -75,7 +75,12 @@
         </div>
         <div class="stream-forms">
           <div class="form-comments">
-            <Comments :shownComments="shownComments" :count="comentsCount" />
+            <Comments
+              :shownComments="shownComments"
+              :count="comentsCount"
+              :allComments="comments"
+              :isStreamer="false"
+            />
             <AddComment
               v-if="showCommentForm && !isMyStream"
               ref="addComment"
@@ -149,6 +154,7 @@ import Tip from "@/components/common/tip/User";
 import Comments from "@/components/common/streamComments/Index";
 import AddComment from "@/components/common/streamComments/AddComment";
 import { getCookie } from "@/components/pages/stream/debug";
+import PaidBlock from "@/mixins/paidBlock";
 
 export default {
   name: "ViewStremModal",
@@ -159,7 +165,7 @@ export default {
     Comments,
     AddComment
   },
-  mixins: [userMixin],
+  mixins: [userMixin, PaidBlock],
   data: () => ({
     loading: true,
     time: undefined,
@@ -213,7 +219,7 @@ export default {
     },
     stopWatching() {
       const token = this.$store.state.auth.token;
-      const id = this.$store.state.modal.stream.data.stream.id;
+      const id = this.$store.state.modal.stream.data.stream?.id;
       const userId = this.$store.state.modal.stream.data.stream.user.id;
 
       this.$root.ws.send({
@@ -346,6 +352,13 @@ export default {
         this.$store.commit("global/toastShowTrigger", {
           text: "To send chat comments, you have to login",
           type: "warning"
+        });
+        return;
+      }
+      if (this.isPaidBlockedBy(this.streamer.id)) {
+        this.openPaidUnblockModal({
+          userId: this.streamer.id,
+          username: this.streamer.username
         });
         return;
       }

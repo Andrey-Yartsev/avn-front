@@ -32,6 +32,28 @@
                 </span>
               </a>
             </li>
+            <li v-if="profile.isPaidBlocked" class="more-functions__item">
+              <a
+                href="#"
+                @click.prevent="paidUnblock"
+                class="more-functions__link"
+              >
+                <span class="more-functions__option">
+                  Paid unblock
+                </span>
+              </a>
+            </li>
+            <li class="more-functions__item" v-else>
+              <a
+                href="#"
+                @click.prevent="paidBlock"
+                class="more-functions__link"
+              >
+                <span class="more-functions__option">
+                  Paid block
+                </span>
+              </a>
+            </li>
           </template>
           <template v-if="canMute && user">
             <li class="more-functions__item" v-if="isMuted">
@@ -135,6 +157,18 @@ export default {
     },
     unblock() {
       this.$store.dispatch(this.actionPrefix + "/unblock", this.profile.id);
+    },
+    paidBlock() {
+      this.$store.dispatch("modal/show", {
+        name: "paidBlock",
+        data: {
+          userId: this.profile.id,
+          actionPrefix: this.actionPrefix
+        }
+      });
+    },
+    paidUnblock() {
+      this.$store.dispatch(this.actionPrefix + "/paidUnblock", this.profile.id);
     },
     mute() {
       this.$store.dispatch(this.actionPrefix + "/mute", this.profile);

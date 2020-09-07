@@ -130,6 +130,7 @@
                   :sendNewComment="sendNewComment"
                   :userName="commentReplyUserName"
                   @reset="commentReset"
+                  :author="post.author"
                 />
                 <Tip
                   v-if="showTip || (!post.canComment && this.canSendTips)"
@@ -183,6 +184,7 @@
           :sendNewComment="sendNewComment"
           :userName="commentReplyUserName"
           @reset="commentReset"
+          :author="post.author"
         />
         <Tip
           v-if="showTip || (!post.canComment && this.canSendTips)"

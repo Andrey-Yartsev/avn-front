@@ -35,7 +35,7 @@ createRequestAction({
     method: "POST"
   },
   paramsToOptions: function(params, options) {
-    options.data = params.data;
+    options.data = { ...params.data };
     if (window.okev) {
       options.data.sentry = JSON.stringify(window.okev.all());
     }

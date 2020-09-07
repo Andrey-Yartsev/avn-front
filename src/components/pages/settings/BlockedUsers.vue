@@ -36,6 +36,12 @@
             Date
           </div>
           <div
+            v-if="source === 'blockedPaid'"
+            class="date table__cell table__cell_align-hor-c table__cell_selected"
+          >
+            Price
+          </div>
+          <div
             class="table__cell table__cell_align table__cell_align-vert-c table__cell_align-hor-c actions"
           >
             Status
@@ -66,6 +72,12 @@
                 class="table__cell table__cell_align table__cell_align-vert-c table__cell_align-hor-c table__cell_selected"
               >
                 <time datetime="">{{ dt(v.blockedAt) }}</time>
+              </div>
+              <div
+                v-if="source === 'blockedPaid'"
+                class="table__cell table__cell_align table__cell_align-vert-c table__cell_align-hor-c table__cell_selected"
+              >
+                <span>${{ v.price }}</span>
               </div>
               <div
                 class="table__cell table__cell_align table__cell_align-vert-c table__cell_align-hor-c actions"
@@ -164,6 +176,8 @@ export default {
         return this.$store.state.viewers;
       } else if (this.source === "blockedPosts") {
         return this.$store.state.blockedPosts;
+      } else if (this.source === "blockedPaid") {
+        return this.$store.state.blockedPaid;
       }
     },
     storePath() {
@@ -173,6 +187,8 @@ export default {
         return "viewers";
       } else if (this.source === "blockedPosts") {
         return "blockedPosts";
+      } else if (this.source === "blockedPaid") {
+        return "blockedPaid";
       }
     },
     initItems() {

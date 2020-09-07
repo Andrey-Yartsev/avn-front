@@ -83,6 +83,53 @@ const actions = {
       }
     });
   },
+  paidBlock({ commit, dispatch }, { userId, price }) {
+    dispatch("user/paidBlock", { userId, price }, { root: true }).then(r => {
+      if (r.success) {
+        dispatch(
+          "global/flashToast",
+          {
+            text: "User blocked"
+          },
+          { root: true }
+        );
+        commit("extendChatUser", {
+          id: userId,
+          isPaidBlocked: true
+        });
+        commit(
+          "search/page/extendUser",
+          {
+            userId,
+            data: { isPaidBlocked: true }
+          },
+          { root: true }
+        );
+      }
+    });
+  },
+  paidUnblock({ commit, dispatch }, userId) {
+    dispatch("user/paidUnblock", userId, { root: true }).then(r => {
+      if (r.success) {
+        dispatch(
+          "global/flashToast",
+          {
+            text: "User unblocked"
+          },
+          { root: true }
+        );
+        commit("extendChatUser", { id: userId, isPaidBlocked: false });
+        commit(
+          "search/page/extendUser",
+          {
+            userId,
+            data: { isPaidBlocked: false }
+          },
+          { root: true }
+        );
+      }
+    });
+  },
   muteUser({ commit, dispatch }, { user }) {
     dispatch(`user/mute`, user.id, { root: true }).then(r => {
       if (r.success) {

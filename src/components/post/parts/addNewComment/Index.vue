@@ -37,6 +37,7 @@
 <script>
 import TextareaAutosize from "@/components/common/TextareaAutosize";
 import VueTribute from "vue-tribute";
+import PaidBlock from "@/mixins/paidBlock";
 
 export default {
   name: "AddComment",
@@ -44,6 +45,7 @@ export default {
     TextareaAutosize,
     VueTribute
   },
+  mixins: [PaidBlock],
   data: () => ({
     message: ""
   }),
@@ -55,6 +57,9 @@ export default {
     userName: {
       type: String,
       default: ""
+    },
+    author: {
+      type: Object
     }
   },
   computed: {
@@ -109,6 +114,13 @@ export default {
   },
   methods: {
     sendComment() {
+      if (this.isPaidBlockedBy(this.author.id)) {
+        this.openPaidUnblockModal({
+          userId: this.author.id,
+          username: this.author.username
+        });
+        return;
+      }
       this.sendNewComment(this.message);
       this.message = "";
     },

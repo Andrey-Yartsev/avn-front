@@ -206,6 +206,14 @@ const modalTypes = [
   {
     storeName: "contestSupporters",
     layoutOnlyModal: true
+  },
+  {
+    storeName: "paidBlock",
+    layoutOnlyModal: true
+  },
+  {
+    storeName: "paidUnblock",
+    layoutOnlyModal: true
   }
 ];
 

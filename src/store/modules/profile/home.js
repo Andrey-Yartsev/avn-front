@@ -182,6 +182,37 @@ const actions = {
       }
     });
   },
+  paidBlock({ commit, dispatch }, { userId, price }) {
+    dispatch("user/paidBlock", { userId, price }, { root: true }).then(r => {
+      if (r.success) {
+        dispatch(
+          "global/flashToast",
+          {
+            text: "User blocked"
+          },
+          { root: true }
+        );
+        commit("profile", {
+          ...state.profile,
+          isPaidBlocked: true
+        });
+      }
+    });
+  },
+  paidUnblock({ commit, dispatch }, userId) {
+    dispatch("user/paidUnblock", userId, { root: true }).then(r => {
+      if (r.success) {
+        dispatch(
+          "global/flashToast",
+          {
+            text: "User unblocked"
+          },
+          { root: true }
+        );
+        commit("profile", { ...state.profile, isPaidBlocked: false });
+      }
+    });
+  },
   pin({ commit, dispatch }, postId) {
     if (window.location.hash) {
       window.location.hash = "";

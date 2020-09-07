@@ -324,6 +324,14 @@
   }
 }
 
+.stream-comments-show-all{
+  text-align: center;
+  color: #fff;
+  font-size: 12px;
+  cursor: pointer;
+  padding: 10px 0;
+}
+
 .comments-list-scrolling {
   position: absolute;
   max-height: 100%;
@@ -332,6 +340,11 @@
   right: 0;
   padding-right: 14px;
   background-color: rgba(0,0,0,.2);
+}
+
+.comments-list-observer {
+  width: 100%;
+  height: 1px;
 }
 
 .stream-message {
@@ -410,9 +423,20 @@
   }
 
   &__title {
-    color: #fff;
+    color: $white;
+    opacity: 0.5;
     padding: 0;
     padding-right: 10px;
+  }
+
+  &__sources {
+    color: $white;
+    margin-left: -7px;
+    margin-top: 15px;
+    margin-bottom: 0;
+    .label {
+      opacity: 0.5;
+    }
   }
 }
 

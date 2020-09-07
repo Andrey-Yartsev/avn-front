@@ -33,6 +33,7 @@ import twitter from "@/store/modules/twitter";
 import google from "@/store/modules/google";
 import emails from "@/store/modules/emails";
 import blocked from "@/store/modules/blocked";
+import blockedPaid from "@/store/modules/blockedPaid";
 import blockedPosts from "@/store/modules/blockedPosts";
 import tip from "@/store/modules/tip";
 import followers from "@/store/modules/followers";
@@ -106,6 +107,7 @@ const store = new Vuex.Store({
     google,
     emails,
     blocked,
+    blockedPaid,
     blockedPosts,
     tip,
     followers,

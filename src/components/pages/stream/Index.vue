@@ -277,6 +277,36 @@
                 :disabled="!tipsGoal.amount || !tipsGoal.description"
               ></button>
             </form>
+            <div class="form-group-inner form-tipsGoal__sources">
+              <span class="label" :class="{ mobile: $mq === 'mobile' }"
+                >Sources:</span
+              >
+              <span class="form-group form-group_clear-gaps">
+                <span class="form-field">
+                  <multiselect
+                    v-model="tipsGoal.sources"
+                    :options="tipsGoal.sourceTypes"
+                    :multiple="true"
+                    :close-on-select="true"
+                    :clear-on-select="false"
+                    :preserve-search="true"
+                    placeholder="Add source"
+                    label="title"
+                    track-by="value"
+                  >
+                    <template
+                      slot="selection"
+                      slot-scope="{ values, search, isOpen }"
+                      ><span
+                        class="multiselect__single"
+                        v-if="tipsGoal.sources.length &amp;&amp; !isOpen"
+                        >{{ tipsGoal.sources.length }} sources selected</span
+                      ></template
+                    >
+                  </multiselect>
+                </span>
+              </span>
+            </div>
           </div>
         </div>
         <div class="bottom-btns">
@@ -389,6 +419,16 @@ import { getCookie } from "@/components/pages/stream/debug";
 import moment from "moment";
 import LoadScripts from "@/components/statistics/loadScripts";
 import { convertImgToBase64URL } from "@/utils/mediaFiles";
+import Multiselect from "vue-multiselect";
+
+const tipsGoalSourceTypes = [
+  { title: "Live stream tips", value: "localTips" },
+  { title: "All other tips", value: "globalTips" },
+  { title: "Clips", value: "clips" },
+  { title: "Messages", value: "messages" },
+  { title: "Subscriptions", value: "subscriptions" },
+  { title: "Votes", value: "votes" }
+];
 
 export default {
   name: "Stream",
@@ -436,10 +476,14 @@ export default {
 
       tipsGoal: {
         amount: "",
-        description: ""
+        description: "",
+        sources: [],
+        sourceTypes: tipsGoalSourceTypes
       },
       showTipsGoalForm: false,
       base64watermark: null
+      // tipsGoalSources: [],
+      // tipsGoalSourceTypes: tipsGoalSourceTypes
     };
   },
   components: {
@@ -447,7 +491,8 @@ export default {
     StreamStatistic,
     Filters,
     Comments,
-    StreamViewers
+    StreamViewers,
+    Multiselect
   },
   computed: {
     likesCount() {
@@ -720,13 +765,25 @@ export default {
         stream_user_id: this.user.id,
         stream_id: this.startedStreamId,
         description: this.tipsGoal.description,
+        sources: this.tipsGoal.sources.map(item => item.value),
         amount: this.tipsGoal.amount,
         sess: this.$store.state.auth.token
       });
-      this.$root.ws.ws.send(data);
-      this.tipsGoal.amount = 0;
-      this.tipsGoal.description = "";
-      this.showTipsGoalForm = false;
+      this.$store
+        .dispatch("lives/setTipsGoal", {
+          amount: this.tipsGoal.amount,
+          description: this.tipsGoal.description,
+          entityType: "users_streams",
+          entityId: this.startedStreamId,
+          source: this.tipsGoal.sources.map(item => item.value)
+        })
+        .then(() => {
+          this.$root.ws.ws.send(data);
+          this.tipsGoal.amount = 0;
+          this.tipsGoal.description = "";
+          // this.tipsGoal.sources = [];
+          this.showTipsGoalForm = false;
+        });
     },
     requestStreamStat() {
       const token = this.$store.state.auth.token;
@@ -816,6 +873,10 @@ export default {
       if (!this.showTipsGoalForm && this.isTipsGoalExists) {
         this.tipsGoal.amount = this.activeTipsGoal.amount + "";
         this.tipsGoal.description = this.activeTipsGoal.description;
+        // this.tipsGoal.sources = this.activeTipsGoal.sources?.map(item => {
+        //   const elem = this.tipsGoal.sourceTypes.find(i => i.value === item);
+        //   return elem;
+        // });
       }
       this.showTipsGoalForm = !this.showTipsGoalForm;
     },

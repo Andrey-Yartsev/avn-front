@@ -84,6 +84,7 @@
         :sendNewComment="sendNewComment"
         :userName="commentReplyUserName"
         @reset="commentReset"
+        :author="post.author"
       />
       <Tip
         :user="post.author"

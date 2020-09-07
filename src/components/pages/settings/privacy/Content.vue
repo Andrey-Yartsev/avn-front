@@ -562,6 +562,15 @@
     />
     <BlockedUsers
       v-if="
+        !this.$route.params.view || this.$route.params.view === 'blockedPaid'
+      "
+      title="Paid blocked users"
+      mobileBlockedRoute="/settings/privacy/blockedPaid"
+      source="blockedPaid"
+      subtext="These people can't chat with you or comment your posts"
+    />
+    <BlockedUsers
+      v-if="
         !this.$route.params.view || this.$route.params.view === 'blockedPosts'
       "
       title="Blocked posts"

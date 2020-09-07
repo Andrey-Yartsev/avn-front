@@ -65,6 +65,7 @@ createRequestAction({
   options: {
     method: "POST"
   },
+  throw400: true,
   paramsToOptions: function(params, options) {
     options.data = params;
     return options;
@@ -81,6 +82,7 @@ createRequestAction({
   options: {
     method: "PUT"
   },
+  throw400: true,
   paramsToOptions: function(params, options) {
     options.data = params.data;
     return options;
