@@ -399,7 +399,7 @@ export default {
               ? `You have paid ${message.text} for ${
                   this.withUser.name
                 } to unblock the account`
-              : `${this.fromUser.name} paid ${
+              : `${message.fromUser.name} paid ${
                   message.text
                 } to unblock the account`;
             break;
