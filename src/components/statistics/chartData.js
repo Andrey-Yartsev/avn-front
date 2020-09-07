@@ -7,11 +7,13 @@ import {
   matchCodeByPrefix,
   getScaleData
 } from "./utils";
-import CalcCount from "./calcCount";
 import moment from "moment";
 import pluralize from "pluralize";
 // import { barCount } from "./chartVars";
+
+import CalcCount from "./calcCount";
 import ChartDonutData from "./chartDonutData";
+import TopFollowers from "./topFollowers";
 
 //
 // abstract: currentPeriodType
@@ -30,13 +32,8 @@ Object.keys(chartTypes).forEach(chartType => {
   }
 });
 
-const topFollowersStorage = {};
-for (let periodType of periodTypeNames) {
-  topFollowersStorage[periodType] = {};
-}
-
 export default {
-  mixins: [CalcCount, ChartDonutData],
+  mixins: [CalcCount, ChartDonutData, TopFollowers],
   data() {
     return {
       subscribedWsCodes: [],
@@ -129,8 +126,9 @@ export default {
       // ------------
       r = matchCodeByPrefix(data.statistics.code, "top_followers_count");
       if (r) {
+        console.log("---------------");
         this.updateTopFollowers(statData);
-        topFollowersStorage[this.currentPeriodType] = statData;
+        this.updateTopFollowersCache(statData);
         return;
       }
       // ------------

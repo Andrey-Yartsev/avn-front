@@ -299,7 +299,7 @@ export default {
         this.currentPeriodType
       );
 
-      console.log("barCount=", barCount);
+      // console.log("barCount=", barCount);
 
       if (!units) {
         throw new Error("units is not defined");

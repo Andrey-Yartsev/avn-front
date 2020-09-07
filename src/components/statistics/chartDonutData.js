@@ -1,4 +1,4 @@
-import request from "@/utils/request";
+// import request from "@/utils/request";
 // import ChartDonutBuilding from "./chartDonutBuilding";
 
 export default {
@@ -147,24 +147,6 @@ export default {
         this.$refs.visitorsDesktop.innerHTML = statData.desktop;
       }
       donut.validateData();
-    },
-    async updateTopFollowers(statData) {
-      let _ids = Object.keys(statData);
-      if (!_ids.length) {
-        return;
-      }
-      _ids = _ids.slice(0, 5);
-      const ids = _ids.map(id => "ids[]=" + id);
-      const response = await request(
-        `users?access-token=` +
-          this.$store.state.auth.token +
-          "&" +
-          ids.join("&"),
-        {
-          method: "GET"
-        }
-      );
-      this.topFollowers = await response.json();
     },
     updateMap(statData) {
       const sortable = [];

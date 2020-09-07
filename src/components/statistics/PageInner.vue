@@ -624,10 +624,6 @@ export default {
         this.processData(v, false);
       }
       this[name + "Chart"].validateData();
-    },
-    updateTopFollowersFromCache() {
-      this.topFollowers = [];
-      this.updateTopFollowers(topFollowersStorage[this.currentPeriodType]);
     }
   },
   watch: {
@@ -641,7 +637,6 @@ export default {
         }
         this[chartType + "Chart"].validateData();
       });
-      this.updateTopFollowersFromCache();
       if (this.$route.path !== "/statistics/" + this.currentPeriodType) {
         this.$router.push("/statistics/" + this.currentPeriodType);
       }
