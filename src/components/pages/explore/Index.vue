@@ -85,12 +85,8 @@
                           v-model="selectedMonth"
                         >
                           <option value="0">Current month</option>
-                          <option
-                            v-for="month in prevMonths"
-                            :key="month.value"
-                            :value="month.value"
-                          >
-                            {{ month.name }}
+                          <option value="202008" key="202008">
+                            August
                           </option>
                         </select>
                       </div>
@@ -205,7 +201,6 @@ import GenderFilter from "@/components/common/GenderFilter";
 import MediaMedium from "@/components/common/profile/media/views/MediaMedium";
 import MediaSmall from "@/components/common/profile/media/views/MediaSmall";
 import BrowserStore from "store";
-import moment from "moment";
 // import mockStories from "@/mock/stories";
 
 export default {
@@ -348,21 +343,6 @@ export default {
     },
     isEnableGayVoting() {
       return this.$store.state.init.data.enableGayVoting;
-    },
-    prevMonths() {
-      let dateStart = moment("2020-8-31");
-      let dateEnd = moment();
-      const months = [];
-
-      while (dateStart.format("M") !== dateEnd.format("M")) {
-        const item = {
-          value: dateStart.format("YYYY") + "" + dateStart.format("MM"),
-          name: dateStart.format("MMMM")
-        };
-        months.push(item);
-        dateStart.add(1, "month");
-      }
-      return months.reverse();
     }
   },
   methods: {
