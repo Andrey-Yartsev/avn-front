@@ -85,8 +85,12 @@
                           v-model="selectedMonth"
                         >
                           <option value="0">Current month</option>
-                          <option value="202008" key="202008">
-                            August
+                          <option
+                            v-for="month in prevMonths"
+                            :key="month.value"
+                            :value="month.value"
+                          >
+                            {{ month.name }}
                           </option>
                         </select>
                       </div>
@@ -228,7 +232,8 @@ export default {
     return {
       storiesFetched: false,
       livesFetched: false,
-      selectedMonth: 0
+      selectedMonth: 0,
+      prevMonths: []
     };
   },
   created() {
@@ -435,6 +440,25 @@ export default {
     },
     storePrefix() {
       return "explore";
+    },
+    initPrevMonths() {
+      let dateStart = new Date("2020-08-28");
+      let dateEnd = new Date();
+      const months = [];
+
+      while (dateStart.getMonth() !== dateEnd.getMonth()) {
+        let month = dateStart.getMonth() + 1;
+        if (month < 10) {
+          month = "0" + month;
+        }
+        const item = {
+          value: dateStart.getFullYear() + month,
+          name: dateStart.toLocaleDateString("default", { month: "long" })
+        };
+        months.push(item);
+        dateStart.setMonth(dateStart.getMonth() + 1);
+      }
+      this.prevMonths = months.reverse();
     }
   },
   watch: {
@@ -465,6 +489,7 @@ export default {
     if (magazineRedirect && this.user) {
       this.$router.push("/settings/magazine");
     }
+    this.initPrevMonths();
   }
 };
 </script>
