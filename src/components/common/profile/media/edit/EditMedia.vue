@@ -176,6 +176,38 @@
                 Add media
               </span>
             </label>
+            <div v-if="!media.active" class="schedule__container">
+              <div v-if="!media.scheduledDate" class="post-datetime">
+                <Datetime
+                  :inputId="`post-datetime__switcher_schedule-clip`"
+                  class="post-datetime__switcher"
+                  type="datetime"
+                  v-model="media.scheduledDate"
+                  input-class="post-datetime__input"
+                  use12-hour
+                  :min-datetime="minDate"
+                  :max-datetime="maxDate"
+                  @close="closeDatepicker"
+                  :phrases="{ ok: 'Schedule', cancel: 'Cancel' }"
+                />
+                <span
+                  class="post-datetime__icn icn-item icn-calendar icn-size_lg"
+                  @click="openDatepicker"
+                ></span>
+                <span class="btn-post__text">
+                  Schedule release
+                </span>
+              </div>
+              <div v-else class="clip-scheduled-time">
+                <div class="datetime-value">
+                  <span class="clip-datetime__value">{{ formattedDate }}</span>
+                  <span
+                    @click="resetScheduledDate"
+                    class="clip-datetime__reset icn-item btn-reset btn-reset_prim-color icn-pos_center"
+                  />
+                </div>
+              </div>
+            </div>
             <div class="categories" v-if="mediaCategories.length">
               <div class="form-group-inner">
                 <span
@@ -329,7 +361,6 @@
 <script>
 import Loader from "@/components/common/Loader";
 import ClickOutside from "vue-click-outside";
-import { Settings } from "luxon";
 import UserMixin from "@/mixins/user";
 import "vue-datetime/dist/vue-datetime.css";
 import VueTribute from "vue-tribute";
@@ -339,6 +370,10 @@ import MediaPreview from "@/components/common/MediaPreview";
 import Draggable from "vuedraggable";
 import ThumbDropdown from "./ThumbDropdown.vue";
 import Multiselect from "vue-multiselect";
+import { Datetime } from "vue-datetime";
+import { Settings, DateTime as LuxonDateTime } from "luxon";
+import moment from "moment";
+
 // import mediaCategories from "@/mock/mediaCategories";
 
 Settings.defaultLocale = "en";
@@ -357,7 +392,8 @@ const InitialState = {
     removeVideoPreview: false,
     pinned: false,
     categories: [],
-    canDownload: false
+    canDownload: false,
+    scheduledDate: null
   },
   saving: false,
   defaultPriceLimit: 500,
@@ -387,7 +423,8 @@ export default {
     MediaPreview,
     Draggable,
     ThumbDropdown,
-    Multiselect
+    Multiselect,
+    Datetime
   },
   props: {
     initialExpanded: {
@@ -509,6 +546,25 @@ export default {
         return !this.preloadedMedias.length ? true : false;
       }
       return false;
+    },
+    minDate() {
+      return LuxonDateTime.local()
+        .plus({ minutes: 1 })
+        .toISO();
+    },
+    maxDate() {
+      if (!this.datetimeExpired) {
+        return null;
+      }
+      return LuxonDateTime.fromISO(this.datetimeExpired)
+        .minus({ minutes: 1 })
+        .toISO();
+    },
+    formattedDate() {
+      return (
+        "Scheduled for " +
+        moment(this.media.scheduledDate).format("MMM D, hh:mm a")
+      );
     }
   },
   watch: {
@@ -580,7 +636,8 @@ export default {
         subscribersFree,
         media: { thumbs, thumbId },
         categories,
-        canDownload
+        canDownload,
+        scheduledDate
       } = this.$props.post;
       this.media.title = title;
       this.media.text = this.getConvertedText(text);
@@ -591,6 +648,7 @@ export default {
       this.media.thumbs = thumbs;
       this.media.pinned = pinned || false;
       this.media.canDownload = canDownload;
+      this.media.scheduledDate = scheduledDate || null;
       this.media.categories = this.getObjectsFromArray(categories);
       this.$refs.textarea.value = this.getConvertedText(text);
       if (this.post.media.type === "photo") {
@@ -617,6 +675,7 @@ export default {
       this.media.canDownload = false;
       this.preloadedMedias = [];
       this.photosetCover = null;
+      this.media.scheduledDate = null;
     },
     saveClickHandler() {
       if (this.overMaxPrice()) {
@@ -630,8 +689,6 @@ export default {
         return;
       }
       this.saving = true;
-      console.log(this.getMediaDataToUpdate());
-      // return
       this.$store
         .dispatch("profile/media/updateMedia", this.getMediaDataToUpdate(), {
           root: true
@@ -663,7 +720,8 @@ export default {
         media: {
           ...this.media,
           categories: this.media.categories.map(item => +item.id),
-          type: this.post.media.type
+          type: this.post.media.type,
+          scheduledDate: this.media.scheduledDate || null
         },
         productId: this.$props.post.productId,
         type: this.post.media.type
@@ -679,6 +737,9 @@ export default {
           id: videoPreview.processId
         };
         data.media.removeVideoPreview = false;
+      }
+      if (this.media.active) {
+        data.media.scheduledDate = null;
       }
       // if (mediaCover) {
       //   data.media.mediaCover = mediaCover;
@@ -712,6 +773,17 @@ export default {
         matchedCategory && categoriesObjects.push(matchedCategory);
       });
       return categoriesObjects;
+    },
+    closeDatepicker() {
+      document.body.classList.remove("open-timepicker");
+    },
+    openDatepicker() {
+      if (this.datetime) return;
+      document.body.classList.add("open-timepicker");
+      document.getElementById(`post-datetime__switcher_schedule-clip`).click();
+    },
+    resetScheduledDate() {
+      this.media.scheduledDate = null;
     }
   },
   mounted() {
@@ -778,6 +850,12 @@ export default {
     top: 0.21em;
     left: 0.21em;
     right: auto;
+  }
+}
+.schedule__container {
+  padding: 5px 0;
+  .clip-datetime__reset {
+    right: -10px;
   }
 }
 </style>
