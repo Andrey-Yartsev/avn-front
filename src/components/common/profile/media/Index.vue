@@ -257,6 +257,8 @@ export default {
           return "On sale";
         case "draft":
           return "Draft";
+        case "scheduled":
+          return "Scheduled";
         case "dateNew":
           return "Newest";
         case "dateOld":

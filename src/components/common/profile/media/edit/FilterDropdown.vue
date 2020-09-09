@@ -53,6 +53,23 @@
             >
           </span>
         </li>
+        <li class="more-functions__item ">
+          <span
+            class="edit more-functions__link menuItemWrapper"
+            type="button"
+            @click.prevent="handleClick('scheduled')"
+          >
+            <span
+              v-if="type === 'scheduled'"
+              class="status-card on icn-item checkmark"
+            />
+            <span
+              class="more-functions__option menuItem"
+              :class="{ selected: type === 'scheduled' }"
+              >Scheduled</span
+            >
+          </span>
+        </li>
       </template>
       <template v-if="!isAuthor && user">
         <li class="more-functions__item ">
