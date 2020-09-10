@@ -98,6 +98,13 @@
                   </div>
                 </label>
               </div>
+              <div
+                v-if="category === 1"
+                class="title-subtext text-centered semi-transparent"
+              >
+                Select preferred view content category to Straight or to Gay
+                Gays to see top models prizes
+              </div>
               <Users :items="topModels" actionPrefix="topModels" :top="true" />
             </template>
             <div v-else-if="page === 'feed'" class="feed-wrapper">
