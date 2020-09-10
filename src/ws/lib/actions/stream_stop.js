@@ -7,10 +7,4 @@ export default data => {
     currentStream: null
   });
   Store.dispatch("obs/stopped", data);
-  if (data.user && Store.state.auth.user?.id === data.user.id) {
-    Store.commit("obs/selfStreamFinishedUpdate", {
-      stream: data,
-      isFinished: true
-    });
-  }
 };

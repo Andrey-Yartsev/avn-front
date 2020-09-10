@@ -8,9 +8,7 @@ const state = {
   trigStart: 0,
   likes: [],
   viewers: [],
-  tips: [],
-  selfStreamFinished: false,
-  selfStreamFinishedData: null
+  tips: []
 };
 
 const actions = {
@@ -32,7 +30,6 @@ const actions = {
     }
     dispatch("fetch").then(() => {
       commit("trigStart");
-      commit("selfStreamFinishedUpdate", { stream: null, isFinished: false });
     });
   },
   stopped({ state, commit, dispatch }, stream) {
@@ -52,9 +49,6 @@ const actions = {
     commit("reset");
     commit("lives/resetCurrentLive", null, { root: true });
   }
-  // setStatistics({ state, commit, dispatch }, data) {
-  //   commit("lives/setObsStreamStatistics", data, { root: true })
-  // }
 };
 
 const mutations = {
@@ -98,10 +92,6 @@ const mutations = {
     state.likes = [];
     state.viewers = [];
     state.tips = [];
-  },
-  selfStreamFinishedUpdate(state, { stream, isFinished }) {
-    state.selfStreamFinished = isFinished;
-    state.selfStreamFinishedData = stream;
   }
 };
 
