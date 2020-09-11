@@ -669,6 +669,20 @@ export default {
             });
           } else {
             this.isStarted = true;
+            this.$root.ws.send({
+              act: "stream_log",
+              stream_id: null,
+              stream_user_id: this.$store.state.auth.user.id,
+              user_action: "try_to_start",
+              stream_data: {
+                type: "common",
+                view_category: this.streamVisibility.key,
+                microphone:
+                  this.streamAudio.deviceId === undefined ? "off" : "on",
+                date_time: new Date()
+              },
+              sess: this.$store.state.auth.token
+            });
             this.streamModule.startStream();
           }
         });
@@ -681,6 +695,19 @@ export default {
     stopStream() {
       this.isStoppedByButton = true;
       this.requestStreamStat();
+      this.$root.ws.send({
+        act: "stream_log",
+        stream_id: this.startedStreamId,
+        stream_user_id: this.$store.state.auth.user.id,
+        user_action: "try_to_stop",
+        stream_data: {
+          type: "common",
+          view_category: this.streamVisibility.key,
+          microphone: this.streamAudio.deviceId === undefined ? "off" : "on",
+          date_time: new Date()
+        },
+        sess: this.$store.state.auth.token
+      });
       this.streamModule.stopStream();
     },
     getLikePosition(data) {
@@ -725,11 +752,57 @@ export default {
       } else {
         if (haveToSave) {
           this.saving = true;
+          this.$root.ws.send({
+            act: "stream_log",
+            stream_id: this.startedStreamId,
+            stream_user_id: this.$store.state.auth.user.id,
+            user_action: "try_to_save",
+            stream_data: {
+              type: "common",
+              view_category: this.streamVisibility.key,
+              save_comments: haveToSaveComments,
+              microphone:
+                this.streamAudio.deviceId === undefined ? "off" : "on",
+              date_time: new Date()
+            },
+            sess: this.$store.state.auth.token
+          });
           StreamApi.saveStream(this.startedStreamId, haveToSaveComments)
             .then(() => {
+              this.$root.ws.send({
+                act: "stream_log",
+                stream_id: this.startedStreamId,
+                stream_user_id: this.$store.state.auth.user.id,
+                user_action: "save_success",
+                stream_data: {
+                  type: "common",
+                  view_category: this.streamVisibility.key,
+                  save_comments: haveToSaveComments,
+                  microphone:
+                    this.streamAudio.deviceId === undefined ? "off" : "on",
+                  date_time: new Date()
+                },
+                sess: this.$store.state.auth.token
+              });
               this.$router.push("/");
             })
-            .catch(() => {
+            .catch(error => {
+              this.$root.ws.send({
+                act: "stream_log",
+                stream_id: this.startedStreamId,
+                stream_user_id: this.$store.state.auth.user.id,
+                user_action: "save_failure",
+                stream_data: {
+                  type: "common",
+                  error_message: error,
+                  view_category: this.streamVisibility.key,
+                  save_comments: haveToSaveComments,
+                  microphone:
+                    this.streamAudio.deviceId === undefined ? "off" : "on",
+                  date_time: new Date()
+                },
+                sess: this.$store.state.auth.token
+              });
               this.$router.push("/");
             });
         } else {
@@ -940,6 +1013,20 @@ export default {
       onLocalStreamInit: () => {},
       onRemoteStreamInit: () => {},
       onStreamError: error => {
+        this.$root.ws.send({
+          act: "stream_log",
+          stream_id: this.startedStreamId,
+          stream_user_id: this.$store.state.auth.user.id,
+          user_action: "error",
+          stream_data: {
+            type: "common",
+            error_message: error,
+            view_category: this.streamVisibility.key,
+            microphone: this.streamAudio.deviceId === undefined ? "off" : "on",
+            date_time: new Date()
+          },
+          sess: this.$store.state.auth.token
+        });
         // eslint-disable-next-line
         this.$store.dispatch("global/setError", { message: error });
         // eslint-disable-next-line
@@ -977,6 +1064,20 @@ export default {
                 sess: token
               })
             );
+            this.$root.ws.send({
+              act: "stream_log",
+              stream_id: id,
+              stream_user_id: this.$store.state.auth.user.id,
+              user_action: "start_success",
+              stream_data: {
+                type: "common",
+                view_category: this.streamVisibility.key,
+                microphone:
+                  this.streamAudio.deviceId === undefined ? "off" : "on",
+                date_time: new Date()
+              },
+              sess: this.$store.state.auth.token
+            });
 
             this.startedStreamId = id;
             this.startingStream = false;
@@ -1001,6 +1102,21 @@ export default {
               sess: token
             })
           );
+
+          this.$root.ws.send({
+            act: "stream_log",
+            stream_id: this.startedStreamId,
+            stream_user_id: this.$store.state.auth.user.id,
+            user_action: "stop_success",
+            stream_data: {
+              type: "common",
+              view_category: this.streamVisibility.key,
+              microphone:
+                this.streamAudio.deviceId === undefined ? "off" : "on",
+              date_time: new Date()
+            },
+            sess: this.$store.state.auth.token
+          });
 
           this.finishing = true;
 
