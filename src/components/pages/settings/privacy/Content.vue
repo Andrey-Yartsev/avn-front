@@ -414,6 +414,23 @@
         </div>
       </div>
 
+      <div class="form-title tweet-posts-block border-top">
+        <div class="inner">
+          <span class="semi-transparent">
+            Block Messages from people I do not follow
+          </span>
+          <label class="toggle-element">
+            <input
+              type="checkbox"
+              name="isMsgFromNonFollowed"
+              value="false"
+              v-model="localUser.isBlockMsgFromNonFollowed"
+            />
+            <span class="toggle-element_switcher"></span>
+          </label>
+        </div>
+      </div>
+
       <div
         v-if="isMonetizedUser"
         class="form-title tweet-posts-block border-top"
