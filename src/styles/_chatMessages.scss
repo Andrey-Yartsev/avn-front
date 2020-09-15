@@ -84,6 +84,26 @@
       background-color: $white;
     }
   }
+
+  .acceptChatBox {
+    padding: 10px;
+
+    &__header {
+      padding-bottom: 10px;
+      text-align: center;
+    }
+
+    &__buttonContainer {
+      padding-top: 10px;
+      display: flex;
+      flex-flow: column nowrap;
+      align-items: center;
+
+      button {
+        margin-bottom: 10px;
+      }
+    }
+  }
 }
 
 .chat-section {

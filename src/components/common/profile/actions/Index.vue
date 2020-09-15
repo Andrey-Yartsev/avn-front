@@ -153,7 +153,7 @@
               </div>
             </div>
             <button
-              v-if="profile.canWrite"
+              v-if="user"
               @click="sendMessage"
               type="button"
               class="profile-actions__btn btn-with-icon profile-message-btn"

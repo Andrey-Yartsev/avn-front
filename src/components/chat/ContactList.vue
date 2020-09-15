@@ -1,5 +1,8 @@
 <template>
-  <div class="contactsList" :class="{ 'has-unread': !!unreadCount }">
+  <div
+    class="contactsList"
+    :class="{ 'has-unread': !!unreadCount || !!requestedCount }"
+  >
     <div
       v-if="unreadCount && $mq === 'desktop'"
       class="new-post-toast show bg-gradient bg-gradient_standart unread-box"
@@ -8,7 +11,7 @@
       <span>Unread chats ({{ unreadCount }})</span
       ><a href="#" :disabled="markAsReadInProgress">Mark all as read</a>
     </div>
-    <div class="filter-tab" v-if="unreadCount">
+    <div class="filter-tab" v-if="unreadCount || requestedCount">
       <a
         href="#"
         :class="{ selected: filter === 'all' }"
@@ -16,10 +19,18 @@
         >All</a
       >
       <a
+        v-if="unreadCount"
         href="#"
         :class="{ selected: filter === 'unread' }"
         @click.prevent="setFilter('unread')"
-        >Unread</a
+        >Unread <span class="badge">{{ unreadCount }}</span></a
+      >
+      <a
+        v-if="requestedCount"
+        href="#"
+        :class="{ selected: filter === 'requested' }"
+        @click.prevent="setFilter('requested')"
+        >Requests <span class="badge">{{ requestedCount }}</span></a
       >
     </div>
     <component
@@ -157,6 +168,9 @@ export default {
     },
     unreadCount() {
       return this.$store.state.chat.unreadChatsCount;
+    },
+    requestedCount() {
+      return this.$store.state.chat.requestedChatsCount;
     },
     markAsReadInProgress() {
       return this.$store.state.chat._markAllChatsAsReadLoading;

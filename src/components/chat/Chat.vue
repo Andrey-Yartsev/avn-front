@@ -123,7 +123,13 @@
             >
               <template v-if="activeUser">
                 <Messages :withUser="activeUser" />
-                <AddMessage :withUser="activeUser" ref="addMessageSection" />
+                <AddMessage
+                  :withUser="activeUser"
+                  ref="addMessageSection"
+                  :messages="messages"
+                  :mode="'modal'"
+                  @deleteConversation="deleteConversation"
+                />
                 <div
                   class="notes bg-gradient_light"
                   :class="{ visible: notes.show }"
@@ -232,6 +238,9 @@ export default {
     },
     allowNotes() {
       return this.user && this.user.canEarn && this.user.canPayoutsRequest;
+    },
+    chatsFilter() {
+      return this.$store.state.chat.chatsFilter;
     }
   },
 
@@ -264,6 +273,12 @@ export default {
       this.$store.dispatch("chat/delete", this.activeUserId).then(() => {
         this.deleteInProgress = false;
         this.goTo("/chat");
+        if (this.chatsFilter === "requested") {
+          if (this.chats.length === 1) {
+            this.$store.commit("chat/setChatsFilter", "all");
+          }
+          this.$store.commit("chat/decrementRequestedChatsCount");
+        }
       });
     },
     fetchMessages() {

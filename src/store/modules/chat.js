@@ -27,6 +27,7 @@ const state = {
   blockNewMessagesHandling: false,
   showMarkAsReedForContacts: false,
   unreadChatsCount: 0,
+  requestedChatsCount: 0,
   chatsFilter: "all"
 };
 
@@ -256,7 +257,10 @@ const actions = {
         chat => chat.withUser.id === activeUserId
       );
       if (activeChat) {
-        if (activeChat.unreadMessagesCount) {
+        if (
+          activeChat.unreadMessagesCount &&
+          state.chatsFilter !== "requested"
+        ) {
           commit("decrementUnreadChatsCount");
         }
       }
@@ -380,6 +384,12 @@ const actions = {
         return res;
       }
     );
+  },
+  acceptChat({ dispatch, commit }, data) {
+    return dispatch("_acceptChat", data).then(() => {
+      commit("setChatsFilter", "all");
+      commit("decrementRequestedChatsCount");
+    });
   }
 };
 
@@ -522,6 +532,7 @@ const mutations = {
     state.showMarkAsReedForContacts =
       state.chats.length < state._fetchChatsResult.unreadMessagesCount;
     state.unreadChatsCount = state._fetchChatsResult.unreadMessagesCount;
+    state.requestedChatsCount = state._fetchChatsResult.requestedChatsCount;
 
     if (state._fetchChatsResult.list.length < chatsLimit) {
       state.allDataReceived = true;
@@ -568,6 +579,9 @@ const mutations = {
     } else {
       state.offset += chatsLimit;
     }
+  },
+  decrementRequestedChatsCount(state) {
+    state.requestedChatsCount--;
   }
 };
 
@@ -1003,6 +1017,20 @@ createRequestAction({
     options.data = {};
     options.data.text = params.text;
     return options;
+  }
+});
+
+createRequestAction({
+  prefix: "_acceptChat",
+  apiPath: "chats/{userId}/accept",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "POST"
+  },
+  paramsToPath: function(params, path) {
+    return path.replace(/{userId}/, params.userId);
   }
 });
 
