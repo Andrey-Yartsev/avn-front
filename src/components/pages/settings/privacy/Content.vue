@@ -414,7 +414,10 @@
         </div>
       </div>
 
-      <div class="form-title tweet-posts-block border-top">
+      <div
+        v-if="!user.isPerformer"
+        class="form-title tweet-posts-block border-top"
+      >
         <div class="inner">
           <span class="semi-transparent">
             Block Messages from people I do not follow
