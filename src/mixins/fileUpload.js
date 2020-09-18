@@ -90,6 +90,7 @@ export default {
 
       if (this.allowMultipleFileTypes) {
         this.preloadedMedias = [...addedFiles];
+        this.mediaType = addedFiles[0].mediaType;
       } else {
         this.mediaType = addedFiles[0].mediaType;
 

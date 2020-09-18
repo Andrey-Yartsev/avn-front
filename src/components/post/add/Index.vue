@@ -116,7 +116,7 @@
               name="flip-list"
             >
               <MediaPreview
-                v-for="media in preloadedMedias"
+                v-for="media in filteredPreloadedMedias"
                 :media="media"
                 :key="media.id"
                 @removeMedia="removeMedia"
@@ -124,7 +124,10 @@
               />
             </transition-group>
           </Draggable>
-          <div class="block-thumbnails" v-if="showChooseThumbBlock">
+          <div
+            class="block-thumbnails"
+            v-if="showChooseThumbBlock && !customThumb"
+          >
             <div class="block-thumbnails__title">Choose cover</div>
             <div class="addFileCollectionView postFileCollectionView">
               <div
@@ -142,6 +145,21 @@
               </div>
             </div>
           </div>
+          <Draggable v-model="preloadedMedias" v-if="customThumb">
+            <div class="block-thumbnails__title">Custom cover</div>
+            <transition-group
+              class="addFileCollectionView"
+              type="transition"
+              name="flip-list"
+            >
+              <MediaPreview
+                :media="customThumb"
+                :key="customThumb.id"
+                @removeMedia="removeMedia"
+                :isSaving="false"
+              />
+            </transition-group>
+          </Draggable>
           <div
             class="post-scheduled-time"
             v-if="datetime && $mq === 'desktop' && where !== 'modal'"
@@ -218,6 +236,23 @@
             <span class="icn-media icn-item icn-size_lg"></span>
             <span class="btn-post__text">
               Add media
+            </span>
+          </label>
+          <label
+            v-if="preloadedMedias.length && mediaType === 'video'"
+            :class="['add-media-input', { disabled: customThumb }]"
+            class="btn-post"
+            for="addFilePreview"
+          >
+            <input
+              id="addFilePreview"
+              type="file"
+              :accept="inputAcceptTypes.photo"
+              @change="addMediaFiles"
+            />
+            <span class="icn-media icn-item icn-size_lg"></span>
+            <span class="btn-post__text">
+              Add custom thumb
             </span>
           </label>
           <div class="btn-post btn-post_datetime" v-if="showSchedule">
@@ -511,7 +546,8 @@ const InitialState = {
     achieved: 0,
     sources: []
   },
-  tipsGoalSourceTypes: tipsGoalSourceTypes
+  tipsGoalSourceTypes: tipsGoalSourceTypes,
+  allowMultipleFileTypes: true
 };
 
 export default {
@@ -693,6 +729,18 @@ export default {
         parseFloat(this.tipsGoal.total) > 0 &&
         this.tipsGoal.sources.length
       );
+    },
+    customThumb() {
+      if (this.preloadedMedias.length && this.mediaType === "video") {
+        return this.preloadedMedias[1];
+      }
+      return null;
+    },
+    filteredPreloadedMedias() {
+      if (this.mediaType === "video") {
+        return this.preloadedMedias.filter(item => item.mediaType === "video");
+      }
+      return this.preloadedMedias;
     }
   },
   methods: {
@@ -751,7 +799,7 @@ export default {
         tweetSend: this.tweetSend,
         isScheduled: !!this.datetime,
         isFree: this.isFree,
-        mediaFiles: this.preloadedMedias.map(media => {
+        mediaFiles: this.filteredPreloadedMedias.map(media => {
           const data = {};
 
           if (media.mediaType === "video") {
@@ -767,6 +815,10 @@ export default {
 
       if (postData.isScheduled) {
         postData.scheduledDate = scheduledDate;
+      }
+
+      if (this.customThumb) {
+        postData.customThumb = { id: this.customThumb.processId };
       }
 
       if (this.datetimeExpired) {
