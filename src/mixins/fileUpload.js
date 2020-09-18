@@ -319,7 +319,11 @@ export default {
                 );
                 this.uploadInProgress = false;
                 if (this.setMediaIsReady !== undefined) {
-                  this.setMediaIsReady(processId);
+                  this.setMediaIsReady({
+                    processId,
+                    categoryId: file.categoryId,
+                    fileName: file.fileName
+                  });
                 }
                 delete this.s3uploads[id];
                 accept();
@@ -337,7 +341,11 @@ export default {
             );
             this.uploadInProgress = false;
             if (this.setMediaIsReady !== undefined) {
-              this.setMediaIsReady(processId);
+              this.setMediaIsReady({
+                processId,
+                categoryId: file.categoryId,
+                fileName: file.fileName
+              });
             }
             accept();
           });

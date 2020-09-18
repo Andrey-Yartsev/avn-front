@@ -39,6 +39,7 @@
           <FileUploader
             :defaultLimits="limits"
             :disableWatermark="withoutWatermark"
+            :withDefaultCategory="withDefaultCategory"
             @setFilesLength="setFilesLength"
             :type="type"
           />
@@ -71,6 +72,18 @@
           />
           <span class="b-check-state__icon icn-item icn-size_lg"></span>
           <span class="b-check-state__text">Without watermark</span>
+        </label>
+        <label :class="{ disabled: isFilesLoaded }">
+          <input
+            class="is-free-post"
+            type="checkbox"
+            :disabled="isFilesLoaded"
+            v-model="withDefaultCategory"
+          />
+          <span class="b-check-state__icon icn-item icn-size_lg"></span>
+          <span class="b-check-state__text"
+            >Set Default Category/Title based on filename</span
+          >
         </label>
         <button
           @click="generateAccessLink"
@@ -195,6 +208,7 @@ export default {
       opened: false,
       fetchLimit: 9,
       withoutWatermark: false,
+      withDefaultCategory: false,
       filesLength: 0,
       selectedCategory: defaultSelectedCategory,
       type: "video"
@@ -460,8 +474,12 @@ export default {
     margin-left: auto;
     line-height: 15px;
   }
+  label {
+    margin-right: 10px;
+  }
   &.mobile {
     margin-left: 10px;
+    flex-wrap: wrap;
     button {
       margin-right: 10px;
     }

@@ -159,7 +159,12 @@ export default {
       type: Object,
       default: null
     },
-    disableWatermark: Boolean,
+    disableWatermark: {
+      type: Boolean
+    },
+    withDefaultCategory: {
+      type: Boolean
+    },
     type: {
       type: String,
       default: "video"
@@ -210,32 +215,38 @@ export default {
     "files.length"(value) {
       this.$emit("setFilesLength", value);
     },
-    readyToUploadFile(newFile) {
+    readyToUploadFile({ processId, categoryId, fileName }) {
       if (this.type === "photo") {
         return;
       }
-      this.filesInProgress.push(newFile);
+      this.filesInProgress.push(processId);
+      const data = {
+        mediaFiles: [{ id: processId }],
+        type: this.type
+      };
+      if (categoryId) {
+        data.categories = [categoryId];
+      }
+      if (fileName) {
+        data.title = fileName;
+      }
       this.$store
-        .dispatch(
-          "profile/media/addMedia",
-          { mediaFiles: [{ id: newFile }], type: this.type },
-          { root: true }
-        )
+        .dispatch("profile/media/addMedia", data, { root: true })
         .then(() => {
           logDebug({
             logger: "ClipStore",
             message: "Create clip success",
             logData: {
-              processId: newFile
+              processId: processId
             }
           });
           this.disableButtons = false;
           this.loading = false;
           this.filesInProgress = this.filesInProgress.filter(
-            item => item !== newFile
+            item => item !== processId
           );
           this.$nextTick(() => {
-            this.triggerClickEvent(newFile);
+            this.triggerClickEvent(processId);
           });
         });
     }
@@ -295,6 +306,21 @@ export default {
             this.sendFilesFromBuffer();
             this.fileBuffer = [];
           }, 300);
+        }
+        if (this.withDefaultCategory) {
+          const folders = newFile.name.split("/");
+          newFile.file.fileName = folders[folders.length - 1]
+            .split(".")[0]
+            .replace("_", " ");
+          if (folders.length > 1) {
+            const folderName = folders[folders.length - 2];
+            const matchCategory = this.$store.state.profile?.media?.mediaCategories?.find(
+              item => item.name.toUpperCase() === folderName.toUpperCase()
+            );
+            if (matchCategory) {
+              newFile.file.categoryId = matchCategory.id;
+            }
+          }
         }
         this.fileBuffer.push(newFile.file);
       }
@@ -371,22 +397,23 @@ export default {
         input.click();
       }
     },
-    setMediaIsReady(processId) {
-      this.readyToUploadFile = processId;
+    setMediaIsReady(data) {
+      this.readyToUploadFile = data;
     },
     uploadPhotoset() {
       this.loading = true;
+      const data = {
+        mediaFiles: this.preloadedMedias.map(item => ({
+          id: item.processId
+        })),
+        type: this.type
+      };
+      if (this.withDefaultCategory) {
+        data.categories = [this.preloadedMedias[0].file.categoryId];
+        data.title = this.preloadedMedias[0].file.fileName;
+      }
       this.$store
-        .dispatch(
-          "profile/media/addMedia",
-          {
-            mediaFiles: this.preloadedMedias.map(item => ({
-              id: item.processId
-            })),
-            type: this.type
-          },
-          { root: true }
-        )
+        .dispatch("profile/media/addMedia", data, { root: true })
         .then(() => {
           // logDebug({
           //   logger: "ClipStore",
