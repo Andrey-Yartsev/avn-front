@@ -3,6 +3,12 @@
     <template v-if="withFontSizeController">
       <FontSizeControls />
     </template>
+    <div
+      v-if="withUser && withUser.isSpamReported"
+      class="info-message semi-transparent"
+    >
+      You are unable to send messages to this user
+    </div>
     <div class="addChatMessage__inside-section">
       <div class="addFileCollectionView" v-if="preloadedMedias.length">
         <MediaPreview

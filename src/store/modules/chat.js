@@ -1034,6 +1034,20 @@ createRequestAction({
   }
 });
 
+createRequestAction({
+  prefix: "reportSpam",
+  apiPath: "users/{userId}/spam-report",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "POST"
+  },
+  paramsToPath: function(params, path) {
+    return path.replace(/{userId}/, params.userId);
+  }
+});
+
 export default {
   namespaced: true,
   state,

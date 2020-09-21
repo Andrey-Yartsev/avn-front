@@ -131,6 +131,23 @@
       }
     }
 
+    &.neutral {
+      color: $main-color;
+      opacity: 0.5;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+
+        &:hover {
+          color: $light;
+          background: $main-color;
+
+          &:before {
+            color: $main-color;
+          }
+        }
+      }
+    }
+
     &.disconnect-twitter {
       color: $main-color;
 
