@@ -116,26 +116,26 @@ const routes = [
       collections: true
     }
   },
-  {
-    beforeEnter: Auth.requireAuth,
-    path: "/statistics/debug",
-    name: "StatisticPage2",
-    component: () =>
-      import(/* webpackChunkName: "StatPage" */ "@/components/statistics/Debug"),
-    meta: {
-      cssName: "statistics"
-    }
-  },
-  {
-    beforeEnter: Auth.requireAuth,
-    path: "/statistics/debug-posts",
-    name: "StatisticPage3",
-    component: () =>
-      import(/* webpackChunkName: "StatPage" */ "@/components/statistics/DebugPosts"),
-    meta: {
-      cssName: "statistics"
-    }
-  },
+  // {
+  //   beforeEnter: Auth.requireAuth,
+  //   path: "/statistics/debug",
+  //   name: "StatisticPage2",
+  //   component: () =>
+  //     import(/* webpackChunkName: "StatPage" */ "@/components/statistics/Debug"),
+  //   meta: {
+  //     cssName: "statistics"
+  //   }
+  // },
+  // {
+  //   beforeEnter: Auth.requireAuth,
+  //   path: "/statistics/debug-posts",
+  //   name: "StatisticPage3",
+  //   component: () =>
+  //     import(/* webpackChunkName: "StatPage" */ "@/components/statistics/DebugPosts"),
+  //   meta: {
+  //     cssName: "statistics"
+  //   }
+  // },
   {
     beforeEnter: Auth.requireAuth,
     path: "/statistics/:_currentPeriodType?",

@@ -540,7 +540,7 @@ export default {
         "current_subscribers_detailed_histogram_" + period
       );
 
-      this.subscribeUserStatistics("top_followers_count_all");
+      this.subscribeUserStatistics("top_followers_count_" + period);
     },
     setCounter(ref, title, value, postfix) {
       if (title) {
