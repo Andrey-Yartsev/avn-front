@@ -46,7 +46,12 @@ const initState = {
   }
 };
 
-const state = { ...initState };
+const state = {
+  ...initState,
+  currentLive: {
+    ...initState.currentLive
+  }
+};
 
 const mutations = {
   addNewOne(state, live) {
@@ -139,7 +144,7 @@ const mutations = {
     });
   },
 
-  resetCurrentLive() {
+  resetCurrentLive(state) {
     state.currentLive = {
       ...initState.currentLive
     };
@@ -149,6 +154,9 @@ const mutations = {
     for (let k of Object.keys(initState)) {
       state[k] = initState[k];
     }
+    state.currentLive = {
+      ...initState.currentLive
+    };
   },
   setSource(state, { source }) {
     state.source = source;
