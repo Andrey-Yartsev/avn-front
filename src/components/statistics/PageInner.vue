@@ -310,7 +310,6 @@
           <div class="box">
             <h3 class="box-title">
               Top 5
-              <span class="chart_period">Today</span>
             </h3>
             <div class="box-body">
               <div class="swiper-container" id="statistics-top-swiper">
@@ -341,6 +340,9 @@
                           }}</span>
                         </div>
                       </router-link>
+                    </div>
+                    <div class="no-items" v-else>
+                      No followers for current period
                     </div>
                   </div>
                   <!--<div class=swiper-slide>
