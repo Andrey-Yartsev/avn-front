@@ -246,9 +246,46 @@ export default {
         sess: token
       });
       this.$store.commit("obs/started", this.stream);
+      this.$root.ws.send({
+        act: "stream_log",
+        stream_id: this.stream.id,
+        stream_user_id: this.stream.user.id,
+        user_action: "start_success",
+        stream_data: {
+          type: "obs",
+          view_category: this.localStream.type,
+          date_time: new Date()
+        },
+        sess: this.$store.state.auth.token
+      });
     },
     stop() {
-      this.$store.dispatch("obs/stop", this.stream.id);
+      this.$root.ws.send({
+        act: "stream_log",
+        stream_id: this.stream.id,
+        stream_user_id: this.stream.user.id,
+        user_action: "try_to_stop",
+        stream_data: {
+          type: "obs",
+          view_category: this.localStream.type,
+          date_time: new Date()
+        },
+        sess: this.$store.state.auth.token
+      });
+      this.$store.dispatch("obs/stop", this.stream.id).then(() => {
+        this.$root.ws.send({
+          act: "stream_log",
+          stream_id: this.localStream.id,
+          stream_user_id: this.localStream.user.id,
+          user_action: "stop_success",
+          stream_data: {
+            type: "obs",
+            view_category: this.localStream.type,
+            date_time: new Date()
+          },
+          sess: this.$store.state.auth.token
+        });
+      });
       this.stopDisabled = true;
       setTimeout(() => {
         this.stopDisabled = false;
@@ -257,7 +294,20 @@ export default {
     update(data) {
       const stream = { ...this.stream, ...data };
       this.localStream = stream;
-      return this.$store.dispatch("obs/update", stream);
+      return this.$store.dispatch("obs/update", stream).then(() => {
+        this.$root.ws.send({
+          act: "stream_log",
+          stream_id: this.stream.id,
+          stream_user_id: this.stream.user.id,
+          user_action: "change_view_category_success",
+          stream_data: {
+            type: "obs",
+            view_category: this.stream.type,
+            date_time: new Date()
+          },
+          sess: this.$store.state.auth.token
+        });
+      });
     },
     visibilityChanged(type) {
       this.filterSelected = true;
@@ -269,6 +319,18 @@ export default {
         data.type = "list";
         data.entityId = type;
       }
+      this.$root.ws.send({
+        act: "stream_log",
+        stream_id: this.stream.id,
+        stream_user_id: this.stream.user.id,
+        user_action: "try_to_change_view_category",
+        stream_data: {
+          type: "obs",
+          view_category: data.type,
+          date_time: new Date()
+        },
+        sess: this.$store.state.auth.token
+      });
       this.update(data);
       this.$store.dispatch("global/flashToast", {
         text: "Visibility changed"
@@ -316,8 +378,34 @@ export default {
       this.$store.commit("lives/resetCurrentLive", null, { root: true });
       if (haveToSave) {
         this.saving = true;
+        this.$root.ws.send({
+          act: "stream_log",
+          stream_id: this.finishedStreamData.id,
+          stream_user_id: this.finishedStreamData.user.id,
+          user_action: "try_to_save",
+          stream_data: {
+            type: "obs",
+            view_category: this.finishedStreamData.type,
+            save_comments: haveToSaveComments,
+            date_time: new Date()
+          },
+          sess: this.$store.state.auth.token
+        });
         StreamApi.saveStream(this.finishedStreamData.id, haveToSaveComments)
           .then(() => {
+            this.$root.ws.send({
+              act: "stream_log",
+              stream_id: this.finishedStreamData.id,
+              stream_user_id: this.finishedStreamData.user.id,
+              user_action: "save_success",
+              stream_data: {
+                type: "obs",
+                view_category: this.finishedStreamData.type,
+                save_comments: haveToSaveComments,
+                date_time: new Date()
+              },
+              sess: this.$store.state.auth.token
+            });
             this.$router.push("/");
           })
           .catch(() => {
