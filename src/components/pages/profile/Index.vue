@@ -180,31 +180,48 @@
                 :isPrivate="isOwner(profile.id)"
               />
               <template v-else>
-                <p
-                  :class="['empty-feed']"
-                  v-if="
-                    !posts.length &&
-                      !infinityScrollLoading &&
-                      pageName !== 'links'
-                  "
-                >
-                  <!-- <p
-                  :class="['empty-feed']"
-                  v-if="!posts.length && infinityScrollLoading"
-                > -->
-                  <span>Nothing here yet</span>
-                  <button
-                    v-if="isOwner(profile.id) && pageName !== 'links'"
-                    @click="openAddPostModal"
-                    type="button"
-                    class="make-post-btn make-post-btn_feed make-post-btn_color-sec btn-with-icon btn-with-icon_lg"
-                  >
-                    <span class="icn-item icn-post"></span>
-                    Create new post
-                  </button>
-                </p>
                 <div class="profile-content">
                   <div class="posts-container" v-if="useMediumPostView">
+                    <div
+                      v-if="isOwner(profile.id)"
+                      class="posts-container__stashPostSwitcher "
+                    >
+                      <div
+                        class="posts-container__stashPostSwitcher-title semi-transparent"
+                      >
+                        {{
+                          showStashedPosts ? "Stashed posts" : "Publised posts"
+                        }}
+                      </div>
+                      <a
+                        href="#"
+                        @click.prevent
+                        class="posts-container__stashPostSwitcher-switcher"
+                        @click="switchStashedPostsView"
+                        >Switch to
+                        {{ showStashedPosts ? "published" : "stashed" }}
+                        posts</a
+                      >
+                      <button
+                        v-if="showStashedPosts"
+                        class="btn make-post-btn border alt btn_fix-width-sm"
+                        type="button"
+                        @click="openAddPostModal(true)"
+                      >
+                        <span class="icn-item icn-post icn-size_lg"></span>
+                        Add
+                      </button>
+                      <div
+                        v-if="showStashedPosts"
+                        class="posts-container__stashPostSwitcher-settingsLink semi-transparent"
+                      >
+                        You can manage publication settings on
+                        <router-link to="/settings/privacy"
+                          >privacy</router-link
+                        >
+                        page
+                      </div>
+                    </div>
                     <PostCollection
                       :class="'rounded-container'"
                       :posts="posts"
@@ -236,6 +253,29 @@
                     <Loader :fullscreen="false" :inline="true" :small="true" />
                   </div>
                 </div>
+                <p
+                  :class="['empty-feed']"
+                  v-if="
+                    !posts.length &&
+                      !infinityScrollLoading &&
+                      pageName !== 'links'
+                  "
+                >
+                  <span>Nothing here yet</span>
+                  <button
+                    v-if="
+                      isOwner(profile.id) &&
+                        pageName !== 'links' &&
+                        !showStashedPosts
+                    "
+                    @click="openAddPostModal"
+                    type="button"
+                    class="make-post-btn make-post-btn_feed make-post-btn_color-sec btn-with-icon btn-with-icon_lg"
+                  >
+                    <span class="icn-item icn-post"></span>
+                    Create new post
+                  </button>
+                </p>
               </template>
             </div>
           </div>
@@ -315,7 +355,8 @@ export default {
       collapseLimit: 250,
       collapsed: true,
       mysnapchat: "",
-      descrInitHeight: 0
+      descrInitHeight: 0,
+      showStashedPosts: false
     };
   },
 
@@ -449,6 +490,8 @@ export default {
     pageName() {
       this.scrollToTop();
       this.footerScrollAction();
+      this.showStashedPosts = false;
+      this.$store.commit("profile/home/switchStashedPostView", { reset: true });
       if (this.pageName !== "links" && this.pageName !== "media") {
         this.initPosts();
       }
@@ -527,9 +570,12 @@ export default {
       this.$store.dispatch("profile/home/setSource", this.source);
       this.getPosts();
     },
-    openAddPostModal() {
+    openAddPostModal(isStashed = false) {
       this.$store.dispatch("modal/show", {
-        name: "addPost"
+        name: "addPost",
+        data: {
+          isStashed
+        }
       });
     },
     infinityScrollGetDataMethod() {
@@ -656,6 +702,15 @@ export default {
       } else if (this.$refs.description.$el.style.height !== "") {
         this.$refs.description.$el.style.height = "";
       }
+    },
+    switchStashedPostsView() {
+      this.showStashedPosts = !this.showStashedPosts;
+      this.$store.commit("profile/home/switchStashedPostView", {
+        reset: false
+      });
+      this.$nextTick(() => {
+        this.initPosts();
+      });
     }
   },
   created() {
@@ -697,6 +752,7 @@ export default {
       window.removeEventListener("scroll", this.scrollAction, true);
     }
     document.title = "AVN Stars";
+    this.$store.commit("profile/home/switchStashedPostView", { reset: true });
   }
 };
 </script>

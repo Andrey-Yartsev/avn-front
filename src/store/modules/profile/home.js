@@ -21,7 +21,8 @@ const initState = {
   onPageAction: null,
   onLoginAction: null,
   beforeLoginProfileUsername: null,
-  onTipRouteAction: null
+  onTipRouteAction: null,
+  stashed: false
 };
 
 const state = { ...initState };
@@ -75,16 +76,19 @@ const mutations = {
   },
   resetOnTipRouteAction(state) {
     state.onTipRouteAction = null;
+  },
+  switchStashedPostView(state, { reset }) {
+    state.stashed = reset ? false : !state.stashed;
   }
 };
 
 const actions = {
   getPosts({ commit, state }) {
     const userId = state.profile.id;
-    const { limit, offset, marker, source } = state;
+    const { limit, offset, marker, source, stashed } = state;
     commit("postsRequest");
 
-    return UserApi.getPosts({ userId, limit, offset, marker, source })
+    return UserApi.getPosts({ userId, limit, offset, marker, source, stashed })
       .then(response => {
         if (response.status === 200) {
           response.json().then(function(res) {

@@ -47,8 +47,9 @@ export default {
       data: user
     });
   },
-  getPosts({ userId, offset, limit, marker, source }) {
-    return anyRequest(`users/${userId}/posts/${source}`, {
+  getPosts({ userId, offset, limit, marker, source, stashed }) {
+    const url = stashed ? `posts/stashed` : `users/${userId}/posts/${source}`;
+    return anyRequest(url, {
       method: "GET",
       query: {
         offset,

@@ -1150,6 +1150,30 @@
       @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         box-shadow: 0 1px 7px rgba(0,0,0,.15);
       }
+
+      &__stashPostSwitcher {
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: center;
+        padding: 0 10px 10px 10px;
+        text-align: center;
+        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+          padding-top: 10px;
+        }
+
+        &-title {
+          font-size: 18px;
+          margin-bottom: 10px;
+          font-weight: 500;
+        }
+        &-switcher {
+          margin-bottom: 10px;
+        }
+
+        &-settingsLink {
+          margin-top: 10px
+        }
+      }
     }
   }
 

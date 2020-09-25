@@ -255,7 +255,10 @@
               Add custom thumb
             </span>
           </label>
-          <div class="btn-post btn-post_datetime" v-if="showSchedule">
+          <div
+            class="btn-post btn-post_datetime"
+            v-if="showSchedule && !isStashedPost"
+          >
             <div class="post-datetime" :class="{ disabled: datetime }">
               <Datetime
                 :inputId="`post-datetime__switcher_${where}`"
@@ -278,7 +281,10 @@
               </span>
             </div>
           </div>
-          <div class="btn-post btn-post_datetime" v-if="showExpired">
+          <div
+            class="btn-post btn-post_datetime"
+            v-if="showExpired && !isStashedPost"
+          >
             <div
               class="post-datetime post-datetime-expire"
               :class="{ disabled: datetimeExpired }"
@@ -591,6 +597,10 @@ export default {
     type: {
       type: String,
       required: true
+    },
+    isStashed: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
@@ -741,6 +751,9 @@ export default {
         return this.preloadedMedias.filter(item => item.mediaType === "video");
       }
       return this.preloadedMedias;
+    },
+    isStashedPost() {
+      return this.isStashed || this.post.stashed;
     }
   },
   methods: {
@@ -842,6 +855,10 @@ export default {
         postData.tipsGoal = {
           ...InitialState.tipsGoal
         };
+      }
+
+      if (this.isStashed) {
+        postData.stashed = true;
       }
 
       return postData;

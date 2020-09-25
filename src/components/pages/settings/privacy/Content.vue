@@ -414,6 +414,54 @@
         </div>
       </div>
 
+      <template v-if="isMonetizedUser">
+        <div class="form-title tweet-posts-block border-top">
+          <div class="inner">
+            <span class="semi-transparent">
+              Autostash posts
+              <p class="subtext">
+                Posts will be published from stashed posts list at selected
+                frequency
+              </p>
+            </span>
+            <label class="toggle-element">
+              <input
+                type="checkbox"
+                name="isEnableAutoloadStashedPosts"
+                value="false"
+                v-model="localUser.privacy.isEnableAutoloadStashedPosts"
+              />
+              <span class="toggle-element_switcher"></span>
+            </label>
+          </div>
+        </div>
+        <div class="shadow-block">
+          <div class="container">
+            <div class="form-group form-group_with-label gender-options">
+              <label class="form-group-inner">
+                <span class="label">Frequency (hours)</span>
+                <div class="row">
+                  <div class="col-1-2">
+                    <div class="select-wrapper">
+                      <select
+                        name="autoloadStashedPostPeriod"
+                        class="default-disabled"
+                        value="1"
+                        v-model="localUser.privacy.autoloadStashedPostPeriod"
+                      >
+                        <option :value="v" v-for="v in 24" :key="v">
+                          {{ v }}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </label>
+            </div>
+          </div>
+        </div>
+      </template>
+
       <div
         v-if="!user.isPerformer"
         class="form-title tweet-posts-block border-top"

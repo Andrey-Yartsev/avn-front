@@ -21,6 +21,7 @@
             <AddPost
               :initialExpanded="true"
               :close="close"
+              :isStashed="isStashed"
               type="new"
               where="modal"
               ref="addPost"
@@ -111,6 +112,9 @@ export default {
     },
     allDataReceived() {
       return this.$store.state.postQueue.allDataReceived;
+    },
+    isStashed() {
+      return this.$store.state.modal.addPost.data.isStashed;
     }
   },
   created() {
