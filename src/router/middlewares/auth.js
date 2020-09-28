@@ -71,6 +71,9 @@ const Auth = {
       if (to.path === "/settings/magazine") {
         BrowserStore.set("magazineRedirect", true);
       }
+      if (to.path === "/settings/magazine/one-click") {
+        BrowserStore.set("magazineModalRedirect", true);
+      }
       return next("/login");
     }
     Store.dispatch("auth/setToken", token);
@@ -88,6 +91,9 @@ const Auth = {
               if (to.path === "/settings/magazine") {
                 BrowserStore.set("magazineRedirect", true);
               }
+              if (to.path === "/settings/magazine/one-click") {
+                BrowserStore.set("magazineModalRedirect", true);
+              }
               next("/login");
             });
           });
@@ -95,6 +101,9 @@ const Auth = {
           Store.dispatch("auth/logout").then(() => {
             if (to.path === "/settings/magazine") {
               BrowserStore.set("magazineRedirect", true);
+            }
+            if (to.path === "/settings/magazine/one-click") {
+              BrowserStore.set("magazineModalRedirect", true);
             }
             next("/login");
           });

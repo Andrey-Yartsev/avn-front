@@ -26,6 +26,18 @@
       padding-right: 15px;
     }
     min-height: 140px;
+
+    &.autoPopup {
+      padding-top: 10px;
+      .shipping-form-title {
+        padding: 5px 11.5% 15px 11.5%;
+        text-align: center;
+        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+          padding-left: 15px;
+          padding-right: 15px;
+        }
+      }
+    }
   }
   .shipping-info {
     margin: 10px 0;
@@ -112,5 +124,24 @@
       margin: 10px 0;
       display: inline-block;
     }
+  }
+  .reasons {
+    .bottom-buttons {
+      padding-bottom: 13px;
+    }
+    .btn {
+      flex-grow: 0;
+      margin-left: auto;
+      display: block;
+      @include media-breakpoint-down($mobile-breakpoint) {
+        margin-left: auto;
+      }
+    }
+  }
+}
+
+.popup-container {
+  &.showYScroll {
+    overflow-y: auto;
   }
 }

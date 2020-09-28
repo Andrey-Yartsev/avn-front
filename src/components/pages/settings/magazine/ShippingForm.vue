@@ -73,10 +73,17 @@
         Fill in all required fields to enable AVN Magazine subscription
       </div>
       <div class="form-group bottom-buttons">
-        <div></div>
-        <div></div>
-        <button class="btn" :disabled="disabled">
+        <button class="btn btn_fix-width-lg" :disabled="disabled">
           {{ submitTitle }}
+        </button>
+      </div>
+      <div v-if="autoPopup" class="form-group ">
+        <button
+          class="btn btn_fix-width-lg alt"
+          :disabled="disabled"
+          @click.prevent="reject"
+        >
+          No, thank you
         </button>
       </div>
     </div>
@@ -95,6 +102,12 @@ export default {
   components: {
     TextField,
     Loader
+  },
+  props: {
+    autoPopup: {
+      type: Boolean,
+      default: false
+    }
   },
   computed: {
     valid() {
@@ -173,6 +186,13 @@ export default {
     },
     resetStateId() {
       this.userInfo.stateId = 0;
+    },
+    reject() {
+      this.$store
+        .dispatch("magazine/rejectAutoOfflineSubscription")
+        .then(() => {
+          this.$emit("close");
+        });
     }
   },
   mounted() {

@@ -242,7 +242,19 @@ export const routes = [
   },
   {
     beforeEnter: Auth.requireAuth,
-    path: "/settings/magazine",
+    path: "/settings/magazine/one-click",
+    name: "SettingsMagazinePage",
+    component: () =>
+      import(/* webpackChunkName: "SettingsMagazinePage" */ "@/components/pages/settings/magazine/Index.vue"),
+    meta: {
+      title: "Magazine",
+      cssName: "settings",
+      autoPopup: true
+    }
+  },
+  {
+    beforeEnter: Auth.requireAuth,
+    path: "/settings/magazine/",
     name: "SettingsMagazinePage",
     component: () =>
       import(/* webpackChunkName: "SettingsMagazinePage" */ "@/components/pages/settings/magazine/Index.vue"),

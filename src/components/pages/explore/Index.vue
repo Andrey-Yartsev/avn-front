@@ -496,6 +496,10 @@ export default {
     if (magazineRedirect && this.user) {
       this.$router.push("/settings/magazine");
     }
+    const magazineModalRedirect = BrowserStore.get("magazineModalRedirect");
+    if (magazineModalRedirect && this.user) {
+      this.$router.push("/settings/magazine/one-click");
+    }
     this.initPrevMonths();
   }
 };

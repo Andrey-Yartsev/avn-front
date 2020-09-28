@@ -210,6 +210,18 @@ createRequestAction({
   }
 });
 
+createRequestAction({
+  prefix: "rejectAutoOfflineSubscription",
+  requestType: "token",
+  apiPath: "users/magazine/offline/reject",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "PUT"
+  }
+});
+
 export default {
   namespaced: true,
   state,

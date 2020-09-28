@@ -156,9 +156,12 @@ export default {
     }
   },
   methods: {
-    subscribeOffline() {
+    subscribeOffline(autoPopup = false) {
       if (!this.shippingExists) {
-        this.$store.dispatch("modal/show", { name: "magShipping" });
+        this.$store.dispatch("modal/show", {
+          name: "magShipping",
+          data: { autoPopup }
+        });
         return;
       }
 
@@ -231,6 +234,11 @@ export default {
   watch: {
     trigOfflineSubscription() {
       this.subscribeOffline();
+    },
+    shipping(shippingData) {
+      if (shippingData && !shippingData.id && this.$route.meta.autoPopup) {
+        this.subscribeOffline(true);
+      }
     }
   },
   created() {
@@ -238,6 +246,10 @@ export default {
     const magazineRedirect = BrowserStore.get("magazineRedirect");
     if (magazineRedirect && this.user) {
       BrowserStore.remove("magazineRedirect");
+    }
+    const magazineModalRedirect = BrowserStore.get("magazineModalRedirect");
+    if (magazineModalRedirect && this.user) {
+      BrowserStore.remove("magazineModalRedirect");
     }
   }
 };
