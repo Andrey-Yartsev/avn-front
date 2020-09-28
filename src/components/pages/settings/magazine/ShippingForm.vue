@@ -78,7 +78,10 @@
         </button>
       </div>
       <div v-if="autoPopup" class="form-group ">
-        <button class="btn btn_fix-width-lg alt" @click.prevent="reject">
+        <button
+          class="btn border btn_fix-width-lg neutral"
+          @click.prevent="reject"
+        >
           No, thank you
         </button>
       </div>
