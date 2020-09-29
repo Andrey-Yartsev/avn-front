@@ -211,7 +211,7 @@ import uniqBy from "lodash.uniqby";
 import GenderFilter from "@/components/common/GenderFilter";
 import MediaMedium from "@/components/common/profile/media/views/MediaMedium";
 import MediaSmall from "@/components/common/profile/media/views/MediaSmall";
-import BrowserStore from "store";
+import RouteRedirectMixin from "@/mixins/routeRedirect";
 // import mockStories from "@/mock/stories";
 
 export default {
@@ -234,7 +234,13 @@ export default {
     MediaMedium,
     MediaSmall
   },
-  mixins: [UserMixin, InfinityScrollMixin, PostsStat, Visibility],
+  mixins: [
+    UserMixin,
+    InfinityScrollMixin,
+    PostsStat,
+    Visibility,
+    RouteRedirectMixin
+  ],
   data() {
     return {
       storiesFetched: false,
@@ -492,14 +498,16 @@ export default {
     }
   },
   mounted() {
-    const magazineRedirect = BrowserStore.get("magazineRedirect");
-    if (magazineRedirect && this.user) {
-      this.$router.push("/settings/magazine");
-    }
-    const magazineModalRedirect = BrowserStore.get("magazineModalRedirect");
-    if (magazineModalRedirect && this.user) {
-      this.$router.push("/settings/magazine/one-click");
-    }
+    this.useRouteRedirect(
+      "magazineRedirect",
+      "/settings/magazine",
+      !!this.user
+    );
+    this.useRouteRedirect(
+      "magazineModalRedirect",
+      "/settings/magazine/one-click",
+      !!this.user
+    );
     this.initPrevMonths();
   }
 };

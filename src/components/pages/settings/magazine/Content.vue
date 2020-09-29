@@ -104,11 +104,11 @@ import ShippingInfo from "./ShippingInfo";
 import DigitalPreviews from "./DigitalPreviews";
 import PayAction from "../payments/payAction";
 import User from "@/mixins/user";
-import BrowserStore from "store";
+import RouteRedirectMixin from "@/mixins/routeRedirect";
 
 export default {
   name: "ProfileMagazinePage",
-  mixins: [PayAction, User],
+  mixins: [PayAction, User, RouteRedirectMixin],
   components: {
     Loader,
     ShippingInfo,
@@ -243,14 +243,8 @@ export default {
   },
   created() {
     this.$store.dispatch("magazine/fetchShipping");
-    const magazineRedirect = BrowserStore.get("magazineRedirect");
-    if (magazineRedirect && this.user) {
-      BrowserStore.remove("magazineRedirect");
-    }
-    const magazineModalRedirect = BrowserStore.get("magazineModalRedirect");
-    if (magazineModalRedirect && this.user) {
-      BrowserStore.remove("magazineModalRedirect");
-    }
+    this.clearRouteRedirect("magazineRedirect", !!this.user);
+    this.clearRouteRedirect("magazineModalRedirect", !!this.user);
   }
 };
 </script>
