@@ -206,6 +206,18 @@
                     class="clip-datetime__reset icn-item btn-reset btn-reset_prim-color icn-pos_center"
                   />
                 </div>
+                <div v-if="user.canSendTweets" class="tweet-new-post">
+                  <input
+                    class="tweetSend"
+                    type="checkbox"
+                    v-model="media.tweetSend"
+                    id="tweetClipRelease"
+                  />
+                  <label
+                    class="icn-item icn-twitter icn-size_lg"
+                    for="tweetClipRelease"
+                  />
+                </div>
               </div>
             </div>
             <div class="categories" v-if="mediaCategories.length">
@@ -393,7 +405,8 @@ const InitialState = {
     pinned: false,
     categories: [],
     canDownload: false,
-    scheduledDate: null
+    scheduledDate: null,
+    tweetSend: true
   },
   saving: false,
   defaultPriceLimit: 500,
@@ -637,7 +650,8 @@ export default {
         media: { thumbs, thumbId },
         categories,
         canDownload,
-        scheduledDate
+        scheduledDate,
+        tweetSend
       } = this.$props.post;
       this.media.title = title;
       this.media.text = this.getConvertedText(text);
@@ -649,6 +663,7 @@ export default {
       this.media.pinned = pinned || false;
       this.media.canDownload = canDownload;
       this.media.scheduledDate = scheduledDate || null;
+      this.media.tweetSend = tweetSend !== undefined ? tweetSend : true;
       this.media.categories = this.getObjectsFromArray(categories);
       this.$refs.textarea.value = this.getConvertedText(text);
       if (this.post.media.type === "photo") {
@@ -676,6 +691,7 @@ export default {
       this.preloadedMedias = [];
       this.photosetCover = null;
       this.media.scheduledDate = null;
+      this.media.tweetSend = true;
     },
     saveClickHandler() {
       if (this.overMaxPrice()) {
@@ -741,12 +757,12 @@ export default {
       if (this.media.active) {
         data.media.scheduledDate = null;
       }
-      // if (mediaCover) {
-      //   data.media.mediaCover = mediaCover;
-      // }
       if (mediaSet) {
         data.media.mediaFiles = mediaSet;
         data;
+      }
+      if (!this.user.canSendTweets || !this.media.scheduledDate) {
+        delete data.media.tweetSend;
       }
 
       return data;
@@ -853,9 +869,15 @@ export default {
   }
 }
 .schedule__container {
+  width: 100%;
   padding: 5px 0;
   .clip-datetime__reset {
     right: -10px;
+  }
+  .clip-scheduled-time {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
   }
 }
 </style>
