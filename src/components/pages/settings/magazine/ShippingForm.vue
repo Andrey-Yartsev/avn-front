@@ -157,6 +157,9 @@ export default {
       return this.kindOptions.length < 2;
     },
     submitTitle() {
+      if (this.autoPopup) {
+        return "Confirm";
+      }
       return this.hasShipping ? "Update" : "Activate";
     }
   },

@@ -19,7 +19,7 @@
           <div v-if="autoPopup" class="shipping-form-title">
             Congratulations, you qualify for a complimentary subscription to AVN
             Magazine Print Edition!<br />
-            Please confirm your mailing address and click Activate.
+            Please confirm your mailing address.
           </div>
           <ShippingForm @close="close" :autoPopup="autoPopup" />
         </div>
