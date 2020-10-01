@@ -121,7 +121,7 @@
       <div class="container">
         <div class="download-apps">
           <a
-            href="/static/doc/obs-win.pdf"
+            :href="getStaticLink('winObs')"
             target="_blank"
             class="download-app"
           >
@@ -154,7 +154,7 @@
             </span>
           </a>
           <a
-            href="/static/doc/obs-mac.pdf"
+            :href="getStaticLink('macObs')"
             target="_blank"
             class="download-app"
           >
@@ -231,6 +231,9 @@ export default {
           text: "URL copied!"
         });
       });
+    },
+    getStaticLink(key) {
+      return this.$store.state.init.data.staticDocs[key];
     }
   }
 };
