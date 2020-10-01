@@ -73,7 +73,9 @@
       >
         <span class="user-num-list__text">
           <span class="rank">{{ num }}</span>
-          <span v-if="profile.prize" class="prize">${{ profile.prize }}</span>
+          <span v-if="profile.prize && profile.prize !== '0'" class="prize"
+            >${{ profile.prize }}</span
+          >
         </span>
       </div>
       <p
