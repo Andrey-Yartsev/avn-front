@@ -1,5 +1,5 @@
 <template>
-  <Modal :onClose="close">
+  <Modal :onClose="close" :extraClassName="'z-index-200'">
     <div class="popup-container popup-image" slot="content">
       <div class="content content_relative">
         <img :src="src" />

@@ -55,8 +55,8 @@ export default {
       return !this.message.isMediaReady;
     },
     isDownloadAllowed() {
-      return this.$store.state.chat.fetchFullActiveUserResult.privacy
-        .allowDownloadChatContent;
+      return this.$store.state.chat.fetchFullActiveUserResult?.privacy
+        ?.allowDownloadChatContent;
     }
   },
   methods: {

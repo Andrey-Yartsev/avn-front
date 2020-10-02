@@ -23,6 +23,15 @@
             </span>
           </a>
           <h3 class="chat-title">Messages</h3>
+          <div v-if="$mq === 'mobile'" class="massMessagesHistory-link">
+            <a
+              href="#"
+              @click.prevent="showMassMessagesHistory"
+              class="newMessage"
+            >
+              <span class="icn-clock icn-item icn-size_lg"></span>
+            </a>
+          </div>
           <div class="newMessage-link">
             <a
               href="/chat/new"
@@ -128,6 +137,11 @@ export default {
     },
     markAsRead() {
       this.$store.dispatch("chat/markAllChatsAsRead");
+    },
+    showMassMessagesHistory() {
+      this.$store.dispatch("modal/show", {
+        name: "chatMassMessagesHistory"
+      });
     }
   }
 };

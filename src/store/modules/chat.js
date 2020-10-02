@@ -4,6 +4,7 @@ import { createRequestAction } from "../utils/storeRequest";
 import arrayUtils from "../../utils/arrayUtils";
 import Store from "@/store";
 import attachments from "./chat/attachments";
+import bulkHistory from "./chat/bulkHistory";
 
 const messagesLimit = 50;
 const chatsLimit = 15;
@@ -15,7 +16,6 @@ const state = {
   messagesOffset: messagesLimit,
   allMessagesLoaded: true,
   fetchingOld: false,
-  // fetch chats
   allDataReceived: false,
   offset: 0,
   chats: [],
@@ -1054,6 +1054,7 @@ export default {
   actions,
   mutations,
   modules: {
-    attachments
+    attachments,
+    bulkHistory
   }
 };

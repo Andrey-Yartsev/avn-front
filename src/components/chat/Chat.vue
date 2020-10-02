@@ -39,6 +39,14 @@
                 @click="goTo('/chat/new')"
                 >New message</span
               >
+              <div class="msg-no-chat__msg msg-no-chat__msg-additional">
+                or show mass messages history
+              </div>
+              <span
+                class="btn border md alt btn-start"
+                @click="showMassMessagesHistory"
+                >Mass messages</span
+              >
             </div>
           </div>
         </div>
@@ -365,6 +373,11 @@ export default {
       }
       this.$store.dispatch("chat/fetchNotes", this.activeUserId).then(res => {
         this.notes.text = res;
+      });
+    },
+    showMassMessagesHistory() {
+      this.$store.dispatch("modal/show", {
+        name: "chatMassMessagesHistory"
       });
     }
   },

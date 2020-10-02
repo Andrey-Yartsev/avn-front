@@ -747,6 +747,10 @@
     margin-bottom: 10px;
     opacity: 0.3;
     text-align: center;
+
+    &-additional {
+      margin-top: 10px;
+    }
   }
 }
 
@@ -1309,7 +1313,8 @@
   }
 }
 
-.newMessage-link {
+.newMessage-link,
+.massMessagesHistory-link {
 
   @include media-breakpoint-up($desktop-breakpoint) {
     margin: 0 0 0 auto;
@@ -1321,6 +1326,9 @@
     align-items: center;
     align-content: center;
   }
+}
+.massMessagesHistory-link {
+  margin-right: 20px;
 }
 
 .chatView {

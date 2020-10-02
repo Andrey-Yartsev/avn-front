@@ -66,6 +66,7 @@ import GroupWelcomeMessageModal from "@/components/common/profile/groups/modals/
 import ContestSupportersModal from "@/components/pages/settings/contests/modals/SupportersModal";
 import PaidBlockModal from "@/components/modal/PaidBlock";
 import PaidUnblockModal from "@/components/modal/PaidUnblock";
+import ChatMassMessagesHistoryModal from "@/components/chat/MassMessagesHistoryModal";
 
 export default {
   components: {
@@ -121,7 +122,8 @@ export default {
     GroupWelcomeMessageModal,
     ContestSupportersModal,
     PaidBlockModal,
-    PaidUnblockModal
+    PaidUnblockModal,
+    ChatMassMessagesHistoryModal
   },
   props: {
     hasLayout: {

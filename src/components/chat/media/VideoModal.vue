@@ -1,5 +1,5 @@
 <template>
-  <Modal class="popup-video">
+  <Modal class="popup-video" :extraClassName="'z-index-200'">
     <div class="popup-container popup-image" slot="content">
       <div class="content content_relative">
         <Video :message="message" />

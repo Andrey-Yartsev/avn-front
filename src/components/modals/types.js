@@ -214,6 +214,10 @@ const modalTypes = [
   {
     storeName: "paidUnblock",
     layoutOnlyModal: true
+  },
+  {
+    storeName: "chatMassMessagesHistory",
+    layoutOnlyModal: true
   }
 ];
 

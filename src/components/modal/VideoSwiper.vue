@@ -1,5 +1,5 @@
 <template>
-  <Modal :onClose="close">
+  <Modal :onClose="close" :extraClassName="'z-index-200'">
     <div class="popup-container popup-image videSwiperContainer" slot="content">
       <swiper
         ref="mySwiper"
@@ -129,8 +129,8 @@ export default {
       return !this.message.isMediaReady;
     },
     isDownloadAllowed() {
-      return this.$store.state.chat.fetchFullActiveUserResult.privacy
-        .allowDownloadChatContent;
+      return this.$store.state.chat.fetchFullActiveUserResult?.privacy
+        ?.allowDownloadChatContent;
     }
   },
   methods: {

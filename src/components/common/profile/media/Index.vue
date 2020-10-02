@@ -385,7 +385,7 @@ export default {
             name: "mediaAccessLink",
             data: {
               text:
-                "Share this one-off link to give free access to all your curently available clips",
+                "Share this one-off link to give free access to all your currently available clips",
               linkUrl: urlString
             }
           });
