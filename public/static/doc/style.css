@@ -1,0 +1,50 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+@page {
+    size: A4;
+    margin: 0;
+}
+
+body {
+    font-family: Arial;
+    color: #000;
+}
+
+.page {
+    margin: 1.6cm;
+    page-break-after: always;
+}
+
+.print.last {
+    page-break-after: avoid ;
+}
+
+img {
+    display: block;
+    margin-bottom: 20px;
+    width: 95%;
+}
+
+.images {
+    display: flex;
+width: 90%;
+    img {
+        width: auto;
+    }
+}
+
+h1 {
+    margin-top: 0;
+    font-size: 34px;
+    page-break-after: avoid;
+    margin-bottom: 0.5em;
+}
+
+p {
+    margin: 0 0 0.9em 0;
+    font-size: 18px;
+}
