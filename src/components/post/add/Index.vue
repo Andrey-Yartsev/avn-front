@@ -857,7 +857,7 @@ export default {
         };
       }
 
-      if (this.isStashed) {
+      if (this.isStashedPost) {
         postData.stashed = true;
       }
 
