@@ -29,13 +29,9 @@ const routes = [
   {
     beforeEnter: Auth.requireAny,
     path: "/hashtag/:tag",
-    name: "ExplorePage",
-    component: () =>
-      import(/* webpackChunkName: "ExplorePage" */ "@/components/pages/explore/Index"),
-    meta: {
-      page: "feed",
-      type: "feed",
-      cssName: "explore"
+    redirect: to => {
+      const { params } = to;
+      return { path: `/search/users/${params.tag}/hashtag` };
     }
   },
   {
@@ -51,7 +47,7 @@ const routes = [
   },
   {
     beforeEnter: Auth.requireAny,
-    path: "/search/:type/:query",
+    path: "/search/:type/:query/:isHashtag?",
     name: "Search",
     component: () =>
       import(/* webpackChunkName: "SearchPage" */ "@/components/pages/search/Index"),

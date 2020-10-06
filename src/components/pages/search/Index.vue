@@ -7,7 +7,11 @@
             <router-link
               v-bind:key="v.name"
               v-if="summary[`${v.name}Count`]"
-              :to="'/search/' + v.name + '/' + query"
+              :to="{
+                path: isHashtagSearch
+                  ? `/search/${v.name}/${query}/hashtag`
+                  : `/search/${v.name}/${query}`
+              }"
               class="content-nav__item"
             >
               {{ v.title }}
@@ -138,6 +142,9 @@ export default {
     },
     summary() {
       return this.$store.state.search.summary.summary;
+    },
+    isHashtagSearch() {
+      return !!this.$route.params?.isHashtag;
     }
   },
 
@@ -145,7 +152,8 @@ export default {
     getSummary() {
       this.$store.commit("search/summary/reset");
       this.$store.dispatch("search/summary/search", {
-        query: this.query
+        query: this.query,
+        isHashtag: this.isHashtagSearch
       });
     },
     search() {
@@ -155,13 +163,15 @@ export default {
       this.$store.commit("search/page/reset");
       this.$store.dispatch("search/page/search", {
         type: this.type,
-        query: this.query
+        query: this.query,
+        isHashtag: this.isHashtagSearch
       });
     },
     searchNext() {
       this.$store.dispatch("search/page/searchNext", {
         type: this.type,
-        query: this.query
+        query: this.query,
+        isHashtag: this.isHashtagSearch
       });
     },
     searchChange() {
@@ -190,9 +200,11 @@ export default {
     type() {
       this.lastYOffset = 0;
       this.$store.commit("search/page/reset");
-      this.$router
-        .push(`/search/${this.type}/${this.localQuery}`)
-        .catch(() => {});
+      let path = `/search/${this.type}/${this.localQuery}`;
+      if (this.isHashtagSearch) {
+        path += "/hashtag";
+      }
+      this.$router.push(path).catch(() => {});
       this.search();
     },
     summary() {
@@ -221,7 +233,11 @@ export default {
       }
 
       if (goTo) {
-        this.$router.push(`/search/${goTo}/${this.localQuery}`).catch(() => {});
+        let path = `/search/${goTo}/${this.localQuery}`;
+        if (this.isHashtagSearch) {
+          path += "/hashtag";
+        }
+        this.$router.push(path).catch(() => {});
       }
     }
   },

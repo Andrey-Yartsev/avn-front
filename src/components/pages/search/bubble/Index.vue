@@ -141,12 +141,15 @@ export default {
     },
     isLogedIn() {
       return this.$store.state.auth.user;
+    },
+    isHashtagSearch() {
+      return !!this.$route.params?.isHashtag;
     }
   },
 
   watch: {
     query(query) {
-      this.localQuery = query;
+      this.localQuery = this.isHashtagSearch ? `#${query}` : query;
     },
     $route() {
       this.opened2 = false;
@@ -238,7 +241,8 @@ export default {
   mounted() {
     setTimeout(() => {
       if (this.query) {
-        this.localQuery = this.query;
+        const query = this.isHashtagSearch ? `#${this.query}` : this.query;
+        this.localQuery = query;
       }
     }, 1);
   }

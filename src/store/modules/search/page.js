@@ -70,6 +70,7 @@ createRequestAction({
     options.query.offset = params.offset || 0;
     options.query.limit = params.limit || 5;
     options.query.marker = params.marker || "";
+    options.query.isHashtag = params.isHashtag;
     return options;
   },
   paramsToPath: function(params, path) {
