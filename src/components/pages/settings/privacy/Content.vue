@@ -420,8 +420,9 @@
             <span class="semi-transparent">
               Autostash posts
               <p class="subtext">
-                Posts will be published from stashed posts list at selected
-                frequency
+                A post will be auto-pulled from Stashed Posts in the case where
+                I did not post manually or scheduled within the selected
+                frequency.
               </p>
             </span>
             <label class="toggle-element">
@@ -456,6 +457,14 @@
                     </div>
                   </div>
                 </div>
+              </label>
+            </div>
+            <div class="form-group form-group_with-label gender-options">
+              <label class="form-group-inner">
+                <span class="label">Posts remaining in stash</span>
+                <span class="input">
+                  {{ localUser.privacy.autoloadStashedPostAmount || 0 }}</span
+                >
               </label>
             </div>
           </div>
