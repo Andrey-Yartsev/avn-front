@@ -190,7 +190,7 @@
                         class="posts-container__stashPostSwitcher-title semi-transparent"
                       >
                         {{
-                          showStashedPosts ? "Stashed posts" : "Publised posts"
+                          showStashedPosts ? "Stashed posts" : "Published posts"
                         }}
                       </div>
                       <a

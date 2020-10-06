@@ -420,9 +420,9 @@
             <span class="semi-transparent">
               Autostash posts
               <p class="subtext">
-                A post will be auto-pulled from Stashed Posts in the case where
-                I did not post manually or scheduled within the selected
-                frequency.
+                A post will be auto - pulled to post from Stashed posts in the
+                case where there is not a post manually posted or scheduled to
+                be posted within the selected frequency.
               </p>
             </span>
             <label class="toggle-element">
