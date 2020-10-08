@@ -393,8 +393,11 @@ export default {
           root: true
         })
         .then(() => {
-          this.saving = false;
           this.close();
+        })
+        .catch(() => {})
+        .finally(() => {
+          this.saving = false;
         });
     },
     getGroupData() {
