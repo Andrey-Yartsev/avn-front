@@ -58,28 +58,30 @@
                 </span>
               </a>
             </li>
-            <li v-if="_user.isPaidBlocked" class="more-functions__item">
-              <a
-                href="#"
-                @click.prevent="paidUnblock"
-                class="more-functions__link"
-              >
-                <span class="more-functions__option">
-                  Paid unblock
-                </span>
-              </a>
-            </li>
-            <li class="more-functions__item" v-else>
-              <a
-                href="#"
-                @click.prevent="paidBlock"
-                class="more-functions__link"
-              >
-                <span class="more-functions__option">
-                  Paid block
-                </span>
-              </a>
-            </li>
+            <template v-if="isMonetizedUser">
+              <li v-if="_user.isPaidBlocked" class="more-functions__item">
+                <a
+                  href="#"
+                  @click.prevent="paidUnblock"
+                  class="more-functions__link"
+                >
+                  <span class="more-functions__option">
+                    Paid unblock
+                  </span>
+                </a>
+              </li>
+              <li class="more-functions__item" v-else>
+                <a
+                  href="#"
+                  @click.prevent="paidBlock"
+                  class="more-functions__link"
+                >
+                  <span class="more-functions__option">
+                    Paid block
+                  </span>
+                </a>
+              </li>
+            </template>
           </template>
           <template v-if="userExists && _canMute(_user)">
             <li class="more-functions__item" v-if="_user.isMuted">
@@ -140,13 +142,14 @@
 <script>
 import ClickOutside from "vue-click-outside";
 import Mute from "@/mixins/mute";
+import User from "@/mixins/user";
 
 export default {
   name: "ChatUserDropdown",
   directives: {
     ClickOutside
   },
-  mixins: [Mute],
+  mixins: [Mute, User],
   props: {
     activeUser: Object,
     hasMessages: Boolean,

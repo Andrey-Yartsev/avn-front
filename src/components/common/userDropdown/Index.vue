@@ -32,28 +32,30 @@
                 </span>
               </a>
             </li>
-            <li v-if="profile.isPaidBlocked" class="more-functions__item">
-              <a
-                href="#"
-                @click.prevent="paidUnblock"
-                class="more-functions__link"
-              >
-                <span class="more-functions__option">
-                  Paid unblock
-                </span>
-              </a>
-            </li>
-            <li class="more-functions__item" v-else>
-              <a
-                href="#"
-                @click.prevent="paidBlock"
-                class="more-functions__link"
-              >
-                <span class="more-functions__option">
-                  Paid block
-                </span>
-              </a>
-            </li>
+            <template v-if="isMonetizedUser">
+              <li v-if="profile.isPaidBlocked" class="more-functions__item">
+                <a
+                  href="#"
+                  @click.prevent="paidUnblock"
+                  class="more-functions__link"
+                >
+                  <span class="more-functions__option">
+                    Paid unblock
+                  </span>
+                </a>
+              </li>
+              <li class="more-functions__item" v-else>
+                <a
+                  href="#"
+                  @click.prevent="paidBlock"
+                  class="more-functions__link"
+                >
+                  <span class="more-functions__option">
+                    Paid block
+                  </span>
+                </a>
+              </li>
+            </template>
           </template>
           <template v-if="canMute && user">
             <li class="more-functions__item" v-if="isMuted">
