@@ -21,14 +21,20 @@
             type="checkbox"
             id="subscribedOffline"
             v-model="opened"
-            :disabled="data.hasFinished"
+            :disabled="data.hasFinished || data.disableJoin"
           />
           <span
             class="toggle-element_switcher"
-            :class="{ disabled: data.hasFinished }"
+            :class="{
+              disabled: data.hasFinished || data.disableJoin
+            }"
           ></span>
         </label>
       </div>
+    </div>
+    <div class="contest-table-winnerInfo" v-if="!opened && data.disableJoin">
+      Congrats on winning the last contest! You’re ineligible to enter this
+      contest but you will be able to enter the next one.
     </div>
     <div class="contest-table-details" v-if="opened">
       <p class="finished-title" v-if="data.hasFinished">
