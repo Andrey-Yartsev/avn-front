@@ -78,13 +78,13 @@ export default {
       return;
     }
     logger.info(
-      `send video view duration for post ${this.post.id} (${duration})`
+      `send video view duration for post ${this.post?.id} (${duration})`
     );
     this.$root.ws.send({
       act: "collect",
       message: "view_video",
       data: {
-        post_id: this.post.id,
+        post_id: this.post?.id,
         owner: this.authorId,
         duration: duration,
         start_time: Math.round(this.playTimer / 1000)
