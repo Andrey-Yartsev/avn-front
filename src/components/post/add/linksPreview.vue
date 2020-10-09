@@ -29,7 +29,6 @@ export default {
       switch (location) {
         case "https://stars.avn.com":
           return "prod";
-        case "https://avn2.retloko.com":
         default:
           return "dev";
       }
@@ -37,15 +36,19 @@ export default {
   },
   methods: {
     getMediaLinksFromText(text) {
-      const regexp =
-        this.domain === "prod"
-          ? /https:\/\/stars.avn.com\/media\S+\b/g
-          : /https:\/\/avn2.retloko.com\/media\S+\b/g;
+      if (text?.length) {
+        const regexp =
+          this.domain === "prod"
+            ? /https:\/\/stars.avn.com\/media\S+\b/g
+            : /https:\/\/avn2.retloko.com\/media\S+\b/g;
 
-      return [...text.matchAll(regexp)];
+        const result = text.match(regexp);
+        return result;
+      }
+      return null;
     },
     validMediaLinks(list) {
-      const idList = list.map(item => item["0"].split("/").pop());
+      const idList = list.map(item => item.split("/").pop());
       return idList.filter(item => /^\d+$/.test(item));
     },
     getPreviews() {
@@ -66,12 +69,15 @@ export default {
   watch: {
     text(value) {
       const matchedLinks = this.getMediaLinksFromText(value);
-      if (matchedLinks.length) {
+      if (matchedLinks?.length) {
         const validLinks = this.validMediaLinks(matchedLinks);
         if (validLinks.length) {
           this.links = validLinks;
         }
-      } else if (!matchedLinks.length && this.previews.length) {
+      } else if (
+        (!matchedLinks || !matchedLinks.length) &&
+        this.previews.length
+      ) {
         this.previews = [];
       }
     },
