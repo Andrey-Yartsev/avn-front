@@ -413,11 +413,6 @@ export default {
       this.$store.dispatch("explore/resetPageState");
       this.$store.commit("topModels/reset");
 
-      const searchTag = this.$route.params.tag;
-      if (searchTag) {
-        this.$store.commit("explore/setTag", searchTag);
-      }
-
       if (this.type === "media" || this.type === "feed") {
         this.$store.dispatch("explore/setSource", { source: this.source });
         if (this.page === "clips") {

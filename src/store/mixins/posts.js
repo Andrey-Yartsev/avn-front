@@ -5,12 +5,12 @@ const result = {
   state: {},
   actions: {
     getPosts({ commit, state, rootState }) {
-      const { limit, offset, marker, source, tag } = state;
+      const { limit, offset, marker, source } = state;
       commit("postsRequest");
 
       const category = rootState.gender.category;
 
-      return PostApi.getPosts({ limit, offset, marker, source, category, tag })
+      return PostApi.getPosts({ limit, offset, marker, source, category })
         .then(response => {
           if (response.status === 200) {
             response.json().then(function(res) {

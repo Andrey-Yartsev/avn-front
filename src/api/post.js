@@ -2,7 +2,7 @@ import tokenRequest from "@/utils/tokenRequest";
 import anyRequest from "@/utils/anyRequest";
 
 export default {
-  getPosts({ offset, limit, marker, source, category, tag }) {
+  getPosts({ offset, limit, marker, source, category }) {
     if (!category) {
       category = 1;
     }
@@ -13,8 +13,7 @@ export default {
         offset,
         limit,
         marker,
-        category,
-        tag
+        category
       }
     });
   },
@@ -28,7 +27,7 @@ export default {
       }
     });
   },
-  getExplorePosts({ offset, limit, marker, source, category, tag, filter }) {
+  getExplorePosts({ offset, limit, marker, source, category, filter }) {
     return anyRequest(`posts/${source}`, {
       method: "GET",
       query: {
@@ -36,7 +35,6 @@ export default {
         offset,
         limit,
         marker,
-        tag,
         filter: filter || null
       }
     });

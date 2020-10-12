@@ -145,10 +145,6 @@ export default {
     },
     init() {
       this.$store.dispatch("home/resetPageState");
-      const searchTag = this.$route.params.tag;
-      if (searchTag) {
-        this.$store.commit("home/setTag", searchTag);
-      }
       this.$store.dispatch("home/getPosts");
 
       this.$store.dispatch("stories/feed/resetPageState");
@@ -165,7 +161,6 @@ export default {
     this.$root.$on("homePageReload", this.init);
   },
   beforeDestroy() {
-    // this.$state.commit("home/setTag", "");
     this.$root.$off("homePageReload", this.init);
   },
   watch: {

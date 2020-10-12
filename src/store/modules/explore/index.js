@@ -12,8 +12,7 @@ const initState = {
   marker: "",
   source: "media",
   deletedPost: undefined,
-  category: null,
-  tag: ""
+  category: null
 };
 
 const state = { ...initState };
@@ -45,14 +44,10 @@ const mutations = {
 const actions = {
   getPosts({ commit, state, rootState }, data) {
     const filter = (data && data.filter) || undefined;
-    const { limit, offset, marker, tag } = state;
+    const { limit, offset, marker } = state;
     let source = state.source;
-    if (tag) {
-      source = tag;
-    } else {
-      if (source === "feed") {
-        source = "media";
-      }
+    if (source === "feed") {
+      source = "media";
     }
     commit("postsRequest");
 
@@ -65,7 +60,6 @@ const actions = {
         marker,
         source,
         category,
-        tag,
         filter
       })
         .then(response => {
