@@ -42,11 +42,12 @@
               </div>
               <div class="chatMessageHistoryItem__info-unsend">
                 <button
+                  :disabled="v.unsent"
                   type="button"
                   class="btn border alt btn_fix-width-md "
                   @click="unsend(v.id)"
                 >
-                  Undsend unopened
+                  {{ v.unsent ? "Already was unsent" : "Unsend unopened" }}
                 </button>
               </div>
             </div>

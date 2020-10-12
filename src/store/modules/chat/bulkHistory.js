@@ -28,6 +28,17 @@ const mutations = {
     state.messages = [];
     state.offset = 0;
     state.allDataReceived = false;
+  },
+  updateMessage(state, { messageId, newData }) {
+    state.messages = state.messages.map(item => {
+      if (item.id === messageId) {
+        return {
+          ...item,
+          ...newData
+        };
+      }
+      return item;
+    });
   }
 };
 
@@ -42,8 +53,10 @@ const actions = {
       commit("isAllDataReceived", res.list.length);
     });
   },
-  unsendMessage({ dispatch }, messageId) {
-    return dispatch("_unsendMessage", messageId);
+  unsendMessage({ dispatch, commit }, messageId) {
+    return dispatch("_unsendMessage", messageId).then(() => {
+      commit("updateMessage", { messageId, newData: { unsent: true } });
+    });
   }
 };
 
