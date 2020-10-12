@@ -32,7 +32,10 @@
         </label>
       </div>
     </div>
-    <div class="contest-table-winnerInfo" v-if="!opened && data.disableJoin">
+    <div
+      class="contest-table-winnerInfo"
+      v-if="!opened && !data.hasFinished && data.disableJoin"
+    >
       Congrats on winning the last contest! You’re ineligible to enter this
       contest but you will be able to enter the next one.
     </div>
