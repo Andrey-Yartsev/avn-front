@@ -268,7 +268,7 @@
                         pageName !== 'links' &&
                         !showStashedPosts
                     "
-                    @click="openAddPostModal"
+                    @click="openAddPostModal(false)"
                     type="button"
                     class="make-post-btn make-post-btn_feed make-post-btn_color-sec btn-with-icon btn-with-icon_lg"
                   >
