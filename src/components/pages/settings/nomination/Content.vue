@@ -18,7 +18,7 @@
           <div class="inner inner_block">
             <div class="logo text-centered">
               <img
-                :src="process.env.VUE_APP_CDN_PATH + 'static/img/avnawards.png'"
+                :src="cdnPath + 'static/img/avnawards.png'"
                 alt=""
                 class="logo-awards"
                 v-if="!isGay"
@@ -126,74 +126,6 @@
                 </button>
               </div>
             </div>
-            <!--
-                       <div
-                         class="border-top gaps-around-selects"
-                         :class="{
-                           'shadow-block shadow-block_b-gap-sm': url,
-                           'shadow-block_reset-pt': !url
-                         }"
-                       >
-                         <div class="container">
-                           <div
-                             class="row row_separate-line"
-                             v-for="(selects, i) in selects"
-                             :key="i"
-                           >
-                             <div
-                               :class="{
-                                 'col-3-4': $mq === 'mobile',
-                                 'col-1-2': $mq === 'desktop'
-                               }"
-                             >
-                               <div class="select-wrapper">
-                                 <select v-model="category[i]" @change="changeTrig">
-                                   <option
-                                     v-for="v in categories"
-                                     :key="v.id"
-                                     :value="v.id"
-                                     >{{ v.title }}</option
-                                   >
-                                 </select>
-                               </div>
-                             </div>
-                             <button
-                               type="button"
-                               class="btn-unblock"
-                               data-original-title="null"
-                               v-if="hasRemoveButton(i)"
-                               @click="remove(i)"
-                             >
-                               <span class="icn-item icn-block"></span>
-                             </button>
-                           </div>
-                         </div>
-                       </div>
-
-
-                       <div
-                         class="form-group form-group_with-label"
-                         v-if="selects.length"
-                         v-for="(selects, i) in selects"
-                         :key="i"
-                       >
-                         <div class="form-group-inner form-group-title"></div>
-                       </div>
-
-                       <div
-                         class="form-group form-group_with-label"
-                         v-if="$mq === 'desktop'"
-                       >
-                         <button
-                           type="submit"
-                           class="btn lg btn_fix-width saveChanges"
-                           :class="{ 'btn_form-gap': $mq === 'desktop' }"
-                           :disabled="!changed || loading"
-                         >
-                           Save changes
-                         </button>
-                       </div>
-                       -->
           </template>
         </template>
       </div>
@@ -215,7 +147,6 @@
 import Common from "../common";
 import Loader from "@/components/common/Loader";
 import User from "@/mixins/user";
-// import { gayDomain } from "@/helpers/domains";
 
 export default {
   name: "NominationSettingsContent",
@@ -228,31 +159,6 @@ export default {
     };
   },
   computed: {
-    // url() {
-    //   const values = Object.values(this.category);
-    //   if (!values.length) {
-    //     return null;
-    //   }
-    //
-    //   let path = "";
-    //   path += "/nominator/";
-    //   path += this.user.username + "/";
-    //   if (this.eventId == 91) {
-    //     path += "avn_awards";
-    //   } else {
-    //     path += "gayvn_awards";
-    //   }
-    //   path += "/" + values.filter(v => v !== 0).join(",");
-    //
-    //   let url;
-    //   if (this.eventId == 91) {
-    //     url = window.location.origin + path;
-    //   } else {
-    //     url = gayDomain(path);
-    //   }
-    //
-    //   return url;
-    // },
     categories() {
       if (!this.$store.state.awards.fetchNominatedResult) {
         return [];
@@ -274,7 +180,9 @@ export default {
       return !!this.$route.path.match(/gayvn/);
     },
     eventId() {
-      return this.isGay ? 92 : 91;
+      return this.isGay
+        ? process.env.VUE_APP_GAY_AWARDS_EVENT_ID
+        : process.env.VUE_APP_AWARDS_EVENT_ID;
     },
     plural() {
       return this.categories && this.categories.length > 1 ? "s" : "";
@@ -284,6 +192,9 @@ export default {
     },
     getEndDateVoting() {
       return this.isGay ? "Mon Jan 20" : "Sat Jan 25";
+    },
+    cdnPath() {
+      return process.env.VUE_APP_CDN_PATH;
     }
   },
   watch: {
@@ -329,14 +240,6 @@ export default {
     },
     init() {
       this.fetchCategories();
-      // if (this.localUser.nominationCategories) {
-      //   const category = JSON.parse(this.localUser.nominationCategories);
-      //   if (category) {
-      //     this.category = category[this.eventId] || {};
-      //   } else {
-      //     this.category = {};
-      //   }
-      // }
     },
     url(v) {
       const awardsType = this.isGay ? "/gayvn_awards/" : "/avn_awards/";

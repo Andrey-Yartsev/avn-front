@@ -50,6 +50,14 @@
           <div class="block-indicator" v-if="user && profile.isBlocked">
             <span class="icn-block icn-item"></span>
           </div>
+          <button
+            @click="clickVoteHandler"
+            class="btn vote-btn"
+            v-if="showVoteButton"
+          >
+            <span class="icn-award icn-item icn-size_lg" />
+            Vote 4 Me!
+          </button>
         </div>
         <span class="user-login reset-ml user-login-container">
           <router-link :to="'/' + profile.username">{{
@@ -75,10 +83,11 @@
 import User from "@/mixins/user";
 import HeaderScrolled from "@/mixins/headerScrolled";
 import Access from "@/components/stream/access";
+import VotingMixin from "@/mixins/voting";
 
 export default {
   name: "ProfileAvatar",
-  mixins: [User, HeaderScrolled, Access],
+  mixins: [User, HeaderScrolled, Access, VotingMixin],
   props: {
     pageName: {
       type: String,

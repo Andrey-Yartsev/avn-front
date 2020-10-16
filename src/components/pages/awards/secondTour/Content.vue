@@ -136,7 +136,9 @@ export default {
       return this.$route.meta.isGay;
     },
     eventId() {
-      return this.isGay ? 92 : 91;
+      return this.isGay
+        ? process.env.VUE_APP_GAY_AWARDS_EVENT_ID
+        : process.env.VUE_APP_AWARDS_EVENT_ID;
     },
     categories() {
       if (!this.$store.state.awards.categories) {

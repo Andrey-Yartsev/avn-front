@@ -67,6 +67,7 @@ import ContestSupportersModal from "@/components/pages/settings/contests/modals/
 import PaidBlockModal from "@/components/modal/PaidBlock";
 import PaidUnblockModal from "@/components/modal/PaidUnblock";
 import ChatMassMessagesHistoryModal from "@/components/chat/MassMessagesHistoryModal";
+import VotingModal from "@/components/pages/awards/secondTour/VotingModal";
 
 export default {
   components: {
@@ -108,7 +109,6 @@ export default {
     EditMediaModal,
     AddGroupModal,
     EditGroupModal,
-    MediaPayConfirmModal,
     GroupPayConfirmModal,
     AddRedirectLinkModal,
     MediaAccessLinkModal,
@@ -123,7 +123,9 @@ export default {
     ContestSupportersModal,
     PaidBlockModal,
     PaidUnblockModal,
-    ChatMassMessagesHistoryModal
+    ChatMassMessagesHistoryModal,
+    MediaPayConfirmModal,
+    VotingModal
   },
   props: {
     hasLayout: {

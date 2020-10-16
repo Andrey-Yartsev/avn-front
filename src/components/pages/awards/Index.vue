@@ -188,7 +188,9 @@ export default {
       return !!this.$route.meta.predefined;
     },
     eventId() {
-      return this.isGay ? 92 : 91;
+      return this.isGay
+        ? process.env.VUE_APP_GAY_AWARDS_EVENT_ID
+        : process.env.VUE_APP_AWARDS_EVENT_ID;
     },
     loading() {
       if (!this.predefined) {
@@ -339,7 +341,7 @@ export default {
     //   });
     // }
 
-    this.$store.dispatch("contest/fetchCategories", this.eventId).then(() => {
+    this.$store.dispatch("awards/fetchCategories", this.eventId).then(() => {
       if (this.predefined) {
         this.$store
           .dispatch("awards/fetchUser", this.modelUsername)

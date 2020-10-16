@@ -2,7 +2,7 @@
   <div class="container awards">
     <div class="awards-header" :class="{ gay: isGay }">
       <img
-        :src="process.env.VUE_APP_CDN_PATH + 'static/img/avnawards.png'"
+        :src="cdnPath + 'static/img/avnawards.png'"
         alt=""
         class="logo-awards"
         v-if="!isGay"
@@ -66,6 +66,9 @@ export default {
         (this.user && this.user.adminReturnUrl) ||
         (this.user && this.user.showVote)
       );
+    },
+    cdnPath() {
+      return process.env.VUE_APP_CDN_PATH;
     }
   }
 };

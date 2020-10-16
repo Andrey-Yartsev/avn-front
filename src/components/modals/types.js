@@ -218,6 +218,10 @@ const modalTypes = [
   {
     storeName: "chatMassMessagesHistory",
     layoutOnlyModal: true
+  },
+  {
+    storeName: "voting",
+    layoutOnlyModal: true
   }
 ];
 

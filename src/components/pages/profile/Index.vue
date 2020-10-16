@@ -34,6 +34,14 @@
             <div class="block-indicator" v-if="user && profile.isBlocked">
               <span class="icn-item icn-block"></span>
             </div>
+            <button
+              @click="clickVoteHandler"
+              class="btn vote-btn"
+              v-if="showVoteButton"
+            >
+              <span class="icn-award icn-item icn-size_lg" />
+              Vote 4 Me!
+            </button>
           </div>
           <span class="user-login reset-ml user-login-container">
             <a>{{ profile.username }}</a>
@@ -316,6 +324,7 @@ import LinksPage from "@/components/common/profile/links/Index";
 import MediaPage from "@/components/common/profile/media/Index";
 import GroupsPage from "@/components/common/profile/groups/Index";
 import TipAuto from "@/mixins/tipAuto";
+import VotingMixin from "@/mixins/voting";
 
 export default {
   name: "ProfileHome",
@@ -326,7 +335,8 @@ export default {
     FileUpload,
     Wsp,
     Visibility,
-    TipAuto
+    TipAuto,
+    VotingMixin
   ],
 
   components: {

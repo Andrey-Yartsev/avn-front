@@ -49,7 +49,10 @@ export default {
       this.$store.dispatch("modal/hide", { name: "voting" });
     },
     url(v) {
-      const awardsType = v.eventId == 91 ? "/avn_awards/" : "/gayvn_awards/";
+      const awardsType =
+        v.eventId == process.env.VUE_APP_AWARDS_EVENT_ID
+          ? "/avn_awards/"
+          : "/gayvn_awards/";
       return (
         window.location.origin +
         "/vote/" +
@@ -59,7 +62,9 @@ export default {
       );
     },
     categoryType(category) {
-      return category.eventId == 91 ? "(AVN Awards)" : "(GayVN Awards)";
+      return category.eventId == process.env.VUE_APP_AWARDS_EVENT_ID
+        ? "(AVN Awards)"
+        : "(GayVN Awards)";
     }
   }
 };
