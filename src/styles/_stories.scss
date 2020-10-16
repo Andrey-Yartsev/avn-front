@@ -684,6 +684,15 @@
       }
     }
   }
+
+  .newStoriesLabel {
+    margin-left: 5px;
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      margin-left: 16px;
+      font-size: 14px;
+    }
+  }
 }
 
 

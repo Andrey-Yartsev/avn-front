@@ -13,6 +13,7 @@
           class="stories-wrapper stories-all"
           v-if="stories.length || streamLives.length"
         >
+          <div class="newStoriesLabel">New Stories</div>
           <div class="storyCollectionView storyCollectionView_tape">
             <div class="stories-group__outer">
               <div class="stories-group">
