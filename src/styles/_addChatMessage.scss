@@ -45,7 +45,7 @@
   flex-direction: row;
   flex-wrap: wrap;
   width: 100%;
-  align-items: flex-end;
+  align-items: center;
   align-content: flex-end;
   color: $main-color;
 
@@ -81,6 +81,16 @@
         opacity: 1;
         color: $primary-color;
       }
+    }
+  }
+
+  .getPaid {
+    margin: 0;
+    margin-right: 0.6em;
+    flex-grow: 0;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      margin-right: 1.1em;
     }
   }
 
@@ -149,7 +159,7 @@
   background-color: rgba(124, 139, 150, 0.08);
   padding-left: 0.55em;
   padding-right: 0.55em;
-  height: 31px;
+  height: 34px;
 }
 
 .field-text-message {

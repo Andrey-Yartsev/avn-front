@@ -58,6 +58,16 @@
           <span class="icn-tips icn-item icn-size_lg"></span>
         </button>
 
+        <button
+          class="getPaid btn-el"
+          :class="{ active: showPaid, disabled: showTip }"
+          v-if="user.canEarn && withPrice"
+          @click="showPaidForm"
+          v-tooltip="'Price'"
+        >
+          <span class="icn-item icn-price icn-size_lg"></span>
+        </button>
+
         <div
           v-if="withInput"
           class="field-text-message"
@@ -134,16 +144,6 @@
             Set Price
           </button>
         </div>
-
-        <button
-          class="getPaid btn-el"
-          :class="{ active: showPaid, disabled: showTip }"
-          v-if="user.canEarn && withPrice"
-          @click="showPaidForm"
-          v-tooltip="'Price'"
-        >
-          <span class="icn-item icn-price icn-size_lg"></span>
-        </button>
 
         <button
           @click="sendMessage"
