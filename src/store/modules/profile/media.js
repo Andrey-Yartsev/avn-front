@@ -161,13 +161,14 @@ const mutations = {
 const actions = {
   getMedia(
     { dispatch, commit, state },
-    { profileId, filter, sort, categories, type }
+    { profileId, filter, sort, categories, type, order }
   ) {
     return dispatch("_getMedia", {
       profileId,
       offset: state.offset,
       filter,
       sort,
+      order,
       categories,
       type
     }).then(res => {
@@ -283,6 +284,7 @@ createRequestAction({
     options.query.limit = fetchLimit;
     options.query.filter = params.filter;
     options.query.sort = params.sort;
+    options.query.order = params.order;
     options.query.categories = params.categories;
     options.query.type = params.type;
     return options;

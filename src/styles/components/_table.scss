@@ -104,7 +104,16 @@
       padding-top: 0;
     }
 
-    .SubscribersBlockCollectionView & {
+    .SubscribersBlockCollectionView &,
+    .MediaListTableView & {
+
+      .table__cell {
+        cursor: pointer;
+        &:hover {
+          opacity: 1;
+          background: rgba($gray, 0.05);
+        }
+      }
 
       @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         display: none;
@@ -295,7 +304,8 @@
   }
 
   .EarningsBlockCollectionView &,
-  .SubscribersBlockCollectionView & {
+  .SubscribersBlockCollectionView &,
+  .MediaListTableView & {
 
     .item {
 
@@ -431,6 +441,98 @@
           padding-top: 9px;
         }
       }
+    }
+  }
+
+  .MediaListTableView & {
+
+    &__cell {
+
+      &.thumb {
+        flex: 0 1 50%;
+        max-width: 50%;
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          flex: 0 1 44%;
+          max-width: 44%;
+        }
+        .userview-block {
+          min-height: 50px;
+
+          .avatar {
+            border-radius: 0;
+            img {
+              border-radius: 5px;
+            }
+          }
+
+          .name {
+            margin-left: 20px
+          }
+
+          .pinnedIcon {
+            color: $primary-color;
+            position:  absolute;
+            top: 0;
+            right: 0;
+            height: 100%;
+            display: flex;
+            align-items: center;
+          }
+        }
+      }
+
+      &.price,
+      &.status,
+      &.date, 
+      &.totalRevenue, 
+      &.monthRevenue {
+
+        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+          font-size: 12px;
+          flex-wrap: wrap;
+          text-align: right;
+          justify-content: flex-end;
+          align-items: flex-start;
+          align-content: flex-start;
+
+          &:before {
+            content: attr(data-title);
+            flex: 0 0 100%;
+            opacity: .5;
+            text-align: right;
+            font-weight: 400;
+          }
+        }
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          flex: 0 1 14%;
+          max-width: 14%;
+        }
+      }
+
+      &.price,
+      &.status {
+        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+          flex: 0 1 25%;
+          max-width: 25%;
+        }
+      }
+
+      &.date,
+      &.totalRevenue,
+      &.monthRevenue {
+
+        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+          border-top: 1px solid rgba($gray, 0.2);
+          margin-top: 13px;
+          padding-top: 9px;
+          flex: 0 1 33.33%;
+          max-width: 33.33%;
+        }
+      }
+
+
     }
   }
 
@@ -981,7 +1083,8 @@
     }
 
     .EarningsBlockCollectionView &,
-    .SubscribersBlockCollectionView & {
+    .SubscribersBlockCollectionView &,
+    .MediaListTableView & {
 
       @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         padding-bottom: 0;

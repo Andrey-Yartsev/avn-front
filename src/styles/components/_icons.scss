@@ -451,5 +451,16 @@
     }
   }
 
+  &-th {
+    &:after {
+      content: '\e803';
+    }
+  }
+  &-th-list {
+    &:after {
+      content: '\e804';
+    }
+  }
+
 
 }

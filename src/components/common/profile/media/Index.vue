@@ -121,19 +121,65 @@
           </div>
         </div>
         <div
+          v-if="this.$props.private && user && user.isPerformer"
+          class="form-group categories viewOrder"
+          :class="{ mobile: $mq === 'mobile' }"
+        >
+          <div class="form-group-inner">
+            <span class="label">Default view order:</span>
+            <span class="form-group form-group_clear-gaps">
+              <span class="form-field">
+                <multiselect
+                  v-model="mediaSortOrder[type]"
+                  :options="viewOrderOptions"
+                  @select="mediaSortOrderHandleChange"
+                  :multiple="false"
+                  :close-on-select="true"
+                  :clear-on-select="false"
+                  :preserve-search="true"
+                  placeholder="Select default order"
+                  label="title"
+                  track-by="name"
+                  :taggable="false"
+                  :openDirection="$mq === 'desktop' ? 'bottom' : ''"
+                >
+                </multiselect>
+              </span>
+            </span>
+          </div>
+        </div>
+        <div
+          class="viewModeIcon-container"
+          v-if="this.$props.private && user && user.isPerformer"
+        >
+          <span
+            class="icn-item icn-th viewModeIcon"
+            :class="{ active: viewMode === 'grid' }"
+            @click="setViewMode('grid')"
+          ></span>
+          <span
+            class="icn-item icn-th-list viewModeIcon"
+            :class="{ active: viewMode === 'list' }"
+            @click="setViewMode('list')"
+          ></span>
+        </div>
+        <div
           :class="['buttonWrapper', 'more-functions', { open: opened }]"
           v-click-outside="hide"
         >
           <div class="more-functions__overlay" @click="hide"></div>
-          <div class="sortLabel">Sort:</div>
+          <div class="sortLabel">Sort / Filter:</div>
           <div class="openMenuButton" @click="open">
             <span class="status-card on icn-item checkmark styledCheckmark" />
-            <span class="filterLabel">{{ getFilterName }}</span>
+            <span class="filterLabel">{{ getFilterDropdownLabel }}</span>
           </div>
           <div class="more-functions__dropdown">
             <FilterDropdown
               :isAuthor="this.$props.private"
-              :type="filterType"
+              :filterType="filterType"
+              :sortType="sortType"
+              :orderType="orderType"
+              :isListView="viewMode === 'list'"
               @handleClick="handleClick"
             />
           </div>
@@ -143,15 +189,25 @@
         <div class="exploreAllCollectionView">
           <div class="explore">
             <div class="explore__inside">
-              <div class="explore-wrapper videos">
-                <component
-                  :is="mediaComponent"
-                  v-for="item in media"
-                  :post="item"
-                  :key="item.id"
-                  from="profile/home"
-                  :isPrivate="$props.private"
+              <div
+                class="explore-wrapper videos"
+                :class="{ listViewItem: viewMode === 'list' }"
+              >
+                <MediaListTable
+                  v-if="viewMode === 'list'"
+                  :items="media"
+                  @filterClickHandler="filterClickHandler"
                 />
+                <template v-else>
+                  <component
+                    :is="mediaComponent"
+                    v-for="item in media"
+                    :post="item"
+                    :key="item.id"
+                    from="profile/home"
+                    :isPrivate="$props.private"
+                  />
+                </template>
               </div>
             </div>
           </div>
@@ -175,6 +231,7 @@ import Loader from "@/components/common/Loader";
 import FileUploader from "@/components/common/profile/media/FileUploader";
 import MediaSmall from "@/components/common/profile/media/views/MediaSmall";
 import MediaMedium from "@/components/common/profile/media/views/MediaMedium";
+import MediaListTable from "@/components/common/profile/media/views/MediaListTable";
 import FilterDropdown from "@/components/common/profile/media/edit/FilterDropdown";
 import User from "@/mixins/user";
 import IntersectionObserver from "@/mixins/intersectionObserver";
@@ -182,6 +239,12 @@ import ClickOutside from "vue-click-outside";
 import Multiselect from "vue-multiselect";
 
 const defaultSelectedCategory = { id: "0", name: "All", title: "All" };
+const defaultViewOrderOptions = [
+  { name: "default", title: "Default" },
+  { name: "date", title: "Publish date" },
+  { name: "totalRevenue", title: "Total revenue" },
+  { name: "monthRevenue", title: "Month revenue" }
+];
 
 export default {
   name: "MediaPage",
@@ -189,7 +252,8 @@ export default {
     Loader,
     FileUploader,
     FilterDropdown,
-    Multiselect
+    Multiselect,
+    MediaListTable
   },
   directives: {
     ClickOutside
@@ -204,14 +268,23 @@ export default {
         photo: 50,
         audio: 10
       },
-      filterType: "all",
+      filterType: "",
+      orderType: "DESC",
+      sortType: "default",
       opened: false,
       fetchLimit: 9,
       withoutWatermark: false,
       withDefaultCategory: false,
       filesLength: 0,
       selectedCategory: defaultSelectedCategory,
-      type: "video"
+      type: "video",
+      viewMode: "grid",
+      viewOrderOptions: [...defaultViewOrderOptions],
+      mediaSortOrder: {
+        video: { name: "default", title: "Default" },
+        photo: { name: "default", title: "Default" },
+        audio: { name: "default", title: "Default" }
+      }
     };
   },
   computed: {
@@ -228,6 +301,9 @@ export default {
       return this.$store.state.profile.media.getMediaLoading;
     },
     mediaComponent() {
+      if (this.viewMode === "list") {
+        return MediaListTable;
+      }
       if (this.$mq === "mobile") {
         return MediaMedium;
       }
@@ -239,52 +315,34 @@ export default {
     storeEnabled() {
       return this.$store.state.auth.user.storeEnabled;
     },
-    getSortOrder() {
-      switch (this.filterType) {
-        case "dateNew":
-        case "priceHight":
-          return "DESC";
-        case "dateOld":
-        case "priceLow":
-          return "ASC";
-        default:
-          return null;
-      }
-    },
-    getFilterType() {
-      if (this.filterType === "dateNew" || this.filterType === "dateOld") {
-        return "date";
-      }
-      if (this.filterType === "priceHight" || this.filterType === "priceLow") {
-        return "price";
-      }
-      return this.filterType;
-    },
     isFilesLoaded() {
       return this.filesLength > 0;
     },
-    getFilterName() {
-      switch (this.filterType) {
-        case "all":
-          return "All";
-        case "sale":
-          return "On sale";
-        case "draft":
-          return "Draft";
-        case "scheduled":
-          return "Scheduled";
-        case "dateNew":
-          return "Newest";
-        case "dateOld":
-          return "Oldest";
-        case "priceHight":
-          return "Price: Hight to Low";
-        case "priceLow":
-          return "Price: Low to High";
-        case "purchases":
-          return "My Purchases Only";
-        default:
-          return "all";
+    getFilterDropdownLabel() {
+      if (this.sortType === "date") {
+        return this.orderType === "ASC" ? "Oldest" : "Newest";
+      }
+      if (this.sortType === "price") {
+        return this.orderType === "ASC"
+          ? "Price: Low to High"
+          : "Price: Hight to Low";
+      }
+      if (!this.filterType) {
+        return "All";
+      }
+      if (this.filterType) {
+        switch (this.filterType) {
+          case "sale":
+            return "On sale";
+          case "draft":
+            return "Draft";
+          case "scheduled":
+            return "Scheduled";
+          case "purchases":
+            return "My Purchases Only";
+          default:
+            return "All";
+        }
       }
     },
     categoriesList() {
@@ -307,31 +365,24 @@ export default {
       });
       list.unshift({ id: "0", name: "All", title: "All" });
       return list;
+    },
+    getSortFilterLabel() {
+      return this.private && this.viewMode === "list"
+        ? "Filter"
+        : "Sort / Filter";
     }
   },
   watch: {
-    filterType() {
-      this.destroyObserver();
-      this.isInitFetch = true;
-      this.$store.commit("profile/media/clearMedia", null, { root: true });
-      this.fetchMedia();
-    },
     selectedCategory(newValue) {
       if (!newValue) {
         this.selectedCategory = defaultSelectedCategory;
         return;
       }
-      this.destroyObserver();
-      this.isInitFetch = true;
-      this.$store.commit("profile/media/clearMedia", null, { root: true });
-      this.fetchMedia();
+      this.resetAndFetch();
     },
     type(value) {
       this.selectedCategory = defaultSelectedCategory;
-      this.filterType = "all";
-      this.destroyObserver();
-      this.isInitFetch = true;
-      this.$store.commit("profile/media/clearMedia", null, { root: true });
+      this.filterType = "";
       this.$store.dispatch(
         "profile/media/getMediaCategories",
         { type: value },
@@ -339,10 +390,16 @@ export default {
           root: true
         }
       );
-      this.fetchMedia();
+      this.resetAndFetch();
     }
   },
   methods: {
+    resetAndFetch() {
+      this.destroyObserver();
+      this.isInitFetch = true;
+      this.$store.commit("profile/media/clearMedia", null, { root: true });
+      this.fetchMedia();
+    },
     open() {
       this.opened = true;
       this.$emit("openDropdown");
@@ -351,17 +408,34 @@ export default {
       this.opened = false;
       this.$emit("hideDropdown");
     },
-    handleClick(type) {
+    handleClick(data) {
       this.opened = false;
-      this.filterType = type;
+      const { filter, order, sort } = data;
+      this.filterType = filter;
+      this.sortType = sort;
+      this.orderType = order;
+      this.$nextTick(() => {
+        this.resetAndFetch();
+      });
+    },
+    filterClickHandler(data) {
+      if (data === this.sortType) {
+        this.orderType = this.orderType === "ASC" ? "DESC" : "ASC";
+      } else {
+        this.sortType = data;
+      }
+      this.$nextTick(() => {
+        this.resetAndFetch();
+      });
     },
     fetchMedia() {
       this.$store
         .dispatch("profile/media/getMedia", {
           categories: this.selectedCategory.id,
           profileId: this.$store.state.profile.home.profile.id,
-          filter: this.getFilterType,
-          sort: this.getSortOrder,
+          filter: this.filterType,
+          sort: this.sortType,
+          order: this.orderType,
           type: this.type
         })
         .then(() => {
@@ -400,6 +474,36 @@ export default {
     },
     changeType(value) {
       this.type = value;
+    },
+    setViewCategory(value) {
+      if (value) {
+        const selectedOption = defaultViewOrderOptions.find(
+          item => item.name === value
+        );
+        this.mediaSortOrder[value] = { ...selectedOption };
+      }
+      if (!value && this.user?.mediaSortOrder) {
+        for (let key in this.user.mediaSortOrder) {
+          const selectedOption = defaultViewOrderOptions.find(
+            item => item.name === this.user.mediaSortOrder[key]
+          );
+          this.mediaSortOrder[key] = { ...selectedOption };
+        }
+      }
+    },
+    setViewMode(mode) {
+      this.viewMode = mode;
+    },
+    mediaSortOrderHandleChange({ name }) {
+      const updatedUser = {
+        ...this.user,
+        mediaSortOrder: {
+          ...this.user.mediaSortOrder,
+          [this.type]: name
+        }
+      };
+      console.log(updatedUser);
+      this.$store.dispatch("profile/update", updatedUser);
     }
   },
   mounted() {
@@ -412,6 +516,7 @@ export default {
     );
     this.$store.commit("profile/media/clearMedia", null, { root: true });
     this.fetchMedia();
+    this.setViewCategory();
   }
 };
 </script>
@@ -512,6 +617,13 @@ export default {
     }
   }
 }
+.viewOrder {
+  .form-group-inner {
+    .label {
+      white-space: nowrap;
+    }
+  }
+}
 .viewSettings {
   display: flex;
   flex-flow: row nowrap;
@@ -542,6 +654,17 @@ export default {
 .btn-user-activity {
   .label {
     font-weight: 400;
+  }
+}
+.viewModeIcon {
+  margin: 0 5px;
+  cursor: pointer;
+  opacity: 0.5;
+  &.active {
+    opacity: 1;
+  }
+  &-container {
+    margin-bottom: 8px;
   }
 }
 </style>

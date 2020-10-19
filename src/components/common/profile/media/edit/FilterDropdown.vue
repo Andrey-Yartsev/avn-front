@@ -6,15 +6,17 @@
           <span
             class="edit more-functions__link menuItemWrapper"
             type="button"
-            @click.prevent="handleClick('all')"
+            @click.prevent="
+              handleClick({ filter: '', order: 'ASC', sort: 'default' })
+            "
           >
             <span
-              v-if="type === 'all'"
+              v-if="filterType === ''"
               class="status-card on icn-item checkmark"
             />
             <span
               class="more-functions__option menuItem"
-              :class="{ selected: type === 'all' }"
+              :class="{ selected: filterType === '' }"
               >All</span
             >
           </span>
@@ -23,15 +25,17 @@
           <span
             class="edit more-functions__link menuItemWrapper"
             type="button"
-            @click.prevent="handleClick('sale')"
+            @click.prevent="
+              handleClick({ filter: 'sale', order: 'ASC', sort: 'default' })
+            "
           >
             <span
-              v-if="type === 'sale'"
+              v-if="filterType === 'sale'"
               class="status-card on icn-item checkmark"
             />
             <span
               class="more-functions__option menuItem"
-              :class="{ selected: type === 'sale' }"
+              :class="{ selected: filterType === 'sale' }"
               >On Sale</span
             >
           </span>
@@ -40,15 +44,17 @@
           <span
             class="edit more-functions__link menuItemWrapper"
             type="button"
-            @click.prevent="handleClick('draft')"
+            @click.prevent="
+              handleClick({ filter: 'draft', order: 'ASC', sort: 'default' })
+            "
           >
             <span
-              v-if="type === 'draft'"
+              v-if="filterType === 'draft'"
               class="status-card on icn-item checkmark"
             />
             <span
               class="more-functions__option menuItem"
-              :class="{ selected: type === 'draft' }"
+              :class="{ selected: filterType === 'draft' }"
               >Draft</span
             >
           </span>
@@ -57,15 +63,21 @@
           <span
             class="edit more-functions__link menuItemWrapper"
             type="button"
-            @click.prevent="handleClick('scheduled')"
+            @click.prevent="
+              handleClick({
+                filter: 'scheduled',
+                order: 'ASC',
+                sort: 'default'
+              })
+            "
           >
             <span
-              v-if="type === 'scheduled'"
+              v-if="filterType === 'scheduled'"
               class="status-card on icn-item checkmark"
             />
             <span
               class="more-functions__option menuItem"
-              :class="{ selected: type === 'scheduled' }"
+              :class="{ selected: filterType === 'scheduled' }"
               >Scheduled</span
             >
           </span>
@@ -76,88 +88,134 @@
           <span
             class="edit more-functions__link menuItemWrapper"
             type="button"
-            @click.prevent="handleClick('purchases')"
+            @click.prevent="
+              handleClick({
+                filter: 'purchases',
+                order: 'ASC',
+                sort: 'default'
+              })
+            "
           >
             <span
-              v-if="type === 'purchases'"
+              v-if="filterType === 'purchases'"
               class="status-card on icn-item checkmark"
             />
             <span
               class="more-functions__option menuItem"
-              :class="{ selected: type === 'purchases' }"
+              :class="{ selected: filterType === 'purchases' }"
               >My Purchases Only</span
             >
           </span>
         </li>
       </template>
-      <li class="more-functions__item ">
-        <span
-          class="edit more-functions__link menuItemWrapper"
-          type="button"
-          @click.prevent="handleClick('dateNew')"
-        >
+      <template>
+        <li class="more-functions__item ">
           <span
-            v-if="type === 'dateNew'"
-            class="status-card on icn-item checkmark"
-          />
-          <span
-            class="more-functions__option menuItem"
-            :class="{ selected: type === 'dateNew' }"
-            >Newest</span
+            class="edit more-functions__link menuItemWrapper"
+            type="button"
+            @click.prevent="
+              handleClick({ filter: '', order: 'DESC', sort: 'date' })
+            "
           >
-        </span>
-      </li>
-      <li class="more-functions__item ">
-        <span
-          class="edit more-functions__link menuItemWrapper"
-          type="button"
-          @click.prevent="handleClick('dateOld')"
-        >
+            <span
+              v-if="
+                filterType === '' && sortType === 'date' && orderType === 'DESC'
+              "
+              class="status-card on icn-item checkmark"
+            />
+            <span
+              class="more-functions__option menuItem"
+              :class="{
+                selected:
+                  filterType === '' &&
+                  sortType === 'date' &&
+                  orderType === 'DESC'
+              }"
+              >Newest</span
+            >
+          </span>
+        </li>
+        <li class="more-functions__item ">
           <span
-            v-if="type === 'dateOld'"
-            class="status-card on icn-item checkmark"
-          />
-          <span
-            class="more-functions__option menuItem"
-            :class="{ selected: type === 'dateOld' }"
-            >Oldest</span
+            class="edit more-functions__link menuItemWrapper"
+            type="button"
+            @click.prevent="
+              handleClick({ filter: '', order: 'ASC', sort: 'date' })
+            "
           >
-        </span>
-      </li>
-      <li class="more-functions__item ">
-        <span
-          class="edit more-functions__link menuItemWrapper"
-          type="button"
-          @click.prevent="handleClick('priceHight')"
-        >
+            <span
+              v-if="
+                filterType === '' && sortType === 'date' && orderType === 'ASC'
+              "
+              class="status-card on icn-item checkmark"
+            />
+            <span
+              class="more-functions__option menuItem"
+              :class="{
+                selected:
+                  filterType === '' &&
+                  sortType === 'date' &&
+                  orderType === 'ASC'
+              }"
+              >Oldest</span
+            >
+          </span>
+        </li>
+        <li class="more-functions__item ">
           <span
-            v-if="type === 'priceHight'"
-            class="status-card on icn-item checkmark"
-          />
-          <span
-            class="more-functions__option menuItem"
-            :class="{ selected: type === 'priceHight' }"
-            >Price: Hight to Low</span
+            class="edit more-functions__link menuItemWrapper"
+            type="button"
+            @click.prevent="
+              handleClick({ filter: '', order: 'DESC', sort: 'price' })
+            "
           >
-        </span>
-      </li>
-      <li class="more-functions__item ">
-        <span
-          class="edit more-functions__link menuItemWrapper"
-          type="button"
-          @click.prevent="handleClick('priceLow')"
-        >
+            <span
+              v-if="
+                filterType === '' &&
+                  sortType === 'price' &&
+                  orderType === 'DESC'
+              "
+              class="status-card on icn-item checkmark"
+            />
+            <span
+              class="more-functions__option menuItem"
+              :class="{
+                selected:
+                  filterType === '' &&
+                  sortType === 'price' &&
+                  orderType === 'DESC'
+              }"
+              >Price: Hight to Low</span
+            >
+          </span>
+        </li>
+        <li class="more-functions__item ">
           <span
-            v-if="type === 'priceLow'"
-            class="status-card on icn-item checkmark"
-          />
-          <span
-            class="more-functions__option menuItem"
-            :class="{ selected: type === 'priceLow' }"
-            >Price: Low to High</span
+            class="edit more-functions__link menuItemWrapper"
+            type="button"
+            @click.prevent="
+              handleClick({ filter: '', order: 'ASC', sort: 'price' })
+            "
           >
-        </span>
-      </li>
+            <span
+              v-if="
+                filterType === '' && sortType === 'price' && orderType === 'ASC'
+              "
+              class="status-card on icn-item checkmark"
+            />
+            <span
+              class="more-functions__option menuItem"
+              :class="{
+                selected:
+                  filterType === '' &&
+                  sortType === 'price' &&
+                  orderType === 'ASC'
+              }"
+              >Price: Low to High</span
+            >
+          </span>
+        </li>
+      </template>
     </ul>
   </div>
 </template>
@@ -166,18 +224,30 @@
 export default {
   name: "FilterDropdown",
   props: {
-    type: {
+    filterType: {
+      type: String,
+      required: true
+    },
+    sortType: {
+      type: String,
+      required: true
+    },
+    orderType: {
       type: String,
       required: true
     },
     isAuthor: {
       type: Boolean,
       required: true
+    },
+    isListView: {
+      type: Boolean,
+      default: false
     }
   },
   methods: {
-    handleClick(type) {
-      this.$emit("handleClick", type);
+    handleClick(data) {
+      this.$emit("handleClick", data);
     }
   },
   computed: {

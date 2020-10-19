@@ -356,6 +356,40 @@
       }
     }
 
+    &.listViewItem {
+      @include media-breakpoint-up($desktop-breakpoint) {
+        grid-template-columns: 1fr;
+      }
+
+      .post {
+
+        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+          background-color: $white;
+          position: relative;
+          max-width: 100vw;
+
+          &:last-child {
+
+            .post--details {
+              border-bottom: none;
+            }
+          }
+        }
+
+        &-details {
+
+          @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba($gray, 0.2);
+          }
+        }
+
+        &:not(.open-dropdown-inside) {
+          z-index: 0;
+        }
+      }
+    }
+
     &.photos {
       grid-template-columns: 1fr 1fr 1fr;
     }
