@@ -64,7 +64,7 @@
         </div>
         <div class="explore">
           <div class="row-btn" v-if="!infinityScrollLoading">
-            <router-link
+            <!-- <router-link
               :to="getVoteLinkHref"
               class="btn border block alt lg"
               v-if="!user"
@@ -92,7 +92,7 @@
                 <span class="icn-item icn-gayvn icn-size_lg"></span>
                 GayVN Awards Voting
               </router-link>
-            </template>
+            </template> -->
           </div>
           <div
             :class="{
