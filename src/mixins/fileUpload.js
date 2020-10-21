@@ -53,18 +53,34 @@ export default {
 
   methods: {
     addMediaFiles: async function(e) {
-      const files = Array.from(e.target.files);
-      const innerLength = files.length;
-      if (!innerLength) return;
+      this._addMediaFiles(Array.from(e.target.files), {
+        onFiltered: () => {
+          e.target.value = "";
+        },
+        onError: () => {
+          if (!e.target.multiple) {
+            e.target.value = "";
+          }
+          this.toast(
+            "Media of that type or size can not be added at this time"
+          );
+        }
+      });
+    },
 
+    _addMediaFiles(files, options = {}) {
+      if (!files.length) {
+        return;
+      }
+
+      const innerLength = files.length;
       const validFiles = this.validateFiles(files);
       const validLength = validFiles.length;
 
       if (validLength < innerLength) {
-        if (!e.target.multiple) {
-          e.target.value = "";
+        if (options.onError) {
+          options.onError();
         }
-        this.toast("Media of that type or size can not be added at this time");
       }
 
       let addedFiles = [...this.preloadedMedias];
@@ -101,7 +117,9 @@ export default {
           audio: addedFiles.filter(file => file.mediaType === "audio")
         };
 
-        e.target.value = "";
+        if (options.onFiltered) {
+          options.onFiltered();
+        }
 
         if (filtered[this.mediaType].length > this.limits[this.mediaType]) {
           this.toast(messages[this.mediaType]);

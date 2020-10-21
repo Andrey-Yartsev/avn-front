@@ -96,6 +96,17 @@
                 >
                   {{ v.price }}
                 </span>
+
+                <div class="media-chat" v-if="v.docFiles.length">
+                  <a
+                    :href="file.source"
+                    class="icn-file-pdf icn-item"
+                    v-for="file in v.docFiles"
+                    :key="file.id"
+                    target="_blank"
+                  ></a>
+                </div>
+
                 <div class="media-chat" v-if="v.media.length">
                   <span
                     v-if="v.price && isLocked(v) && !isMyMessage(v)"

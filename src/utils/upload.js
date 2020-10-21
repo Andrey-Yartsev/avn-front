@@ -1,6 +1,6 @@
 import Store from "@/store";
 
-export default (file, type) => {
+export default (file, type, opt = {}) => {
   if (!type) {
     type = "image";
   }
@@ -35,6 +35,11 @@ export default (file, type) => {
         return reject(result.error);
       }
       accept(result[0].fileName);
+    };
+    xhr.upload.onprogress = ({ loaded, total }) => {
+      if (opt.onProgress) {
+        opt.onProgress(loaded, total);
+      }
     };
     xhr.send(formData);
   });

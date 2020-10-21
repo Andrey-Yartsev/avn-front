@@ -79,11 +79,22 @@
   &-media {
 
     .add-new-form.expanded & {
-      margin-right: 4px;
+      margin-right: 0;
     }
 
     &:after {
       content: "\E61A";
+    }
+  }
+
+
+  &-file-pdf {
+    padding: 3px;
+    &:after {
+      content: "\f1c1";
+    }
+    &.icn-size_lg:after {
+      font-size: 18px;
     }
   }
 
@@ -100,7 +111,7 @@
       content: "\E622";
     }
   }
-  
+
   &-settings {
     &:after {
       content: "\E62F";
@@ -425,7 +436,7 @@
       content: "\E623";
     }
   }
-  
+
   &-close {
 
     &:after {

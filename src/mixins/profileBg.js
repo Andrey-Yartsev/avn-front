@@ -21,6 +21,7 @@ export default {
   },
   methods: {
     setBgPreview(e) {
+      console.log(e.target.files[0]);
       this.bgRemoved = false;
       this.hideInput = false;
       this.gettingBgPreview = true;

@@ -10,13 +10,23 @@
       You are unable to send messages to this user
     </div>
     <div class="addChatMessage__inside-section">
-      <div class="addFileCollectionView" v-if="preloadedMedias.length">
+      <div
+        class="addFileCollectionView"
+        v-if="preloadedMedias.length || preloadedPdfFiles.length"
+      >
         <MediaPreview
           v-for="media in preloadedMedias"
           :media="media"
           :key="media.id"
           :isSaving="isSaving"
           @removeMedia="removeMedia"
+        />
+        <PdfPreview
+          v-for="media in preloadedPdfFiles"
+          :media="media"
+          :key="media.id"
+          :isSaving="isSaving"
+          @removeMedia="removePdf"
         />
       </div>
       <span v-if="showFreeTextSwitcher" class="freeText-switcher">
@@ -41,13 +51,14 @@
           v-tooltip="'Media'"
         >
           <input
-            @change="addMediaFiles"
+            @change="addChatMediaFiles"
             type="file"
             :multiple="multipleMedia"
             :accept="getAcceptedFormats"
           />
           <span class="icn-media icn-item icn-size_lg"></span>
         </label>
+
         <button
           v-if="withTips && withUser && withUser.canEarn && $root.showTips"
           class="tips btn-el"
@@ -158,6 +169,7 @@
 
 <script>
 import MediaPreview from "@/components/common/MediaPreview";
+import PdfPreview from "@/components/common/PdfPreview";
 import FileUpload from "@/mixins/fileUpload";
 import Tip from "@/components/common/tip/User";
 import TextareaAutosize from "@/components/common/TextareaAutosize";
@@ -165,14 +177,17 @@ import User from "@/mixins/user";
 import Form from "@/mixins/form";
 import FontSizeControls from "./FontSizeControls";
 import PaidBlock from "@/mixins/paidBlock";
+import { uniqId } from "@/utils/mediaFiles";
+import upload from "@/utils/upload";
 
 export default {
-  name: "ChatAddMesssageBox",
+  name: "ChatAddMessageBox",
 
   mixins: [FileUpload, User, Form, PaidBlock],
 
   components: {
     MediaPreview,
+    PdfPreview,
     Tip,
     TextareaAutosize,
     FontSizeControls
@@ -253,7 +268,8 @@ export default {
         gif: 1,
         photo: 50,
         audio: 1
-      }
+      },
+      preloadedPdfFiles: []
     };
   },
 
@@ -278,6 +294,9 @@ export default {
       if (this.uploadInProgress) {
         return false;
       }
+      if (this.preloadedPdfFiles.length) {
+        return true;
+      }
       // if (this.$props.multipleMedia) {
       //   return this.preloadedMedias.length;
       // }
@@ -287,8 +306,8 @@ export default {
       return this.$store.state.tip.funded;
     },
     allMediaTypes() {
-      const { photo, video, audio } = this.inputAcceptTypes;
-      return [...photo, ...video, ...audio];
+      const { video, audio } = this.inputAcceptTypes;
+      return [...["jpg", "jpeg", "png", "pdf"], ...video, ...audio];
     },
     isMuted() {
       if (!this.withUser) {
@@ -310,9 +329,10 @@ export default {
         return this.allMediaTypes.map(item => "." + item).join();
       }
       const loadedMediaType = this.preloadedMedias[0].mediaType;
-      return this.inputAcceptTypes[loadedMediaType]
-        .map(item => "." + item)
-        .join();
+      return (
+        this.inputAcceptTypes[loadedMediaType].map(item => "." + item).join() +
+        ",.pdf"
+      );
     },
     showFreeTextSwitcher() {
       return (
@@ -371,6 +391,9 @@ export default {
         } else {
           opt.mediaFile = [{ id: mediaFiles[0].processId }];
         }
+      }
+      if (this.preloadedPdfFiles) {
+        opt.docFile = this.preloadedPdfFiles;
       }
 
       if (this.confirmation && this.recipientsCount) {
@@ -433,6 +456,7 @@ export default {
     reset() {
       this.message = "";
       this.preloadedMedias = [];
+      this.preloadedPdfFiles = [];
       this.showPaid = false;
       this.closeTip();
       this.resetPrice();
@@ -458,6 +482,12 @@ export default {
     handleDroppedFiles(files) {
       files.forEach(file => {
         const fileType = file.type.split("/")[1];
+
+        if (fileType === "pdf") {
+          this.addPdfFile(file);
+          return;
+        }
+
         if (!this.preloadedMedias.length) {
           if (this.allMediaTypes.includes(fileType)) {
             this.addMediaFiles({ target: { files: [file] } });
@@ -469,6 +499,49 @@ export default {
           }
         }
       });
+    },
+    addChatMediaFiles(e) {
+      const files = Array.from(e.target.files).map(v => v);
+      const _files = [];
+
+      files.forEach(file => {
+        const fileType = file.type.split("/")[1];
+        if (fileType === "pdf") {
+          this.addPdfFile(file);
+          return;
+        }
+        _files.push(file);
+      });
+
+      this._addMediaFiles(_files);
+    },
+    addPdfFile(file) {
+      const id = uniqId() + (this.preloadedPdfFiles.length + 1);
+
+      this.preloadedPdfFiles.push({
+        file,
+        mediaType: "pdf",
+        userFileName: file.name,
+        id,
+        loaded: 0,
+        size: file.name
+      });
+
+      upload(file, "doc", {
+        onProgress: (loaded, total) => {
+          const progress = Math.round((loaded / total) * 100);
+          this.preloadedPdfFiles = this.preloadedPdfFiles.map(v => {
+            return v.id === id ? { ...v, loaded: progress } : v;
+          });
+        }
+      }).then(fileName => {
+        this.preloadedPdfFiles = this.preloadedPdfFiles.map(v => {
+          return v.id === id ? { ...v, fileName } : v;
+        });
+      });
+    },
+    removePdf(id) {
+      this.preloadedPdfFiles = this.preloadedPdfFiles.filter(v => v.id !== id);
     },
     init() {
       this.message = this.initData.text || "";

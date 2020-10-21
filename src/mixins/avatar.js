@@ -39,8 +39,10 @@ export default {
     saveAvatar() {
       return new Promise(accept => {
         this.avatarUploading = true;
+        console.log(">>>", this.$refs.avatar.files[0]);
         upload(this.$refs.avatar.files[0])
           .then(fileName => {
+            console.log("fileName", fileName);
             this.$store
               .dispatch("profile/extend", {
                 avatar: fileName

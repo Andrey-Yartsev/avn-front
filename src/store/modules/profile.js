@@ -121,6 +121,7 @@ const actions = {
     });
   },
   extend({ rootState, dispatch }, data) {
+    console.log(data);
     return dispatch("update", { ...rootState.auth.user, ...data });
   },
   setFetchLoading({ commit }, flag) {
