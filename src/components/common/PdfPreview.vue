@@ -36,7 +36,7 @@
 import Loader from "@/components/common/Loader";
 
 export default {
-  name: "MediaPreview",
+  name: "PdfPreview",
   props: {
     media: {
       type: Object,

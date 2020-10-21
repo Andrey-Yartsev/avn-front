@@ -151,10 +151,17 @@
   }
 
   .icn-file-pdf {
-    position: absolute;
-    bottom: 5px;
-    right: 5px;
+    margin: auto;
+    margin-top: 10px;
     opacity: 0.7;
+    &:after {
+      font-size: 40px;
+    }
+    &:hover {
+      &:after {
+        color: $main;
+      }
+    }
   }
 }
 
