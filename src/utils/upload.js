@@ -1,6 +1,6 @@
 import Store from "@/store";
 
-export default (file, type) => {
+export default (file, type, opt = {}) => {
   if (!type) {
     type = "image";
   }
@@ -36,6 +36,11 @@ export default (file, type) => {
       }
       accept(result[0].fileName);
     };
+    if (opt.onProgress) {
+      xhr.upload.onprogress = ({ loaded, total }) => {
+        opt.onProgress(loaded, total);
+      };
+    }
     xhr.send(formData);
   });
 };

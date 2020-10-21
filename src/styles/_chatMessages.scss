@@ -462,6 +462,18 @@
       }
     }
   }
+
+  .icn-file-pdf {
+    &:after {
+      font-size: 40px;
+      margin-left: 10px;
+    }
+    &:hover {
+      &:after {
+        color: $main;
+      }
+    }
+  }
 }
 
 .message-locked {

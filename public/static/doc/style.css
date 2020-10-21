@@ -20,7 +20,7 @@ body {
 }
 
 .print.last {
-    page-break-after: avoid ;
+    page-break-after: avoid;
 }
 
 img {
@@ -31,10 +31,11 @@ img {
 
 .images {
     display: flex;
-width: 90%;
-    img {
-        width: auto;
-    }
+    width: 90%;
+}
+
+.images img {
+    width: auto;
 }
 
 h1 {
