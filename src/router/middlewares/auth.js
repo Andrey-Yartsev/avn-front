@@ -184,7 +184,10 @@ const Auth = {
       window.location = params.url;
       return;
     }
-    if (Auth.loggedIn && Auth.loggedIn.adminReturnUrl) {
+    if (
+      Auth.loggedIn &&
+      (Auth.loggedIn.adminReturnUrl || Auth.loggedIn.showVote)
+    ) {
       return next();
     }
     const token = BrowserStore.get("token");
@@ -194,7 +197,10 @@ const Auth = {
     Store.dispatch("auth/setToken", token);
     Store.dispatch("profile/fetch")
       .then(() => {
-        if (trialCodeExists || !Auth.loggedIn.adminReturnUrl) {
+        if (
+          trialCodeExists ||
+          (!Auth.loggedIn.adminReturnUrl && !Auth.loggedIn.showVote)
+        ) {
           return next("/");
         }
         next();

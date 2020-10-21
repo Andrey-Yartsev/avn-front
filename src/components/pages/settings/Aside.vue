@@ -243,6 +243,14 @@ export default {
           title: "Contests"
         });
       }
+
+      if (this.user?.showVote || this.user?.adminReturnUrl) {
+        items.push({
+          name: "nomination",
+          title: "Nomination"
+        });
+      }
+
       items.push(
         ...[
           {

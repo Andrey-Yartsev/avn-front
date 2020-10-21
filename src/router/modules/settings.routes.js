@@ -273,5 +273,16 @@ export const routes = [
       title: "Welcome Messages",
       cssName: "settings"
     }
+  },
+  {
+    beforeEnter: Auth.requireAuthAdmin,
+    path: "/settings/nomination",
+    name: "SettingsNominationPage",
+    component: () =>
+      import(/* webpackChunkName: "SettingsWelcomeMessagesPage" */ "@/components/pages/settings/nomination/Index.vue"),
+    meta: {
+      title: "Nomination",
+      cssName: "settings"
+    }
   }
 ];

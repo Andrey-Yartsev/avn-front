@@ -96,10 +96,15 @@
                   to="/settings/avn"
                   >AVN Awards Promo Link
                 </router-link>
-                <router-link
+                <!-- <router-link
                   class="user-menu-item user-menu-item__award-avn icn-item"
                   to="/avn_awards/voting"
                   >AVN Awards Voting
+                </router-link> -->
+                <router-link
+                  class="user-menu-item user-menu-item__award-avn icn-item"
+                  to="/settings/nomination"
+                  >AVN Awards
                 </router-link>
                 <router-link
                   v-if="user.nominee && userHasGayNominations"
@@ -107,10 +112,15 @@
                   to="/settings/gayvn"
                   >GayVN Awards Promo Link
                 </router-link>
-                <router-link
+                <!-- <router-link
                   class="user-menu-item user-menu-item__award-gayvn icn-item"
                   to="/gayvn_awards/voting"
                   >GayVN Awards Voting
+                </router-link> -->
+                <router-link
+                  class="user-menu-item user-menu-item__award-gayvn icn-item"
+                  to="/settings/nomination"
+                  >GayVN Awards
                 </router-link>
               </template>
               <template v-else>

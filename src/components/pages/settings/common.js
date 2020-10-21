@@ -41,8 +41,8 @@ export default {
   },
 
   methods: {
-    save() {
-      if (!this.changed) {
+    save({ shouldCheckChanges = true }) {
+      if (shouldCheckChanges && !this.changed) {
         return;
       }
       this.transformValueBeforeSave(this.localUser);
