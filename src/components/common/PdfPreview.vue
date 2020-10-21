@@ -5,7 +5,7 @@
       <span class="icn-file-pdf icn-item"></span>
       <span
         class="attachment-status icn-item success-status"
-        v-if="media.processId"
+        v-if="media.fileName"
       />
       <span
         class="attachment-status icn-item error-status"
