@@ -1,6 +1,7 @@
 "use strict";
 import PostApi from "@/api/post";
 import PostMixin from "@/store/mixins/posts";
+import { createRequestAction } from "../../utils/storeRequest";
 
 const initState = {
   loading: false,
@@ -15,7 +16,7 @@ const initState = {
   category: null
 };
 
-const state = { ...initState };
+const state = { ...initState, clipCategories: [] };
 
 const mutations = {
   resetPageState(state) {
@@ -38,12 +39,16 @@ const mutations = {
         return item.productId === post.productId ? post : item;
       });
     }
+  },
+  resetClipCategories(state) {
+    state.clipCategories = [];
   }
 };
 
 const actions = {
   getPosts({ commit, state, rootState }, data) {
     const filter = (data && data.filter) || undefined;
+    const clipCategory = (data && data.clipCategory) || "";
     const { limit, offset, marker } = state;
     let source = state.source;
     if (source === "feed") {
@@ -60,7 +65,8 @@ const actions = {
         marker,
         source,
         category,
-        filter
+        filter,
+        clipCategory
       })
         .then(response => {
           if (response.status === 200) {
@@ -79,6 +85,19 @@ const actions = {
     commit("setSource", { source });
   }
 };
+
+createRequestAction({
+  prefix: "getClipCategories",
+  apiPath: "posts/clips/categories",
+  requestType: "any",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "GET"
+  },
+  resultKey: "clipCategories"
+});
 
 export default {
   namespaced: true,

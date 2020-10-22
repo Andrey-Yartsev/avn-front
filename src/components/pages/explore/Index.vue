@@ -37,31 +37,65 @@
             </div>
           </div>
         </div>
-        <div
-          v-if="page === 'clips'"
-          class="stories-wrapper stories-all clipCategories"
-        >
-          <span class="clipCategories_item">
-            <router-link to="/explore/clips/all">
-              All
-            </router-link>
-          </span>
-          <span class="clipCategories_item">
-            <router-link to="/explore/clips/free">
-              Free Only
-            </router-link>
-          </span>
-          <span class="clipCategories_item">
-            <router-link to="/explore/clips/topView">
-              Top Viewed
-            </router-link>
-          </span>
-          <span class="clipCategories_item">
-            <router-link to="/explore/clips/topSale">
-              Best Selling
-            </router-link>
-          </span>
-        </div>
+        <template v-if="page === 'clips'">
+          <div class="stories-wrapper stories-all clipCategories">
+            <span class="clipCategories_item">
+              <router-link to="/explore/clips/all">
+                All
+              </router-link>
+            </span>
+            <span class="clipCategories_item">
+              <router-link to="/explore/clips/free">
+                Free Only
+              </router-link>
+            </span>
+            <span class="clipCategories_item">
+              <router-link to="/explore/clips/topView">
+                Top Viewed
+              </router-link>
+            </span>
+            <span class="clipCategories_item">
+              <router-link to="/explore/clips/topSale">
+                Best Selling
+              </router-link>
+            </span>
+          </div>
+          <div
+            v-if="$route.params.category === 'all'"
+            class="clipCategories_selector"
+          >
+            <div
+              class="form-group categories"
+              :class="{ mobile: $mq === 'mobile' }"
+            >
+              <div class="form-group-inner">
+                <span class="label">Categories:</span>
+                <div class="row">
+                  <div class="col-1-2">
+                    <span class="form-group form-group_clear-gaps">
+                      <span class="form-field">
+                        <multiselect
+                          v-model="selectedClipCategory"
+                          :options="clipCategories"
+                          :multiple="false"
+                          :close-on-select="true"
+                          :clear-on-select="false"
+                          :preserve-search="true"
+                          placeholder="Select category"
+                          label="title"
+                          track-by="name"
+                          :taggable="false"
+                          :openDirection="$mq === 'desktop' ? 'bottom' : ''"
+                        >
+                        </multiselect>
+                      </span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </template>
         <div class="explore">
           <div class="row-btn" v-if="!infinityScrollLoading">
             <!-- <router-link
@@ -244,7 +278,10 @@ import GenderFilter from "@/components/common/GenderFilter";
 import MediaMedium from "@/components/common/profile/media/views/MediaMedium";
 import MediaSmall from "@/components/common/profile/media/views/MediaSmall";
 import RouteRedirectMixin from "@/mixins/routeRedirect";
+import Multiselect from "vue-multiselect";
 // import mockStories from "@/mock/stories";
+
+const defaultSelectedClipCategory = { id: 0, name: "All", title: "All" };
 
 export default {
   name: "Explore",
@@ -264,7 +301,8 @@ export default {
     PostCollection,
     GenderFilter,
     MediaMedium,
-    MediaSmall
+    MediaSmall,
+    Multiselect
   },
   mixins: [
     UserMixin,
@@ -278,7 +316,8 @@ export default {
       storiesFetched: false,
       livesFetched: false,
       selectedMonth: 0,
-      prevMonths: []
+      prevMonths: [],
+      selectedClipCategory: defaultSelectedClipCategory
     };
   },
   created() {
@@ -402,6 +441,21 @@ export default {
     },
     isEnableGayVoting() {
       return this.$store.state.init.data.enableGayVoting;
+    },
+    clipCategories() {
+      let list = this.$store.state.explore.clipCategories.map(item => {
+        const transformedName = item.name.replace(/&amp;/g, "&");
+        return {
+          id: item.id,
+          name: transformedName,
+          title: `${transformedName} (${item.amount})`
+        };
+      });
+      list.sort((a, b) => {
+        return a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1;
+      });
+      list.unshift({ id: "0", name: "All", title: "All" });
+      return list;
     }
   },
   methods: {
@@ -457,8 +511,15 @@ export default {
       if (this.type === "media" || this.type === "feed") {
         this.$store.dispatch("explore/setSource", { source: this.source });
         if (this.page === "clips") {
+          if (
+            this.$route.params.category === "all" &&
+            !this.$store.state.explore.clipCategories.length
+          ) {
+            this.$store.dispatch("explore/getClipCategories");
+          }
           this.$store.dispatch("explore/getPosts", {
-            filter: this.$route.params.category
+            filter: this.$route.params.category,
+            clipCategory: this.selectedClipCategory.id
           });
         } else {
           this.$store.dispatch("explore/getPosts");
@@ -508,10 +569,15 @@ export default {
         dateStart.setMonth(dateStart.getMonth() + 1);
       }
       this.prevMonths = months.reverse();
+    },
+    resetSelectedClipCategory() {
+      this.$store.commit("explore/resetClipCategories");
+      this.selectedClipCategory = {};
     }
   },
   watch: {
     page() {
+      this.resetSelectedClipCategory();
       this.postsStatFinishViewAction();
       this.getPageData();
     },
@@ -523,6 +589,7 @@ export default {
     },
     ["$route.params.category"](newValue, oldValue) {
       if (newValue !== undefined && oldValue !== undefined) {
+        this.resetSelectedClipCategory();
         this.init();
       }
     },
@@ -531,6 +598,13 @@ export default {
         this.$store.commit("topModels/reset");
         this.$store.dispatch("topModels/getPosts", { month: value });
       }
+    },
+    selectedClipCategory(newValue) {
+      if (!newValue.id) {
+        this.selectedClipCategory = defaultSelectedClipCategory;
+        return;
+      }
+      this.getPageData();
     }
   },
   mounted() {
@@ -575,6 +649,9 @@ export default {
         color: #222b32;
       }
     }
+  }
+  &_selector {
+    margin-bottom: 10px;
   }
 }
 .month-options {

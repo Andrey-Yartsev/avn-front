@@ -27,7 +27,15 @@ export default {
       }
     });
   },
-  getExplorePosts({ offset, limit, marker, source, category, filter }) {
+  getExplorePosts({
+    offset,
+    limit,
+    marker,
+    source,
+    category,
+    filter,
+    clipCategory
+  }) {
     return anyRequest(`posts/${source}`, {
       method: "GET",
       query: {
@@ -35,7 +43,8 @@ export default {
         offset,
         limit,
         marker,
-        filter: filter || null
+        filter: filter || null,
+        clipCategory: clipCategory || ""
       }
     });
   },
