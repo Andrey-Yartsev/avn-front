@@ -521,7 +521,9 @@ export default {
             this.$route.params.category === "all" &&
             !this.$store.state.explore.clipCategories.length
           ) {
-            this.$store.dispatch("explore/getClipCategories");
+            this.$store.dispatch("explore/getClipCategories", {
+              category: this.category
+            });
           }
           this.$store.dispatch("explore/getPosts", {
             filter: this.$route.params.category,

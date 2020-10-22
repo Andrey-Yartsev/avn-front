@@ -96,7 +96,11 @@ createRequestAction({
   options: {
     method: "GET"
   },
-  resultKey: "clipCategories"
+  resultKey: "clipCategories",
+  paramsToOptions: function(params, options) {
+    options.query = params;
+    return options;
+  }
 });
 
 export default {
