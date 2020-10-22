@@ -71,7 +71,12 @@
               <div class="form-group-inner">
                 <span class="label">Categories:</span>
                 <div class="row">
-                  <div class="col-1-2">
+                  <div
+                    :class="{
+                      'col-1-2': $mq === 'desktop',
+                      'col-1-1': $mq === 'mobile'
+                    }"
+                  >
                     <span class="form-group form-group_clear-gaps">
                       <span class="form-field">
                         <multiselect
@@ -652,6 +657,9 @@ export default {
   }
   &_selector {
     margin-bottom: 10px;
+    .label {
+      flex: 0 0 0;
+    }
   }
 }
 .month-options {
