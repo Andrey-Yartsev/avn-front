@@ -485,7 +485,8 @@ export default {
       if (this.type === "media" || this.type === "feed") {
         if (this.page === "clips") {
           this.$store.dispatch("explore/getPosts", {
-            filter: this.$route.params.category
+            filter: this.$route.params.category,
+            clipCategory: this.selectedClipCategory.id
           });
         } else {
           this.$store.dispatch("explore/getPosts");
