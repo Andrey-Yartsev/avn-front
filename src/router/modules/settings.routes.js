@@ -122,7 +122,7 @@ export const routes = [
     }
   },
   {
-    beforeEnter: Auth.requireAuth,
+    beforeEnter: Auth.requireAuthAdmin,
     path: "/settings/avn",
     name: "SettingsNomination",
     component: () =>
@@ -132,7 +132,7 @@ export const routes = [
     }
   },
   {
-    beforeEnter: Auth.requireAuth,
+    beforeEnter: Auth.requireAuthAdmin,
     path: "/settings/gayvn",
     name: "SettingsNominationGay",
     component: () =>

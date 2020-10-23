@@ -103,7 +103,7 @@
                 </router-link> -->
                 <router-link
                   class="user-menu-item user-menu-item__award-avn icn-item"
-                  to="/settings/nomination"
+                  to="/settings/avn"
                   >AVN Awards
                 </router-link>
                 <router-link
@@ -119,7 +119,7 @@
                 </router-link> -->
                 <router-link
                   class="user-menu-item user-menu-item__award-gayvn icn-item"
-                  to="/settings/nomination"
+                  to="/settings/gayvn"
                   >GayVN Awards
                 </router-link>
               </template>
