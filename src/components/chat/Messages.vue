@@ -73,6 +73,36 @@
                   }"
                   v-if="v.textLength"
                 >
+                  <div v-if="v.reply" class="message__reply">
+                    <div class="message__reply-header">Replying to You</div>
+                    <div v-if="v.reply.media" class="message__reply-media">
+                      <img
+                        v-if="
+                          v.reply.media.type === 'video' ||
+                            v.reply.media.type === 'photo'
+                        "
+                        :src="v.reply.media.source"
+                        :alt="v.reply.text || ''"
+                      />
+                      <a
+                        v-if="v.reply.media.type === 'doc'"
+                        :href="v.reply.media.source"
+                        target="_blank"
+                        class="icn-file-pdf icn-item"
+                      ></a>
+                      <audio
+                        v-if="v.reply.media.type === 'audio'"
+                        controls="controls"
+                        controlslist="nodownload"
+                        :src="v.reply.media.source"
+                      ></audio>
+                    </div>
+                    <span
+                      v-if="v.reply.text"
+                      class="message__reply-text"
+                      v-html="v.reply.text"
+                    ></span>
+                  </div>
                   <span class="message__text" v-html="text(v)" />
                   <span
                     class="message-locked__text"
@@ -242,6 +272,7 @@ import MediaVideosList from "./media/VideosList";
 import MediaVideo from "./media/VideoPreview";
 import SubscribeButton from "@/components/subscription/Button";
 import moment from "moment";
+// import messages from "@/mock/messages.js";
 
 const bottomThreshold = 100; // pixels left to bottom of container
 
@@ -400,7 +431,16 @@ export default {
       return message.fromUser.id === this.user.id;
     },
     text(message) {
-      if (!message.paymentType) {
+      if (message.reply) {
+        const text = this.isAuthor(message)
+          ? `You have paid ${message.withUser.name} for ${
+              message.text
+            } to view this message`
+          : `User ${message.fromUser.name} has paid for ${
+              message.text
+            } to view this message`;
+        return text;
+      } else if (!message.paymentType) {
         return message.text;
       } else {
         let text = "";

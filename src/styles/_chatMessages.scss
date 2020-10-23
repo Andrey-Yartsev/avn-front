@@ -263,6 +263,27 @@
     span.emoji-inner {
       vertical-align: top;
     }
+
+    &__reply {
+      padding: 10px;
+      border-radius: 20px 0;
+      background-color: rgba($gray, 0.3);
+      color: $main;
+      margin-bottom: 10px;
+      &-header {
+        font-weight: bold;
+      }
+      &-media {
+        img {
+          display: block;
+          width: 100px;
+          height: 100px;
+        }
+        audio {
+          max-width: 200px;
+        }
+      }
+    }
   }
 
   &.notAuthorMessage {
@@ -280,6 +301,9 @@
             text-decoration: underline;
           }
         }
+      }
+      &__reply {
+        border-radius: 0 20px;
       }
     }
 
@@ -529,10 +553,10 @@
     .notAuthorMessage & {
 
       &:before {
-        top: 50%;
+        // top: 50%;
         right: -30px;
         color: $secondary-color;
-        transform: translateY(-50%);
+        // transform: translateY(-50%);
       }
     }
   }
