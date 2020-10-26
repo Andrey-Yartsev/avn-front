@@ -232,6 +232,28 @@
     max-width: 620px;
   }
 }
+
+.SubscribersGroupMessages,
+.GroupsGroupMessages {
+  .popup & {
+
+    .content {
+      overflow: visible;
+    }
+  }
+  &.popup-container.popup-massmes {
+    @include media-breakpoint-down($desktop-breakpoint) {
+      overflow: visible;
+    }
+  }
+  .withStars-form {
+    margin-left: 8px;
+    @include media-breakpoint-down($desktop-breakpoint) {
+      margin-left: 3px;
+    }
+  }
+}
+
 .GroupsGroupMessages {
   &.popup {
     &-container {
@@ -254,19 +276,7 @@
       }
     }
   }
-}
-
-.SubscribersGroupMessages,
-.GroupsGroupMessages {
-  .popup & {
-
-    .content {
-      overflow: visible;
-    }
-  }
-  &.popup-container.popup-massmes {
-    @include media-breakpoint-down($desktop-breakpoint) {
-      overflow: visible;
-    }
+  .withStars-form {
+    margin-left: 3px;
   }
 }

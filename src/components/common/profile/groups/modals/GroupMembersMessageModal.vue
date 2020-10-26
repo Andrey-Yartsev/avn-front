@@ -46,6 +46,17 @@
                   </div>
                 </div>
               </div>
+              <div class="b-check-state b-check-state_post withStars-form">
+                <label>
+                  <input
+                    class="is-free-post"
+                    type="checkbox"
+                    v-model="excludeStars"
+                  />
+                  <span class="b-check-state__icon icn-item icn-size_lg"></span>
+                  <span class="b-check-state__text">Exclude all AVN Stars</span>
+                </label>
+              </div>
             </div>
             <AddMessageBox
               @send="submit"
@@ -123,7 +134,8 @@ export default {
     return {
       scheduledDate: undefined,
       scheduledMessages: [],
-      loading: false
+      loading: false,
+      excludeStars: true
     };
   },
   computed: {
@@ -157,7 +169,8 @@ export default {
         ...data,
         scheduledDate: this.scheduledDate,
         recipients: "list",
-        listId: this.group.productId
+        listId: this.group.productId,
+        withStars: !this.excludeStars
       };
       try {
         this.loading = true;
