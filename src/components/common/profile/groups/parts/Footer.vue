@@ -40,7 +40,7 @@
       {{ group.membersCount || 0 }}
     </span>
     <span
-      v-if="group.membersCount > 0"
+      v-if="group.membersCount > 0 && group.isActive"
       class="actions__btn  hover-highlight message"
       @click="showMassMessageModal"
     >
