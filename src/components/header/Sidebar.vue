@@ -92,7 +92,7 @@
               <template v-if="userIsAdmin">
                 <router-link
                   class="user-menu-item user-menu-item__award-avn icn-item"
-                  to="/settings/avn"
+                  to="/avn_awards/nominations"
                   >AVN Awards
                 </router-link>
                 <router-link
@@ -102,7 +102,7 @@
                 </router-link>
                 <router-link
                   class="user-menu-item user-menu-item__award-gayvn icn-item"
-                  to="/settings/gayvn"
+                  to="/gayvn_awards/nominations"
                   >GayVN Awards
                 </router-link>
                 <router-link
@@ -131,7 +131,7 @@
                   <router-link
                     v-else
                     class="user-menu-item user-menu-item__award-avn icn-item"
-                    to="/settings/avn"
+                    to="/avn_awards/nominations"
                   >
                     AVN Awards
                   </router-link>
@@ -154,8 +154,8 @@
                   </template>
                   <router-link
                     v-else
-                    class="user-menu-item user-menu-item__award-avn icn-item"
-                    to="/settings/gayvn"
+                    class="user-menu-item user-menu-item__award-gayvn icn-item"
+                    to="/gayvn_awards/nominations"
                   >
                     GayVN Awards
                   </router-link>

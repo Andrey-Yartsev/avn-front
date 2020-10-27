@@ -38,7 +38,7 @@ export default user => {
           Store.state.init.data.enableVoting &&
           userHasStraightNominations(user.nominatedList)
             ? "AVN Awards Promo Link"
-            : "AVN Awards"
+            : "AVN Awards Pre-Nominations"
       },
       {
         path: "/avn_awards/voting",
@@ -50,7 +50,7 @@ export default user => {
           Store.state.init.data.enableGayVoting &&
           userHasGayNominations(user.nominatedList)
             ? "GayVN Awards Promo Link"
-            : "GayVN Awards"
+            : "GayVN Awards Pre-Nominations"
       },
       {
         path: "/gayvn_awards/voting",
@@ -78,7 +78,7 @@ export default user => {
       if (userViewIsStraight(user) || userViewIsAll(user)) {
         items.push({
           path: "/settings/avn",
-          title: "AVN Awards"
+          title: "AVN Awards Pre-Nominations"
         });
       }
     }
@@ -99,7 +99,7 @@ export default user => {
       if (userViewIsGay(user) || userViewIsAll(user)) {
         items.push({
           path: "/settings/gayvn",
-          title: "GayVN Awards"
+          title: "GayVN Awards Pre-Nominations"
         });
       }
     }
