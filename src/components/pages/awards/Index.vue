@@ -243,6 +243,9 @@ export default {
         }
       }
     },
+    eventId() {
+      this.$store.dispatch("awards/fetchCategories", this.eventId);
+    },
     user: {
       handler(value, oldValue) {
         if (value && !oldValue && this.$store.state.awards.savedData) {
