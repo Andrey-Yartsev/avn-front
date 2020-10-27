@@ -10,6 +10,10 @@ const userViewIsAll = user => {
   return user.categoryView === 1;
 };
 
+const userIsAdmin = user => {
+  return user.adminReturnUrl || user.showVote;
+};
+
 const userHasGayNominations = nominations => {
   if (!nominations) return false;
   return nominations.find(
@@ -25,68 +29,79 @@ const userHasStraightNominations = nominations => {
 
 export default user => {
   const items = [];
-  // user is adimin on login from kitchen page
-  if (user.adminReturnUrl || user.showVote) {
+  // user is admin on login from kitchen page
+  if (userIsAdmin(user)) {
     items.push(
+      {
+        path: "/settings/avn",
+        title:
+          Store.state.init.data.enableVoting &&
+          userHasStraightNominations(user.nominatedList)
+            ? "AVN Awards Promo Link"
+            : "AVN Awards"
+      },
       {
         path: "/avn_awards/voting",
         title: "AVN Awards Voting"
+      },
+      {
+        path: "/settings/gayvn",
+        title:
+          Store.state.init.data.enableGayVoting &&
+          userHasGayNominations(user.nominatedList)
+            ? "GayVN Awards Promo Link"
+            : "GayVN Awards"
       },
       {
         path: "/gayvn_awards/voting",
         title: "GayVN Awards Voting"
       }
     );
-    if (userHasStraightNominations(user.nominatedList)) {
-      items.push({
-        path: "/settings/avn",
-        title: "AVN Awards Promo Link"
-      });
+  } else if (
+    !userIsAdmin(user) &&
+    process.env.VUE_APP_IS_AWARDS_ACTIVE === "true"
+  ) {
+    if (Store.state.init.data.enableVoting) {
+      if (user.nominee && userHasStraightNominations(user.nominatedList)) {
+        items.push({
+          path: "/settings/avn",
+          title: "AVN Awards Promo Link"
+        });
+      }
+      if (userViewIsStraight(user) || userViewIsAll(user)) {
+        items.push({
+          path: "/avn_awards/voting",
+          title: "AVN Awards Voting"
+        });
+      }
+    } else {
+      if (userViewIsStraight(user) || userViewIsAll(user)) {
+        items.push({
+          path: "/settings/avn",
+          title: "AVN Awards"
+        });
+      }
     }
-    if (userHasGayNominations(user.nominatedList)) {
-      items.push({
-        path: "/settings/gayvn",
-        title: "GayVN Awards Promo Link"
-      });
-    }
-  } else {
-    if (
-      user.nominee &&
-      userHasStraightNominations(user.nominatedList) &&
-      Store.state.init.data.enableVoting
-    ) {
-      items.push({
-        path: "/settings/avn",
-        title: "AVN Awards Promo Link"
-      });
-    }
-    if (
-      (userViewIsStraight(user) || userViewIsAll(user)) &&
-      Store.state.init.data.enableVoting
-    ) {
-      items.push({
-        path: "/avn_awards/voting",
-        title: "AVN Awards Voting"
-      });
-    }
-    if (
-      user.nominee &&
-      userHasGayNominations(user.nominatedList) &&
-      Store.state.init.data.enableGayVoting
-    ) {
-      items.push({
-        path: "/settings/gayvn",
-        title: "GayVN Awards Promo Link"
-      });
-    }
-    if (
-      (userViewIsGay(user) || userViewIsAll(user)) &&
-      Store.state.init.data.enableGayVoting
-    ) {
-      items.push({
-        path: "/gayvn_awards/voting",
-        title: "GayVN Awards Voting"
-      });
+    if (Store.state.init.data.enableGayVoting) {
+      if (user.nominee && userHasGayNominations(user.nominatedList)) {
+        items.push({
+          path: "/settings/gayvn",
+          title: "GayVN Awards Promo Link"
+        });
+      }
+      if (userViewIsGay(user) || userViewIsAll(user)) {
+        items.push({
+          path: "/gayvn_awards/voting",
+          title: "GayVN Awards Voting"
+        });
+      }
+    } else {
+      if (userViewIsGay(user) || userViewIsAll(user)) {
+        items.push({
+          path: "/settings/gayvn",
+          title: "GayVN Awards"
+        });
+      }
     }
   }
   return items;

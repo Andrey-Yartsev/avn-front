@@ -1,13 +1,34 @@
 <template>
   <Layout>
-    <!-- <template slot="title"
-      >{{ isGay ? "GayVN" : "AVN" }} Awards Voting Links</template
-    > -->
-    <!-- <Content slot="content" /> -->
-    <template slot="title">
-      {{ isGay ? "GayVN" : "AVN" }} Awards Pre-Nominations Link Generator
+    <template v-if="isGay">
+      <template v-if="isVotingGayEnabled">
+        <template slot="title"
+          >GayVN Awards Voting Links</template
+        >
+        <Content slot="content" />
+      </template>
+      <template v-else>
+        <template slot="title">
+          GayVN Awards Pre-Nominations Link Generator
+        </template>
+        <PreNominationContent slot="content" />
+      </template>
     </template>
-    <PreNominationContent slot="content" />
+
+    <template v-else>
+      <template v-if="isVotingEnabled">
+        <template slot="title"
+          >AVN Awards Voting Links</template
+        >
+        <Content slot="content" />
+      </template>
+      <template v-else>
+        <template slot="title">
+          AVN Awards Pre-Nominations Link Generator
+        </template>
+        <PreNominationContent slot="content" />
+      </template>
+    </template>
   </Layout>
 </template>
 
@@ -26,6 +47,12 @@ export default {
   computed: {
     isGay() {
       return !!this.$route.path.match(/gayvn/);
+    },
+    isVotingEnabled() {
+      return this.$store.state.init.data.enableVoting;
+    },
+    isVotingGayEnabled() {
+      return this.$store.state.init.data.enableGayVoting;
     }
   }
 };

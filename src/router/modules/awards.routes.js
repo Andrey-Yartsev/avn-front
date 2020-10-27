@@ -2,7 +2,10 @@ import Auth from "../middlewares/auth";
 
 export const routes = [
   {
-    beforeEnter: Auth.requireAuthAdmin,
+    beforeEnter:
+      process.env.VUE_APP_IS_AWARDS_ACTIVE === "true"
+        ? Auth.requireAny
+        : Auth.requireAuthAdmin,
     path: "/avn_awards/nominations",
     name: "AvnAwards",
     component: () =>
@@ -29,7 +32,10 @@ export const routes = [
   //   }
   // },
   {
-    beforeEnter: Auth.requireAuthAdmin,
+    beforeEnter:
+      process.env.VUE_APP_IS_AWARDS_ACTIVE === "true"
+        ? Auth.requireAny
+        : Auth.requireAuthAdmin,
     path: "/nominator/:username/:type/:categories?",
     name: "Nominator",
     component: () =>

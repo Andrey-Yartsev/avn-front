@@ -122,7 +122,10 @@ export const routes = [
     }
   },
   {
-    beforeEnter: Auth.requireAuthAdmin,
+    beforeEnter:
+      process.env.VUE_APP_IS_AWARDS_ACTIVE === "true"
+        ? Auth.requireAuth
+        : Auth.requireAuthAdmin,
     path: "/settings/avn",
     name: "SettingsNomination",
     component: () =>
@@ -132,7 +135,10 @@ export const routes = [
     }
   },
   {
-    beforeEnter: Auth.requireAuthAdmin,
+    beforeEnter:
+      process.env.VUE_APP_IS_AWARDS_ACTIVE === "true"
+        ? Auth.requireAuth
+        : Auth.requireAuthAdmin,
     path: "/settings/gayvn",
     name: "SettingsNominationGay",
     component: () =>
@@ -275,7 +281,10 @@ export const routes = [
     }
   },
   {
-    beforeEnter: Auth.requireAuthAdmin,
+    beforeEnter:
+      process.env.VUE_APP_IS_AWARDS_ACTIVE === "true"
+        ? Auth.requireAuth
+        : Auth.requireAuthAdmin,
     path: "/settings/nomination",
     name: "SettingsNominationPage",
     component: () =>
