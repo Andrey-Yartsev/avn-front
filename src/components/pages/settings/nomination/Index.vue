@@ -54,6 +54,11 @@ export default {
     isVotingGayEnabled() {
       return this.$store.state.init.data.enableGayVoting;
     }
+  },
+  created() {
+    if (!this.$store.state.auth.user.canEarn) {
+      this.$router.push("/settings");
+    }
   }
 };
 </script>
