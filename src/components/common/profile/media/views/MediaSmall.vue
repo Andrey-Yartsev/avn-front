@@ -290,7 +290,7 @@ export default {
       return `${mins < 10 ? "0" : ""}${mins} : ${sec < 10 ? "0" : ""}${sec}`;
     },
     trimmText(text, len) {
-      if (!text.length) {
+      if (!text || !text.length) {
         return "";
       }
       if (text.length > len) {
