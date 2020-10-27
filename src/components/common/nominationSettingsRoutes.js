@@ -59,6 +59,7 @@ export default user => {
     );
   } else if (
     !userIsAdmin(user) &&
+    user.canEarn &&
     process.env.VUE_APP_IS_AWARDS_ACTIVE === "true"
   ) {
     if (Store.state.init.data.enableVoting) {
