@@ -17,20 +17,23 @@ export const routes = [
       notShowGenderFilter: true
     }
   },
-  // {
-  //   beforeEnter: Auth.requireAuthAdmin,
-  //   path: "/gayvn_awards/nominations",
-  //   name: "AvnAwardsGay",
-  //   component: () =>
-  //     import(/* webpackChunkName: "AvnAwards" */ "@/components/pages/awards/Index"),
-  //   meta: {
-  //     noAuthSection: true,
-  //     staticPage: true,
-  //     cssName: "staticPage",
-  //     isGay: true,
-  //     notShowGenderFilter: true
-  //   }
-  // },
+  {
+    beforeEnter:
+      process.env.VUE_APP_IS_AWARDS_ACTIVE === "true"
+        ? Auth.requireAny
+        : Auth.requireAuthAdmin,
+    path: "/gayvn_awards/nominations",
+    name: "AvnAwardsGay",
+    component: () =>
+      import(/* webpackChunkName: "AvnAwards" */ "@/components/pages/awards/Index"),
+    meta: {
+      noAuthSection: true,
+      staticPage: true,
+      cssName: "staticPage",
+      isGay: true,
+      notShowGenderFilter: true
+    }
+  },
   {
     beforeEnter:
       process.env.VUE_APP_IS_AWARDS_ACTIVE === "true"
