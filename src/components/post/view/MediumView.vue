@@ -26,7 +26,7 @@
         <p
           class="text"
           :class="{ 'trunc-text': truncateText && !showTruncatedText }"
-          v-html="getPostText()"
+          v-html="post.text"
           ref="text"
         />
         <div class="trunc-toggle-btn" v-if="truncateText">
@@ -220,10 +220,6 @@ export default {
     truncateToggle() {
       this.showTruncatedText = !this.showTruncatedText;
     },
-    getPostText() {
-      return this.$props.post.text;
-      // return `<router-link :to="/hashtag/two"><p>some text</p></router-link>`
-    },
     addHandlersToTags() {
       if (!this.$refs.text) {
         return;
@@ -258,7 +254,7 @@ export default {
     if (!this.$refs.text) {
       return;
     }
-    if (this.$refs.text.getBoundingClientRect().height > 18 * 5 + 2) {
+    if (this.$refs.text.getBoundingClientRect().height > 18 * 8) {
       this.truncateText = true;
     }
     this.addHandlersToTags();

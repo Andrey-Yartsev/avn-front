@@ -301,6 +301,8 @@
     padding: 0 15px 4px;
     max-width: 100%;
     word-break: break-word;
+    // max-height: auto;
+    // height: auto;
 
     @include media-breakpoint-up($desktop-breakpoint) {
       padding-bottom: 2px;
@@ -316,7 +318,7 @@
     }
 
     &.trunc-text {
-      max-height: calc((1.25em * 5) - 2px);
+      max-height: calc((1.25em * 4) - 0px);
     }
 
     &:empty {
