@@ -206,7 +206,7 @@ export default {
     if (!this.$refs.text) {
       return;
     }
-    if (this.$refs.text.getBoundingClientRect().height > 18 * 5 + 2) {
+    if (this.$refs.text.getBoundingClientRect().height > 18 * 8) {
       this.truncateText = true;
     }
     this.addHandlersToTags();

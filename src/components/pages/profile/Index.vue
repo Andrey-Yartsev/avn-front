@@ -66,7 +66,7 @@
               <span v-html="trunc(profile.about)"></span>
               <span
                 class="collapse-text"
-                v-if="profile.about.length > collapseLimit"
+                v-if="profile.about.length > collapseLimit + collapseGap"
               >
                 <a href="#" @click.prevent="collapsed = !collapsed">{{
                   collapsed ? "Read more" : "Collapse"
@@ -362,7 +362,8 @@ export default {
 
   data() {
     return {
-      collapseLimit: 250,
+      collapseLimit: 200,
+      collapseGap: 150,
       collapsed: true,
       mysnapchat: "",
       descrInitHeight: 0,
@@ -624,7 +625,10 @@ export default {
       footer.classList[methodName]("site-footer_sticky-bottom");
     },
     trunc(text) {
-      if (this.collapsed && this.profile.about.length > this.collapseLimit) {
+      if (
+        this.collapsed &&
+        this.profile.about.length > this.collapseLimit + this.collapseGap
+      ) {
         text = text.replace(/<br \/>/g, " ");
         return text.substring(0, this.collapseLimit) + "…";
       } else {
