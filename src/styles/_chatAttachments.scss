@@ -111,9 +111,7 @@
       height: 100%;
       overflow-y: auto;
       padding: 60px 10px 10px 10px;
-      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-        display: block;
-      }
+      display: block;
       .chatMessageHistoryItem {
         display: flex;
         flex-flow: row nowrap;
