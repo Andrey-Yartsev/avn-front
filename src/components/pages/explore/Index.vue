@@ -638,7 +638,7 @@ export default {
   flex-flow: row nowrap;
   align-items: center;
   justify-content: space-evenly;
-  padding: 10px;
+  padding: 20px 10px;
   &_item {
     cursor: pointer;
     color: #2196f3;
