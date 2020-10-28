@@ -63,7 +63,7 @@
           </template>
         </div>
         <div
-          v-if="contestGroup && contests.length"
+          v-if="contests.length"
           class="form-group form-group_with-label gender-options contest-select contest-select-groupItem"
         >
           <label class="form-group-inner">
@@ -75,7 +75,6 @@
                     name="gender"
                     class="default-disabled"
                     v-model="contestGroupItem"
-                    :disabled="!contestGroup"
                   >
                     <!-- <option value="">All</option> -->
                     <option
@@ -92,7 +91,7 @@
         </div>
       </div>
       <template v-if="contest">
-        <div class="contest-links title-subtext">
+        <!-- <div class="contest-links title-subtext">
           <template v-for="value in contests">
             <a
               :href="`/contests/${value.id}`"
@@ -104,7 +103,7 @@
             </a>
             <span :key="`span-${value.id}`"> || </span>
           </template>
-        </div>
+        </div> -->
         <template v-if="!sent">
           <div class="contest-header" v-if="contest.image_url">
             <img :src="contest.image_url" />
@@ -186,7 +185,7 @@ export default {
       return set;
     },
     groupItems() {
-      if (!this.contestGroup || !this.contests.length) {
+      if (!this.contests.length) {
         return [];
       }
       return this.contests.map(item => {
@@ -299,8 +298,10 @@ export default {
         })
         .then(() => {
           if (this.isFirstInit) {
+            console.log("set contest id");
             this.scrollToShared();
             this.isFirstInit = false;
+            this.contestGroupItem = this.contestId;
           }
           this.isInitFetch = false;
           this.handleResponseWithIntersectionObserver(this.init);
@@ -396,7 +397,7 @@ export default {
     },
     contestGroup(value) {
       if (!value) {
-        this.contestGroupItem = "";
+        // this.contestGroupItem = "";
         return;
       }
       this.contestGroupItem = this.groupItems[0].id;
