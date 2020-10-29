@@ -261,7 +261,11 @@
           >
             <div class="post-datetime" :class="{ disabled: datetime }">
               <Datetime
-                :inputId="`post-datetime__switcher_${where}`"
+                :inputId="
+                  `post-datetime__switcher_${where}-${
+                    type === 'edit' ? post.id : ''
+                  }`
+                "
                 class="post-datetime__switcher"
                 type="datetime"
                 v-model="datetime"
@@ -290,7 +294,11 @@
               :class="{ disabled: datetimeExpired }"
             >
               <Datetime
-                :inputId="`post-datetimeExpired__switcher_${where}`"
+                :inputId="
+                  `post-datetimeExpired__switcher_${where}-${
+                    type === 'edit' ? post.id : ''
+                  }`
+                "
                 class="post-datetime__switcher"
                 type="datetime"
                 v-model="datetimeExpired"
@@ -866,13 +874,23 @@ export default {
     openDatepicker() {
       if (this.datetime) return;
       document.body.classList.add("open-timepicker");
-      document.getElementById(`post-datetime__switcher_${this.where}`).click();
+      document
+        .getElementById(
+          `post-datetime__switcher_${this.where}-${
+            this.type === "edit" ? this.post.id : ""
+          }`
+        )
+        .click();
     },
     openDatepickerExpired() {
       if (this.datetimeExpired) return;
       document.body.classList.add("open-timepicker");
       document
-        .getElementById(`post-datetimeExpired__switcher_${this.where}`)
+        .getElementById(
+          `post-datetimeExpired__switcher_${this.where}-${
+            this.type === "edit" ? this.post.id : ""
+          }`
+        )
         .click();
     },
     closeDatepicker() {
