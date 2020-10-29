@@ -1,6 +1,7 @@
 @import "components/imports";
 
-.SubscribersGroupMessages {
+.SubscribersGroupMessages,
+.GroupsGroupMessages {
   .form-group.form-group_clear-gaps {
     display: flex;
     flex-flow: row nowrap;
