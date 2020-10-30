@@ -1554,7 +1554,8 @@
   body {
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-      height: 100%;
+      // height: 100%;
+      height: auto;
     }
   }
 
