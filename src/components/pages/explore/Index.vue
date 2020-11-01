@@ -570,7 +570,7 @@ export default {
           month = "0" + month;
         }
         const item = {
-          value: dateStart.getFullYear() + month,
+          value: "" + dateStart.getFullYear() + month,
           name: dateStart.toLocaleDateString("en-US", { month: "long" })
         };
         months.push(item);
