@@ -71,31 +71,54 @@
                     'message-locked':
                       v.textLength && isLocked(v) && !v.showPaidMessageText
                   }"
+                  :style="{
+                    display: hasReplyMediaContent(v) ? 'block' : 'inline-block'
+                  }"
                   v-if="v.textLength"
                 >
                   <div v-if="v.reply" class="message__reply">
                     <div class="message__reply-header">Replying to You</div>
                     <div v-if="v.reply.media" class="message__reply-media">
-                      <img
-                        v-if="
-                          v.reply.media.type === 'video' ||
-                            v.reply.media.type === 'photo'
-                        "
-                        :src="v.reply.media.source"
-                        :alt="v.reply.text || ''"
-                      />
-                      <a
-                        v-if="v.reply.media.type === 'doc'"
-                        :href="v.reply.media.source"
-                        target="_blank"
-                        class="icn-file-pdf icn-item"
-                      ></a>
-                      <audio
-                        v-if="v.reply.media.type === 'audio'"
-                        controls="controls"
-                        controlslist="nodownload"
-                        :src="v.reply.media.source"
-                      ></audio>
+                      <div class="media-chat" v-if="v.reply.media.length">
+                        <MediaAudio
+                          v-if="
+                            v.reply.media.length &&
+                              v.reply.media[0].type === 'audio'
+                          "
+                          :message="{
+                            ...v.reply,
+                            isOpened: true,
+                            isFree: false,
+                            isMediaReady: true
+                          }"
+                        />
+                        <MediaVideosList
+                          v-if="
+                            v.reply.media.length &&
+                              v.reply.media[0].type === 'video'
+                          "
+                          :message="{
+                            ...v.reply,
+                            isOpened: true,
+                            isFree: false,
+                            isMediaReady: true
+                          }"
+                          :videos="v.reply.media"
+                        />
+                        <MediaImagesList
+                          v-else-if="
+                            v.reply.media.length &&
+                              v.reply.media[0].type === 'photo'
+                          "
+                          :message="{
+                            ...v.reply,
+                            isOpened: true,
+                            isFree: false,
+                            isMediaReady: true
+                          }"
+                          :images="v.reply.media"
+                        />
+                      </div>
                     </div>
                     <span
                       v-if="v.reply.text"
@@ -114,6 +137,24 @@
                     :profile="v.fromUser"
                   />
                 </span>
+                <!-- <div class="media-chat" v-if="v.reply && v.reply.media && v.reply.media.length">
+                        <MediaAudio
+                          v-if="v.reply.media.length && v.reply.media[0].type === 'audio'"
+                          :message="{...v.reply, isOpened: true, isFree: false, isMediaReady: true}"
+                        />
+                        <MediaVideosList
+                          v-if="v.reply.media.length && v.reply.media[0].type === 'video'"
+                          :message="{...v.reply, isOpened: true, isFree: false, isMediaReady: true}"
+                          :videos="v.reply.media"
+                        />
+                        <MediaImagesList
+                          v-else-if="
+                            v.reply.media.length && v.reply.media[0].type === 'photo'
+                          "
+                          :message="{...v.reply, isOpened: true, isFree: false, isMediaReady: true}"
+                          :images="v.reply.media"
+                        />
+                      </div> -->
                 <span
                   v-if="
                     v.textLength &&
@@ -143,12 +184,6 @@
                     class="media-chat__price"
                     >Price: {{ v.price }}</span
                   >
-                  <!-- <MediaVideo
-                    v-if="v.media.length && v.media[0].type === 'video'"
-                    :message="v"
-                    :ref="'video' + v.id"
-                    @play="stopOtherVideo(v.id)"
-                  /> -->
                   <MediaAudio
                     v-if="v.media.length && v.media[0].type === 'audio'"
                     :message="v"
@@ -163,11 +198,6 @@
                     :message="v"
                     :images="v.media"
                   />
-                  <!-- <MediaImage
-                    v-else-if="v.media.length && v.media[0].type === 'photo'"
-                    :message="v"
-                    ref="img"
-                  /> -->
                 </div>
                 <template v-if="v.story">
                   <div class="media-chat">
@@ -722,6 +752,9 @@ export default {
     },
     markAllAsRead() {
       this.$store.dispatch("chat/markAllMessagesAsRead", this.withUser.id);
+    },
+    hasReplyMediaContent(message) {
+      return !!message.reply?.media?.length;
     }
   },
   mounted() {

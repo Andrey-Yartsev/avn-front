@@ -83,7 +83,7 @@ export default {
       return this.message.isOpened && !this.message.isFree;
     },
     isMyMessage() {
-      return this.message.fromUser.id === this.user.id;
+      return this.message.fromUser?.id === this.user.id;
     }
   },
   methods: {
