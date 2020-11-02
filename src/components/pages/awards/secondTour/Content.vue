@@ -72,7 +72,7 @@
                 :textString="twitterText"
               /> -->
               <a
-                v-if="nominee.twitter && !twitterScriptLoading"
+                v-if="nominee.twitter"
                 :id="'nominee' + nominee.nomineeId"
                 ref="tweetLink"
                 target="_blank"
@@ -121,7 +121,7 @@ export default {
       maxVotes: 5,
       lastVoteId: 0,
       models: [],
-      twitterScriptLoading: true,
+      // twitterScriptLoading: true,
       votingClickInProgress: false,
       selectedNomineeId: 0,
       initCategoriesFetch: false,
@@ -357,15 +357,15 @@ export default {
         }
       }
     },
-    addTwitterLib() {
-      let script = document.createElement("script");
-      script.onload = () => {
-        this.twitterScriptLoading = false;
-      };
-      script.async = true;
-      script.src = "https://platform.twitter.com/widgets.js?" + Math.random();
-      document.head.appendChild(script);
-    },
+    // addTwitterLib() {
+    //   let script = document.createElement("script");
+    //   script.onload = () => {
+    //     this.twitterScriptLoading = false;
+    //   };
+    //   script.async = true;
+    //   script.src = "https://platform.twitter.com/widgets.js?" + Math.random();
+    //   document.head.appendChild(script);
+    // },
     tryVoteSelectedNominee() {
       if (!this.selectedNomineeId) {
         return;
@@ -446,7 +446,7 @@ export default {
     }
   },
   created() {
-    this.addTwitterLib();
+    // this.addTwitterLib();
   },
   mounted() {
     this.initRequest();

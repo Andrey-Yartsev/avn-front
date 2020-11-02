@@ -114,6 +114,10 @@
     display: flex;
   }
 
+  .btns {
+    align-items: center;
+  }
+
   @include media-breakpoint-down($desktop-breakpoint) {
     .form-field {
       display: block;

@@ -79,7 +79,7 @@
         Pre-nominate your favorite star by entering their name under the
         category below:
       </div>
-      <div class="loader-container" v-if="loading || scriptLoading">
+      <div class="loader-container" v-if="loading">
         <Loader text="" :fullscreen="false" :small="true" />
       </div>
       <form action="#" class="awards-form" @submit.prevent="send" v-else>
@@ -139,8 +139,7 @@ export default {
   },
   data() {
     return {
-      data: {},
-      scriptLoading: true
+      data: {}
     };
   },
   computed: {
@@ -360,13 +359,13 @@ export default {
       }
     });
 
-    let script = document.createElement("script");
-    script.onload = () => {
-      this.scriptLoading = false;
-    };
-    script.async = true;
-    script.src = "https://platform.twitter.com/widgets.js";
-    document.head.appendChild(script);
+    // let script = document.createElement("script");
+    // script.onload = () => {
+    //   this.scriptLoading = false;
+    // };
+    // script.async = true;
+    // script.src = "https://platform.twitter.com/widgets.js";
+    // document.head.appendChild(script);
   },
   mounted() {
     const storageData = BrowserStore.get("nomUserRegData");

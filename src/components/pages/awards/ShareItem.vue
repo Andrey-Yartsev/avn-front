@@ -5,7 +5,16 @@
       <span class="form-field">
         <div v-html="html" class="tweet-text"></div>
         <div class="btns">
-          <div ref="cont" class="btn-tweet"></div>
+          <a
+            target="_blank"
+            :href="getHrefString()"
+            class="btn-block btn-tweet btn-twitter"
+            data-show-count="false"
+          >
+            <span class="icn-item icn-twitter icn-size_sm"></span>
+            <span class="btn-twitter__label">Tweet</span>
+          </a>
+          <!-- <div ref="cont" class="btn-tweet"></div> -->
         </div>
       </span>
     </span>
@@ -46,15 +55,20 @@ export default {
           text: "Tweet text copied!"
         });
       });
+    },
+    getHrefString() {
+      let text = encodeURI(this.text) || "";
+      text = text.replace(/#/g, "%23");
+      return `https://twitter.com/intent/tweet?text=${text}`;
     }
   },
   mounted() {
-    if (window.twttr) {
-      // fix error from sentry. but can't reproduce
-      window.twttr.widgets.createShareButton(" ", this.$refs.cont, {
-        text: this.text
-      });
-    }
+    // if (window.twttr) {
+    //   // fix error from sentry. but can't reproduce
+    //   window.twttr.widgets.createShareButton(" ", this.$refs.cont, {
+    //     text: this.text
+    //   });
+    // }
   }
 };
 </script>
