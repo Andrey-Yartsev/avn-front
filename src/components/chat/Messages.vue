@@ -120,6 +120,20 @@
                         />
                       </div>
                     </div>
+                    <div
+                      v-if="v.reply.docFiles && v.reply.docFiles.length"
+                      class="message__reply-media"
+                    >
+                      <div class="media-chat">
+                        <a
+                          :href="file.source"
+                          class="icn-file-pdf icn-item"
+                          v-for="file in v.reply.docFiles"
+                          :key="file.id"
+                          target="_blank"
+                        ></a>
+                      </div>
+                    </div>
                     <span
                       v-if="v.reply.text"
                       class="message__reply-text"
@@ -137,24 +151,6 @@
                     :profile="v.fromUser"
                   />
                 </span>
-                <!-- <div class="media-chat" v-if="v.reply && v.reply.media && v.reply.media.length">
-                        <MediaAudio
-                          v-if="v.reply.media.length && v.reply.media[0].type === 'audio'"
-                          :message="{...v.reply, isOpened: true, isFree: false, isMediaReady: true}"
-                        />
-                        <MediaVideosList
-                          v-if="v.reply.media.length && v.reply.media[0].type === 'video'"
-                          :message="{...v.reply, isOpened: true, isFree: false, isMediaReady: true}"
-                          :videos="v.reply.media"
-                        />
-                        <MediaImagesList
-                          v-else-if="
-                            v.reply.media.length && v.reply.media[0].type === 'photo'
-                          "
-                          :message="{...v.reply, isOpened: true, isFree: false, isMediaReady: true}"
-                          :images="v.reply.media"
-                        />
-                      </div> -->
                 <span
                   v-if="
                     v.textLength &&
