@@ -459,7 +459,7 @@ export default {
     text(message) {
       if (message.reply) {
         const text = this.isAuthor(message)
-          ? `You have paid ${message.withUser.name} for ${
+          ? `You have paid ${message.withUser.name} ${
               message.text
             } to view this message`
           : `User ${message.fromUser.name} has paid for ${
