@@ -72,10 +72,6 @@ export default {
           }
         });
       });
-      const n = medias.length % 3;
-      if (n === 2) {
-        medias.push(null);
-      }
       return medias;
     }
   },
