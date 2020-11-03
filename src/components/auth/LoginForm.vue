@@ -101,7 +101,7 @@
         <span>or</span>
       </div>
       <button
-        class="btn block btn-twitter"
+        class="btn block btn-twitter btn-twitter-auth"
         :class="{ lg: largeControls }"
         @click.prevent="handleTwitter"
         :disabled="loginInProgress"

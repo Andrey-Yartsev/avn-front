@@ -176,6 +176,9 @@
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
+  &-auth {
+    border-radius: 1000px;
+  }
 
   &:hover {
     background-color: #0c7abf;

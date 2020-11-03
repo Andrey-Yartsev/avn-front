@@ -109,7 +109,7 @@
     </form>
     <div class="login-or"><span>or</span></div>
     <button
-      class="btn block btn-twitter"
+      class="btn block btn-twitter btn-twitter-auth"
       @click.prevent="twitter"
       :class="{ lg: largeControls }"
       :disabled="isSaving"
