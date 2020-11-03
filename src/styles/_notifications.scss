@@ -115,6 +115,12 @@
       content: "\E619";
     }
   }
+
+  .purchase {
+    &:after {
+      content: '💵'; /* '\1f4b5' */
+    }
+  }
 }
 
 

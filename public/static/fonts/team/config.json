@@ -1671,6 +1671,12 @@
       "css": "file-pdf",
       "code": 61889,
       "src": "fontawesome"
+    },
+    {
+      "uid": "fhpup8jff2yw9kmuwavhyqxogczcbbhj",
+      "css": "dollar",
+      "code": 128181,
+      "src": "modernpics"
     }
   ]
 }

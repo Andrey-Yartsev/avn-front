@@ -95,7 +95,8 @@ const typeTitles = {
   mentioned: "Mentions",
   followed: "Followers",
   tip: "Tips",
-  subscribed: "Subscriptions"
+  subscribed: "Subscriptions",
+  purchase: "Purchases"
   // system: "System"
 };
 
