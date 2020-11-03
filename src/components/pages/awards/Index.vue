@@ -270,8 +270,10 @@ export default {
       if (!this.user) {
         this.$store.commit("awards/saveData", {
           eventId: this.eventId,
-          data: this.data
+          data: this.data,
+          username: this.$route.params.username
         });
+        console.log(this.data);
 
         this.$store.dispatch("modal/show", {
           name: "login",
@@ -377,18 +379,26 @@ export default {
         return;
       }
       this.$store
-        .dispatch(
-          "awards/nominate",
-          {
-            eventId: storageData.eventId,
-            data: storageData.data
-          },
-          {
-            root: true
-          }
-        )
+        .dispatch("awards/fetchUser", storageData.username)
         .then(() => {
-          this.$store.commit("awards/clearSavedData", null, { root: true });
+          this.$store
+            .dispatch(
+              "awards/nominate",
+              {
+                eventId: storageData.eventId,
+                data: storageData.data
+              },
+              {
+                root: true
+              }
+            )
+            .then(() => {
+              this.$store.commit("awards/clearSavedData", null, { root: true });
+            });
+          this.setPredefinedData();
+        })
+        .catch(() => {
+          this.$router.push("/not-found");
         });
     }
     const savedData =
