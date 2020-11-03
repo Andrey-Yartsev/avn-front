@@ -10,9 +10,11 @@
           <AttachImage :media="v" v-if="v" />
         </div>
       </template>
-      <div v-else class="item">
-        <MediaVideo :message="items[0]" />
-      </div>
+      <template v-else-if="type === 'video'">
+        <div v-for="(v, k) in medias" :key="k" class="item">
+          <MediaVideo :message="v" />
+        </div>
+      </template>
     </template>
   </perfect-scrollbar>
 </template>
@@ -60,7 +62,14 @@ export default {
       const medias = [];
       this.items.forEach(item => {
         item.media.forEach(media => {
-          medias.push(media);
+          if (this.type === "video") {
+            medias.push({
+              ...item,
+              media: [media]
+            });
+          } else if (this.type === "photo") {
+            medias.push(media);
+          }
         });
       });
       const n = medias.length % 3;
