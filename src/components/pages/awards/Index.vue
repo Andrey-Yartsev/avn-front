@@ -271,7 +271,7 @@ export default {
         this.$store.commit("awards/saveData", {
           eventId: this.eventId,
           data: this.data,
-          username: this.$route.params.username
+          username: this.$route.params.username || null
         });
 
         this.$store.dispatch("modal/show", {
@@ -377,28 +377,50 @@ export default {
         this.$store.commit("awards/clearSavedData", null, { root: true });
         return;
       }
-      this.$store
-        .dispatch("awards/fetchUser", storageData.username)
-        .then(() => {
-          this.$store
-            .dispatch(
-              "awards/nominate",
-              {
-                eventId: storageData.eventId,
-                data: storageData.data
-              },
-              {
-                root: true
-              }
-            )
-            .then(() => {
-              this.$store.commit("awards/clearSavedData", null, { root: true });
+      if (storageData.username) {
+        this.$store
+          .dispatch("awards/fetchUser", storageData.username)
+          .then(() => {
+            this.$store
+              .dispatch(
+                "awards/nominate",
+                {
+                  eventId: storageData.eventId,
+                  data: storageData.data
+                },
+                {
+                  root: true
+                }
+              )
+              .then(() => {
+                this.$store.commit("awards/clearSavedData", null, {
+                  root: true
+                });
+              });
+            this.setPredefinedData();
+          })
+          .catch(() => {
+            this.$router.push("/not-found");
+          });
+      } else {
+        this.$store
+          .dispatch(
+            "awards/nominate",
+            {
+              eventId: storageData.eventId,
+              data: storageData.data
+            },
+            {
+              root: true
+            }
+          )
+          .then(() => {
+            this.$store.commit("awards/clearSavedData", null, {
+              root: true
             });
-          this.setPredefinedData();
-        })
-        .catch(() => {
-          this.$router.push("/not-found");
-        });
+          });
+        this.setPredefinedData();
+      }
     }
     const savedData =
       this.$store.state.awards.savedData &&

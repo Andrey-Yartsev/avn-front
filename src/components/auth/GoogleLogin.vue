@@ -13,6 +13,7 @@
 
 <script>
 import GoogleLogin from "vue-google-login";
+import BrowserStore from "store";
 
 export default {
   name: "GoogleLoginButton",
@@ -45,7 +46,14 @@ export default {
         .then(() => {
           this.$emit("loginEnd");
           setTimeout(() => {
-            window.location.href = "/login";
+            if (this.$store.state.awards.savedData) {
+              BrowserStore.set(
+                "nomUserRegData",
+                this.$store.state.awards.savedData
+              );
+            }
+            this.$router.go();
+            // window.location.href = "/login";
           }, 100);
         })
         .catch(err => {
