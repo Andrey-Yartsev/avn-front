@@ -93,7 +93,11 @@
           Free access link
         </button>
       </div>
-      <div class="viewSettings" :class="{ mobile: $mq === 'mobile' }">
+      <div
+        v-if="!purchasedFiltersOnly"
+        class="viewSettings"
+        :class="{ mobile: $mq === 'mobile' }"
+      >
         <div
           class="form-group categories"
           :class="{ mobile: $mq === 'mobile' }"
@@ -258,7 +262,15 @@ export default {
   directives: {
     ClickOutside
   },
-  props: ["private"],
+  props: {
+    private: {
+      type: Boolean
+    },
+    purchasedFiltersOnly: {
+      type: Boolean,
+      default: false
+    }
+  },
   mixins: [User, IntersectionObserver],
   data() {
     return {
@@ -268,7 +280,7 @@ export default {
         photo: 50,
         audio: 10
       },
-      filterType: "",
+      filterType: this.purchasedFiltersOnly ? "purchases" : "",
       orderType: "DESC",
       sortType: "default",
       opened: false,
@@ -382,14 +394,14 @@ export default {
     },
     type(value) {
       this.selectedCategory = defaultSelectedCategory;
-      this.filterType = "";
-      this.$store.dispatch(
-        "profile/media/getMediaCategories",
-        { type: value },
-        {
-          root: true
-        }
-      );
+      (this.filterType = this.purchasedFiltersOnly ? "purchases" : ""),
+        this.$store.dispatch(
+          "profile/media/getMediaCategories",
+          { type: value },
+          {
+            root: true
+          }
+        );
       this.resetAndFetch();
     }
   },

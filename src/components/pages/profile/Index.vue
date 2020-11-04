@@ -164,14 +164,19 @@
               <!-- <BlockedBlock v-if="true" :profile="profile" /> -->
               <BlockedBlock v-if="isBlockedOn" :profile="profile" />
               <PrivateBlock
-                v-else-if="!isOwner(profile.id) && profile.isPrivatePost"
+                v-else-if="
+                  !isOwner(profile.id) &&
+                    profile.isPrivatePost &&
+                    pageName !== 'media'
+                "
                 :profile="profile"
               />
               <FollowersOnlyBlock
                 v-else-if="
                   !isOwner(profile.id) &&
                     !profile.isPrivatePost &&
-                    (profile.privacy.forFollowersOnly && !profile.followedBy)
+                    (profile.privacy.forFollowersOnly && !profile.followedBy) &&
+                    pageName !== 'media'
                 "
                 :profile="profile"
               />
@@ -180,8 +185,14 @@
                 :private="isOwner(profile.id)"
               />
               <MediaPage
-                v-else-if="pageName === 'media' && !profile.isPrivatePost"
+                v-else-if="pageName === 'media'"
                 :private="isOwner(profile.id)"
+                :purchasedFiltersOnly="
+                  (!isOwner(profile.id) && profile.isPrivatePost) ||
+                    (!isOwner(profile.id) &&
+                      !profile.isPrivatePost &&
+                      (profile.privacy.forFollowersOnly && !profile.followedBy))
+                "
               />
               <GroupsPage
                 v-else-if="pageName === 'groups'"

@@ -273,7 +273,6 @@ export default {
           data: this.data,
           username: this.$route.params.username
         });
-        console.log(this.data);
 
         this.$store.dispatch("modal/show", {
           name: "login",
