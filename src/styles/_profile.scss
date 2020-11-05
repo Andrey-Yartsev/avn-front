@@ -1160,6 +1160,25 @@
         @include media-breakpoint-down($desktop-breakpoint-dcrs) {
           padding-top: 10px;
         }
+        .content-types {
+          margin: 0px 0 20px 0;
+          display: flex;
+          flex-flow: row nowrap;
+          align-items: center;
+          justify-content: space-evenly;
+          width: 100%;
+          @include media-breakpoint-up($desktop-breakpoint-dcrs) {
+            .btn-user-activity {
+              flex-basis: 67px;
+            }
+          }
+          @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+            .btn-user-activity {
+              background-color: inherit;
+            }
+          }
+
+        }
 
         &-title {
           font-size: 18px;

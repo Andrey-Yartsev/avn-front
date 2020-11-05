@@ -205,22 +205,24 @@
                       v-if="isOwner(profile.id)"
                       class="posts-container__stashPostSwitcher "
                     >
-                      <div
-                        class="posts-container__stashPostSwitcher-title semi-transparent"
-                      >
-                        {{
-                          showStashedPosts ? "Stashed posts" : "Published posts"
-                        }}
+                      <div class="content-types">
+                        <a
+                          class="btn-user-activity"
+                          :class="{ active: !showStashedPosts }"
+                          @click.prevent="switchStashedPostsView"
+                          href="#"
+                        >
+                          <span class="label">Published</span>
+                        </a>
+                        <a
+                          class="btn-user-activity"
+                          :class="{ active: showStashedPosts }"
+                          @click.prevent="switchStashedPostsView"
+                          href="#"
+                        >
+                          <span class="label">Stashed</span>
+                        </a>
                       </div>
-                      <a
-                        href="#"
-                        @click.prevent
-                        class="posts-container__stashPostSwitcher-switcher"
-                        @click="switchStashedPostsView"
-                        >Switch to
-                        {{ showStashedPosts ? "published" : "stashed" }}
-                        posts</a
-                      >
                       <button
                         v-if="showStashedPosts"
                         class="btn make-post-btn border alt btn_fix-width-sm"
