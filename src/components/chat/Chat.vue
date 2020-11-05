@@ -233,6 +233,9 @@ export default {
       if (!this.activeChat) {
         return this.$store.state.chat.fetchActiveUserResult;
       }
+      if (this.$store.state.chat.fetchFullActiveUserResult) {
+        return this.$store.state.chat.fetchFullActiveUserResult;
+      }
       return this.activeChat.withUser;
     },
     blockLoading() {

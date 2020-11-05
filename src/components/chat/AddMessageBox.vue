@@ -1,5 +1,8 @@
 <template>
-  <div class="addChatMessage" :class="{ disabled: isMuted || isDeleted }">
+  <div
+    class="addChatMessage"
+    :class="{ disabled: isMuted || isMutedOn || isDeleted }"
+  >
     <template v-if="withFontSizeController">
       <FontSizeControls />
     </template>
@@ -89,7 +92,9 @@
             class="text-media-container rounded lg"
             rows="1"
             cols="60"
-            :placeholder="textareaPlaceholder"
+            :placeholder="
+              isMutedOn ? 'You have been muted by user' : textareaPlaceholder
+            "
             maxlength="10000"
             :minHeight="30"
             :maxHeight="100"
@@ -314,6 +319,9 @@ export default {
         return false;
       }
       return this.withUser.isMuted;
+    },
+    isMutedOn() {
+      return this.withUser?.privacy?.isMutedOn;
     },
     isDeleted() {
       if (!this.withUser) {
