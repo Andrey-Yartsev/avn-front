@@ -5,61 +5,26 @@
       <Loader text="" :fullscreen="false" :small="true" />
     </div>
     <template v-else>
-      <!-- <div class="awards-title text-centered">
-        <select name="contest" v-model="contestGroup">
-          <option value="All">All</option>
-          <option v-for="item in groups" :key="item" :value="item"
-            >{{ item }}
-          </option>
-        </select>
-      </div> -->
       <div v-if="groups.size" class="contest-select-wrapper">
-        <!-- <div
-          class="form-group form-group_with-label gender-options contest-select contest-select-group"
-        >
-          <label class="form-group-inner">
-            <span class="label">Contest group</span>
-            <div class="row">
-              <div class="col-1-2 row-select">
-                <div class="select-wrapper">
-                  <select
-                    name="gender"
-                    class="default-disabled"
-                    v-model="contestGroup"
-                  >
-                    <option value="">All</option>
-                    <option v-for="item in groups" :key="item" :value="item"
-                      >{{ item }}
-                    </option>
-                  </select>
-                </div>
-              </div>
-            </div>
-          </label>
-        </div> -->
-        <div class="contest-group">
-          <span
+        <div class="content-types">
+          <a
+            class="btn-user-activity"
+            :class="{ active: contestGroup === '' }"
             @click.prevent="selectGroup('')"
-            class="contest-group-name"
-            :class="{ selected: contestGroup === '' }"
+            href="#"
           >
-            All
-          </span>
-          <span class="contest-group-divider">
-            ||
-          </span>
+            <span class="label">All</span>
+          </a>
           <template v-for="item in groups">
-            <span
+            <a
               :key="item"
+              class="btn-user-activity"
+              :class="{ active: item === contestGroup }"
               @click.prevent="selectGroup(item)"
-              class="contest-group-name"
-              :class="{ selected: item === contestGroup }"
+              href="#"
             >
-              {{ item }}
-            </span>
-            <span class="contest-group-divider" :key="`span-${item}`">
-              ||
-            </span>
+              <span class="label">{{ item }}</span>
+            </a>
           </template>
         </div>
         <div
@@ -67,7 +32,6 @@
           class="form-group form-group_with-label gender-options contest-select contest-select-groupItem"
         >
           <label class="form-group-inner">
-            <!-- <span class="label">Contest</span> -->
             <div class="row">
               <div class="col-1-1 row-select">
                 <div class="select-wrapper">
@@ -76,7 +40,6 @@
                     class="default-disabled"
                     v-model="contestGroupItem"
                   >
-                    <!-- <option value="">All</option> -->
                     <option
                       v-for="item in groupItems"
                       :key="item.id"
@@ -91,19 +54,6 @@
         </div>
       </div>
       <template v-if="contest">
-        <!-- <div class="contest-links title-subtext">
-          <template v-for="value in contests">
-            <a
-              :href="`/contests/${value.id}`"
-              :key="value.id"
-              @click.prevent="selectContest(value.id)"
-              :class="{ selected: value.id === contestId }"
-            >
-              {{ value.name }}
-            </a>
-            <span :key="`span-${value.id}`"> || </span>
-          </template>
-        </div> -->
         <template v-if="!sent">
           <div class="contest-header" v-if="contest.image_url">
             <img :src="contest.image_url" />
