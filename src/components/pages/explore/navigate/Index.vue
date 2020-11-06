@@ -10,17 +10,8 @@
       data-type="stories"
       >Stories</router-link
     >
-    <router-link
-      to="/explore/videos"
-      class="content-nav__item"
-      data-type="videos"
-      >Videos</router-link
-    >
-    <router-link
-      to="/explore/photos"
-      class="content-nav__item"
-      data-type="photos"
-      >Photos</router-link
+    <router-link to="/explore/media" class="content-nav__item" data-type="media"
+      >Media</router-link
     >
     <router-link to="/explore/clips" class="content-nav__item" data-type="clips"
       >Clips</router-link

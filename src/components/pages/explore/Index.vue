@@ -133,16 +133,7 @@
               </router-link>
             </template>
           </div> -->
-          <div
-            :class="{
-              exploreAllCollectionView: page === 'all',
-              photoCollectionView: page === 'photos',
-              videoCollectionView: page === 'videos',
-              storyCollectionView: page === 'stories',
-              liveCollectionView: page === 'lives',
-              userCollectionView: page === 'topmodels'
-            }"
-          >
+          <div :class="exploreSubClass">
             <template v-if="page === 'topmodels'">
               <div class="form-group form-group_with-label month-options">
                 <label class="form-group-inner">
@@ -461,6 +452,18 @@ export default {
       });
       list.unshift({ id: "0", name: "All", title: "All" });
       return list;
+    },
+    exploreSubClass() {
+      const classes = {
+        all: "exploreAllCollectionView",
+        photos: "photoCollectionView",
+        videos: "videoCollectionView",
+        media: "photoCollectionView",
+        stories: "storyCollectionView",
+        lives: "liveCollectionView",
+        topmodels: "userCollectionView"
+      };
+      return classes[this.page] || null;
     }
   },
   methods: {

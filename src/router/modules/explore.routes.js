@@ -39,6 +39,18 @@ export const routes = [
   },
   {
     beforeEnter: Auth.requireAny,
+    path: "/explore/media",
+    name: "ExploreMedia",
+    component: () =>
+      import(/* webpackChunkName: "ExplorePage" */ "@/components/pages/explore/Index"),
+    meta: {
+      page: "media",
+      type: "media",
+      cssName: "explore"
+    }
+  },
+  {
+    beforeEnter: Auth.requireAny,
     path: "/explore/clips/:category",
     name: "ExploreStore",
     component: () =>
