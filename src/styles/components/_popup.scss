@@ -384,11 +384,13 @@
   &.popup-massmes {
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-      position: absolute;
+      position: relative;
+      left: auto;
+      top: auto;
       margin-left: 20px;
       margin-right: 20px;
       max-width: calc(100% - 40px);
-      transform: translate(calc(-50% - 20px), -50%);
+      transform: none;
     }
   }
 

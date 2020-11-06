@@ -238,13 +238,12 @@
   .popup & {
 
     .content {
-      overflow: auto;
-      position: static;
+      overflow: visible;
     }
   }
   &.popup-container.popup-massmes {
     @include media-breakpoint-down($desktop-breakpoint) {
-      overflow: auto;
+      overflow: visible;
     }
   }
   .withStars-form {
