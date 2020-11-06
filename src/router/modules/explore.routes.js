@@ -27,7 +27,7 @@ export const routes = [
   },
   {
     beforeEnter: Auth.requireAny,
-    path: "/explore/photos",
+    path: "/explore/media/photos",
     name: "ExplorePhotos",
     component: () =>
       import(/* webpackChunkName: "ExplorePage" */ "@/components/pages/explore/Index"),
@@ -79,7 +79,7 @@ export const routes = [
   },
   {
     beforeEnter: Auth.requireAny,
-    path: "/explore/videos",
+    path: "/explore/media/videos",
     name: "ExploreVideos",
     component: () =>
       import(/* webpackChunkName: "ExplorePage" */ "@/components/pages/explore/Index"),

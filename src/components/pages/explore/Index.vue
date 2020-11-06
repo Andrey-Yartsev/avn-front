@@ -37,6 +37,27 @@
             </div>
           </div>
         </div>
+        <template
+          v-if="page === 'media' || page === 'photos' || page === 'videos'"
+        >
+          <div class="content-sub-nav">
+            <span class="item">
+              <router-link to="/explore/media">
+                All
+              </router-link>
+            </span>
+            <span class="item">
+              <router-link to="/explore/media/photos">
+                Photos
+              </router-link>
+            </span>
+            <span class="item">
+              <router-link to="/explore/media/videos">
+                Videos
+              </router-link>
+            </span>
+          </div>
+        </template>
         <template v-if="page === 'clips'">
           <div class="content-sub-nav">
             <span class="item">
