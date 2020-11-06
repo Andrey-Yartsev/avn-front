@@ -38,23 +38,23 @@
           </div>
         </div>
         <template v-if="page === 'clips'">
-          <div class="stories-wrapper stories-all clipCategories">
-            <span class="clipCategories_item">
+          <div class="content-sub-nav">
+            <span class="item">
               <router-link to="/explore/clips/all">
                 All
               </router-link>
             </span>
-            <span class="clipCategories_item">
+            <span class="item">
               <router-link to="/explore/clips/free">
                 Free Only
               </router-link>
             </span>
-            <span class="clipCategories_item">
+            <span class="item">
               <router-link to="/explore/clips/topView">
                 Top Viewed
               </router-link>
             </span>
-            <span class="clipCategories_item">
+            <span class="item">
               <router-link to="/explore/clips/topSale">
                 Best Selling
               </router-link>
@@ -62,7 +62,7 @@
           </div>
           <div
             v-if="$route.params.category === 'all'"
-            class="clipCategories_selector"
+            class="content-sub-nav-selector"
           >
             <div
               class="form-group categories"
@@ -635,39 +635,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.videoCategories,
-.clipCategories {
-  display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
-  justify-content: space-evenly;
-  padding: 20px 10px;
-  &_item {
-    cursor: pointer;
-    color: #2196f3;
-    border-bottom: 2px solid transparent;
-    &:hover {
-      color: #222b32;
-    }
-    &.selected {
-      font-weight: 500;
-      color: #222b32;
-    }
-    a {
-      color: inherit;
-      &.router-link-exact-active {
-        font-weight: 500;
-        color: #222b32;
-      }
-    }
-  }
-  &_selector {
-    margin-bottom: 10px;
-    .label {
-      flex: 0 0 0;
-    }
-  }
-}
 .month-options {
   margin-left: -20px;
   /* padding: 10px 20px; */

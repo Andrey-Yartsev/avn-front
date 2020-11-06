@@ -1054,3 +1054,35 @@
 .text-create-story {
   opacity: .5;
 }
+
+.content-sub-nav {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 0 10px 20px 10px;
+  & .item {
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    &:hover {
+      color: $main-color;
+    }
+    &.selected {
+      font-weight: 500;
+      color: $main-color;
+    }
+    a {
+      color: $secondary-color;
+      &.router-link-exact-active {
+        font-weight: 500;
+        color: $main-color;
+      }
+    }
+  }
+  &-selector {
+    margin-bottom: 10px;
+    .label {
+      flex: 0 0 0;
+    }
+  }
+}
