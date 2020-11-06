@@ -239,6 +239,7 @@
 
     .content {
       overflow: auto;
+      position: static;
     }
   }
   &.popup-container.popup-massmes {
