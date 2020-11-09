@@ -27,12 +27,24 @@ export const routes = [
   },
   {
     beforeEnter: Auth.requireAny,
-    path: "/explore/photos",
+    path: "/explore/media/photos",
     name: "ExplorePhotos",
     component: () =>
       import(/* webpackChunkName: "ExplorePage" */ "@/components/pages/explore/Index"),
     meta: {
       page: "photos",
+      type: "media",
+      cssName: "explore"
+    }
+  },
+  {
+    beforeEnter: Auth.requireAny,
+    path: "/explore/media",
+    name: "ExploreMedia",
+    component: () =>
+      import(/* webpackChunkName: "ExplorePage" */ "@/components/pages/explore/Index"),
+    meta: {
+      page: "media",
       type: "media",
       cssName: "explore"
     }
@@ -67,7 +79,7 @@ export const routes = [
   },
   {
     beforeEnter: Auth.requireAny,
-    path: "/explore/videos",
+    path: "/explore/media/videos",
     name: "ExploreVideos",
     component: () =>
       import(/* webpackChunkName: "ExplorePage" */ "@/components/pages/explore/Index"),
