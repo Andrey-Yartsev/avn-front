@@ -1012,3 +1012,13 @@ video {
     z-index: 200 !important;
   }
 }
+.margin {
+  &-bottom {
+    &-1 {
+      margin-bottom: 1em;
+    }
+    &-2 {
+      margin-bottom: 2em;
+    }
+  }
+}

@@ -5,7 +5,11 @@
       <Bank />
     </template>
     <!-- <ElectroniDelivery /> -->
-    <Balances storeKey="payouts" prefix="payout" />
+    <Balances
+      storeKey="payouts"
+      prefix="payout"
+      :withTransactionOption="true"
+    />
     <AutoRequests />
     <Requests title="Payout Statements" storeKey="payouts" />
     <Transactions />

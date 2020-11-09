@@ -32,6 +32,45 @@
             <span class="value">${{ balances[prefix + "Pending"] }}</span>
           </div>
         </div>
+        <form v-if="withTransactionOption" v-on:submit.stop.prevent="purchase">
+          <div class="form-title semi-transparent">
+            Purchase credits from available balance
+          </div>
+          <div
+            class="form-group form-group_with-label"
+            :class="{ disabled: !balances.payoutAvailable }"
+          >
+            <label class="form-group-inner">
+              <span class="label">
+                Amount
+              </span>
+              <span class="form-group form-group_clear-gaps">
+                <span class="form-field field-symbol-currency">
+                  <span class="form-field">
+                    <input
+                      name="amount"
+                      type="number"
+                      step="0.01"
+                      v-model="amount"
+                      class="field-gap_currency"
+                      autocomplete="off"
+                    />
+                  </span>
+                </span>
+              </span>
+            </label>
+          </div>
+          <div class="form-group-btn">
+            <button
+              type="submit"
+              :disabled="!amount || progress"
+              class="btn lg btn_fix-width"
+            >
+              Purchase
+            </button>
+            <div class="lds-dual-ring transparent inline" v-if="progress"></div>
+          </div>
+        </form>
       </div>
     </div>
   </div>
@@ -53,7 +92,17 @@ export default {
     prefix: {
       type: String,
       required: true
+    },
+    withTransactionOption: {
+      type: Boolean,
+      default: false
     }
+  },
+  data() {
+    return {
+      amount: "",
+      progress: false
+    };
   },
   computed: {
     loading() {
@@ -81,6 +130,52 @@ export default {
       this.$store.commit("global/toastShowTrigger", {
         text: text,
         type: err ? "error" : "success"
+      });
+    },
+    isValidAmount() {
+      if (parseFloat(this.amount) < 5) {
+        this.showToast(true, "Amount should be more than $5");
+        return false;
+      }
+      if (
+        parseFloat(this.amount) >
+        parseFloat(this.balances[this.prefix + "Available"])
+      ) {
+        this.showToast(
+          true,
+          `Amount should be less than $${
+            this.balances[this.prefix + "Available"]
+          }`
+        );
+        return false;
+      }
+      return true;
+    },
+    async purchase() {
+      if (!this.isValidAmount()) {
+        return;
+      }
+      this.$store.dispatch("modal/show", {
+        name: "confirm",
+        data: {
+          title: `Confirming to withdrawal $${
+            this.amount
+          } from available balance for purchase of credits.`,
+          success: async () => {
+            this.progress = true;
+            try {
+              await this.$store.dispatch(this.storeKey + "/balances/credits", {
+                amount: this.amount
+              });
+              this.showToast(false, "Credits purchased successfuly");
+            } catch (error) {
+              this.showToast(true, error.message);
+            } finally {
+              this.progress = false;
+              this.amount = "";
+            }
+          }
+        }
       });
     }
   },

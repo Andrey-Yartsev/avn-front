@@ -1,7 +1,11 @@
 <template>
   <div class="ReferralsView">
     <ReferralsLink />
-    <ReferralsBalances storeKey="referrals" prefix="bonus" />
+    <ReferralsBalances
+      storeKey="referrals"
+      prefix="bonus"
+      :withTransactionOption="false"
+    />
     <ReferralsRequests title="Referral Bonus Statements" storeKey="referrals" />
     <ReferralsList />
   </div>
