@@ -1,39 +1,41 @@
 <template>
   <nav class="content-nav">
     <router-link to="/explore/all" data-type="all" class="content-nav__item">
-      <span class="hidden-mobile">Explore all</span>
-      <span class="hidden-desktop">All</span>
+      <span class="hidden-mobile content-nav__item-label">Explore all</span>
+      <span class="hidden-desktop content-nav__item-label">All</span>
     </router-link>
     <router-link
       to="/explore/stories"
       class="content-nav__item"
       data-type="stories"
-      >Stories</router-link
+      ><span class="content-nav__item-label">Stories</span></router-link
     >
     <router-link to="/explore/media" class="content-nav__item" data-type="media"
-      >Media</router-link
+      ><span class="content-nav__item-label">Media</span></router-link
     >
     <router-link to="/explore/clips" class="content-nav__item" data-type="clips"
-      >Clips</router-link
+      ><span class="content-nav__item-label">Clips</span></router-link
     >
     <router-link to="/explore/live" class="content-nav__item" data-type="live"
-      >Live</router-link
+      ><span class="content-nav__item-label">Live</span></router-link
     >
     <router-link to="/explore/top" class="content-nav__item" data-type="top"
-      >Top
-      <template v-if="$mq === 'desktop'"
-        >Models</template
+      ><span class="content-nav__item-label"
+        >Top
+        <template v-if="$mq === 'desktop'"
+          >Models</template
+        ></span
       ></router-link
     >
     <router-link to="/explore" exact class="content-nav__item" data-type="top"
-      >Feed</router-link
+      ><span class="content-nav__item-label">Feed</span></router-link
     >
     <router-link
       v-if="contestsEnabled"
       to="/contests"
       class="content-nav__item"
       data-type="top"
-      >Contests</router-link
+      ><span class="content-nav__item-label">Contests</span></router-link
     >
   </nav>
 </template>
