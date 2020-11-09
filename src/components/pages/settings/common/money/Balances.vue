@@ -66,7 +66,7 @@
               :disabled="!amount || progress"
               class="btn lg btn_fix-width"
             >
-              Purchase
+              Charge Credits
             </button>
             <div class="lds-dual-ring transparent inline" v-if="progress"></div>
           </div>
