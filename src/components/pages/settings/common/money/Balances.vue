@@ -133,8 +133,8 @@ export default {
       });
     },
     isValidAmount() {
-      if (parseFloat(this.amount) < 5) {
-        this.showToast(true, "Amount should be more than $5");
+      if (parseFloat(this.amount) < 1) {
+        this.showToast(true, "Amount should be more than $1");
         return false;
       }
       if (
