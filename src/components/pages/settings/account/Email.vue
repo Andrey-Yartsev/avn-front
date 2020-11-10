@@ -142,17 +142,23 @@ export default {
       if (!this.isFormValid) {
         return;
       }
-      this.$store.dispatch("emails/resend", this.emailToSend).then(r => {
-        if (!r.success) {
-          this.$store.dispatch("global/flashToast", {
-            text: "Error on sending"
-          });
-          return;
-        }
-        this.$store.dispatch("profile/fetch");
-        this.newEmail = "";
-        this.$store.dispatch("global/flashToast", { text: "Email sent" });
+      this.$root.ws.send({
+        act: "check_new_email",
+        email: this.emailToSend
       });
+      this.newEmail = "";
+
+      // this.$store.dispatch("emails/resend", this.emailToSend).then(r => {
+      //   if (!r.success) {
+      //     this.$store.dispatch("global/flashToast", {
+      //       text: "Error on sending"
+      //     });
+      //     return;
+      //   }
+      //   this.$store.dispatch("profile/fetch");
+      //   this.newEmail = "";
+      //   this.$store.dispatch("global/flashToast", { text: "Email sent" });
+      // });
     }
   },
   created() {

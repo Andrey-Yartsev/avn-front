@@ -18,7 +18,8 @@ const state = {
     follow: [],
     subscribe: [],
     groups: []
-  }
+  },
+  tempLocalUser: null
 };
 
 const defaultUser = {
@@ -251,6 +252,9 @@ const mutations = {
       ...state.connectedData,
       [key]: state.connectedData[key].filter(item => item !== parseInt(id))
     };
+  },
+  setTempLocalUser(state, user) {
+    state.tempLocalUser = user;
   }
 };
 

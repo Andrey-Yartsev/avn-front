@@ -45,8 +45,17 @@ export default {
       if (shouldCheckChanges && !this.changed) {
         return;
       }
+
       this.transformValueBeforeSave(this.localUser);
-      this.$store.dispatch("profile/update", this.localUser);
+      if (this.user.username !== this.localUser.username) {
+        this.$root.ws.send({
+          act: "check_new_username",
+          username: this.localUser.username
+        });
+        this.$store.commit("auth/setTempLocalUser", this.localUser);
+      } else {
+        this.$store.dispatch("profile/update", this.localUser);
+      }
     },
     _clone(o) {
       return JSON.parse(JSON.stringify(o));

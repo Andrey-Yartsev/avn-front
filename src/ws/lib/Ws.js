@@ -29,6 +29,8 @@ import contests from "./actions/contests";
 import groups from "./actions/groups";
 import blockedWithPrice from "./actions/blockedWithPrice";
 import unblockedWithPrice from "./actions/unblockedWithPrice";
+import check_new_email from "./actions/check_new_email";
+import check_new_username from "./actions/check_new_username";
 
 const actions = {
   chats,
@@ -58,7 +60,9 @@ const actions = {
   contests,
   groups,
   blockedWithPrice,
-  unblockedWithPrice
+  unblockedWithPrice,
+  check_new_email,
+  check_new_username
 };
 
 export default class Ws extends WsAbstract {
