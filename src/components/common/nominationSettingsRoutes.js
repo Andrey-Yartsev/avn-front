@@ -76,12 +76,12 @@ export default user => {
         });
       }
     } else {
-      if (userViewIsStraight(user) || userViewIsAll(user)) {
-        items.push({
-          path: "/settings/avn",
-          title: "AVN Awards Pre-Nominations"
-        });
-      }
+      // if (userViewIsStraight(user) || userViewIsAll(user)) {
+      //   items.push({
+      //     path: "/settings/avn",
+      //     title: "AVN Awards Pre-Nominations"
+      //   });
+      // }
     }
     if (Store.state.init.data.enableGayVoting) {
       if (user.nominee && userHasGayNominations(user.nominatedList)) {
@@ -97,12 +97,12 @@ export default user => {
         });
       }
     } else {
-      if (userViewIsGay(user) || userViewIsAll(user)) {
-        items.push({
-          path: "/settings/gayvn",
-          title: "GayVN Awards Pre-Nominations"
-        });
-      }
+      // if (userViewIsGay(user) || userViewIsAll(user)) {
+      //   items.push({
+      //     path: "/settings/gayvn",
+      //     title: "GayVN Awards Pre-Nominations"
+      //   });
+      // }
     }
   }
   return items;
