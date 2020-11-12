@@ -157,10 +157,11 @@
     }
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-      border-top: 1px solid rgba($gray, 0.2);
-      padding-top: 6px;
+      // border-top: 1px solid rgba($gray, 0.2);
+      padding-top: 0px;
       padding-bottom: 5px;
       margin-bottom: 0;
+      margin-top: 0;
     }
   }
 
@@ -686,11 +687,11 @@
   }
 
   .newStoriesLabel {
-    margin-left: 5px;
+    margin-left: 12px;
+    font-size: 12px;
 
     @include media-breakpoint-down($desktop-breakpoint) {
-      margin-left: 16px;
-      font-size: 12px;
+      margin-left: 15px;
     }
   }
 }

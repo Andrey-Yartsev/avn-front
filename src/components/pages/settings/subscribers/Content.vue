@@ -45,7 +45,7 @@
             <span class="label icn-item">Paid</span>
           </div>
         </label>
-        <button class="btn btn_not-bold sm" @click="openGroupMessageModal">
+        <button type="submit" class="btn md" @click="openGroupMessageModal">
           Send group message
         </button>
       </div>
