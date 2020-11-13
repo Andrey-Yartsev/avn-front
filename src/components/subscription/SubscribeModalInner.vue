@@ -10,6 +10,7 @@
           :profile="profile"
           @subscribe="subscribe"
           :progress="progress"
+          :isResubscribe="false"
         >
           <template slot="button-text">
             Subscribe for ${{ profile.subscribePrice }} / month

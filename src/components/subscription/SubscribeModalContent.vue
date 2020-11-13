@@ -59,7 +59,7 @@
       >
         <slot name="button-text" />
       </button>
-      <template v-if="profileHasMultimonthSubscription">
+      <template v-if="!isResubscribe && profileHasMultimonthSubscription">
         <template v-for="key in [3, 6, 12]">
           <button
             :key="key"
@@ -100,6 +100,10 @@ export default {
     progress: {
       type: Boolean,
       require: true,
+      default: false
+    },
+    isResubscribe: {
+      type: Boolean,
       default: false
     }
   },

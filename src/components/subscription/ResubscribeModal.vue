@@ -6,6 +6,7 @@
           :profile="profile"
           @subscribe="resubscribe"
           :progress="progress"
+          :isResubscribe="true"
         >
           <template slot="button-text">
             {{ daysLeft }} days left - Resubscribe ${{ profile.subscribePrice }}
