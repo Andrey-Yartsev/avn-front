@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="contactsList"
-    :class="{ 'has-unread': !!unreadCount || !!requestedCount }"
-  >
+  <div class="contactsList has-unread">
     <div
       v-if="unreadCount && $mq === 'desktop'"
       class="new-post-toast show bg-gradient bg-gradient_standart unread-box"
@@ -11,7 +8,7 @@
       <span>Unread chats ({{ unreadCount }})</span
       ><a href="#" :disabled="markAsReadInProgress">Mark all as read</a>
     </div>
-    <div class="filter-tab" v-if="unreadCount || requestedCount">
+    <div class="filter-tab">
       <a
         href="#"
         :class="{ selected: filter === 'all' }"
@@ -19,18 +16,18 @@
         >All</a
       >
       <a
-        v-if="unreadCount"
         href="#"
-        :class="{ selected: filter === 'unread' }"
+        :class="{ selected: filter === 'unread', disabled: !unreadCount }"
         @click.prevent="setFilter('unread')"
-        >Unread <span class="badge">{{ unreadCount }}</span></a
+        >Unread
+        <span v-if="unreadCount" class="badge">{{ unreadCount }}</span></a
       >
       <a
-        v-if="requestedCount"
         href="#"
-        :class="{ selected: filter === 'requested' }"
+        :class="{ selected: filter === 'requested', disabled: !requestedCount }"
         @click.prevent="setFilter('requested')"
-        >Requests <span class="badge">{{ requestedCount }}</span></a
+        >Requests
+        <span v-if="requestedCount" class="badge">{{ requestedCount }}</span></a
       >
     </div>
     <component

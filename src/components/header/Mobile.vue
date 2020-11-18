@@ -84,6 +84,11 @@ export default {
     routeIsLoading(name) {
       return this.$store.state.route.loadingName === name;
     }
+  },
+  beforeDestroy() {
+    if (this.activeName === "chat") {
+      this.$store.commit("chat/setChatsFilter", "all");
+    }
   }
 };
 </script>

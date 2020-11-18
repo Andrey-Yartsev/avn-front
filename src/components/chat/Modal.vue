@@ -1,5 +1,5 @@
 <template>
-  <Modal :onClose="close">
+  <Modal :onClose="_close">
     <div
       class="popup-container chat-popup"
       slot="content"
@@ -15,7 +15,7 @@
       <button
         type="button"
         class="close close_shift-t close_default icn-item icn-size_lg"
-        @click="close"
+        @click="_close"
       />
     </div>
   </Modal>
@@ -48,6 +48,12 @@ export default {
     },
     isNew() {
       return this.routePath === "chat/new";
+    }
+  },
+  methods: {
+    _close() {
+      this.$store.commit("chat/setChatsFilter", "all");
+      this.close();
     }
   }
 };
