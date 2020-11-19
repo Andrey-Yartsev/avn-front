@@ -48,6 +48,7 @@
         </div>
         <template v-else>
           <img
+            v-if="media.thumb && media.thumb.source"
             :src="media.thumb.source"
             @contextmenu.prevent="() => false"
             @dragstart.prevent="() => false"

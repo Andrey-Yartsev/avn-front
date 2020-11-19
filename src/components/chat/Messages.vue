@@ -81,10 +81,7 @@
                     <div v-if="v.reply.media" class="message__reply-media">
                       <div class="media-chat" v-if="v.reply.media.length">
                         <MediaAudio
-                          v-if="
-                            v.reply.media.length &&
-                              v.reply.media[0].type === 'audio'
-                          "
+                          v-if="v.reply.media[0].type === 'audio'"
                           :message="{
                             ...v.reply,
                             isOpened: true,
@@ -93,10 +90,7 @@
                           }"
                         />
                         <MediaVideosList
-                          v-if="
-                            v.reply.media.length &&
-                              v.reply.media[0].type === 'video'
-                          "
+                          v-else-if="v.reply.media[0].type === 'video'"
                           :message="{
                             ...v.reply,
                             isOpened: true,
@@ -106,10 +100,7 @@
                           :videos="v.reply.media"
                         />
                         <MediaImagesList
-                          v-else-if="
-                            v.reply.media.length &&
-                              v.reply.media[0].type === 'photo'
-                          "
+                          v-else-if="v.reply.media[0].type === 'photo'"
                           :message="{
                             ...v.reply,
                             isOpened: true,
@@ -164,7 +155,7 @@
                   {{ v.price }}
                 </span>
 
-                <div class="media-chat" v-if="v.docFiles.length">
+                <div class="media-chat" v-if="v.docFiles && v.docFiles.length">
                   <a
                     :href="file.source"
                     class="icn-file-pdf icn-item"
@@ -180,17 +171,14 @@
                     class="media-chat__price"
                     >Price: {{ v.price }}</span
                   >
-                  <MediaAudio
-                    v-if="v.media.length && v.media[0].type === 'audio'"
-                    :message="v"
-                  />
+                  <MediaAudio v-if="v.media[0].type === 'audio'" :message="v" />
                   <MediaVideosList
-                    v-if="v.media.length && v.media[0].type === 'video'"
+                    v-else-if="v.media[0].type === 'video'"
                     :message="v"
                     :videos="v.media"
                   />
                   <MediaImagesList
-                    v-else-if="v.media.length && v.media[0].type === 'photo'"
+                    v-else-if="v.media[0].type === 'photo'"
                     :message="v"
                     :images="v.media"
                   />
@@ -291,11 +279,9 @@
 import userMixin from "@/mixins/user";
 import Loader from "@/components/common/Loader";
 import { fromNow } from "@/helpers/datetime";
-import MediaImage from "./media/Image";
 import MediaAudio from "./media/Audio";
 import MediaImagesList from "./media/ImagesList";
 import MediaVideosList from "./media/VideosList";
-import MediaVideo from "./media/VideoPreview";
 import SubscribeButton from "@/components/subscription/Button";
 import moment from "moment";
 // import messages from "@/mock/messages.js";
@@ -307,8 +293,6 @@ export default {
 
   components: {
     Loader,
-    MediaImage,
-    MediaVideo,
     SubscribeButton,
     MediaImagesList,
     MediaVideosList,
@@ -696,13 +680,6 @@ export default {
     },
     isUnlocked(message) {
       return message.isOpened && !message.isFree;
-    },
-    media(media) {
-      if (media.type === "image") {
-        return MediaImage;
-      } else if (media.type === "video") {
-        return MediaVideo;
-      }
     },
     _scrollHandler() {
       this.saveScrollPosition();

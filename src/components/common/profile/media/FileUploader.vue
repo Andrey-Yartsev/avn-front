@@ -275,6 +275,9 @@ export default {
   methods: {
     triggerClickEvent(newFile) {
       const button = document.querySelector(`[data-id="${newFile}"]`);
+      if (!button) {
+        return;
+      }
       button.click();
       this.preloadedMedias = this.preloadedMedias.filter(
         item => item.processId !== newFile
