@@ -8,6 +8,17 @@
       flex-wrap: wrap;
     }
   }
+  .markAsFree {
+    padding-bottom: 15px;
+    font-size: 13px;
+    a {
+      display: inline-block;
+      padding-right: 10px;
+    }
+    span {
+      opacity: .5;
+    }
+  }
 }
 
 .progress {
@@ -163,6 +174,15 @@
       }
     }
   }
+
+  .label {
+    position: absolute;
+    background: $secondary-color;
+    right: 2px;
+    bottom: 3px;
+    padding: 1px 5px;
+    border-radius: 3px;
+  }
 }
 
 .attachment-status {
@@ -204,6 +224,14 @@
     &:after {
       content: "\E619";
     }
+  }
+
+  cursor: pointer;
+  &:hover {
+    color: $primary-color;
+  }
+  &.checked {
+    color: $secondary-color !important;
   }
 }
 

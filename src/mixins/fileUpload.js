@@ -98,7 +98,8 @@ export default {
           userFileName: name,
           id: uniqId() + i,
           loaded: 0,
-          size
+          size,
+          isFree: false
         });
       }
 
@@ -206,6 +207,22 @@ export default {
       );
 
       return await Promise.all(promises);
+    },
+
+    setParamToPreloadedMedias(id, name, value) {
+      const o = {};
+      o[name] = value;
+      // for (let i =0; i<=this.preloadedMedias.length; i++) {
+      //   if (this.preloadedMedias[i].id === id) {
+      //     this.preloadedMedias[i][name] = value;
+      //   }
+      // }
+      this.preloadedMedias = this.preloadedMedias.map(m => {
+        return m.id === id ? { ...m, ...o } : m;
+      });
+      console.log("==============");
+      console.log(this.preloadedMedias);
+      console.log(o);
     },
 
     getS3Upload(file) {

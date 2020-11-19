@@ -10,8 +10,11 @@
       <span v-else>{{ media.userFileName }}</span>
       <span
         class="attachment-status icn-item success-status"
+        :class="{ checked: iconChecked }"
         v-if="media.processId"
+        @click="switchChecked"
       />
+      <span class="label" v-if="iconChecked">free</span>
       <span
         class="attachment-status icn-item error-status"
         v-if="media.uploadError"
@@ -60,6 +63,11 @@ export default {
     Loader,
     AudioPreview
   },
+  data() {
+    return {
+      iconChecked: false
+    };
+  },
   computed: {
     preview() {
       if (
@@ -83,6 +91,13 @@ export default {
     }
   },
   methods: {
+    switchChecked() {
+      this.iconChecked = !this.iconChecked;
+      this.$emit("clickCheckIcon", {
+        id: this.media.id,
+        iconChecked: this.iconChecked
+      });
+    },
     remove() {
       this.$emit("removeMedia", this.media.id);
     }

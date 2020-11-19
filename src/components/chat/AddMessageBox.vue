@@ -23,6 +23,7 @@
           :key="media.id"
           :isSaving="isSaving"
           @removeMedia="removeMedia"
+          @clickCheckIcon="isFree"
         />
         <PdfPreview
           v-for="media in preloadedPdfFiles"
@@ -31,6 +32,14 @@
           :isSaving="isSaving"
           @removeMedia="removePdf"
         />
+      </div>
+      <div class="addFileCollectionView" v-if="preloadedMedias.length">
+        <div class="markAsFree">
+          <span
+            >You can mark some medias as free to be used as a previews for
+            hidden content. Just click on media check icon</span
+          >
+        </div>
       </div>
       <span v-if="showFreeTextSwitcher" class="freeText-switcher">
         <span class="label">Unlock text</span>
@@ -361,6 +370,9 @@ export default {
   },
 
   methods: {
+    isFree({ id, iconChecked }) {
+      this.setParamToPreloadedMedias(id, "isFree", iconChecked);
+    },
     async sendMessage(e) {
       e.preventDefault();
       if (e.ctrlKey || e.shiftKey) {
@@ -395,7 +407,12 @@ export default {
       }
       if (mediaFiles.length) {
         if (this.$props.multipleMedia) {
-          opt.mediaFile = mediaFiles.map(item => ({ id: item.processId }));
+          opt.mediaFile = mediaFiles.map(item => {
+            return {
+              id: item.processId,
+              isFree: item.isFree
+            };
+          });
         } else {
           opt.mediaFile = [{ id: mediaFiles[0].processId }];
         }
