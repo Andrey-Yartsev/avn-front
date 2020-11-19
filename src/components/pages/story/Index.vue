@@ -449,7 +449,6 @@ export default {
       return this.currentStory.isReady;
     },
     userId() {
-      // console.log(this.$store.state.modalRouter);
       return this.routeParams.userId;
     },
     currentStory() {

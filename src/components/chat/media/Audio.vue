@@ -34,7 +34,6 @@ export default {
   },
   methods: {
     openAudio(src) {
-      console.log("open");
       this.$store.dispatch("modal/show", {
         name: "audio",
         data: {

@@ -175,7 +175,8 @@
                 v-else-if="
                   !isOwner(profile.id) &&
                     !profile.isPrivatePost &&
-                    (profile.privacy.forFollowersOnly && !profile.followedBy) &&
+                    profile.privacy.forFollowersOnly &&
+                    !profile.followedBy &&
                     pageName !== 'media'
                 "
                 :profile="profile"
@@ -191,7 +192,8 @@
                   (!isOwner(profile.id) && profile.isPrivatePost) ||
                     (!isOwner(profile.id) &&
                       !profile.isPrivatePost &&
-                      (profile.privacy.forFollowersOnly && !profile.followedBy))
+                      profile.privacy.forFollowersOnly &&
+                      !profile.followedBy)
                 "
               />
               <GroupsPage
@@ -561,7 +563,6 @@ export default {
       this.lastYOffset = 0;
     },
     posts() {
-      // console.log(this.posts.length);
       for (let i = 0; i < this.posts.length; i++) {
         if (this.posts[i].isVisible === undefined) {
           this.posts[i].isVisible = true;
@@ -710,7 +711,6 @@ export default {
                 }
               })
               .then(() => {
-                // console.log(r);
                 this.$router.push(`/chat/${this.profile.id}`);
               });
           });

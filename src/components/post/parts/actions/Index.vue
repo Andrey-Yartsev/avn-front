@@ -159,7 +159,6 @@ export default {
       this.$emit("toggleTip");
     },
     open() {
-      console.log("click");
       this.opened = true;
       this.$emit("openDropdown");
     },

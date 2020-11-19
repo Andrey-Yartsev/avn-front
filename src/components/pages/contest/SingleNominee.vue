@@ -232,16 +232,6 @@ export default {
       }
       this.contestId = contestId;
     }
-    // contestId(contestId) {
-    //   const nomineeId = this.$route.params.nomineeId;
-    //   console.log(nomineeId, contestId)
-    //   if (nomineeId) {
-    //     this.$router.push(`/contests/${contestId}#nominee${nomineeId}`);
-    //   } else {
-    //     this.$router.push(`/contests/${contestId}`);
-    //   }
-    //   this.init();
-    // }
   },
   mounted() {
     if (!this.allowContestsView) {

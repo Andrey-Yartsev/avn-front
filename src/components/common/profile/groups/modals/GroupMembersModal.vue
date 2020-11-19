@@ -125,7 +125,6 @@ export default {
     },
     save() {
       this.saving = true;
-      console.log(this.getMediaData());
       this.$store
         .dispatch("profile/groups/updateGroup", this.getMediaData(), {
           root: true

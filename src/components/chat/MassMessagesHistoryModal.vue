@@ -213,7 +213,6 @@ export default {
       return fromNow(date);
     },
     unsend(messageId) {
-      console.log("unsend");
       this.$store
         .dispatch("chat/bulkHistory/unsendMessage", messageId)
         .then(() => {
