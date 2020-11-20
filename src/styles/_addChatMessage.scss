@@ -84,6 +84,14 @@
     }
   }
 
+  .add-media-input {
+    margin-right: 0.6em;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      margin-right: 1.1em;
+    }
+  }
+
   .getPaid {
     margin: 0;
     margin-right: 0.6em;
