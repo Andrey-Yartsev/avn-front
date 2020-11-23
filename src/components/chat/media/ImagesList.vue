@@ -9,7 +9,11 @@
         :key="uniqId"
       >
         <swiperSlide v-for="(media, index) in images" :key="media.id">
-          <div class="media media-item">
+          <div
+            class="media media-item"
+            :class="{ isFree: !media.locked }"
+            @click.stop="imageClick(media)"
+          >
             <figure class="media-item active media-item_photo" data-index="0">
               <template v-if="!media.locked">
                 <a
@@ -56,11 +60,13 @@
         v-if="$mq === 'desktop'"
       >
         <span
+          @click.stop="() => {}"
           :class="
             `btn-direction btn-direction_lr-sides btn-direction_prev btn-direction_prev-left btn-prev btn-prev-${uniqId} icn-item icn-item icn-pos_center`
           "
         />
         <span
+          @click.stop="() => {}"
           :class="
             `btn-direction btn-direction_lr-sides btn-direction_next btn-direction_next-right btn-next btn-next-${uniqId} icn-item icn-item icn-pos_center`
           "
@@ -73,6 +79,7 @@
 <script>
 import { swiper, swiperSlide } from "vue-awesome-swiper";
 import MediaImage from "./Image";
+
 export default {
   name: "MediaImagesList",
   components: {
@@ -140,6 +147,12 @@ export default {
     },
     hideBlurCover() {
       this.blurImage = false;
+    },
+    imageClick(media) {
+      if (media.canView) {
+        return;
+      }
+      this.$emit("clickPassed");
     }
   }
 };

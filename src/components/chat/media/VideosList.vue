@@ -9,15 +9,26 @@
         :key="uniqId"
       >
         <swiperSlide v-for="(media, index) in videos" :key="media.id">
-          <div class="media media-item">
+          <div
+            class="media media-item"
+            :class="{ isFree: !media.locked }"
+            @click.stop="imageClick(media)"
+          >
             <figure class="media-item active media-item_photo" data-index="0">
-              <template v-if="isMyMessage || isFree || isUnlocked">
+              <template
+                v-if="
+                  isMyMessage ||
+                    isFree ||
+                    isUnlocked ||
+                    notFreeMessageButHasFreeMedias
+                "
+              >
                 <a
                   class="postLink video-placeholder icn-item rounded-corners"
                   :class="{ processing }"
                   :href="media.src.source"
                   target="_blank"
-                  @click.prevent="openVideosList(message, videos, index)"
+                  @click.prevent="openVideosList(index, !media.locked)"
                 >
                   <span
                     class="loader-container loader-container_center"
@@ -80,11 +91,13 @@
         v-if="$mq === 'desktop'"
       >
         <span
+          @click.stop="() => {}"
           :class="
             `btn-direction btn-direction_lr-sides btn-direction_prev btn-direction_prev-left btn-prev btn-prev-${uniqId} icn-item icn-item icn-pos_center`
           "
         />
         <span
+          @click.stop="() => {}"
           :class="
             `btn-direction btn-direction_lr-sides btn-direction_next btn-direction_next-right btn-next btn-next-${uniqId} icn-item icn-item icn-pos_center`
           "
@@ -165,14 +178,29 @@ export default {
         !this.isMyMessage &&
         this.blurImage
       );
+    },
+    notFreeMessageButHasFreeMedias() {
+      if (this.isFree) {
+        return false;
+      }
+      return this.videos.some(v => !v.locked);
     }
   },
   methods: {
-    openVideosList(message, videos, index) {
+    openVideosList(index) {
+      if (this.videos[index].locked) {
+        return;
+      }
+      let videos;
+      if (this.notFreeMessageButHasFreeMedias) {
+        videos = [this.videos[index]];
+      } else {
+        videos = this.videos;
+      }
       this.$store.dispatch("modal/show", {
         name: "videoSwiper",
         data: {
-          message,
+          message: this.message,
           videos,
           index
         }
@@ -180,6 +208,12 @@ export default {
     },
     hideBlurCover() {
       this.blurImage = false;
+    },
+    imageClick(media) {
+      if (media.canView) {
+        return;
+      }
+      this.$emit("clickPassed");
     }
   }
 };

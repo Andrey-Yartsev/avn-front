@@ -24,6 +24,7 @@
           :isSaving="isSaving"
           @removeMedia="removeMedia"
           @clickCheckIcon="isFree"
+          :switchable="priceIsSet"
         />
         <PdfPreview
           v-for="media in preloadedPdfFiles"
@@ -31,13 +32,15 @@
           :key="media.id"
           :isSaving="isSaving"
           @removeMedia="removePdf"
+          @clickCheckIcon="isFree"
+          :switchable="priceIsSet"
         />
       </div>
-      <div class="addFileCollectionView" v-if="preloadedMedias.length">
+      <div class="addFileCollectionView" v-if="showCanMakeFreeAlert">
         <div class="markAsFree">
           <span
             >You can mark some medias as free to be used as a previews for
-            hidden content. Just click on media check icon</span
+            hidden content.<br />Just click on media check icon</span
           >
         </div>
       </div>
@@ -169,7 +172,6 @@
             Set Price
           </button>
         </div>
-
         <button
           @click="sendMessage"
           class="btn-send btn-send_default icn-item icn-size_lg"
@@ -357,6 +359,16 @@ export default {
         this.message.trim().length &&
         this.priceIsSet
       );
+    },
+    showCanMakeFreeAlert() {
+      if (!this.priceIsSet) {
+        return false;
+      } else if (this.preloadedMedias.length) {
+        return true;
+      } else if (this.preloadedPdfFiles.length) {
+        return true;
+      }
+      return false;
     }
   },
 
@@ -372,6 +384,9 @@ export default {
   methods: {
     isFree({ id, iconChecked }) {
       this.setParamToPreloadedMedias(id, "isFree", iconChecked);
+      this.preloadedMedias = this.preloadedMedias.map(m => {
+        return m.id === id ? { ...m, isFree: iconChecked } : m;
+      });
     },
     async sendMessage(e) {
       e.preventDefault();
@@ -410,7 +425,7 @@ export default {
           opt.mediaFile = mediaFiles.map(item => {
             return {
               id: item.processId,
-              isFree: item.isFree
+              free: item.isFree
             };
           });
         } else {

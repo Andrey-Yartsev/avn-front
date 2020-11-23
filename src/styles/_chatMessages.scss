@@ -482,11 +482,6 @@
       font-size: 40px;
       margin-left: 10px;
     }
-    &:hover {
-      &:after {
-        color: $main;
-      }
-    }
   }
 }
 
@@ -596,6 +591,12 @@
         color: #fff;
         text-shadow: $shadow-light;
         z-index: 1;
+      }
+    }
+
+    &.isFree {
+      &:before {
+        display: none;
       }
     }
   }

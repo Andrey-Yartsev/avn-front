@@ -188,11 +188,13 @@
                     v-if="v.media.length && v.media[0].type === 'video'"
                     :message="v"
                     :videos="v.media"
+                    @clickPassed="messageClick(v)"
                   />
                   <MediaImagesList
                     v-else-if="v.media.length && v.media[0].type === 'photo'"
                     :message="v"
                     :images="v.media"
+                    @clickPassed="messageClick(v)"
                   />
                 </div>
                 <template v-if="v.story">

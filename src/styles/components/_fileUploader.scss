@@ -167,14 +167,13 @@
     opacity: 0.7;
     &:after {
       font-size: 40px;
-    }
-    &:hover {
-      &:after {
-        color: $main;
-      }
+      color: $main;
+      opacity: 0.3;
     }
   }
+}
 
+.audio-file-preview, .filename {
   .label {
     position: absolute;
     background: $secondary-color;
@@ -182,6 +181,7 @@
     bottom: 3px;
     padding: 1px 5px;
     border-radius: 3px;
+    color: #fff;
   }
 }
 
@@ -225,9 +225,10 @@
       content: "\E619";
     }
   }
-
-  cursor: pointer;
-  &:hover {
+  &.switchable {
+    cursor: pointer;
+  }
+  &.switchable:hover {
     color: $primary-color;
   }
   &.checked {
@@ -254,5 +255,14 @@
     right: 0;
     background: rgba(#000, 0.3);
     z-index: 1;
+  }
+}
+
+.audio-file-preview {
+  padding-right: 60px;
+
+  .attachment-status {
+    left: auto;
+    right: 10px;
   }
 }

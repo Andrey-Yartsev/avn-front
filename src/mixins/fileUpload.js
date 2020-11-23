@@ -212,17 +212,9 @@ export default {
     setParamToPreloadedMedias(id, name, value) {
       const o = {};
       o[name] = value;
-      // for (let i =0; i<=this.preloadedMedias.length; i++) {
-      //   if (this.preloadedMedias[i].id === id) {
-      //     this.preloadedMedias[i][name] = value;
-      //   }
-      // }
       this.preloadedMedias = this.preloadedMedias.map(m => {
         return m.id === id ? { ...m, ...o } : m;
       });
-      console.log("==============");
-      console.log(this.preloadedMedias);
-      console.log(o);
     },
 
     getS3Upload(file) {

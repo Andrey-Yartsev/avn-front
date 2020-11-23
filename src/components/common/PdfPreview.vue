@@ -5,15 +5,17 @@
       <span class="icn-file-pdf icn-item"></span>
       <span
         class="attachment-status icn-item success-status"
+        :class="{ checked: iconChecked, switchable }"
         v-if="media.fileName"
+        @click="switchChecked"
       />
+      <span class="label" v-if="iconChecked">free</span>
       <span
         class="attachment-status icn-item error-status"
         v-if="media.uploadError"
       />
     </span>
     <div v-if="showLoader" class="progress">
-      {{ showLoader }}
       <div class="progress-loader" :style="{ width: `${media.loaded}%` }" />
     </div>
     <span
@@ -49,10 +51,19 @@ export default {
     deleteButton: {
       type: Boolean,
       default: true
+    },
+    switchable: {
+      type: Boolean,
+      default: false
     }
   },
   components: {
     Loader
+  },
+  data() {
+    return {
+      iconChecked: false
+    };
   },
   computed: {
     showLoader() {
@@ -63,6 +74,16 @@ export default {
     }
   },
   methods: {
+    switchChecked() {
+      if (!this.switchable) {
+        return;
+      }
+      this.iconChecked = !this.iconChecked;
+      this.$emit("clickCheckIcon", {
+        id: this.media.id,
+        iconChecked: this.iconChecked
+      });
+    },
     remove() {
       this.$emit("removeMedia", this.media.id);
     }

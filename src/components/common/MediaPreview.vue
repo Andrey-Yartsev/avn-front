@@ -10,7 +10,7 @@
       <span v-else>{{ media.userFileName }}</span>
       <span
         class="attachment-status icn-item success-status"
-        :class="{ checked: iconChecked }"
+        :class="{ checked: iconChecked, switchable }"
         v-if="media.processId"
         @click="switchChecked"
       />
@@ -57,6 +57,10 @@ export default {
     deleteButton: {
       type: Boolean,
       default: true
+    },
+    switchable: {
+      type: Boolean,
+      default: false
     }
   },
   components: {
@@ -92,6 +96,9 @@ export default {
   },
   methods: {
     switchChecked() {
+      if (!this.switchable) {
+        return;
+      }
       this.iconChecked = !this.iconChecked;
       this.$emit("clickCheckIcon", {
         id: this.media.id,
