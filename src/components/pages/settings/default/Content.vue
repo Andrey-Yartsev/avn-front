@@ -192,6 +192,7 @@
             </div>
           </div>
         </div>
+        <ExpiredContent v-if="isFullyMonetizedUser" />
         <Discount v-if="isFullyMonetizedUser" />
         <MultiMonthDiscount
           v-if="isFullyMonetizedUser"
@@ -342,6 +343,7 @@ import Form from "@/mixins/form";
 import DeleteRestore from "../DeleteRestore";
 import timezones from "@/utils/timezones";
 import Discount from "./Discount";
+import ExpiredContent from "./ExpiredContent";
 import MultiMonthDiscount from "./MultiMonthDiscount";
 import UserDiscounts from "./UserDiscounts";
 import User from "@/mixins/user";
@@ -357,7 +359,8 @@ export default {
     DeleteRestore,
     Discount,
     MultiMonthDiscount,
-    UserDiscounts
+    UserDiscounts,
+    ExpiredContent
   },
 
   methods: {

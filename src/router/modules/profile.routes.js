@@ -72,6 +72,17 @@ export const routes = [
     }
   },
   {
+    beforeEnter: Profile.unlockPosts,
+    path: "/:username/posts/:accessToken",
+    name: "ProfilePageAccessToken",
+    component: () =>
+      import(/* webpackChunkName: "ProfilePage" */ "@/components/pages/profile/NotFoundWrapper"),
+    meta: {
+      cssName: "userProfile",
+      profile: true
+    }
+  },
+  {
     beforeEnter: Profile.contests,
     path: "/:username/c/:contestId?/:nomineeId?",
     name: "SingleNomineePage",

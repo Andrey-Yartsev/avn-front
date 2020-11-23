@@ -346,6 +346,33 @@ createRequestAction({
   }
 });
 
+createRequestAction({
+  prefix: "getUnlockExpiredContentLink",
+  apiPath: "posts/accessLink",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "GET"
+  }
+});
+
+createRequestAction({
+  prefix: "unlockExpiredContent",
+  apiPath: "posts/accessLink",
+  state,
+  mutations,
+  actions,
+  throw400: true,
+  options: {
+    method: "POST"
+  },
+  paramsToOptions: function(params, options) {
+    options.data = params;
+    return options;
+  }
+});
+
 export default {
   namespaced: true,
   state,

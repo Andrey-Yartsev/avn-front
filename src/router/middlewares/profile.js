@@ -77,6 +77,53 @@ const Profile = {
       }
     });
   },
+  unlockPosts(to, from, next) {
+    Auth.init(to, from, () => {
+      const username = to.params.username.toLowerCase();
+      const accessToken = to.params.accessToken;
+
+      const fetchProfile = () => {
+        Store.dispatch("profile/home/fetchProfile", username)
+          .then(() => {
+            Store.dispatch("profile/setFetchLoading", false);
+            next(`/${username}/posts`);
+          })
+          .catch(() => {
+            Store.dispatch("profile/setFetchLoading", false);
+            next(`/${username}/posts`);
+          });
+      };
+
+      const isLoggedIn = () => {
+        return !!Store.state.auth.user;
+      };
+
+      const isAuthor = () => {
+        return Store.state.auth.user.username === username;
+      };
+
+      if (isLoggedIn() && !isAuthor()) {
+        Store.dispatch("profile/home/unlockExpiredContent", { accessToken })
+          .then(() => {
+            Store.dispatch("global/flashToast", {
+              text: "You've got access to all users posts",
+              type: "success"
+            });
+          })
+          .catch(err => {
+            Store.dispatch("global/flashToast", {
+              text: err.message,
+              type: "error"
+            });
+          })
+          .finally(() => {
+            fetchProfile();
+          });
+      } else {
+        fetchProfile();
+      }
+    });
+  },
   contests(to, from, next) {
     const { contestId, nomineeId, username } = to.params;
     Store.dispatch("contest/fetchContests")

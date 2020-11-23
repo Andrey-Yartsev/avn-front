@@ -124,10 +124,18 @@ import UserSuggestionsInline from "@/mixins/userSuggestionsInline";
 import moment from "moment";
 import LinksPreviewList from "@/components/post/parts/linksPreviewList/Index";
 import PostTipsGoal from "@/components/post/parts/tipsGoal/Index";
+import PayAction from "@/components/pages/settings/payments/payAction";
 
 export default {
   name: "PostMedium",
-  mixins: [ModalRouterGoto, User, PostCommon, PostOpen, UserSuggestionsInline],
+  mixins: [
+    ModalRouterGoto,
+    User,
+    PostCommon,
+    PostOpen,
+    UserSuggestionsInline,
+    PayAction
+  ],
   data() {
     return {
       showDropdown: false,

@@ -27,7 +27,7 @@
 import Post from "@/components/post/view/MediumView";
 import PostsStat from "@/mixins/post/statMany";
 import UserMixin from "@/mixins/user";
-// import audio from "@/mock/audio";
+// import posts from "@/mock/posts";
 
 export default {
   name: "PostCollection",
@@ -37,7 +37,7 @@ export default {
   },
   // data() {
   //   return {
-  //     posts: audio
+  //     posts: posts
   //   }
   // },
   props: {
