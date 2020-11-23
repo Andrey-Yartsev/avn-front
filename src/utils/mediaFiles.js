@@ -235,7 +235,8 @@ export const converterUpload = (
 
     const getLogData = extra => {
       const logData = {
-        mediaType
+        mediaType,
+        userId: Store.state.auth?.user?.id
       };
       if (file.name) {
         logData.name = file.name;
@@ -251,6 +252,7 @@ export const converterUpload = (
           logData[key] = value;
         }
       }
+      return logData;
     };
 
     const data = {};

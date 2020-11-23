@@ -125,7 +125,7 @@ export default {
   },
   computed: {
     isOwner() {
-      return this.$store.state.auth.user.id === this.message.fromUser.id;
+      return this.$store.state.auth.user.id === this.message?.fromUser?.id;
     },
     showBlurCover() {
       return (

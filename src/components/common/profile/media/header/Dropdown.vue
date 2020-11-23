@@ -58,18 +58,6 @@
           <span class="more-functions__option">Edit {{ mediaType }}</span>
         </a>
       </li>
-      <!-- <li class="more-functions__item">
-        <a
-          class="edit more-functions__link"
-          type="button"
-          :href="'/post/edit/' + post.id"
-          @click.prevent="pinToggle"
-        >
-          <span class="more-functions__option">{{
-            post.pinned ? `Pinned. Unpin ${mediaType}` : `Pin ${mediaType}`
-          }}</span>
-        </a>
-      </li> -->
       <li class="more-functions__item">
         <button
           class="deletePost more-functions__link"
@@ -155,9 +143,7 @@ export default {
           root: true
         })
         .then(res => {
-          const urlString = `${window.location.origin}/media/${
-            this.$store.state.auth.user.username
-          }/${this.post.productId}/${res.accessToken}`;
+          const urlString = `${window.location.origin}/media/${this.$store.state.auth.user.username}/${this.post.productId}/${res.accessToken}`;
           this.$store.dispatch("modal/show", {
             name: "mediaAccessLink",
             data: {
@@ -182,44 +168,6 @@ export default {
         `/media/${this.post.author.username}/${this.post.productId}`
       );
     },
-    // pinToggle() {
-    //   this.hide();
-    //   this.$store
-    //     .dispatch("profile/media/updateMedia", this.getMediaData(), {
-    //       root: true
-    //     })
-    //     .then(() => {
-    //       console.log("updated");
-    //     });
-    // },
-    // getMediaData() {
-    //   const {
-    //     active,
-    //     title,
-    //     text,
-    //     price,
-    //     free,
-    //     thumbId,
-    //     removeVideoPreview,
-    //     pinned,
-    //     categories
-    //   } = this.$props.post;
-    //   const data = {
-    //     media: {
-    //       active,
-    //       title,
-    //       text,
-    //       price,
-    //       free,
-    //       thumbId,
-    //       removeVideoPreview,
-    //       categories,
-    //       pinned: !pinned
-    //     },
-    //     productId: this.$props.post.productId
-    //   };
-    //   return data;
-    // },
     async deletePost() {
       this.hide();
       this.$store

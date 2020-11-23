@@ -114,7 +114,6 @@ export default {
           } else if (this.bankExists) {
             return Summery;
           } else {
-            // console.log("BANK NOT EXISTS", this.bankExists);
             return Bank;
           }
         }

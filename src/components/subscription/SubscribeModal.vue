@@ -48,7 +48,7 @@ export default {
           userId: this.profile.id,
           amount: price,
           months: months,
-          paymentGateCustomerCardToken: this.user.paymentGateCustomerCardToken
+          paymentGateCustomerCardToken: this.user?.paymentGateCustomerCardToken
         },
         onSuccess
       );

@@ -431,10 +431,6 @@ export default {
         ""
       );
     }
-    // subscribePrice(subscribePrice) {
-    //   this.localUser.subscribePrice = subscribePrice.toString().replace(",", ".");
-    //   console.log(this.localUser.subscribePrice);
-    // }
   },
 
   mounted() {

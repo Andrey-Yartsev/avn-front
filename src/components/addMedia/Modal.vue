@@ -65,7 +65,6 @@ export default {
       this.$store.commit("profile/media/endEditMedia");
     },
     submit(data) {
-      console.log(data);
       this.isEditMode
         ? this.$store.dispatch("profile/media/updateMedia", data, {
             root: true

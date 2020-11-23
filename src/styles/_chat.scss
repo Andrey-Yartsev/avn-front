@@ -1224,6 +1224,11 @@
       text-align: center;
       position: absolute;
       width: 100%;
+      @include media-breakpoint-down($desktop-breakpoint) {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+      }
 
       a {
         color: $primary-color;
@@ -1235,6 +1240,11 @@
         &.selected {
           border-color: $primary-color-darken;
           color: $primary-color-darken;
+        }
+        &.disabled {
+          cursor: default;
+          opacity: 0.5;
+          pointer-events: none;
         }
       }
     }

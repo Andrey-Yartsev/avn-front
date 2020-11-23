@@ -29,7 +29,6 @@ export default {
   watch: {
     $route() {
       if (this.error) {
-        console.log("ERR");
         this.$router.go();
       }
     }

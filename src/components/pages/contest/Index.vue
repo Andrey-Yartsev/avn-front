@@ -248,7 +248,6 @@ export default {
         })
         .then(() => {
           if (this.isFirstInit) {
-            console.log("set contest id");
             this.scrollToShared();
             this.isFirstInit = false;
             this.contestGroupItem = this.contestId;

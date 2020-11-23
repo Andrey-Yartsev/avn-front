@@ -165,6 +165,9 @@ export default {
   },
   methods: {
     select(votes) {
+      if (votes.id == this.votes) {
+        return;
+      }
       this.votes = votes;
     },
     vote() {

@@ -5,7 +5,7 @@
         <a
           class="postLink video-placeholder icn-item rounded-corners"
           :class="{ processing }"
-          :href="media.src.source"
+          :href="media.src ? media.src.source : '#'"
           target="_blank"
           @click.prevent="openVideo"
         >

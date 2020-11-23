@@ -18,7 +18,7 @@
       controlslist="nodownload"
       autoplay
       loop
-      :poster="media.preview.source"
+      :poster="media.preview ? media.preview.source : ''"
       @contextmenu.prevent="() => false"
       @dragstart.prevent="() => false"
       ref="video"
@@ -29,7 +29,7 @@
     <img
       v-else
       class="locked"
-      :src="media.preview.source"
+      :src="media.preview ? media.preview.source : ''"
       :width="`${size.width}`"
       @contextmenu.prevent="() => false"
       @dragstart.prevent="() => false"

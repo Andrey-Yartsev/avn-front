@@ -13,7 +13,7 @@
       <div class="chatHeader">
         <div class="contactsListHeader">
           <a
-            :href="'/' + user.username"
+            :href="user.username ? `/${user.username}` : '/#'"
             class="avatar header-avatar"
             @click.prevent="openUserMobileBar"
             v-if="$mq === 'mobile'"
