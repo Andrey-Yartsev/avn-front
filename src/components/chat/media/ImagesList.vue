@@ -140,7 +140,7 @@ export default {
       this.$store.dispatch("modal/show", {
         name: "imageSwiper",
         data: {
-          images,
+          images: images.filter(v => v.canView),
           index
         }
       });

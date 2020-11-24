@@ -195,7 +195,7 @@ export default {
       if (this.notFreeMessageButHasFreeMedias) {
         videos = [this.videos[index]];
       } else {
-        videos = this.videos;
+        videos = this.videos.filter(v => v.canView);
       }
       this.$store.dispatch("modal/show", {
         name: "videoSwiper",

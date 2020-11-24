@@ -363,9 +363,11 @@ export default {
     showCanMakeFreeAlert() {
       if (!this.priceIsSet) {
         return false;
-      } else if (this.preloadedMedias.length) {
+      } else if (this.preloadedMedias.length > 1) {
         return true;
-      } else if (this.preloadedPdfFiles.length) {
+      } else if (this.preloadedPdfFiles.length > 1) {
+        return true;
+      } else if (this.preloadedMedias.length && this.preloadedPdfFiles.length) {
         return true;
       }
       return false;
