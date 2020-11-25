@@ -32,235 +32,12 @@
         >
           Loading history...
         </div>
-        <div
-          v-for="v in messages"
-          v-bind:key="v.id"
-          class="chatMessage"
-          :class="{
-            authorMessage: isAuthor(v),
-            notAuthorMessage: !isAuthor(v),
-            firstMessageInGroup: v.firstMessageInGroup,
-            withTime: v.lastMessageInGroup
-          }"
-        >
-          <div class="chatMessageWrapper">
-            <div
-              class="avatar avatar_gap-r-md avatar_sm"
-              v-if="v.lastMessageInGroup && !isAuthor(v)"
-            >
-              <span class="avatar__img">
-                <img :src="v.fromUser.avatar" v-if="v.fromUser.avatar" />
-              </span>
-            </div>
-            <div class="messageContent" :style="{ fontSize: chatFontsize }">
-              <div
-                class="messageWrapper"
-                :class="{
-                  tipsMessage: v.paymentType,
-                  lockedMessage: isLocked(v),
-                  unlockedMessage: isUnlocked(v),
-                  'message-icon': isLocked(v) || v.paymentType || !isLocked(v),
-                  mine: isMyMessage(v),
-                  snapchatMessage: v.isSnapchat
-                }"
-                @click="messageClick(v)"
-              >
-                <span
-                  class="message rounded-corners"
-                  :class="{
-                    'message-locked':
-                      v.textLength && isLocked(v) && !v.showPaidMessageText
-                  }"
-                  :style="{
-                    display: hasReplyMediaContent(v) ? 'block' : 'inline-block'
-                  }"
-                  v-if="v.textLength"
-                >
-                  <div v-if="v.reply" class="message__reply">
-                    <div class="message__reply-header">Replying to You</div>
-                    <div v-if="v.reply.media" class="message__reply-media">
-                      <div class="media-chat" v-if="v.reply.media.length">
-                        <MediaAudio
-                          v-if="v.reply.media[0].type === 'audio'"
-                          :message="{
-                            ...v.reply,
-                            isOpened: true,
-                            isFree: false,
-                            isMediaReady: true
-                          }"
-                        />
-                        <MediaVideosList
-                          v-else-if="v.reply.media[0].type === 'video'"
-                          :message="{
-                            ...v.reply,
-                            isOpened: true,
-                            isFree: false,
-                            isMediaReady: true
-                          }"
-                          :videos="v.reply.media"
-                        />
-                        <MediaImagesList
-                          v-else-if="v.reply.media[0].type === 'photo'"
-                          :message="{
-                            ...v.reply,
-                            isOpened: true,
-                            isFree: false,
-                            isMediaReady: true
-                          }"
-                          :images="v.reply.media"
-                        />
-                      </div>
-                    </div>
-                    <div
-                      v-if="v.reply.docFiles && v.reply.docFiles.length"
-                      class="message__reply-media"
-                    >
-                      <div class="media-chat">
-                        <a
-                          :href="file.source"
-                          class="icn-file-pdf icn-item"
-                          v-for="file in v.reply.docFiles"
-                          :key="file.id"
-                          target="_blank"
-                        ></a>
-                      </div>
-                    </div>
-                    <span
-                      v-if="v.reply.text"
-                      class="message__reply-text"
-                      v-html="v.reply.text"
-                    ></span>
-                  </div>
-                  <span class="message__text" v-html="text(v)" />
-                  <span
-                    class="message-locked__text"
-                    v-if="v.textLength && isLocked(v) && !isMyMessage(v)"
-                    >{{ lockedText(v) }}</span
-                  >
-                  <SubscribeButton
-                    v-if="v.registerLink"
-                    :profile="v.fromUser"
-                  />
-                </span>
-                <span
-                  v-if="
-                    v.textLength &&
-                      v.price &&
-                      !v.showPaidMessageText &&
-                      isLocked(v) &&
-                      !isMyMessage(v)
-                  "
-                  class="message-locked__price"
-                >
-                  {{ v.price }}
-                </span>
-
-                <div class="media-chat" v-if="v.docFiles && v.docFiles.length">
-                  <a
-                    :href="file.source"
-                    class="icn-file-pdf icn-item"
-                    v-for="file in v.docFiles"
-                    :key="file.id"
-                    target="_blank"
-                  ></a>
-                </div>
-
-                <div class="media-chat" v-if="v.media.length">
-                  <span
-                    v-if="v.price && isLocked(v) && !isMyMessage(v)"
-                    class="media-chat__price"
-                    >Price: {{ v.price }}</span
-                  >
-                  <MediaAudio v-if="v.media[0].type === 'audio'" :message="v" />
-                  <MediaVideosList
-                    v-else-if="v.media[0].type === 'video'"
-                    :message="v"
-                    :videos="v.media"
-                    @clickPassed="messageClick(v)"
-                  />
-                  <MediaImagesList
-                    v-else-if="v.media[0].type === 'photo'"
-                    :message="v"
-                    :images="v.media"
-                    @clickPassed="messageClick(v)"
-                  />
-                </div>
-                <template v-if="v.story">
-                  <div class="media-chat">
-                    <div class="media media-item">
-                      <figure
-                        class="media-item active media-item_photo"
-                        data-index="0"
-                      >
-                        <span class="postLink">
-                          <img
-                            :src="v.story.preview"
-                            class="media-content m-cover-size"
-                          />
-                        </span>
-                      </figure>
-                    </div>
-                  </div>
-                </template>
-                <template v-if="v.messageAttachment">
-                  <a
-                    :href="vv.url"
-                    target="_blank"
-                    class="userView userView_card rounded-corners nolink"
-                    v-for="(vv, k) in v.messageAttachment"
-                    :key="k"
-                  >
-                    <div class="bg bg-color bg-gradient_light">
-                      <img v-if="vv.image" :src="vv.image" />
-                    </div>
-                    <div class="user-container">
-                      <div class="names-actions-wrapper">
-                        <div class="user-names">
-                          <div class="wrap-name" v-html="vv.title"></div>
-                        </div>
-                      </div>
-                      <p
-                        class="profile-text"
-                        v-if="vv.description"
-                        v-html="vv.description"
-                      ></p>
-                      <div class="link-render">
-                        <a>{{ vv.url }}</a>
-                      </div>
-                    </div>
-                  </a>
-                </template>
-              </div>
-              <div
-                v-if="isMyMessage(v) && !v.isFree && v.isOpened && v.payedAt"
-                class="timestamp timestamp_sm-size message-time test"
-              >
-                <div class="message-time__written">
-                  <span class="timeValue"
-                    >Paid {{ v.price }} {{ time(v.payedAt) }}</span
-                  >
-                </div>
-              </div>
-              <div class="timestamp timestamp_sm-size message-time">
-                <div
-                  class="message-time__read"
-                  v-if="
-                    withUser.canWrite &&
-                      isMyMessage(v) &&
-                      v.readDate &&
-                      v.lastMessageInGroup
-                  "
-                >
-                  <span class="timeValue">Read {{ time(v.readDate) }}</span>
-                  <span class="icn-read icn-item" />
-                </div>
-                <div class="message-time__written" v-if="v.lastMessageInGroup">
-                  <span class="timeValue">Sent {{ time(v.createdAt) }}</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <ChatMessage
+          v-for="message in messages"
+          v-bind:key="message.id"
+          :message="message"
+          :withUser="withUser"
+        />
 
         <div class="typing semi-transparent" v-if="typing">
           <span>User is typing...</span>&nbsp;
@@ -280,13 +57,8 @@
 <script>
 import userMixin from "@/mixins/user";
 import Loader from "@/components/common/Loader";
-import { fromNow } from "@/helpers/datetime";
-import MediaAudio from "./media/Audio";
-import MediaImagesList from "./media/ImagesList";
-import MediaVideosList from "./media/VideosList";
-import SubscribeButton from "@/components/subscription/Button";
 import moment from "moment";
-// import messages from "@/mock/messages.js";
+import ChatMessage from "./Message";
 
 const bottomThreshold = 100; // pixels left to bottom of container
 
@@ -295,10 +67,7 @@ export default {
 
   components: {
     Loader,
-    SubscribeButton,
-    MediaImagesList,
-    MediaVideosList,
-    MediaAudio
+    ChatMessage
   },
 
   mixins: [userMixin],
@@ -321,9 +90,6 @@ export default {
   computed: {
     scrollableComponent() {
       return this.$mq === "mobile" ? "div" : "perfect-scrollbar";
-    },
-    chatFontsize() {
-      return this.$store.state.chat.fontSize + "px";
     },
     container() {
       if (this.$mq === "mobile") {
@@ -439,51 +205,6 @@ export default {
   },
 
   methods: {
-    isAuthor(message) {
-      return message.fromUser.id === this.user.id;
-    },
-    text(message) {
-      if (message.reply) {
-        const text = this.isAuthor(message)
-          ? `You have paid ${message.withUser.name} ${
-              message.text
-            } to view this message`
-          : `User ${message.fromUser.name} has paid for ${
-              message.text
-            } to view this message`;
-        return text;
-      } else if (!message.paymentType) {
-        return message.text;
-      } else {
-        let text = "";
-        switch (message.paymentType) {
-          case "tip":
-            text = this.isAuthor(message)
-              ? `You have tipped ${this.withUser.name} for ${message.text}`
-              : `You have been tipped ${message.text}`;
-            break;
-          case "paidUnblock":
-            text = this.isAuthor(message)
-              ? `You have paid ${message.text} for ${
-                  this.withUser.name
-                } to unblock the account`
-              : `${message.fromUser.name} paid ${
-                  message.text
-                } to unblock the account`;
-            break;
-          default:
-            break;
-        }
-        return text;
-      }
-    },
-    lockedText(message) {
-      let s = "";
-      for (let i = 0; i < Math.round(message.textLength / 2); i++) {
-        s += "x ";
-      }
-      return s;
-    },
     addGrouping(messages) {
       return this.setFirstInGroup(this.setLastInGroup(messages));
     },
@@ -641,47 +362,8 @@ export default {
         }
       }
     },
-    time(date) {
-      return fromNow(date);
-    },
     time2(date) {
       return moment(date).format("DD/MM HH:mm:ss");
-    },
-    isMyMessage(message) {
-      return message.fromUser.id === this.user.id;
-    },
-    messageClick(message) {
-      if (this.isMyMessage(message)) {
-        return;
-      }
-      if (message.isFree || message.isOpened) {
-        return;
-      }
-      if (process.env.VUE_APP_NAME === "avn") {
-        // if (!this.user.isPaymentCardConnected) {
-        //   this.$store.dispatch("global/flashToast", {
-        //     text: "You should add card in payment settings",
-        //     type: "warning"
-        //   });
-        //   this.$router.push("/settings/payments");
-        //   return;
-        // }
-
-        this.$store.dispatch("modal/show", {
-          name: "chatMessagePayConfirm",
-          data: {
-            price: message.price,
-            paymentType: "message",
-            messageId: message.id
-          }
-        });
-      }
-    },
-    isLocked(message) {
-      return !message.isOpened && !message.isFree;
-    },
-    isUnlocked(message) {
-      return message.isOpened && !message.isFree;
     },
     _scrollHandler() {
       this.saveScrollPosition();
@@ -727,9 +409,6 @@ export default {
     },
     markAllAsRead() {
       this.$store.dispatch("chat/markAllMessagesAsRead", this.withUser.id);
-    },
-    hasReplyMediaContent(message) {
-      return !!message.reply?.media?.length;
     }
   },
   mounted() {

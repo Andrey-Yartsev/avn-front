@@ -31,6 +31,7 @@ import blockedWithPrice from "./actions/blockedWithPrice";
 import unblockedWithPrice from "./actions/unblockedWithPrice";
 import check_new_email from "./actions/check_new_email";
 import check_new_username from "./actions/check_new_username";
+import deleteMessage from "./actions/deleteMessage";
 
 const actions = {
   chats,
@@ -62,7 +63,8 @@ const actions = {
   blockedWithPrice,
   unblockedWithPrice,
   check_new_email,
-  check_new_username
+  check_new_username,
+  deleteMessage
 };
 
 export default class Ws extends WsAbstract {

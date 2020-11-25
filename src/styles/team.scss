@@ -2,12 +2,12 @@
 
 @font-face {
   font-family: 'team';
-  src: url('#{$assetPath}/fonts/team/team.eot?30693765');
-  src: url('#{$assetPath}/fonts/team/team.eot?30693765#iefix') format('embedded-opentype'),
-       url('#{$assetPath}/fonts/team/team.woff2?30693765') format('woff2'),
-       url('#{$assetPath}/fonts/team/team.woff?30693765') format('woff'),
-       url('#{$assetPath}/fonts/team/team.ttf?30693765') format('truetype'),
-       url('#{$assetPath}/fonts/team/team.svg?30693765#team') format('svg');
+  src: url('#{$assetPath}/fonts/team/team.eot?30693766');
+  src: url('#{$assetPath}/fonts/team/team.eot?30693766#iefix') format('embedded-opentype'),
+       url('#{$assetPath}/fonts/team/team.woff2?30693766') format('woff2'),
+       url('#{$assetPath}/fonts/team/team.woff?30693766') format('woff'),
+       url('#{$assetPath}/fonts/team/team.ttf?30693766') format('truetype'),
+       url('#{$assetPath}/fonts/team/team.svg?30693766#team') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -147,3 +147,4 @@
 .icon-gplus:before { content: '\f0d5'; } /* '' */
 .icon-file-pdf:before { content: '\f1c1'; }
 .icon-dollar:before { content: '💵'; } /* '\1f4b5' */
+.icon-pencil:before { content: '\270e'; } /* '✎' */

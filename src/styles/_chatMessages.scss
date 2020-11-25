@@ -48,16 +48,13 @@
     }
 
     .gif-player {
-
       .gif-img {
         background: #000;
       }
     }
   }
 
-
   &.no-selected-conversation {
-
     .msg-no-chat {
       opacity: 1;
       pointer-events: auto;
@@ -103,13 +100,12 @@
         margin-bottom: 10px;
       }
 
-      .info-message{
+      .info-message {
         font-size: 14px;
         opacity: 0.5;
         margin-top: -8px;
         margin-bottom: 15px;
       }
-
     }
   }
 }
@@ -125,7 +121,6 @@
   }
 
   .no-selected-conversation & {
-
     @include media-breakpoint-up($desktop-breakpoint) {
       min-height: 100%;
     }
@@ -153,7 +148,6 @@
   }
 
   > .chatContent {
-
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       margin-top: auto;
       margin-bottom: 0;
@@ -178,7 +172,6 @@
   }
 
   &_new-chat {
-
     @include media-breakpoint-up($desktop-breakpoint) {
       display: flex;
     }
@@ -191,7 +184,6 @@
   max-width: 71%;
 
   &:not(:first-child) {
-
     .chatMessageWrapper,
     .message,
     .messageWrapper {
@@ -206,9 +198,7 @@
   }
 
   + .chatMessage {
-
     &.withTime {
-
       .chatMessageWrapper {
         margin-top: 0;
       }
@@ -277,7 +267,6 @@
   }
 
   &.notAuthorMessage {
-
     .rounded-corners {
       border-radius: 0 20px 20px 0;
     }
@@ -300,15 +289,13 @@
     .media-chat {
       .blurred {
         img {
-          filter: blur(10px)
+          filter: blur(10px);
         }
       }
     }
 
     &.firstMessageInGroup {
-
       .message {
-
         &.rounded-corners {
           border-top-left-radius: 20px;
         }
@@ -316,14 +303,12 @@
     }
 
     &:not(.withTime) {
-
       .messageContent {
         margin-left: 45px;
       }
     }
 
     &.withTime {
-
       .avatar {
         margin-bottom: 16px;
         margin-top: auto;
@@ -335,6 +320,12 @@
     text-align: right;
     margin-left: auto;
     margin-right: 0;
+    max-width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: flex-start;
+    @include media-breakpoint-down($tablet-breakpoint) {
+    }
 
     .rounded-corners {
       border-radius: 20px 0 0 20px;
@@ -358,24 +349,23 @@
       }
 
       + .media {
-
         .media-item {
           justify-content: flex-end;
         }
       }
+      &.message-deleted {
+        background-color: rgba($gray, 0.3);
+      }
     }
 
     .messageWrapper {
-
       &.lockedMessage {
         opacity: 0.5;
       }
     }
 
     &.firstMessageInGroup {
-
       .message {
-
         &.rounded-corners {
           border-top-right-radius: 20px;
         }
@@ -383,23 +373,25 @@
     }
 
     .media {
-
       &-content {
         margin-right: 0;
       }
 
       &-item {
-
         .postLink {
           justify-content: flex-end;
           border-radius: 20px 0 0 20px;
         }
       }
     }
+
+    .chatMessageWrapper {
+      max-width: 71%;
+      margin-left: auto;
+    }
   }
 
   .media-item {
-
     .postLink {
       width: 100%;
       padding-top: 100%;
@@ -442,18 +434,16 @@
 }
 
 .messageWrapper {
-
   .video-placeholder {
     overflow: hidden;
     background-color: rgba($gray, 0.2);
 
     .media-content {
-      transition: opacity .3s;
+      transition: opacity 0.3s;
     }
   }
 
   &.lockedMessage {
-
     .media-chat {
       position: relative;
       &__price {
@@ -469,7 +459,6 @@
     }
 
     .notAuthorMessage & {
-
       .media {
         border-radius: 0 20px 20px 0;
         overflow: hidden;
@@ -486,7 +475,6 @@
 }
 
 .message-locked {
-
   .lockedMessage:not(.mine) & {
     min-width: 108px;
 
@@ -513,11 +501,9 @@
 }
 
 .message-icon {
-
   .media,
   .message,
   .video-placeholder {
-
     &:before {
       @include icon-font;
       font-size: 24px;
@@ -528,7 +514,6 @@
     }
 
     .authorMessage & {
-
       &:before {
         left: -30px;
         //color: $primary-color;
@@ -536,7 +521,6 @@
     }
 
     .notAuthorMessage & {
-
       &:before {
         // top: 50%;
         right: -30px;
@@ -552,7 +536,6 @@
   color: $secondary-color;
 
   .message {
-
     &:before {
       content: "\E618";
     }
@@ -560,9 +543,7 @@
 }
 
 .unlockedMessage {
-
   .message {
-
     &:before {
       content: "\E61C";
     }
@@ -570,16 +551,13 @@
 }
 
 .lockedMessage {
-
   .media,
   .video-placeholder {
-
     .notAuthorMessage & {
       cursor: pointer;
     }
 
     &:before {
-
       .notAuthorMessage & {
         font-size: 42px;
         right: auto;
@@ -602,7 +580,6 @@
   }
 
   .media {
-
     &-content {
       width: auto;
     }
@@ -610,7 +587,6 @@
 
   .media,
   .video-placeholder {
-
     &:before {
       content: "\E61B";
     }
@@ -625,7 +601,6 @@
   }
 
   &:not(.mine) {
-
     .message {
       cursor: pointer;
     }
@@ -634,7 +609,12 @@
 
 .chatFlatLoader {
   height: 6px;
-  background: repeating-linear-gradient(to right, rgba(255, 64, 129, 1) 0%, rgba(33, 150, 243, 1) 50%, rgba(255, 64, 129, 1) 100%);
+  background: repeating-linear-gradient(
+    to right,
+    rgba(255, 64, 129, 1) 0%,
+    rgba(33, 150, 243, 1) 50%,
+    rgba(255, 64, 129, 1) 100%
+  );
   background-size: 200% auto;
   background-position: 0 100%;
   animation: gradient 2s infinite;
@@ -661,7 +641,6 @@
   }
 
   &.past-messages {
-
     .chat-section & {
       margin-top: -3px;
       margin-bottom: 5px;
@@ -670,5 +649,75 @@
 
   &.new-messages {
     margin-top: 5px;
+  }
+}
+
+.chatMessageControlsWrapper {
+  .messageControlsContainer {
+    padding-top: 3px;
+    display: flex;
+    flex-flow: row nowrap;
+    @include media-breakpoint-up($tablet-breakpoint) {
+      display: none;
+    }
+
+    .more-functions__btn {
+      width: 40px;
+      height: 30px;
+    }
+
+    .chatMessage:hover & {
+      @include media-breakpoint-up($tablet-breakpoint) {
+        display: block;
+      }
+    }
+
+    .btn-el {
+      margin: 0 10px;
+      align-items: center;
+      transition: color 0.3s ease, opacity 0.3s ease;
+      height: 30px;
+      color: $main-color;
+      border: none;
+      cursor: pointer;
+      background: transparent;
+      padding: 0;
+      opacity: 0.3;
+
+      &:before {
+        display: inline-block;
+        width: 1.1em;
+      }
+
+      &:hover {
+        opacity: 1;
+        color: $primary-color;
+      }
+    }
+    .mobileControls {
+      display: flex;
+      flex-flow: row nowrap;
+      .btn-el {
+        margin: 0 5px;
+        pointer-events: none;
+        opacity: 0;
+        transition: transform 0.3s, opacity 0.2s;
+
+        &.edit {
+          transform: translateX(-20px);
+        }
+        
+        &.delete {
+          transform: translateX(-40px);
+        }
+      }
+      &.opened {
+        .btn-el {
+          transform: translateX(0);
+          opacity: 1;
+          pointer-events: auto;
+        }
+      }
+    }
   }
 }

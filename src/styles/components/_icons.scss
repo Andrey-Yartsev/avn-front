@@ -436,6 +436,13 @@
     }
   }
 
+  &-pencil {
+
+    &:after {
+      content: "\270e";
+    }
+  }
+
   &-close {
 
     &:after {

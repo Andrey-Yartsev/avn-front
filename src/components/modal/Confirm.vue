@@ -13,10 +13,10 @@
         </div>
         <div class="popup-alert__footer">
           <button class="btn" @click.prevent="yes" :disabled="disabled">
-            Confirm
+            {{ confirmButtonText }}
           </button>
           <button class="btn alt" @click.prevent="no" :disabled="disabled">
-            Cancel
+            {{ cancelButtonText }}
           </button>
         </div>
       </div>
@@ -40,6 +40,14 @@ export default {
   computed: {
     title() {
       return this.$store.state.modal.confirm.data.title;
+    },
+    confirmButtonText() {
+      return (
+        this.$store.state.modal.confirm.data.confirmButtonText || "Confirm"
+      );
+    },
+    cancelButtonText() {
+      return this.$store.state.modal.confirm.data.cancelButtonText || "Cancel";
     },
     text() {
       return this.$store.state.modal.confirm.data.text;

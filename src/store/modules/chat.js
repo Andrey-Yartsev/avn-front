@@ -390,6 +390,9 @@ const actions = {
       commit("setChatsFilter", "all");
       commit("decrementRequestedChatsCount");
     });
+  },
+  deleteMessage({ dispatch }, data) {
+    return dispatch("_deleteMessage", data);
   }
 };
 
@@ -513,6 +516,9 @@ const mutations = {
   incrementMessagesOffset(state, count) {
     state.messagesOffset += count;
   },
+  decrementMessagesOffset(state, count) {
+    state.messagesOffset -= count;
+  },
   addOldMessages(state) {
     state.messages = state.moreMessages.concat(state.messages);
   },
@@ -582,6 +588,19 @@ const mutations = {
   },
   decrementRequestedChatsCount(state) {
     state.requestedChatsCount--;
+  },
+  deleteMessage(state, { chatId, messageId }) {
+    if (chatId !== state.activeUserId) {
+      return;
+    }
+    const deletedMessage = state.messages.find(item => item.id === messageId);
+    if (deletedMessage) {
+      deletedMessage.isDeleted = true;
+      deletedMessage.media = [];
+      deletedMessage.docFiles = [];
+      // state.messages.splice(needToDeleteMessageIndex, 1);
+      // state.messagesOffset -= 1;
+    }
   }
 };
 
@@ -1045,6 +1064,24 @@ createRequestAction({
   },
   paramsToPath: function(params, path) {
     return path.replace(/{userId}/, params.userId);
+  }
+});
+
+createRequestAction({
+  prefix: "_deleteMessage",
+  apiPath: "chats/{chatId}/messages/{messageId}",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "DELETE"
+  },
+  localError: true,
+  throw400: true,
+  paramsToPath: function(params, path) {
+    let p = path.replace(/{chatId}/, params.chatId);
+    p = p.replace(/{messageId}/, params.messageId);
+    return p;
   }
 });
 
