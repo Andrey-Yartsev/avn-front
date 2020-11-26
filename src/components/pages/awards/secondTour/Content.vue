@@ -13,7 +13,7 @@
       </div>
       <h2>Please choose your top {{ maxVotes }}</h2>
       <div>
-        Voting ends on {{ getEndVotingDate }} 2020 12:00PM. You can cast
+        Voting ends on {{ getEndVotingDate }} 2021 12:00PM. You can cast
         {{ maxVotes }} votes per day for this category. You have
         {{ remaining }} votes remaining
       </div>
@@ -211,7 +211,7 @@ export default {
       return parseInt(this.$route.params.category);
     },
     getEndVotingDate() {
-      return this.$props.type === "straight" ? "Jan 25th" : "Jan 20th";
+      return this.$props.type === "straight" ? "Jan 23th" : "Jan 18th";
     },
     twitterText() {
       return this.$props.type === "straight"

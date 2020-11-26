@@ -92,7 +92,7 @@
             Here {{ pluralVerb }} custom link{{ plural }} you can share with
             your fans so they can vote easily for you. Fans can vote for you
             once per day until voting closes at 12 Noon {{ getEndDateVoting }},
-            2020.
+            2021.
           </div>
         </div>
 
@@ -191,7 +191,7 @@ export default {
       return this.categories && this.categories.length > 1 ? "are" : "is a";
     },
     getEndDateVoting() {
-      return this.isGay ? "Mon Jan 20" : "Sat Jan 25";
+      return this.isGay ? "Mon Jan 18" : "Sat Jan 23";
     },
     cdnPath() {
       return process.env.VUE_APP_CDN_PATH;
