@@ -123,7 +123,12 @@
           </div>
         </template>
         <div class="explore">
-          <!-- <div class="row-btn" v-if="!infinityScrollLoading">
+          <div
+            class="row-btn"
+            v-if="
+              !infinityScrollLoading && (isEnableVoting || isEnableGayVoting)
+            "
+          >
             <router-link
               :to="getVoteLinkHref"
               class="btn border block alt lg"
@@ -153,7 +158,7 @@
                 GayVN Awards Voting
               </router-link>
             </template>
-          </div> -->
+          </div>
           <div :class="exploreSubClass">
             <template v-if="page === 'topmodels'">
               <div class="form-group form-group_with-label month-options">
