@@ -33,6 +33,7 @@ import check_new_email from "./actions/check_new_email";
 import check_new_username from "./actions/check_new_username";
 import deleteMessage from "./actions/deleteMessage";
 import editMessage from "./actions/editMessage";
+import voting from "./actions/voting";
 
 const actions = {
   chats,
@@ -66,7 +67,8 @@ const actions = {
   check_new_email,
   check_new_username,
   deleteMessage,
-  editMessage
+  editMessage,
+  voting
 };
 
 export default class Ws extends WsAbstract {

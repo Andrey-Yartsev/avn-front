@@ -12,6 +12,10 @@ const mutations = {
   },
   updateContestsStatus(state, data) {
     state.data.enableContests = data.enableContests;
+  },
+  updateVotingStatus(state, data) {
+    const key = Object.keys(data)[0];
+    state.data[key] = data[key];
   }
 };
 
