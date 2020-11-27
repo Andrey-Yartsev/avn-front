@@ -121,6 +121,8 @@
         :withUser="withUser"
         :withFontSizeController="true"
         :multipleMedia="true"
+        :editableMessage="editableMessage"
+        @resetEditableMessage="$emit('resetEditableMessage')"
       />
     </template>
   </div>
@@ -146,6 +148,10 @@ export default {
     },
     messages: {
       type: Array
+    },
+    editableMessage: {
+      type: Object,
+      default: null
     }
   },
 
@@ -175,10 +181,19 @@ export default {
 
   methods: {
     sendMessage(data) {
-      this.$store.dispatch("chat/sendMessage", {
-        userId: this.withUser.id,
-        data
-      });
+      if (this.editableMessage) {
+        this.$store.dispatch("chat/editMessage", {
+          text: data.text,
+          userId: this.withUser.id,
+          messageId: this.editableMessage.id
+        });
+        this.$emit("resetEditableMessage");
+      } else {
+        this.$store.dispatch("chat/sendMessage", {
+          userId: this.withUser.id,
+          data
+        });
+      }
     },
     reject() {
       this.$emit("deleteConversation");

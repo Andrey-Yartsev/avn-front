@@ -87,6 +87,11 @@
   .add-media-input {
     margin-right: 0.6em;
 
+    &.disabled {
+      opacity: .1;
+      pointer-events: none;
+    }
+
     @include media-breakpoint-up($desktop-breakpoint) {
       margin-right: 1.1em;
     }

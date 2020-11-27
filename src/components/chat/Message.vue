@@ -8,14 +8,19 @@
       withTime: message.lastMessageInGroup
     }"
   >
-    <div v-if="isAuthor" class="chatMessageControlsWrapper">
+    <div v-if="isShowMessageControls" class="chatMessageControlsWrapper">
       <div class="messageControlsContainer" v-if="$mq === 'desktop'">
-        <!-- <button class="btn-el" @click.prevent="editMessage" v-tooltip="'Edit'">
+        <button
+          v-if="isAllowToEdit"
+          class="btn-el"
+          @click.prevent="editMessage"
+          v-tooltip="'Edit'"
+        >
           <span class="icn-pencil icn-item icn-size_lg"></span>
-        </button> -->
+        </button>
         <button
           class="btn-el"
-          @click.prevent="deleteMessage()"
+          @click.prevent="deleteMessage"
           v-tooltip="'Delete'"
         >
           <span class="icn-remove icn-item icn-size_lg"></span>
@@ -27,9 +32,13 @@
           class="mobileControls"
           :class="{ opened: messageOptionMobileOpened }"
         >
-          <!-- <button class="btn-el edit" @click.prevent="editMessage">
+          <button
+            v-if="isAllowToEdit"
+            class="btn-el edit"
+            @click.prevent="editMessage"
+          >
             <span class="icn-pencil icn-item icn-size_lg"></span>
-          </button> -->
+          </button>
           <button class="btn-el delete" @click.prevent="deleteMessage">
             <span class="icn-remove icn-item icn-size_lg"></span>
           </button>
@@ -63,7 +72,7 @@
             :class="{
               'message-locked':
                 message.textLength && isLocked && !message.showPaidMessageText,
-              'message-deleted': isMyMessage && message.isDeleted
+              'message-deleted': message.isDeleted
             }"
             :style="{
               display: hasReplyMediaContent ? 'block' : 'inline-block'
@@ -320,9 +329,6 @@ export default {
       return this.$store.state.chat.fontSize + "px";
     },
     text() {
-      if (this.message.idDeleted) {
-        return "Message deleted";
-      }
       if (this.message.reply) {
         const text = this.isAuthor
           ? `You have paid ${this.message.withUser.name} ${
@@ -363,6 +369,24 @@ export default {
         s += "x ";
       }
       return s;
+    },
+    isAllowToEdit() {
+      return (
+        !this.message.media.length &&
+        !this.message.docFiles.length &&
+        this.message.isFree &&
+        !this.hasReplyMediaContent &&
+        !this.message.paymentType
+      );
+    },
+    isShowMessageControls() {
+      return (
+        this.isAuthor &&
+        !this.message.isDeleted &&
+        !this.message.paymentType &&
+        !this.hasReplyMediaContent &&
+        !(!this.message.isFree && this.message.isOpened)
+      );
     }
   },
   methods: {
@@ -388,6 +412,7 @@ export default {
       return fromNow(date);
     },
     deleteMessage() {
+      this.messageOptionMobileSwitch();
       this.$store.dispatch("modal/show", {
         name: "confirm",
         data: {
@@ -407,7 +432,7 @@ export default {
         })
         .then(() => {
           this.$store.dispatch("global/flashToast", {
-            text: "Message delted"
+            text: "Message deleted"
           });
         })
         .catch(error => {
@@ -418,7 +443,8 @@ export default {
         });
     },
     editMessage() {
-      console.log("edit");
+      this.messageOptionMobileSwitch();
+      this.$emit("setEditableMessage", this.message);
     },
     messageOptionMobileSwitch() {
       this.messageOptionMobileOpened = !this.messageOptionMobileOpened;

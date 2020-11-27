@@ -58,7 +58,7 @@
       <div class="chatForm">
         <label
           class="add-media-input"
-          :class="{ disabled: showTip || showPaid }"
+          :class="{ disabled: showTip || showPaid || editableMessage }"
           :disabled="disable"
           v-if="
             multipleMedia ? canAddMedia : !preloadedMedias.length ? true : false
@@ -78,7 +78,7 @@
           v-if="withTips && withUser && withUser.canEarn && $root.showTips"
           class="tips btn-el"
           @click.prevent="showTip = !showTip"
-          :class="{ active: showTip, disabled: showPaid }"
+          :class="{ active: showTip, disabled: showPaid || editableMessage }"
           v-tooltip="'Tip'"
         >
           <span class="icn-tips icn-item icn-size_lg"></span>
@@ -86,7 +86,7 @@
 
         <button
           class="getPaid btn-el"
-          :class="{ active: showPaid, disabled: showTip }"
+          :class="{ active: showPaid, disabled: showTip || editableMessage }"
           v-if="user.canEarn && withPrice"
           @click="showPaidForm"
           v-tooltip="'Price'"
@@ -173,10 +173,17 @@
           </button>
         </div>
         <button
+          v-if="editableMessage"
+          @click="resetEditableMessage"
+          class="btn-el"
+        >
+          <span class="icn-item btn-reset icn-size_lg" />
+        </button>
+        <button
           @click="sendMessage"
           class="btn-send btn-send_default icn-item icn-size_lg"
           :disabled="!canSend"
-          v-tooltip="sendButtonTooltip"
+          v-tooltip="editableMessage ? 'Edit' : sendButtonTooltip"
         ></button>
       </div>
     </div>
@@ -267,6 +274,10 @@ export default {
     sendButtonTooltip: {
       type: String,
       default: "Send"
+    },
+    editableMessage: {
+      type: Object,
+      default: null
     }
   },
 
@@ -380,6 +391,9 @@ export default {
     },
     activeUserId() {
       this.reset();
+    },
+    editableMessage(newValue) {
+      this.message = newValue ? newValue.text : "";
     }
   },
 
@@ -600,6 +614,9 @@ export default {
         mediaType: media.type,
         preview: media.thumb?.source
       }));
+    },
+    resetEditableMessage() {
+      this.$emit("resetEditableMessage");
     }
   },
   mounted() {

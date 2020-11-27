@@ -284,6 +284,11 @@
       &__reply {
         border-radius: 0 20px;
       }
+
+      &.message-deleted {
+        background-color: rgba($gray, 0.3);
+        opacity: 0.5;
+      }
     }
 
     .media-chat {
@@ -353,8 +358,10 @@
           justify-content: flex-end;
         }
       }
+
       &.message-deleted {
-        background-color: rgba($gray, 0.3);
+        background-color: rgba($gray, 0.5);
+        opacity: 0.5;
       }
     }
 

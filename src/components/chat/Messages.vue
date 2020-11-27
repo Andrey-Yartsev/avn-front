@@ -37,6 +37,7 @@
           v-bind:key="message.id"
           :message="message"
           :withUser="withUser"
+          @setEditableMessage="setEditableMessage"
         />
 
         <div class="typing semi-transparent" v-if="typing">
@@ -161,6 +162,11 @@ export default {
       this.scrollToLast();
     },
     messages(value, oldValue) {
+      //skip counter update if message has been deleted
+      if (this.$store.state.chat.skipNewMessagesCounter) {
+        this.$store.commit("chat/resetSkipNewMessagesCounter");
+        return;
+      }
       // count added messages
       let messagesCount = value.length - oldValue.length;
       let lastMessage;
@@ -188,10 +194,12 @@ export default {
             this.$store.dispatch("chat/markChatAsViewed", this.withUser.id);
           } else {
             // if we are not at bottom, increment unreadMessagesCount
-            this.$store.dispatch(
-              "chat/incrementUnreadMessagesCount",
-              this.withUser.id
-            );
+            if (messagesCount) {
+              this.$store.dispatch(
+                "chat/incrementUnreadMessagesCount",
+                this.withUser.id
+              );
+            }
           }
           break;
         default:
@@ -409,6 +417,9 @@ export default {
     },
     markAllAsRead() {
       this.$store.dispatch("chat/markAllMessagesAsRead", this.withUser.id);
+    },
+    setEditableMessage(message) {
+      this.$emit("setEditableMessage", message);
     }
   },
   mounted() {

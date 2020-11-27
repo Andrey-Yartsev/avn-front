@@ -130,13 +130,18 @@
               @drop="dropHandler"
             >
               <template v-if="activeUser">
-                <Messages :withUser="activeUser" />
+                <Messages
+                  :withUser="activeUser"
+                  @setEditableMessage="setEditableMessage"
+                />
                 <AddMessage
                   :withUser="activeUser"
                   ref="addMessageSection"
                   :messages="messages"
                   :mode="'modal'"
                   @deleteConversation="deleteConversation"
+                  :editableMessage="editableMessage"
+                  @resetEditableMessage="setEditableMessage(null)"
                 />
                 <div
                   class="notes bg-gradient_light"
@@ -200,7 +205,8 @@ export default {
       notes: {
         show: false,
         text: ""
-      }
+      },
+      editableMessage: null
     };
   },
 
@@ -275,6 +281,7 @@ export default {
       this.fetchMessages();
       this.resetNotes();
       this.fetchNotes();
+      this.setEditableMessage(null);
     }
   },
 
@@ -382,6 +389,9 @@ export default {
       this.$store.dispatch("modal/show", {
         name: "chatMassMessagesHistory"
       });
+    },
+    setEditableMessage(message) {
+      this.editableMessage = message;
     }
   },
   created() {
@@ -418,6 +428,7 @@ export default {
     window.removeEventListener("focus", this.windowFocus);
     window.removeEventListener("blur", this.windowBlur);
     this.resetNotes();
+    this.setEditableMessage(null);
   }
 };
 </script>

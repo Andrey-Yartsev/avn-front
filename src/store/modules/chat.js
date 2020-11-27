@@ -28,7 +28,8 @@ const state = {
   showMarkAsReedForContacts: false,
   unreadChatsCount: 0,
   requestedChatsCount: 0,
-  chatsFilter: "all"
+  chatsFilter: "all",
+  skipNewMessagesCounter: false
 };
 
 let markAsReadId = 0;
@@ -393,6 +394,9 @@ const actions = {
   },
   deleteMessage({ dispatch }, data) {
     return dispatch("_deleteMessage", data);
+  },
+  editMessage({ dispatch }, data) {
+    return dispatch("_editMessage", data);
   }
 };
 
@@ -589,18 +593,36 @@ const mutations = {
   decrementRequestedChatsCount(state) {
     state.requestedChatsCount--;
   },
-  deleteMessage(state, { chatId, messageId }) {
-    if (chatId !== state.activeUserId) {
+  deleteMessage(state, { userId, messageId }) {
+    if (userId != state.activeUserId) {
       return;
     }
-    const deletedMessage = state.messages.find(item => item.id === messageId);
+    const deletedMessage = state.messages.find(item => item.id == messageId);
     if (deletedMessage) {
+      state.skipNewMessagesCounter = true;
+
+      deletedMessage.text = "Deleted";
       deletedMessage.isDeleted = true;
       deletedMessage.media = [];
       deletedMessage.docFiles = [];
-      // state.messages.splice(needToDeleteMessageIndex, 1);
-      // state.messagesOffset -= 1;
+      deletedMessage.reply = null;
+      deletedMessage.isFree = true;
+      deletedMessage.textLength = 7;
+      deletedMessage.paymentType = null;
     }
+  },
+  editMessage(state, { userId, messageId, text }) {
+    if (userId != state.activeUserId) {
+      return;
+    }
+    const editedMessage = state.messages.find(item => item.id == messageId);
+    if (editedMessage) {
+      state.skipNewMessagesCounter = true;
+      editedMessage.text = text;
+    }
+  },
+  resetSkipNewMessagesCounter(state) {
+    state.skipNewMessagesCounter = false;
   }
 };
 
@@ -1082,6 +1104,28 @@ createRequestAction({
     let p = path.replace(/{chatId}/, params.chatId);
     p = p.replace(/{messageId}/, params.messageId);
     return p;
+  }
+});
+createRequestAction({
+  prefix: "_editMessage",
+  apiPath: "chats/{userId}/messages/{messageId}",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "PUT"
+  },
+  localError: true,
+  throw400: true,
+  paramsToPath: function(params, path) {
+    let p = path.replace(/{userId}/, params.userId);
+    p = p.replace(/{messageId}/, params.messageId);
+    return p;
+  },
+  paramsToOptions: function(params, options) {
+    options.data = {};
+    options.data.text = params.text;
+    return options;
   }
 });
 
