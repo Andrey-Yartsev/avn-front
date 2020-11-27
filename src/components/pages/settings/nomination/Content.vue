@@ -129,16 +129,6 @@
           </template>
         </template>
       </div>
-      <div class="text-centered" v-if="$mq === 'mobile'">
-        <button
-          type="submit"
-          class="btn lg btn_fix-width saveChanges"
-          :class="{ 'btn_form-gap': $mq === 'desktop' }"
-          :disabled="!changed || loading"
-        >
-          Save changes
-        </button>
-      </div>
     </form>
   </div>
 </template>
