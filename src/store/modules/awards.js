@@ -2,7 +2,7 @@
 
 import { createRequestAction } from "@/store/utils/storeRequest";
 
-const limit = 50;
+const limit = 75;
 
 const state = {
   votesCount: 0,
