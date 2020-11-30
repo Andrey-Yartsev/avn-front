@@ -26,7 +26,7 @@
   &-viewer {
 
     &:after {
-      content: "\E633";
+      content: "\e8a5";
     }
   }
 
@@ -39,7 +39,7 @@
     }
 
     &:after {
-      content: "\E648";
+      content: "\e8c3";
       font-size: 23px;
       width: 23px;
       height: 23px;
@@ -51,20 +51,20 @@
     line-height: 26px;
 
     &:after {
-      content: "\E638";
+      content: "\e8b8";
     }
   }
 
   &-theme {
 
     &:after {
-      content: "\E636";
+      content: "\e8a2";
     }
 
     .dark-theme & {
 
       &:after {
-        content: "\E637";
+        content: "\e8a1";
       }
     }
   }
@@ -72,7 +72,7 @@
   &-download {
 
     &:after {
-      content: "\E64C";
+      content: "\e8c7";
     }
   }
 
@@ -83,7 +83,7 @@
     }
 
     &:after {
-      content: "\E61A";
+      content: "\e8b5";
     }
   }
 
@@ -100,47 +100,47 @@
   &-tips {
 
     &:after {
-      content: "\E618";
+      content: "\e893";
     }
   }
 
   &-msg {
 
     &:after {
-      content: "\E622";
+      content: "\e89b";
     }
   }
 
   &-settings {
     &:after {
-      content: "\E62F";
+      content: "\e8a9";
     }
   }
 
   &-clock {
     &:after {
-      content: "\E620";
+      content: "\e8c1";
     }
   }
 
   &-camera {
 
     &:after {
-      content: "\E635";
+      content: "\e8a3";
     }
   }
 
   &-photos {
 
     &:after {
-      content: "\E634";
+      content: "\e8a4";
     }
   }
 
   &-live {
 
     &:after {
-      content: "\E621";
+      content: "\e89a";
     }
   }
 
@@ -149,7 +149,7 @@
     padding-left: 8px;
 
     &:after {
-      content: "\E670";
+      content: "\e8dd";
       color: $secondary-color;
     }
 
@@ -167,28 +167,28 @@
     transform: translateY(-3px);
 
     &:after {
-      content: "\E683";
+      content: "\e8ea";
     }
   }
 
   &-twitter {
 
     &:after {
-      content: "\E61F";
+      content: "\e899";
     }
   }
 
   &-calendar {
 
     &:after {
-      content: "\E667";
+      content: "\e8da";
     }
   }
 
   &-replaced {
 
     &:after {
-      content: "\E647";
+      content: "\e8c2";
       font-size: 22px;
     }
   }
@@ -196,35 +196,35 @@
   &-post {
 
     &:after {
-      content: "\E611";
+      content: "\e88c";
     }
   }
 
   &-link {
 
     &:after {
-      content: "\E684";
+      content: "\e8eb";
     }
   }
 
   &-userp {
 
     &:after {
-      content: "\E630";
+      content: "\e8a8";
     }
   }
 
   &-profile {
 
     &:after {
-      content: "\E63F";
+      content: "\e8bf";
     }
   }
 
   &-price {
 
     &:after {
-      content: "\E62E";
+      content: "\e8aa";
     }
   }
 
@@ -264,14 +264,14 @@
   &-locked {
 
     &:after {
-      content: "\E61B";
+      content: "\e895";
     }
   }
 
   &-unlocked {
 
     &:after {
-      content: "\E61C";
+      content: "\e896";
     }
   }
 
@@ -279,13 +279,13 @@
 
     &-checked {
       &:after {
-        content: "\E60D";
+        content: "\e888";
       }
     }
 
     &-unchecked {
       &:after {
-        content: "\E60E";
+        content: "\e889";
       }
     }
 
@@ -304,28 +304,28 @@
   &-web {
 
     &:after {
-      content: "\E685";
+      content: "\e8ec";
     }
   }
 
   &-snapchat {
 
     &:after {
-      content: "\E686";
+      content: "\e8ed";
     }
   }
 
   &-other {
 
     &:after {
-      content: "\E687";
+      content: "\e8ee";
     }
   }
 
   &-read {
 
     &:after {
-      content: "\E603";
+      content: "\e87f";
     }
   }
 
@@ -346,7 +346,7 @@
     }
 
     &:after {
-      content: "\E668";
+      content: "\e8db";
       font-size: 18px;
       width: 18px;
       height: 18px;
@@ -370,7 +370,7 @@
     }
 
     &:after {
-      content: "\E64B";
+      content: "\e8c6";
       font-size: 18px;
       width: 18px;
       height: 18px;
@@ -388,37 +388,37 @@
     }
 
     &.trans:after {
-      content: "\e671";
+      content: "\e8de";
     }
     &.Gay:after {
-      content: "\E676";
+      content: "\e8e3";
     }
     &.straight:after {
-      content: "\E677";
+      content: "\e8e4";
     }
     &.everyone:after {
-      content: "\E678";
+      content: "\e8e5";
     }
   }
 
   &-award {
 
     &:after {
-      content: "\E675";
+      content: "\e8e2";
     }
   }
 
   &-avn {
 
     &:after {
-      content: "\E675";
+      content: "\e8e2";
     }
   }
 
   &-gayvn {
 
     &:after {
-      content: "\E679";
+      content: "\e8e6";
     }
   }
 
@@ -432,21 +432,21 @@
   &-edit {
 
     &:after {
-      content: "\E623";
+      content: "\e8c0";
     }
   }
 
   &-pencil {
 
     &:after {
-      content: "\270e";
+      content: "\e806";
     }
   }
 
   &-close {
 
     &:after {
-      content: "\E605";
+      content: "\e881";
     }
   }
 
@@ -458,13 +458,13 @@
 
   &-message {
     &:after {
-      content: "\E615"
+      content: "\e890"
     }
   }
 
   &-coments {
     &:after {
-      content: "\E617"
+      content: "\e892"
     }
   }
 
@@ -481,7 +481,7 @@
 
   &-dollar {
     &:after {
-      content: '💵'; /* '\1f4b5' */
+      content: '\e805'; /* '\1f4b5' */
     }
   }
 

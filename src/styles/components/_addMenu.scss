@@ -224,25 +224,25 @@
 
     &.new-post {
       &:before {
-        content: "\E623";
+        content: "\e8c0";
       }
     }
 
     &.new-story {
       &:before {
-        content: "\E620";
+        content: "\e8c1";
       }
     }
 
     &.new-live {
       &:before {
-        content: "\E621";
+        content: "\e89a";
       }
     }
 
     &.new-message {
       &:before {
-        content: "\E622";
+        content: "\e89b";
       }
     }
 

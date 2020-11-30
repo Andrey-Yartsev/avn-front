@@ -544,7 +544,7 @@
 
   .message {
     &:before {
-      content: "\E618";
+      content: "\e893";
     }
   }
 }
@@ -552,7 +552,7 @@
 .unlockedMessage {
   .message {
     &:before {
-      content: "\E61C";
+      content: "\e896";
     }
   }
 }
@@ -595,14 +595,14 @@
   .media,
   .video-placeholder {
     &:before {
-      content: "\E61B";
+      content: "\e895";
     }
   }
 
   .message {
     &.message-locked {
       &:before {
-        content: "\E61B";
+        content: "\e895";
       }
     }
   }

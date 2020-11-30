@@ -342,7 +342,7 @@
       display: block;
 
       &:before {
-        content: '\E604';
+        content: '\e880';
         @include icon-font;
         position: absolute;
         left: 50%;

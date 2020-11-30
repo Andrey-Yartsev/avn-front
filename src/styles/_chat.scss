@@ -505,7 +505,7 @@
     }
 
     &:after {
-      content: "\E606";
+      content: "\e882";
       font-size: 24px;
       width: 1.1em;
     }
@@ -719,7 +719,7 @@
   display: none;
 
   &:after {
-    content: "\E605";
+    content: "\e881";
     @include icon-font;
   }
 }
@@ -1641,7 +1641,7 @@
     transition: color .2s;
 
     &:after {
-      content: "\E680";
+      content: "\e8e7";
     }
 
     .opened & {
@@ -1654,7 +1654,7 @@
     transition: opacity .2s, color .2s;
 
     &:after {
-      content: "\E682";
+      content: "\e8e9";
     }
   }
 
@@ -1664,7 +1664,7 @@
     transition-delay: .2s;
 
     &:after {
-      content: "\E681";
+      content: "\e8e8";
     }
   }
 

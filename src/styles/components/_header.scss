@@ -1220,22 +1220,22 @@
 
 .menu-item-home {
   &:before {
-    content: "\E612";
+    content: "\e88d";
   }
 }
 .menu-item-explore {
   &:before {
-    content: "\E613";
+    content: "\e88e";
   }
 }
 .menu-item-notifications {
   &:before {
-    content: "\E614";
+    content: "\e88f";
   }
 }
 .menu-item-messages {
   &:before {
-    content: "\E615";
+    content: "\e890";
   }
 }
 
@@ -1567,7 +1567,7 @@
     }
     &__profile {
       &:after {
-        content: "\E63F";
+        content: "\e8bf";
       }
     }
     &__award {
@@ -1575,14 +1575,14 @@
       &-avn {
 
         &:after {
-          content: "\E675";
+          content: "\e8e2";
         }
       }
 
       &-gayvn {
 
         &:after {
-          content: "\E679";
+          content: "\e8e6";
           left: 23px;
         }
       }
@@ -1594,42 +1594,42 @@
     }
     &__statistics {
       &:after {
-        content: "\E639";
+        content: "\e8a0";
       }
     }
     &__payouts {
       &:after {
-        content: "\E63C";
+        content: "\e8b1";
       }
     }
     &__payments {
       &:after {
-        content: "\E63B";
+        content: "\e89e";
       }
     }
     &__privacy {
       &:after {
-        content: "\E62F";
+        content: "\e8a9";
       }
     }
     &__help {
       &:after {
-        content: "\E640";
+        content: "\e8b4";
       }
     }
     &__logout {
       &:after {
-        content: "\E63D";
+        content: "\e8b2";
       }
     }
     &__subscribers {
       &:after {
-        content: "\E630"
+        content: "\e8a8"
       }
     }
     &__clipStore {
       &:after {
-        content: "\E627"
+        content: "\e89d"
       }
     }
   }
@@ -1759,7 +1759,7 @@
 
     &__qr {
       &:before {
-        content: "\E63A";
+        content: "\e89f";
       }
     }
   }
@@ -1842,14 +1842,14 @@
     &_arrow {
 
       &:before {
-        content: "\E606";
+        content: "\e882";
       }
     }
 
     &_times {
 
       &:before {
-        content: "\E605";
+        content: "\e881";
       }
     }
   }

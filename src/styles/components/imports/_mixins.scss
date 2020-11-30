@@ -6,7 +6,7 @@
 }
 
 @mixin default-avatar {
-  content: "\E642";
+  content: "\e8ba";
   @include icon-font;
   background: $default-avatar-bg;
   color: $default-avatar-color;

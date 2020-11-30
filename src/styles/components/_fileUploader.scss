@@ -73,7 +73,7 @@
     }
 
     &:after {
-      content: "\E610";
+      content: "\e88b";
       font-size: 18px;
       line-height: 18px;
       position: absolute;
@@ -91,7 +91,7 @@
     &.current {
 
       &:after {
-        content: "\E60F";
+        content: "\e88a";
       }
     }
   }
@@ -214,7 +214,7 @@
   &.success-status {
 
     &:after {
-      content: "\E604";
+      content: "\e880";
       background-color: rgba(0, 0, 0, .4);
     }
   }
@@ -223,7 +223,7 @@
     background-color: red;
 
     &:after {
-      content: "\E619";
+      content: "\e894";
     }
   }
   &.switchable {

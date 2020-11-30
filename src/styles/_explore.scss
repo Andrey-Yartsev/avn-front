@@ -653,7 +653,7 @@
 
     &_radio {
       &:after {
-        content: "\E60E";
+        content: "\e889";
         position: absolute;
         right: 10px;
         bottom: 10px;
@@ -666,7 +666,7 @@
 
       &.selected {
         &:after {
-          content: "\E60D";
+          content: "\e888";
         }
 
         .explore-media {
@@ -983,7 +983,7 @@
   }
 
   &:after {
-    content: "\E604";
+    content: "\e880";
     position: absolute;
     left: 0;
     right: 0;

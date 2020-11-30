@@ -331,21 +331,21 @@ form.support-search-form {
   //    &_account {
   //
   //      &:before {
-  //        content: "\E551";
+  //        content: "\e8cc";
   //      }
   //    }
   //
   //    &_problems {
   //
   //      &:before {
-  //        content: "\E654";
+  //        content: "\e8cf";
   //      }
   //    }
   //
   //    &_reports {
   //
   //      &:before {
-  //        content: "\E650";
+  //        content: "\e8cb";
   //      }
   //    }
   //  }
@@ -369,7 +369,7 @@ form.support-search-form {
   //  &.info {
   //
   //    &:before {
-  //      content: "\E619";
+  //      content: "\e894";
   //      color: $primary-color;
   //    }
   //
@@ -512,7 +512,7 @@ form.support-search-form {
     display: inline-block;
 
     &:after {
-      content: "\E643";
+      content: "\e8bb";
       @include icon-font;
       position: absolute;
       right: -5px;
@@ -555,7 +555,7 @@ form.support-search-form {
         }
 
         &:before {
-          content: "\E604";
+          content: "\e880";
           @include icon-font;
           position: absolute;
           left: 0;
@@ -663,7 +663,7 @@ form.support-search-form {
       }
 
       &:after {
-        content: "\E658";
+        content: "\e8d2";
       }
     }
 
@@ -678,7 +678,7 @@ form.support-search-form {
       }
 
       &:after {
-        content: "\E657";
+        content: "\e8d3";
       }
     }
   }

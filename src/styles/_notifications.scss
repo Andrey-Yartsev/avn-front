@@ -37,7 +37,7 @@
   }
 
   &:after {
-    content: "\E62F";
+    content: "\e8a9";
   }
 }
 
@@ -46,21 +46,21 @@
   .all {
 
     &:after {
-      content: "\E632";
+      content: "\e8a6";
     }
   }
 
   .followed {
 
     &:after {
-      content: "\E630";
+      content: "\e8a8";
     }
   }
 
   .favorited {
 
     &:after {
-      content: "\E616";
+      content: "\e891";
     }
   }
 
@@ -68,7 +68,7 @@
   .price_changed {
 
     &:after {
-      content: "\E62E";
+      content: "\e8aa";
     }
   }
 
@@ -77,48 +77,48 @@
   .commented {
 
     &:after {
-      content: "\E617";
+      content: "\e892";
     }
   }
 
   .tip {
 
     &:after {
-      content: "\E618";
+      content: "\e893";
     }
   }
 
   .approved {
 
     &:after {
-      content: "\E603";
+      content: "\e87f";
     }
   }
 
   .rejected {
 
     &:after {
-      content: "\E649";
+      content: "\e8c4";
     }
   }
 
   .mentioned {
 
     &:after {
-      content: "\E631";
+      content: "\e8a7";
     }
   }
 
   .system {
 
     &:after {
-      content: "\E619";
+      content: "\e894";
     }
   }
 
   .purchase {
     &:after {
-      content: '💵'; /* '\1f4b5' */
+      content: '\e805';
     }
   }
 }

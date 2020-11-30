@@ -1121,7 +1121,7 @@
     color: $secondary-color;
 
     &:after {
-      content: "\E604";
+      content: "\e880";
     }
   }
 
@@ -1129,7 +1129,7 @@
     color: $primary-color;
 
     &:after {
-      content: "\E605";
+      content: "\e881";
     }
   }
 }
@@ -1242,7 +1242,7 @@
 .arr-inverse {
 
   &:after {
-    content: "\E608";
+    content: "\e884";
     color: red;
   }
 }
@@ -1250,7 +1250,7 @@
 .arr-reverse {
 
   &:after {
-    content: "\E60B";
+    content: "\e887";
     color: green
   }
 }

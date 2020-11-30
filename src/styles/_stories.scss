@@ -1169,7 +1169,7 @@
     &:after {
 
       @include media-breakpoint-up($desktop-breakpoint) {
-        content: "\E608";
+        content: "\e884";
         @include icon-font;
         font-size: 24px;
         position: absolute;

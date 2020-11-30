@@ -165,7 +165,7 @@
       &.active {
         &:after {
           position: absolute;
-          content: "\E604";
+          content: "\e880";
           @include icon-font;
           right: 20px;
           font-size: 24px;
@@ -180,7 +180,7 @@
   &.picture {
     .root-btn__inside {
       &:before {
-        content: "\E61A";
+        content: "\e8b5";
       }
     }
   }
@@ -188,7 +188,7 @@
   &.fullscreen {
     .root-btn__inside {
       &:before {
-        content: "\E662";
+        content: "\e8d7";
       }
     }
   }
@@ -196,7 +196,7 @@
   &.layers {
     .root-btn__inside {
       &:before {
-        content: "\E64D";
+        content: "\e8c8";
       }
     }
 
@@ -210,7 +210,7 @@
   &.letters-color {
     .root-btn__inside {
       &:before {
-        content: "\E664";
+        content: "\e8d8";
       }
     }
   }
@@ -218,7 +218,7 @@
   &.letters-bg {
     .root-btn__inside {
       &:before {
-        content: "\E663";
+        content: "\e8d9";
       }
     }
   }
@@ -228,11 +228,11 @@
       &:before {
 
         @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-          content: "\E647";
+          content: "\e8c2";
         }
 
         @include media-breakpoint-up($desktop-breakpoint) {
-          content: "\E627";
+          content: "\e89d";
         }
       }
     }
@@ -240,7 +240,7 @@
     &.device-disabled {
       .root-btn__inside {
         &:before {
-          content: "\E628";
+          content: "\e8b0";
         }
       }
     }
@@ -253,7 +253,7 @@
       &:before {
 
         @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-          content: "\E647";
+          content: "\e8c2";
         }
       }
     }
@@ -262,14 +262,14 @@
   &.microphone {
     .root-btn__inside {
       &:before {
-        content: "\E629";
+        content: "\e8af";
       }
     }
 
     &.device-disabled {
       .root-btn__inside {
         &:before {
-          content: "\E62A";
+          content: "\e8ae";
         }
       }
     }
@@ -285,7 +285,7 @@
     &.public {
       .root-btn__inside {
         &:before {
-          content: "\E626";
+          content: "\e8b9";
         }
       }
     }
@@ -293,7 +293,7 @@
     &.followers {
       .root-btn__inside {
         &:before {
-          content: "\e63f";
+          content: "\e8bf";
         }
       }
     }
@@ -301,7 +301,7 @@
     &.subscribers {
       .root-btn__inside {
         &:before {
-          content: "\E625";
+          content: "\e89c";
         }
       }
     }
@@ -361,7 +361,7 @@
       width: 24px;
       height: 24px;
       line-height: 24px;
-      content: "\E608";
+      content: "\e884";
       display: none;
     }
   }

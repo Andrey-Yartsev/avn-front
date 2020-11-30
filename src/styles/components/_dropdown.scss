@@ -177,7 +177,7 @@
       padding: 0 24px 0 0;
 
       &:after {
-        content: "\E646";
+        content: "\e8be";
         @include icon-font;
         position: absolute;
         right: 0;
@@ -230,7 +230,7 @@
       opacity: 1;
 
       &:before {
-        content: "\E646";
+        content: "\e8be";
         background-image: none;
         font-size: 24px;
         line-height: 12px;
@@ -429,7 +429,7 @@
       transition: padding-left .3s;
 
       &:after {
-        content: "\E604";
+        content: "\e880";
         position: absolute;
         left: 10px;
         top: 10px;

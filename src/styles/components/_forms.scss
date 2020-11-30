@@ -179,7 +179,7 @@ textarea,
   .form-field {
 
     &:before {
-      content: "\E619";
+      content: "\e894";
       color: red;
     }
   }
@@ -198,7 +198,7 @@ textarea,
   .form-field {
 
     &:before {
-      content: "\E604";
+      content: "\e880";
       color: $default-secondary-color;
     }
   }
@@ -429,7 +429,7 @@ label {
         width: 1.2em;
         pointer-events: none;
         right: 0;
-        content: "\E604";
+        content: "\e880";
         color: $default-secondary-color;
         @include media-breakpoint-down($desktop-breakpoint-dcrs) {
           bottom: 0;
@@ -1045,7 +1045,7 @@ select {
         &:after {
           background: $primary-color;
           box-shadow: none;
-          content: "\E604";
+          content: "\e880";
         }
       }
     }
@@ -1128,7 +1128,7 @@ select {
   }
 
   &:before {
-    content: '\E608';
+    content: '\e884';
     @include icon-font;
     right: 0;
     top: 0;
@@ -1206,7 +1206,7 @@ select {
     padding: 0;
 
     &:before {
-      content: '\E608';
+      content: '\e884';
       @include icon-font;
       left: 50%;
       top: 50%;
@@ -1277,7 +1277,7 @@ select {
         color: $main-color;
 
         &:after {
-          content: "\E604";
+          content: "\e880";
           color: $primary-color;
           background: none;
           display: block;
@@ -1285,7 +1285,7 @@ select {
       }
 
       &:after {
-        content: "\E604";
+        content: "\e880";
         @include icon-font;
         color: $primary-color;
         font-size: 24px;

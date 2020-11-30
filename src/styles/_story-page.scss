@@ -92,7 +92,7 @@
       top: 44px;
     }
     &:before {
-      content: "\E601";
+      content: "\e87d";
       @include icon-font;
       @include position-center;
     }
@@ -386,7 +386,7 @@
 .btn-story-details {
 
   &:after {
-    content: "\E669";
+    content: "\e8dc";
     font-size: 23px;
   }
 
