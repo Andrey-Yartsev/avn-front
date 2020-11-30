@@ -24,19 +24,23 @@ const actions = {
     });
   },
   vote({ dispatch, commit }, data) {
-    return new Promise(accept => {
-      dispatch("_vote", data).then(result => {
-        commit("setNomineeVoted", {
-          id: data.id,
-          isVoted: true
+    return new Promise((accept, reject) => {
+      return dispatch("_vote", data)
+        .then(result => {
+          commit("setNomineeVoted", {
+            id: data.id,
+            isVoted: true
+          });
+          commit("incrementVotesCount");
+          commit("updateVoteId", {
+            id: data.id,
+            voteId: result.voteId
+          });
+          accept(result);
+        })
+        .catch(err => {
+          reject(err);
         });
-        commit("incrementVotesCount");
-        commit("updateVoteId", {
-          id: data.id,
-          voteId: result.voteId
-        });
-        accept(result);
-      });
     });
   },
   unvote({ dispatch, commit }, data) {
@@ -235,6 +239,7 @@ createRequestAction({
   options: {
     method: "POST"
   },
+  throw400: true,
   paramsToOptions: function(params, options) {
     options.data = {
       nominee: params.id,

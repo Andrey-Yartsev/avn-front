@@ -232,6 +232,14 @@ export default {
         return;
       }
 
+      if (!this.user.emailChecked) {
+        this.$store.dispatch("global/flashToast", {
+          text: "Please, confirm your registration email address",
+          type: "warning"
+        });
+        return;
+      }
+
       this.lastVoteId = id;
       const nominee = this.models.find(v => {
         return v.nomineeId === id;
@@ -282,6 +290,9 @@ export default {
                 });
               }
               this.justVotedIds.push(nominee.nomineeId);
+              this.votingClicking = false;
+            })
+            .catch(() => {
               this.votingClicking = false;
             });
         }
