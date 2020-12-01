@@ -1,12 +1,9 @@
 @import "components/imports";
 
 .explore-page {
-
   &:not(.not-authorized) {
-
     .header-logo,
     .make-post-btn {
-
       @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         display: none;
       }
@@ -14,7 +11,6 @@
   }
 
   #content {
-
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       min-height: calc(100% - 44px);
       height: auto;
@@ -26,9 +22,7 @@
   }
 
   .btn {
-
     &.make-post-btn {
-
       @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         display: none;
       }
@@ -36,7 +30,6 @@
   }
 
   .b-search-form_flex-align {
-
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       display: flex;
       position: relative;
@@ -84,7 +77,6 @@
   }
 
   .searchView & {
-
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       background: $white;
       position: -webkit-sticky;
@@ -95,7 +87,6 @@
     }
 
     .scroll-bottom & {
-
       @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         //transform: translate3d(0, 44px, 0);
         position: fixed;
@@ -135,7 +126,6 @@
     }
 
     .searchView & {
-
       @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         flex: 1;
         height: 44px;
@@ -151,7 +141,8 @@
       outline: 0;
       padding: 0;
       box-sizing: border-box;
-      transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+      transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+        box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
       align-items: center;
       white-space: nowrap;
       border-radius: 16px;
@@ -179,7 +170,7 @@
         text-overflow: ellipsis;
         line-height: 1em;
       }
-      
+
       @include media-breakpoint-up($desktop-breakpoint) {
         margin-right: 0;
       }
@@ -190,7 +181,6 @@
     }
 
     @include media-breakpoint-up($desktop-breakpoint) {
-
       &:hover {
         color: $main-color;
       }
@@ -200,9 +190,7 @@
       font-weight: 500;
 
       &:after {
-
         .searchView & {
-
           @include media-breakpoint-down($desktop-breakpoint-dcrs) {
             position: absolute;
             bottom: 0;
@@ -218,7 +206,7 @@
 
     &.disabled {
       color: $main-color;
-      opacity: .3;
+      opacity: 0.3;
     }
   }
 }
@@ -238,7 +226,6 @@
   }
 
   .container {
-
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       flex: 1;
       width: 100%;
@@ -248,7 +235,6 @@
   }
 
   .over-container {
-
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       width: calc(100% + 30px);
       display: flex;
@@ -260,6 +246,14 @@
 }
 
 .explore {
+  .contest-banner {
+    display: block;
+    margin: 10px 0;
+    img {
+      display: block;
+      width: 100%;
+    }
+  }
 
   @include media-breakpoint-up($desktop-breakpoint) {
     margin-bottom: 14px;
@@ -276,14 +270,12 @@
   }
 
   .not-authorized & {
-
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       min-height: calc(100% - 106px);
     }
   }
 
   > div {
-
     @include media-breakpoint-up($desktop-breakpoint) {
       margin-left: -10px;
       margin-right: -10px;
@@ -301,9 +293,7 @@
       position: relative;
     }
 
-
     &.row-btn {
-      
       @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         flex: 0 0 auto;
       }
@@ -311,7 +301,6 @@
 
     &.row-btn,
     &.userCollectionView {
-
       @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         background: $white;
       }
@@ -335,7 +324,6 @@
     }
 
     .profile-page & {
-
       @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         padding-top: 0;
         padding-bottom: 0;
@@ -343,9 +331,7 @@
     }
 
     &:not(.photos) {
-
       .searchView & {
-
         @include media-breakpoint-down($desktop-breakpoint-dcrs) {
           min-height: 100%;
           padding: 0;
@@ -382,14 +368,12 @@
       }
 
       .post {
-
         @include media-breakpoint-down($desktop-breakpoint-dcrs) {
           background-color: $white;
           position: relative;
           max-width: 100vw;
 
           &:last-child {
-
             .post--details {
               border-bottom: none;
             }
@@ -397,7 +381,6 @@
         }
 
         &-details {
-
           @include media-breakpoint-down($desktop-breakpoint-dcrs) {
             padding-bottom: 8px;
             border-bottom: 1px solid rgba($gray, 0.2);
@@ -416,14 +399,12 @@
       }
 
       .post {
-
         @include media-breakpoint-down($desktop-breakpoint-dcrs) {
           background-color: $white;
           position: relative;
           max-width: 100vw;
 
           &:last-child {
-
             .post--details {
               border-bottom: none;
             }
@@ -431,7 +412,6 @@
         }
 
         &-details {
-
           @include media-breakpoint-down($desktop-breakpoint-dcrs) {
             padding-bottom: 8px;
             border-bottom: 1px solid rgba($gray, 0.2);
@@ -444,7 +424,8 @@
       }
     }
 
-    &.photos, &.media {
+    &.photos,
+    &.media {
       grid-template-columns: 1fr 1fr 1fr;
     }
 
@@ -512,23 +493,20 @@
       }
 
       &:empty {
-
         + .msg-no-content {
           opacity: 1;
           pointer-events: auto;
         }
       }
     }
-    
-    &.posts {
 
+    &.posts {
       @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         display: block;
       }
     }
 
     .special-container & {
-
       &:empty {
         display: none;
       }
@@ -540,7 +518,6 @@
     overflow: hidden;
 
     &_col {
-
       &:first-child {
         order: -1;
       }
@@ -579,7 +556,6 @@
       }
 
       .explore-media {
-
         &:before {
           display: none;
         }
@@ -588,7 +564,6 @@
           display: block;
 
           &:after {
-
             @include media-breakpoint-up($desktop-breakpoint) {
               left: 11px;
               bottom: 11px;
@@ -599,16 +574,13 @@
     }
 
     @include media-breakpoint-up($desktop-breakpoint) {
-
       &:hover {
-
         .overlay {
           opacity: 1;
           transform: scale(1);
         }
 
         .explore-media {
-
           &__counter {
             opacity: 1;
 
@@ -619,7 +591,7 @@
             &_comments {
               transform: translate(28px, -50%) scale(1);
             }
-            
+
             &_price {
               transform: translate(28px, -50%) scale(1);
             }
@@ -650,11 +622,8 @@
       z-index: 0;
 
       @include media-breakpoint-up($desktop-breakpoint) {
-
         &:not(.locked-wrapper):hover {
-
           .item-length {
-
             .value {
               opacity: 1;
             }
@@ -683,7 +652,6 @@
     }
 
     &_radio {
-
       &:after {
         content: "\E60E";
         position: absolute;
@@ -697,13 +665,11 @@
       }
 
       &.selected {
-
         &:after {
           content: "\E60D";
         }
 
         .explore-media {
-
           &:before {
             transform: scale(1);
             opacity: 1;
@@ -742,7 +708,6 @@
     }
 
     &_avatar {
-
       &:before {
         @include default-avatar;
         opacity: 1;
@@ -757,9 +722,7 @@
     }
 
     &_processing {
-
       .explore-media {
-
         &:before {
           opacity: 1;
           transform: scale(1);
@@ -812,7 +775,6 @@
       }
 
       &.online-state {
-
         &:after {
           flex: 0 0 10px;
           margin-left: 5px;
@@ -854,7 +816,6 @@
       }
 
       .icn-item {
-
         &:after {
           font-size: 18px;
 
@@ -897,17 +858,13 @@
 
       &:before {
         content: "";
-        opacity: .15;
+        opacity: 0.15;
         position: absolute;
         left: 0;
         right: 0;
         bottom: 0;
         height: 70px;
-        background: linear-gradient(
-          90deg,
-          #000 10%,
-          #000 100%
-        );
+        background: linear-gradient(90deg, #000 10%, #000 100%);
 
         @include media-breakpoint-up($desktop-breakpoint) {
           height: 80px;
@@ -921,9 +878,7 @@
   .videos,
   .photos,
   .lives {
-
     &:empty {
-
       + .msg-no-content {
         pointer-events: auto;
         opacity: 1;
@@ -1022,7 +977,6 @@
   }
 
   &.selected {
-
     &:after {
       opacity: 1;
     }
@@ -1035,9 +989,9 @@
     right: 0;
     top: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, .4);
+    background-color: rgba(0, 0, 0, 0.4);
     opacity: 0;
-    transition: opacity .3s;
+    transition: opacity 0.3s;
     filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.2));
     font-size: 40px;
     color: #fff;
@@ -1060,14 +1014,13 @@
 }
 
 .name-highlight {
-  opacity: .5;
+  opacity: 0.5;
   @include ellipsis;
   text-align: center;
   margin-top: 10px;
 }
 
 .btns-highlights {
-
   .btn {
     width: 66px;
   }
@@ -1095,7 +1048,7 @@
 }
 
 .text-create-story {
-  opacity: .5;
+  opacity: 0.5;
 }
 
 .content-sub-nav {

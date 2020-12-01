@@ -123,6 +123,18 @@
           </div>
         </template>
         <div class="explore">
+          <router-link
+            :to="isGayContent ? '/contests/26' : '/contests/25'"
+            class="contest-banner"
+          >
+            <img
+              :src="
+                isGayContent
+                  ? 'https://images.avn.com/2020/12/01/A2ge1989UOXt3unuCoYnZuNTRgzXsKWN91FGOUjF.png'
+                  : 'https://images.avn.com/2020/12/01/zSqWRIlQBaIPzKfHfNjTe4jMYLAgy4TNCRA4KRpG.png'
+              "
+            />
+          </router-link>
           <div
             class="row-btn"
             v-if="
@@ -497,6 +509,9 @@ export default {
         topmodels: "userCollectionView"
       };
       return classes[this.page] || null;
+    },
+    isGayContent() {
+      return !!window.location.hostname.match(/gayvn/);
     }
   },
   methods: {

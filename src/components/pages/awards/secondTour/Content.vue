@@ -147,12 +147,14 @@ export default {
       return this.$store.state.awards.categories.data || [];
     },
     catOptions() {
-      return this.categories.map(v => {
+      const options = this.categories.map(v => {
         return {
           label: v.title,
           code: v.id
         };
       });
+      options.push({ label: "Star of the Year", code: 0 });
+      return options;
     },
     currentCategory() {
       return this.categories.find(v => v.id === this.categoryId);
@@ -431,6 +433,11 @@ export default {
       this.fetchNominees();
     },
     categoryId(id) {
+      if (id === 0) {
+        const redirectContestId = this.isGay ? 26 : 25;
+        this.$router.push(`/contests/${redirectContestId}`);
+        return;
+      }
       this.models = [];
       if (!id) {
         if (this.selectedNomineeId) {
