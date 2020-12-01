@@ -48,6 +48,13 @@
   flex: 1;
   display: flex;
   flex-direction: column;
+  @include media-breakpoint-down($desktop-breakpoint) {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
 }
 
 .stream_enabled {
@@ -96,6 +103,10 @@
   height: 100%;
   background: #000;
   z-index: 0;
+  @include media-breakpoint-down($desktop-breakpoint) {
+    bottom: 0;
+    right: 0;
+  }
 
   video {
     width: 100%;
