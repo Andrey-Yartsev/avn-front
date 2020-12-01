@@ -5,7 +5,7 @@
       <Loader text="" :fullscreen="false" :small="true" />
     </div>
     <template v-else>
-      <div v-if="groups.size" class="contest-select-wrapper">
+      <div v-if="groups.size || groups.length" class="contest-select-wrapper">
         <div class="content-types">
           <a
             class="btn-user-activity"
@@ -127,12 +127,12 @@ export default {
   computed: {
     groups() {
       const set = new Set();
-      for (let contest of this.contests) {
+      for (let contest of this.$store.state.contest.fetchContestsResult) {
         contest.groups.forEach(item => {
           set.add(item);
         });
       }
-      return set;
+      return Array.from(set).sort((a, b) => a.length - b.length);
     },
     groupItems() {
       if (!this.contests.length) {
@@ -183,13 +183,30 @@ export default {
       );
       return [...notFinished, ...finished];
     },
+    isGay() {
+      return !!window.location.hostname.match(/gayvn/);
+    },
+    isStraight() {
+      return (
+        !window.location.hostname.match(/gayvn/) &&
+        this.user?.categoryView === 2
+      );
+    },
     contests() {
+      let contests;
       if (!this.contestGroup) {
-        return this.sortedContests;
+        contests = this.sortedContests;
       } else {
-        return this.sortedContests.filter(item =>
+        contests = this.sortedContests.filter(item =>
           item.groups.includes(this.contestGroup)
         );
+      }
+      if (this.isGay) {
+        return contests.filter(item => item.audience !== "straight");
+      } else if (this.isStraight) {
+        return contests.filter(item => !item.audience !== "gay");
+      } else {
+        return contests;
       }
     },
     contest() {
