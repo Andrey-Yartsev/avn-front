@@ -185,7 +185,7 @@
 </template>
 
 <script>
-import moment from "moment-timezone";
+import { utcToZonedTime, format } from "date-fns-tz";
 import Twitter from "@/utils/twitter";
 
 export default {
@@ -266,10 +266,10 @@ export default {
       if (!date) {
         return "";
       }
-      const str = moment(date)
-        // .tz(this.data.timezone)
-        .tz("America/Los_Angeles")
-        .format("MMM D, hh:mm a");
+      const str = format(
+        utcToZonedTime(new Date(date), "America/Los_Angeles"),
+        "MMM d, hh:mm aaaa"
+      );
       return str + " PDT";
     },
     handleImageChoose(event) {
