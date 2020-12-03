@@ -21,7 +21,7 @@
     "js-logger": "^1.6.0",
     "lodash.takeright": "^4.1.1",
     "lodash.uniqby": "^4.7.0",
-    "luxon": "^1.16.1",
+    "luxon": "^1.25.0",
     "moment": "^2.24.0",
     "query-string": "^6.8.2",
     "smooth-scroll": "^16.1.0",

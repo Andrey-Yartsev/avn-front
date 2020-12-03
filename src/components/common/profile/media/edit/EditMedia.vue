@@ -186,7 +186,7 @@
                   input-class="post-datetime__input"
                   use12-hour
                   :min-datetime="minDate"
-                  :max-datetime="maxDate"
+                  :max-datetime="null"
                   @close="closeDatepicker"
                   :phrases="{ ok: 'Schedule', cancel: 'Cancel' }"
                 />
@@ -383,12 +383,10 @@ import Draggable from "vuedraggable";
 import ThumbDropdown from "./ThumbDropdown.vue";
 import Multiselect from "vue-multiselect";
 import { Datetime } from "vue-datetime";
-import { Settings, DateTime as LuxonDateTime } from "luxon";
+import { formatISO, addMinutes } from "date-fns";
 import moment from "moment";
 
 // import mediaCategories from "@/mock/mediaCategories";
-
-Settings.defaultLocale = "en";
 
 const InitialState = {
   expanded: false,
@@ -561,17 +559,8 @@ export default {
       return false;
     },
     minDate() {
-      return LuxonDateTime.local()
-        .plus({ minutes: 1 })
-        .toISO();
-    },
-    maxDate() {
-      if (!this.datetimeExpired) {
-        return null;
-      }
-      return LuxonDateTime.fromISO(this.datetimeExpired)
-        .minus({ minutes: 1 })
-        .toISO();
+      const date = new Date();
+      return formatISO(addMinutes(date, 5));
     },
     formattedDate() {
       return (

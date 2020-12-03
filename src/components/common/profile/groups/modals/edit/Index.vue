@@ -240,7 +240,6 @@
 <script>
 import Loader from "@/components/common/Loader";
 import ClickOutside from "vue-click-outside";
-import { Settings } from "luxon";
 import UserMixin from "@/mixins/user";
 import "vue-datetime/dist/vue-datetime.css";
 import VueTribute from "vue-tribute";
@@ -248,8 +247,6 @@ import UserSuggestions from "@/mixins/userSuggestions";
 import FileUpload from "@/mixins/fileUpload";
 import MediaPreview from "@/components/common/MediaPreview";
 import Draggable from "vuedraggable";
-
-Settings.defaultLocale = "en";
 
 const InitialState = {
   expanded: false,

@@ -517,7 +517,7 @@ import FileUpload from "@/mixins/fileUpload";
 import ClickOutside from "vue-click-outside";
 import { Datetime } from "vue-datetime";
 import moment from "moment";
-import { Settings, DateTime as LuxonDateTime } from "luxon";
+import { formatISO, addMinutes, subMinutes } from "date-fns";
 import UserMixin from "@/mixins/user";
 import "vue-datetime/dist/vue-datetime.css";
 import VueTribute from "vue-tribute";
@@ -525,8 +525,6 @@ import UserSuggestions from "@/mixins/userSuggestions";
 import LinksPreview from "./linksPreview";
 import Multiselect from "vue-multiselect";
 import TipsGoalForm from "@/components/post/parts/tipsGoal/TipsGoalForm";
-
-Settings.defaultLocale = "en";
 
 const tipsGoalSourceTypes = [
   { title: "Post tips", value: "localTips" },
@@ -680,25 +678,22 @@ export default {
       );
     },
     minDate() {
-      return LuxonDateTime.local()
-        .plus({ minutes: 1 })
-        .toISO();
+      const date = new Date();
+      return formatISO(addMinutes(date, 1));
     },
     maxDate() {
       if (!this.datetimeExpired) {
         return null;
       }
-      return LuxonDateTime.fromISO(this.datetimeExpired)
-        .minus({ minutes: 1 })
-        .toISO();
+      const date = new Date(this.datetimeExpired);
+      return formatISO(subMinutes(date, 1));
     },
     minDateExpired() {
       if (!this.datetime) {
         return this.minDate;
       }
-      return LuxonDateTime.fromISO(this.datetime)
-        .plus({ minutes: 1 })
-        .toISO();
+      const date = new Date(this.datetime);
+      return formatISO(addMinutes(date, 1));
     },
     isExtended() {
       return (

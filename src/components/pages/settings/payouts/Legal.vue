@@ -423,13 +423,11 @@ import BirthDateSelect from "./BirthDateSelect";
 import Form from "@/mixins/form";
 import upload from "@/utils/upload";
 import { Datetime } from "vue-datetime";
-import { Settings, DateTime as LuxonDateTime } from "luxon";
+import { formatISO, subYears } from "date-fns";
 import moment from "moment";
 import "vue-datetime/dist/vue-datetime.css";
 import States from "./states";
 import UserMixin from "@/mixins/user";
-
-Settings.defaultLocale = "en";
 
 export default {
   name: "PayoutSettingsLegal",
@@ -507,9 +505,8 @@ export default {
       return this.$store.state.payouts.legal.saveLoading;
     },
     maxDate() {
-      return LuxonDateTime.local()
-        .minus({ year: 18 })
-        .toISO();
+      const date = new Date();
+      return formatISO(subYears(date, 18));
     },
     legal() {
       return this.$store.state.payouts.legal.fetchResult;

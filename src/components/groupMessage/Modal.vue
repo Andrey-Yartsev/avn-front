@@ -147,7 +147,7 @@
 import Modal from "@/components/modal/Index";
 import AddMessageBox from "@/components/chat/AddMessageBox";
 import { Datetime } from "vue-datetime";
-import { DateTime as LuxonDateTime } from "luxon";
+import { formatISO, addMinutes } from "date-fns";
 import moment from "moment";
 import Loader from "@/components/common/Loader";
 // import scheduledMessages from "@/mock/scheduleMessages";
@@ -177,9 +177,8 @@ export default {
       return this.$store.state.auth.user;
     },
     minDate() {
-      return LuxonDateTime.local()
-        .plus({ minutes: 1 })
-        .toISO();
+      const date = new Date();
+      return formatISO(addMinutes(date, 5));
     },
     formattedDate() {
       return (

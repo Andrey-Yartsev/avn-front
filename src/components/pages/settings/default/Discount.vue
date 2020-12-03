@@ -153,7 +153,7 @@
 
 <script>
 import { Datetime } from "vue-datetime";
-import { DateTime as LuxonDateTime } from "luxon";
+import { formatISO, addMinutes } from "date-fns";
 import moment from "moment";
 import States from "../payouts/states";
 import Form from "@/mixins/form";
@@ -185,9 +185,8 @@ export default {
       return this.$store.state.auth.user.subscribePrice;
     },
     minDate() {
-      return LuxonDateTime.local()
-        .plus({ minutes: 1 })
-        .toISO();
+      const date = new Date();
+      return formatISO(addMinutes(date, 1));
     },
     getTime() {
       if (!this.discount.period.to) {
