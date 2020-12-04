@@ -24,7 +24,7 @@
           :isSaving="isSaving"
           @removeMedia="removeMedia"
           @clickCheckIcon="isFree"
-          :switchable="priceIsSet"
+          :switchable="canMakeMediasFree"
         />
         <PdfPreview
           v-for="media in preloadedPdfFiles"
@@ -33,10 +33,10 @@
           :isSaving="isSaving"
           @removeMedia="removePdf"
           @clickCheckIcon="isFree"
-          :switchable="priceIsSet"
+          :switchable="canMakeMediasFree"
         />
       </div>
-      <div class="addFileCollectionView" v-if="showCanMakeFreeAlert">
+      <div class="addFileCollectionView" v-if="canMakeMediasFree">
         <div class="markAsFree">
           <span
             >You can mark some medias as free to be used as a previews for
@@ -371,7 +371,7 @@ export default {
         this.priceIsSet
       );
     },
-    showCanMakeFreeAlert() {
+    canMakeMediasFree() {
       if (!this.priceIsSet) {
         return false;
       } else if (this.preloadedMedias.length > 1) {
