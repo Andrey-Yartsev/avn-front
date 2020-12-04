@@ -464,7 +464,9 @@ export default {
           root: true
         })
         .then(res => {
-          const urlString = `${window.location.origin}/${this.$store.state.auth.user.username}/media/${res.accessToken}`;
+          const urlString = `${window.location.origin}/${
+            this.$store.state.auth.user.username
+          }/media/${res.accessToken}`;
           this.$store.dispatch("modal/show", {
             name: "mediaAccessLink",
             data: {

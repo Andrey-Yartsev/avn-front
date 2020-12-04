@@ -143,7 +143,9 @@ export default {
           root: true
         })
         .then(res => {
-          const urlString = `${window.location.origin}/media/${this.$store.state.auth.user.username}/${this.post.productId}/${res.accessToken}`;
+          const urlString = `${window.location.origin}/media/${
+            this.$store.state.auth.user.username
+          }/${this.post.productId}/${res.accessToken}`;
           this.$store.dispatch("modal/show", {
             name: "mediaAccessLink",
             data: {
