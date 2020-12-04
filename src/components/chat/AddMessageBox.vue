@@ -452,6 +452,12 @@ export default {
         opt.docFile = this.preloadedPdfFiles;
       }
 
+      if (opt.mediaFile) {
+        opt.mediaFile = opt.mediaFile.filter(v => {
+          return !!v.id;
+        });
+      }
+
       if (this.confirmation && this.recipientsCount) {
         this.$store.dispatch("modal/show", {
           name: "confirm",
