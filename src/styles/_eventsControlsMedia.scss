@@ -306,6 +306,14 @@
       }
     }
   }
+
+  &.notifications {
+    .root-btn__inside {
+      &:before {
+        content: "\e88f";
+      }
+    }
+  }
 }
 
 .root-btn {

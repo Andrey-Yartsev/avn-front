@@ -168,6 +168,7 @@
                   </button>
                 </div>
               </div>
+              <NotificationsMenu />
             </div>
           </div>
         </div>
@@ -420,6 +421,7 @@ import moment from "moment";
 import LoadScripts from "@/components/statistics/loadScripts";
 import { convertImgToBase64URL } from "@/utils/mediaFiles";
 import Multiselect from "vue-multiselect";
+import NotificationsMenu from "./menu/Notifications";
 
 const tipsGoalSourceTypes = [
   { title: "Live stream tips", value: "localTips" },
@@ -448,6 +450,7 @@ export default {
       streamAudios: undefined,
       streamAudio: undefined,
       shownStreamAudioMenu: false,
+      shownNotificationsMenu: false,
 
       isReadyToStart: false,
       isStarted: false,
@@ -492,7 +495,8 @@ export default {
     Filters,
     Comments,
     StreamViewers,
-    Multiselect
+    Multiselect,
+    NotificationsMenu
   },
   computed: {
     likesCount() {
@@ -974,6 +978,7 @@ export default {
       return;
     }
     this.$store.commit("lives/resetCurrentLive");
+    this.$store.dispatch("lives/notifications/init");
 
     if (this.user.hasWatermarkStream && this.user.watermarkFileUpload) {
       convertImgToBase64URL(this.user.watermarkFileUpload, base64Img => {

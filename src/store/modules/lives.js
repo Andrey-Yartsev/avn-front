@@ -2,6 +2,8 @@
 import LivesApi from "@/api/lives";
 import PostMixin from "@/store/mixins/posts";
 import { createRequestAction } from "../utils/storeRequest";
+import notifications from "./lives/notifications";
+import playSound from "@/utils/playSound";
 
 const initState = {
   loading: false,
@@ -93,6 +95,8 @@ const mutations = {
       }
     ];
     state.currentLive.looksCount += 1;
+
+    playSound("newUser");
   },
 
   unlook(state, look) {
@@ -276,5 +280,8 @@ export default {
   namespaced: true,
   state,
   actions: { ...PostMixin.actions, ...actions },
-  mutations: { ...PostMixin.mutations, ...mutations }
+  mutations: { ...PostMixin.mutations, ...mutations },
+  modules: {
+    notifications
+  }
 };
