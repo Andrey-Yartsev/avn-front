@@ -2,6 +2,11 @@
   <div
     class="btn-media-event has-dropdown stream-visibility subscribers"
     :class="{ shown }"
+    v-click-outside="
+      () => {
+        shown = false;
+      }
+    "
   >
     <button type="button" class="root-btn" @click="shown = !shown">
       <span class="root-btn__inside">{{ selected.label }}</span>
