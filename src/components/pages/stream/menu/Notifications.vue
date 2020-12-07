@@ -50,7 +50,7 @@
 
 <script>
 import ClickOutside from "vue-click-outside";
-import notifications from "../notifications";
+import notifications from "@/components/pages/stream/utils/notifications";
 
 export default {
   name: "StreamMenuNotifications",

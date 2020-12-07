@@ -141,11 +141,11 @@
 <script>
 import upload from "@/utils/upload";
 import UserMixin from "@/mixins/user";
-import States from "./states";
+import StatesMixin from "@/components/pages/settings/payouts/mixins/states";
 
 export default {
   name: "IdDocsFormLegal",
-  mixins: [UserMixin, States],
+  mixins: [UserMixin, StatesMixin],
   data() {
     return {
       personalIdImage: null,

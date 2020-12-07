@@ -390,23 +390,6 @@
       }
     }
 
-    .add-new-type {
-
-      .addNewNav {
-
-        &__item {
-
-          &:after {
-            display: none;
-          }
-        }
-      }
-    }
-
-    .addNewNav  {
-      display: none;
-    }
-
     .textarea {
       background-color: $white;
 
@@ -467,45 +450,10 @@
         transform: translateX(7px);
       }
 
-      .addNewNav {
-
-        &__item {
-
-          &:before {
-            @include media-breakpoint-up($desktop-breakpoint) {
-              width: 1.8em;
-            }
-          }
-
-          &.active {
-
-            @include media-breakpoint-up($desktop-breakpoint) {
-
-              &:before {
-                @include media-breakpoint-up($desktop-breakpoint) {
-                  width: 54px;
-                }
-              }
-            }
-          }
-        }
-      }
-
       .popup & {
         @include media-breakpoint-up($desktop-breakpoint) {
           margin-top: 0;
           transform: translateX(0);
-        }
-        .addNewNav {
-
-          &__item {
-
-            &:before {
-              @include media-breakpoint-up($desktop-breakpoint) {
-                width: auto;
-              }
-            }
-          }
         }
       }
     }

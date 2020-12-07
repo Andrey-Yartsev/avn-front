@@ -46,15 +46,20 @@
 </template>
 
 <script>
-import Loader from "@/components/common/Loader";
-import LoadScripts from "./loadScripts";
-import BuildScale from "./buildScale";
 import { getUnixTime } from "date-fns";
-import ChartBuilding from "./chartBuilding";
-import ChartData from "./chartData";
+import Loader from "@/components/common/Loader";
+import LoadScriptsMixin from "@/components/statistics/mixins/loadScripts";
+import BuildScaleMixin from "@/components/statistics/mixins/buildScale";
+import ChartBuildingMixin from "@/components/statistics/mixins/chartBuilding";
+import ChartDataMixin from "@/components/statistics/mixins/chartData";
 
 export default {
-  mixins: [LoadScripts, BuildScale, ChartBuilding, ChartData],
+  mixins: [
+    LoadScriptsMixin,
+    BuildScaleMixin,
+    ChartBuildingMixin,
+    ChartDataMixin
+  ],
   components: {
     Loader
   },

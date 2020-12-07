@@ -12,7 +12,7 @@
                 @click="close"
               />
             </div>
-            <Form :close="close" @submit="submit" />
+            <LinkModalForm :close="close" @submit="submit" />
           </div>
         </div>
       </div>
@@ -22,13 +22,13 @@
 
 <script>
 import Modal from "@/components/modal/Index";
-import Form from "./Form";
+import LinkModalForm from "@/components/common/profile/links/LinkModalForm";
 
 export default {
-  name: "AddLinkModal",
+  name: "LinkModal",
   components: {
     Modal,
-    Form
+    LinkModalForm
   },
   computed: {
     isEditMode() {

@@ -46,10 +46,10 @@
 </template>
 
 <script>
-import Kinds from "./kinds";
+import KindsMixin from "@/components/pages/settings/magazine/mixins/kinds";
 
 export default {
-  mixins: [Kinds],
+  mixins: [KindsMixin],
   props: {
     info: Object
   },

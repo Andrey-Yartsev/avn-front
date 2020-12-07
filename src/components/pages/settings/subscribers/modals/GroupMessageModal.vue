@@ -149,10 +149,9 @@ import AddMessageBox from "@/components/chat/AddMessageBox";
 import { Datetime } from "vue-datetime";
 import { formatISO, addMinutes, format } from "date-fns";
 import Loader from "@/components/common/Loader";
-// import scheduledMessages from "@/mock/scheduleMessages";
 
 export default {
-  name: "groupMessageModal",
+  name: "GroupMessageModal",
   components: {
     Modal,
     AddMessageBox,
@@ -189,7 +188,7 @@ export default {
   methods: {
     close(e) {
       e.preventDefault();
-      this.$store.dispatch("modal/hide", { name: "groupMessage" });
+      this.$store.dispatch("modal/hide", { name: "subscribersGroupMessage" });
       this.$store.commit("profile/links/endEditLink");
     },
     async submit(data) {
@@ -213,7 +212,7 @@ export default {
         });
       } finally {
         this.loading = false;
-        this.$store.dispatch("modal/hide", { name: "groupMessage" });
+        this.$store.dispatch("modal/hide", { name: "subscribersGroupMessage" });
       }
     },
     openDatepicker() {

@@ -284,45 +284,10 @@
 <script>
 import Form from "@/mixins/form";
 import Loader from "@/components/common/Loader";
-import States from "@/components/pages/settings/payments/states";
-import { Validator } from "vee-validate";
+import StatesMixin from "@/components/pages/settings/payments/mixins/states";
+import creditCardValidator from "@/validator/creditCard";
 import creditCardType from "credit-card-type";
 import { goCcbill } from "@/utils/ccbill";
-
-Validator.extend("non-amex", {
-  getMessage: () => "We are not supporting American Express cards",
-  validate: value => {
-    return !value.match(/^3[47][0-9]{13}$/);
-  }
-});
-
-Validator.extend("card-date", {
-  getMessage: "Wrong card date expiration",
-  validate: value => {
-    const r = value.match(/^(\d\d)\/(\d\d)$/);
-    if (!r) {
-      return false;
-    }
-    if (r[1] > 12) {
-      return false;
-    }
-    return true;
-  }
-});
-
-Validator.extend("card-holder", {
-  getMessage: "Wrong chars",
-  validate: value => {
-    return !!value.match(/^[a-z\-'. ]+$/i);
-  }
-});
-
-Validator.extend("latin", {
-  getMessage: "Wrong chars",
-  validate: value => {
-    return !!value.match(/^[0-9a-z\-'., ]+$/i);
-  }
-});
 
 const userinfo = {
   street: "",
@@ -356,7 +321,7 @@ const initData = {
 
 export default {
   name: "SettingsPaymentAddCardForm",
-  mixins: [Form, States],
+  mixins: [Form, StatesMixin],
   components: { Loader },
   props: {
     cardId: Number
@@ -528,6 +493,12 @@ export default {
     trimUserInfo(name) {
       this.userinfo[name] = this.userinfo[name].trim();
     }
+  },
+  created() {
+    this.$validator.extend("non-amex", creditCardValidator.nonAmex);
+    this.$validator.extend("card-date", creditCardValidator.cardDate);
+    this.$validator.extend("card-holder", creditCardValidator.cardHolder);
+    this.$validator.extend("latin", creditCardValidator.latin);
   }
 };
 </script>

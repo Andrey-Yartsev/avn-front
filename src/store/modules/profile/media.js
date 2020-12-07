@@ -1,11 +1,11 @@
 import { createRequestAction } from "../../utils/storeRequest";
-import mockMedia from "../../../mock/media";
+// import mockMedia from "../../../mock/media";
 
 const fetchLimit = 9;
 
 const initState = {
-  media: mockMedia,
-  // media: [],
+  // media: mockMedia,
+  media: [],
   editedMedia: null,
   marker: null,
   offset: 0,

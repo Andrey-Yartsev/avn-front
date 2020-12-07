@@ -299,7 +299,6 @@
             {{ likesCount ? likesCount : "" }}
           </span>
           <span
-            v-if="$root.showTips"
             class="stream-btn bottom-btn"
             @click="asideType = 'tip'"
             :class="{ selected: asideType === 'tip', disabled: !amount }"
@@ -377,12 +376,12 @@ import userMixin from "@/mixins/user";
 import { StreamModule } from "streaming-module";
 import StreamApi from "@/api/stream";
 import ClickOutside from "vue-click-outside";
-import logoBase64 from "./logo";
+import logoBase64 from "@/components/pages/stream/utils/logo";
 import Comments from "@/components/common/streamComments/Index";
 import StreamViewers from "@/components/pages/stream/Viewers";
-import { getCookie } from "@/components/pages/stream/debug";
+import { getCookie } from "@/components/pages/stream/utils/debug";
 import { intervalToDuration } from "date-fns";
-import LoadScripts from "@/components/statistics/loadScripts";
+import LoadScriptsMixin from "@/components/statistics/mixins/loadScripts";
 import { convertImgToBase64URL } from "@/utils/mediaFiles";
 import Multiselect from "vue-multiselect";
 import NotificationsMenu from "./menu/Notifications";
@@ -402,7 +401,7 @@ export default {
   directives: {
     ClickOutside
   },
-  mixins: [userMixin, LoadScripts],
+  mixins: [userMixin, LoadScriptsMixin],
   data() {
     return {
       streamVisibility: {},
@@ -866,11 +865,9 @@ export default {
         JSON.stringify({ ...common, code: "stream_comment_search_all" })
       );
 
-      if (this.$root.showTips) {
-        this.$root.ws.ws.send(
-          JSON.stringify({ ...common, code: "stream_tip_search_all" })
-        );
-      }
+      this.$root.ws.ws.send(
+        JSON.stringify({ ...common, code: "stream_tip_search_all" })
+      );
     },
     changeFilter(value) {
       this.streamModule.changeFilter(value);

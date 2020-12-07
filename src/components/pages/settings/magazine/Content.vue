@@ -102,7 +102,7 @@
 import Loader from "@/components/common/Loader";
 import ShippingInfo from "./ShippingInfo";
 import DigitalPreviews from "./DigitalPreviews";
-import PayAction from "../payments/payAction";
+import PayAction from "@/mixins/payAction";
 import User from "@/mixins/user";
 import RouteRedirectMixin from "@/mixins/routeRedirect";
 

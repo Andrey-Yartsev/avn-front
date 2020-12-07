@@ -38,7 +38,6 @@
 
 <script>
 import User from "@/mixins/user";
-import CardExpDate from "@/components/common/CardExpDate";
 import Transactions from "@/components/pages/settings/payments/Transactions";
 import CardForm from "./CardForm";
 import Cards from "./Cards";
@@ -47,7 +46,6 @@ export default {
   name: "AddCardSecurionpay",
   mixins: [User],
   components: {
-    CardExpDate,
     Transactions,
     CardForm,
     Cards

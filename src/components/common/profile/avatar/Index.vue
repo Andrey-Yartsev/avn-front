@@ -82,12 +82,12 @@
 <script>
 import User from "@/mixins/user";
 import HeaderScrolled from "@/mixins/headerScrolled";
-import Access from "@/components/stream/access";
+import AccessMixin from "@/components/stream/mixins/access";
 import VotingMixin from "@/mixins/voting";
 
 export default {
   name: "ProfileAvatar",
-  mixins: [User, HeaderScrolled, Access, VotingMixin],
+  mixins: [User, HeaderScrolled, AccessMixin, VotingMixin],
   props: {
     pageName: {
       type: String,

@@ -59,14 +59,14 @@
 import Loader from "@/components/common/Loader";
 import Transactions from "./Transactions";
 import AutoReloadDeposit from "./AutoReloadDeposit";
-import PayAction from "./payAction";
+import PayActionMixin from "@/components/pages/settings/credits/mixins/payAction";
 import userMixin from "@/mixins/user";
 
 // import PayAction from "../../../../sep-components/avn/securionpay/payAction";
 
 export default {
   name: "CreditsSettingsContent",
-  mixins: [PayAction, userMixin],
+  mixins: [PayActionMixin, userMixin],
   components: {
     Loader,
     Transactions,

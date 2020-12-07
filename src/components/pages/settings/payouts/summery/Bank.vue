@@ -32,11 +32,11 @@
 
 <script>
 import BankEdit from "./BankEdit";
-import Bank from "../bank";
+import BankMixin from "@/components/pages/settings/payouts/mixins/bank";
 
 export default {
   name: "PayoutSettingsSummeryBank",
-  mixins: [Bank],
+  mixins: [BankMixin],
   components: {
     BankEdit
   },

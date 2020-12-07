@@ -91,13 +91,13 @@
 
 <script>
 import TextField from "./TextField";
-import UserInfo from "./userInfo";
-import Kinds from "./kinds";
+import UserInfoMixin from "@/components/pages/settings/magazine/mixins/userInfo";
+import KindsMixin from "@/components/pages/settings/magazine/mixins/kinds";
 import Loader from "@/components/common/Loader";
 
 export default {
   name: "MagShippingForm",
-  mixins: [UserInfo, Kinds],
+  mixins: [UserInfoMixin, KindsMixin],
   components: {
     TextField,
     Loader

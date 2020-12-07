@@ -111,14 +111,14 @@
 <script>
 import ConnectTwitter from "../ConnectTwitter";
 import ConnectGoogle from "../ConnectGoogle";
-import Common from "../common";
+import SettingsCommonMixin from "@/mixins/settings/common";
 import DeleteRestore from "../DeleteRestore";
 import Email from "./Email";
 
 export default {
   name: "AccountSettingsAllView",
 
-  mixins: [Common],
+  mixins: [SettingsCommonMixin],
 
   data() {
     return {

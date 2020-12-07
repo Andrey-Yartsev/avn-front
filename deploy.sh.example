@@ -1,4 +1,5 @@
 #!/bin/bash
+#development deploy
 
 if [ -z "$1" ]
 then
@@ -7,17 +8,28 @@ else
   BRANCH=$1
 fi
 
-cd /home/ubuntu/team3/deploy
+cd /home/ubuntu/avn2/deploy
 git reset --hard origin/$BRANCH
 git fetch origin
 git checkout $BRANCH
 git pull origin $BRANCH
+rm -rf node_modules/streaming-module
 npm i
-npm update streaming-module
+cp .env.avn .env.local
 npm run build
 git log -1 --pretty="%h %B %ad" > ./dist/version.txt
 echo " $BRANCH" >> ./dist/version.txt
 cat ./dist/version.txt
+node routes-export.js
+node make-spa-php.js
+cp reserved-words.json ./dist/static/reserved-words.json
+cp src/manifest/dev.json ./dist/manifest.json
 
-rm -r /var/www/html/team3.retloko.com/public_html
-mv /home/ubuntu/team3/deploy/dist /var/www/html/team3.retloko.com/public_html
+rm /var/www/html/avn2.retloko.com/public_html/js/*
+rm /var/www/html/avn2.retloko.com/public_html/css/*
+cp -R /home/ubuntu/avn2/deploy/dist/* /var/www/html/avn2.retloko.com/public_html/
+
+cd /var/www/html/avn2.retloko.com/
+touch ./REVISION_FRONT
+echo "$(date +'%Y%m%d%H%M%S')" > ./REVISION_FRONT
+cat ./REVISION_FRONT

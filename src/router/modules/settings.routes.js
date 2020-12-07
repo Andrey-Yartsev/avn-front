@@ -128,7 +128,7 @@ export const routes = [
         : Auth.requireAuthAdmin,
     // beforeEnter: Auth.requireAuthAdmin,
     path: "/settings/avn",
-    name: "SettingsNomination",
+    name: "SettingsNominationStraight",
     component: () =>
       import(/* webpackChunkName: "SettingsNominationPage" */ "@/components/pages/settings/nomination/Index.vue"),
     meta: {
@@ -251,7 +251,7 @@ export const routes = [
   {
     beforeEnter: Auth.requireAuth,
     path: "/settings/magazine/one-click",
-    name: "SettingsMagazinePage",
+    name: "SettingsMagazineRedirectLinkPage",
     component: () =>
       import(/* webpackChunkName: "SettingsMagazinePage" */ "@/components/pages/settings/magazine/Index.vue"),
     meta: {
@@ -290,7 +290,7 @@ export const routes = [
     path: "/settings/nomination",
     name: "SettingsNominationPage",
     component: () =>
-      import(/* webpackChunkName: "SettingsWelcomeMessagesPage" */ "@/components/pages/settings/nomination/Index.vue"),
+      import(/* webpackChunkName: "SettingsNominationPage" */ "@/components/pages/settings/nomination/Index.vue"),
     meta: {
       title: "Nomination",
       cssName: "settings"

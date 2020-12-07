@@ -332,9 +332,8 @@ import PrivateBlock from "@/components/common/profile/privateBlock/Index";
 import FollowersOnlyBlock from "@/components/common/profile/followersOnlyBlock/Index";
 import BlockedBlock from "@/components/common/profile/blockedBlock/Index";
 import Highlights from "@/components/common/profile/highlights/Index";
-import Wsp from "@/mixins/wsp";
+import WsMixin from "@/mixins/ws";
 import Footer from "@/components/footer/Index.vue";
-import LinkPost from "@/components/addLink/LinkPost";
 import LinksPage from "@/components/common/profile/links/Index";
 import MediaPage from "@/components/common/profile/media/Index";
 import GroupsPage from "@/components/common/profile/groups/Index";
@@ -348,7 +347,7 @@ export default {
     InfinityScrollMixin,
     UserMixin,
     FileUpload,
-    Wsp,
+    WsMixin,
     Visibility,
     TipAuto,
     VotingMixin
@@ -369,7 +368,6 @@ export default {
     FollowersOnlyBlock,
     BlockedBlock,
     Highlights,
-    LinkPost,
     LinksPage,
     MediaPage,
     GroupsPage
@@ -455,9 +453,6 @@ export default {
       if (this.$mq === "mobile" && this.pageName === "videos") {
         return PostMedium;
       }
-      // if (this.pageName === "links") {
-      //   return LinkPost;
-      // }
 
       return PostSmall;
     },
@@ -653,68 +648,64 @@ export default {
       global.scrollTo(0, 0);
     },
     buySnapchat() {
-      if (process.env.VUE_APP_NAME === "avn") {
-        if (!this.user) {
-          this.$store.dispatch("modal/show", {
-            name: "signup"
-          });
-          return;
-        }
-
-        if (!this.snapchat || this.snapchat.isPaid !== false) {
-          return;
-        }
-
-        // if (!this.user.isPaymentCardConnected) {
-        //   this.$store.dispatch("global/flashToast", {
-        //     text: "You should add card in payment settings",
-        //     type: "warning"
-        //   });
-        //   this.$router.push("/settings/payments");
-        //   return;
-        // }
-
+      if (!this.user) {
         this.$store.dispatch("modal/show", {
-          name: "buySnapchatConfirm",
-          data: {
-            price: "$" + this.snapchat.price,
-            paymentType: "product",
-            productId: this.snapchat.id,
-            callback: this.initProfile
-          }
+          name: "signup"
         });
+        return;
       }
+
+      if (!this.snapchat || this.snapchat.isPaid !== false) {
+        return;
+      }
+
+      // if (!this.user.isPaymentCardConnected) {
+      //   this.$store.dispatch("global/flashToast", {
+      //     text: "You should add card in payment settings",
+      //     type: "warning"
+      //   });
+      //   this.$router.push("/settings/payments");
+      //   return;
+      // }
+
+      this.$store.dispatch("modal/show", {
+        name: "buySnapchatConfirm",
+        data: {
+          price: "$" + this.snapchat.price,
+          paymentType: "product",
+          productId: this.snapchat.id,
+          callback: this.initProfile
+        }
+      });
     },
     sendMySnapchat() {
       if (!this.snapchat || this.snapchat.isPaid === false) {
         return;
       }
-      if (process.env.VUE_APP_NAME === "avn") {
-        this.$store
-          .dispatch("chat/sendMessage", {
-            userId: this.profile.id,
-            data: {
-              price: 0,
-              text: this.$store.state.init.data.messages.snapchatSuccessPaid.replace(
-                "{SNAPCHAT}",
-                this.mysnapchat
-              ),
-              isSnapchat: true
-            }
-          })
-          .then(() => {
-            this.$store
-              .dispatch(`premiumLinks/activate`, {
-                id: this.snapchat.id,
-                data: {
-                  name: this.mysnapchat
-                }
-              })
-              .then(() => {
-                this.$router.push(`/chat/${this.profile.id}`);
-              });
-          });
-      }
+      this.$store
+        .dispatch("chat/sendMessage", {
+          userId: this.profile.id,
+          data: {
+            price: 0,
+            text: this.$store.state.init.data.messages.snapchatSuccessPaid.replace(
+              "{SNAPCHAT}",
+              this.mysnapchat
+            ),
+            isSnapchat: true
+          }
+        })
+        .then(() => {
+          this.$store
+            .dispatch(`premiumLinks/activate`, {
+              id: this.snapchat.id,
+              data: {
+                name: this.mysnapchat
+              }
+            })
+            .then(() => {
+              this.$router.push(`/chat/${this.profile.id}`);
+            });
+        });
     },
     storePrefix() {
       return "profile/home";

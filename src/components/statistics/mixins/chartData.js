@@ -6,14 +6,14 @@ import {
   matchChartCode,
   matchCodeByPrefix,
   getScaleData
-} from "./utils";
+} from "@/components/statistics/utils/common";
 import { getUnixTime } from "date-fns";
 import pluralize from "pluralize";
 // import { barCount } from "./chartVars";
 
-import CalcCount from "./calcCount";
-import ChartDonutData from "./chartDonutData";
-import TopFollowers from "./topFollowers";
+import CalcCount from "@/components/statistics/mixins/calcCount";
+import ChartDonutData from "@/components/statistics/mixins/chartDonutData";
+import TopFollowers from "@/components/statistics/mixins/topFollowers";
 
 //
 // abstract: currentPeriodType

@@ -19,12 +19,12 @@
 <script>
 import Aside from "./Aside";
 import DefaultSection from "./default/Index";
-import Mobile from "./mobile";
+import MobileMixin from "@/mixins/settings/mobile";
 
 export default {
   name: "Settings",
 
-  mixins: [Mobile],
+  mixins: [MobileMixin],
 
   components: {
     Aside,

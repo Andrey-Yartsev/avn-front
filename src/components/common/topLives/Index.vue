@@ -48,11 +48,11 @@
 </template>
 
 <script>
-import Access from "@/components/stream/access";
+import AccessMixin from "@/components/stream/mixins/access";
 
 export default {
   name: "TopLives",
-  mixins: [Access],
+  mixins: [AccessMixin],
   data() {
     return {
       current: 0,

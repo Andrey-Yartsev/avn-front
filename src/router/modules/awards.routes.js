@@ -25,7 +25,7 @@ export const routes = [
     path: "/gayvn_awards/nominations",
     name: "AvnAwardsGay",
     component: () =>
-      import(/* webpackChunkName: "AvnAwards" */ "@/components/pages/awards/PreNominationClosed"),
+      import(/* webpackChunkName: "AvnAwardsNominations" */ "@/components/pages/awards/PreNominationClosed"),
     meta: {
       noAuthSection: true,
       staticPage: true,
@@ -42,7 +42,7 @@ export const routes = [
     path: "/nominator/:username/:type/:categories?",
     name: "Nominator",
     component: () =>
-      import(/* webpackChunkName: "AvnAwardsNominator" */ "@/components/pages/awards/PreNominationClosed"),
+      import(/* webpackChunkName: "AvnAwardsNominations" */ "@/components/pages/awards/PreNominationClosed"),
     meta: {
       noAuthSection: true,
       staticPage: true,

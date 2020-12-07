@@ -1,5 +1,5 @@
 import { startOfWeek, sub, add, format, startOfDay } from "date-fns";
-import { getScaleData } from "./utils";
+import { getScaleData } from "@/components/statistics/utils/common";
 
 export default {
   methods: {

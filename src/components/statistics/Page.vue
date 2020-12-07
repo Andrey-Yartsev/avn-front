@@ -6,10 +6,10 @@
 <script>
 import Loader from "@/components/common/Loader";
 import PageInner from "./PageInner";
-import LoadScripts from "./loadScripts";
+import LoadScriptsMixin from "@/components/statistics/mixins/loadScripts";
 
 export default {
-  mixins: [LoadScripts],
+  mixins: [LoadScriptsMixin],
   components: {
     Loader,
     PageInner

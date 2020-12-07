@@ -659,7 +659,7 @@
 </template>
 
 <script>
-import Common from "../common";
+import SettingsCommonMixin from "@/mixins/settings/common";
 import BlockedUsers from "../BlockedUsers";
 import ConnectTwitter from "../ConnectTwitter";
 import User from "@/mixins/user";
@@ -670,7 +670,7 @@ import Blocking from "./Blocking";
 export default {
   name: "PrivacySettingsContent",
 
-  mixins: [Common, User],
+  mixins: [SettingsCommonMixin, User],
 
   components: {
     BlockedUsers,

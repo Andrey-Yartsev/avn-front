@@ -70,7 +70,7 @@
 
 <script>
 import User from "@/mixins/user";
-import PayAction from "../settings/payments/payAction";
+import PayAction from "@/mixins/payAction";
 
 export default {
   mixins: [User, PayAction],

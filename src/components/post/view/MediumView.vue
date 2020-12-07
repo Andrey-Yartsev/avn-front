@@ -124,7 +124,7 @@ import UserSuggestionsInline from "@/mixins/userSuggestionsInline";
 import { format } from "date-fns";
 import LinksPreviewList from "@/components/post/parts/linksPreviewList/Index";
 import PostTipsGoal from "@/components/post/parts/tipsGoal/Index";
-import PayAction from "@/components/pages/settings/payments/payAction";
+import PayAction from "@/mixins/payAction";
 
 export default {
   name: "PostMedium",

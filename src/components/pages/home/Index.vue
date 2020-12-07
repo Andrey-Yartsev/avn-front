@@ -89,7 +89,7 @@ import Footer from "@/components/footer/Index";
 import AddPost from "@/components/post/add/Fake";
 import StoriesWrapper from "@/components/aside/StoriesWrapper";
 import InfinityScrollMixin from "@/mixins/infinityScroll";
-import Wsp from "@/mixins/wsp";
+import WsMixin from "@/mixins/ws";
 import Loader from "@/components/common/Loader";
 import PostVisibility from "@/mixins/post/visibility";
 
@@ -104,7 +104,7 @@ export default {
     NewFeedPostToast,
     Loader
   },
-  mixins: [InfinityScrollMixin, Wsp, PostVisibility],
+  mixins: [InfinityScrollMixin, WsMixin, PostVisibility],
   created() {
     this.init();
   },

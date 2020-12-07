@@ -197,9 +197,7 @@ export default {
         };
       });
 
-      return this.$root.showTips
-        ? menuTitles
-        : menuTitles.filter(a => a.name !== "tip");
+      return menuTitles;
     },
     notificationView() {
       return NotificationSingleView;

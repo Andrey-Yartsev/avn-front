@@ -438,7 +438,7 @@
 </template>
 
 <script>
-import Common from "../common";
+import SettingsCommonMixin from "@/mixins/settings/common";
 import webPushNotifications from "@/mixins/webPushNotifications";
 // import { twitterNotificationsSettings.options } from "@/mock/twitterNotificationsSettings.options";
 import TwitterCustomPreviews from "./TwitterCustomPreviews";
@@ -446,7 +446,7 @@ import User from "@/mixins/user";
 
 export default {
   name: "NotificationSettingsContent",
-  mixins: [Common, webPushNotifications, User],
+  mixins: [SettingsCommonMixin, webPushNotifications, User],
   components: {
     TwitterCustomPreviews
   },

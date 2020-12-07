@@ -33,9 +33,7 @@
       @hideFooter="hideFooter"
       :postView="postView"
     />
-    <template
-      v-if="!isOwner(post.author.id) && post.author.canEarn && $root.showTips"
-    >
+    <template v-if="!isOwner(post.author.id) && post.author.canEarn">
       <span class="actions__btn" :class="{ active: showTip }" @click="toggleTip"
         ><span
           class="btn-icon icn-tips icn-item icn-size_lg"

@@ -7,45 +7,19 @@ const state = {
 
 const actions = {
   openPaymentModal({ dispatch }, { user, amount, tipId }) {
-    if (process.env.VUE_APP_NAME === "avn") {
-      dispatch(
-        "modal/show",
-        {
-          name: "tipPayConfirm",
-          data: {
-            amount,
-            user,
-            tipId
-          }
-        },
-        { root: true }
-      );
-      return;
-    }
-
     dispatch(
-      "subscription/fetchPaymentLink",
+      "modal/show",
       {
-        type: "tip",
-        amount,
-        tipId,
-        id: user.id
+        name: "tipPayConfirm",
+        data: {
+          amount,
+          user,
+          tipId
+        }
       },
       { root: true }
-    ).then(() => {
-      dispatch(
-        "modal/show",
-        {
-          name: "payment",
-          data: {
-            type: "tip",
-            amount,
-            user
-          }
-        },
-        { root: true }
-      );
-    });
+    );
+    return;
   }
 };
 

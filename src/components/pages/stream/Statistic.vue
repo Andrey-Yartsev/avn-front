@@ -15,10 +15,7 @@
             this.likes.length
           }}</span>
         </div>
-        <div
-          v-if="$root.showTips"
-          class="stream-chart-legend-item stream-chart-legend-item__tips"
-        >
+        <div class="stream-chart-legend-item stream-chart-legend-item__tips">
           <span class="stream-chart-legend-item-label">Tips</span>
           <span class="stream-chart-legend-item-value">{{ this.tips }}</span>
         </div>
@@ -70,10 +67,7 @@
               {{ this.likes.length }}
             </div>
           </div>
-          <div
-            v-if="$root.showTips"
-            class="stream-summary-data-item stream-summary-data-item__tips"
-          >
+          <div class="stream-summary-data-item stream-summary-data-item__tips">
             <div class="stream-summary-data-item__label">
               <span class="btn-icon icn-tips icn-item"></span>Tips
             </div>
@@ -133,7 +127,7 @@
 <script>
 import Loader from "@/components/common/Loader";
 import { format, fromUnixTime } from "date-fns";
-import ChartSettings from "./ChartSettings.js";
+import chartSettings from "@/components/pages/stream/utils/chartSettings.js";
 
 export default {
   name: "Statistic",
@@ -217,7 +211,7 @@ export default {
       this.scale = this.streamDuration < 4 ? this.streamDuration : 4;
       this.streamScaleUnit = this.streamDuration / this.scale;
       this.streamUnitTime = this.streamDuration / this.barCount;
-      this.CHART = global.AmCharts.makeChart("stream-chart", ChartSettings);
+      this.CHART = global.AmCharts.makeChart("stream-chart", chartSettings);
 
       for (let i = 0; i < this.barCount; i += 1) {
         this.CHART.dataProvider.push({

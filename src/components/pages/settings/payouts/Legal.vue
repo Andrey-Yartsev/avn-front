@@ -425,13 +425,13 @@ import upload from "@/utils/upload";
 import { Datetime } from "vue-datetime";
 import { formatISO, subYears } from "date-fns";
 import "vue-datetime/dist/vue-datetime.css";
-import States from "./states";
+import StatesMixin from "@/components/pages/settings/payouts/mixins/states";
 import UserMixin from "@/mixins/user";
 import { formatWithoutLocalization } from "@/utils/datetime";
 
 export default {
   name: "PayoutSettingsLegal",
-  mixins: [Form, States, UserMixin],
+  mixins: [Form, StatesMixin, UserMixin],
   components: {
     BirthDateSelect,
     Datetime

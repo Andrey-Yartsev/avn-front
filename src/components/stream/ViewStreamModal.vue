@@ -86,7 +86,7 @@
               ref="addComment"
             />
             <Tip
-              v-if="$root.showTips && showTip"
+              v-if="showTip"
               :user="streamer"
               ref="tip"
               @cancel="closeTip"
@@ -113,7 +113,7 @@
           <span
             class="bottom-btn"
             type="button"
-            v-if="streamer.canEarn && $root.showTips"
+            v-if="streamer.canEarn"
             @click="openTipForm"
           >
             <span
@@ -153,7 +153,7 @@ import { intervalToDuration } from "date-fns";
 import Tip from "@/components/common/tip/User";
 import Comments from "@/components/common/streamComments/Index";
 import AddComment from "@/components/common/streamComments/AddComment";
-import { getCookie } from "@/components/pages/stream/debug";
+import { getCookie } from "@/components/pages/stream/utils/debug";
 import PaidBlock from "@/mixins/paidBlock";
 
 export default {

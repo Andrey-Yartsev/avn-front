@@ -71,11 +71,11 @@
 <script>
 import upload from "@/utils/upload";
 import UserMixin from "@/mixins/user";
-import Bank from "./bank";
+import BankMixin from "@/components/pages/settings/payouts/mixins/bank";
 
 export default {
   name: "BankProofFormLegal",
-  mixins: [UserMixin, Bank],
+  mixins: [UserMixin, BankMixin],
   data() {
     return {
       bankOwnershipProof: null,

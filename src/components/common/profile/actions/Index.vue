@@ -93,11 +93,7 @@
         </div>
         <div class="profile-actions" v-else>
           <template v-if="!isBlockedOn">
-            <div
-              v-if="$root.showTips"
-              class="profile-actions-tip-form"
-              :class="{ show: showTip }"
-            >
+            <div class="profile-actions-tip-form" :class="{ show: showTip }">
               <Tip
                 :user="profile"
                 ref="tip"
@@ -106,7 +102,7 @@
               />
             </div>
             <button
-              v-if="profile.canEarn && $root.showTips"
+              v-if="profile.canEarn"
               type="button"
               class="profile-actions__btn btn-with-icon profile-tip-btn"
               @click="openTip"

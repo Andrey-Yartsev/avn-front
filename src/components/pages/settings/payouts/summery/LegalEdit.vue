@@ -100,12 +100,12 @@
 </template>
 
 <script>
-import States from "../states";
+import StatesMixin from "@/components/pages/settings/payouts/mixins/states";
 import Loader from "@/components/common/Loader";
 import Form from "@/mixins/form";
 
 export default {
-  mixins: [States, Form],
+  mixins: [StatesMixin, Form],
   components: { Loader },
   data() {
     return {

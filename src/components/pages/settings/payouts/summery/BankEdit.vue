@@ -83,12 +83,12 @@
 </template>
 
 <script>
-import Bank from "../bank.js";
+import BankMixin from "@/components/pages/settings/payouts/mixins/bank";
 import BankFields from "../BankFields";
 
 export default {
   name: "PayoutSettingsSummeryBankEdit",
-  mixins: [Bank],
+  mixins: [BankMixin],
   components: { BankFields },
   data() {
     return {

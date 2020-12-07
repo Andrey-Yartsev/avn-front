@@ -28,7 +28,7 @@ import UserMixin from "@/mixins/user";
 import truncate from "truncate-html";
 
 export default {
-  name: "MediaPost",
+  name: "LinkItem",
   props: ["link"],
   mixins: [UserMixin],
   data() {
@@ -40,9 +40,6 @@ export default {
   computed: {
     profile() {
       return this.$store.state.profile.home.profile;
-    },
-    user() {
-      return this.$store.state.auth.user;
     }
   },
   methods: {

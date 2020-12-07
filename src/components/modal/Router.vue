@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import routes from "./routes";
+import routes from "@/components/modal/utils/routes";
 
 export default {
   data() {

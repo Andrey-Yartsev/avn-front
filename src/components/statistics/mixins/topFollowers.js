@@ -1,4 +1,4 @@
-import { periodTypeNames } from "@/components/statistics/utils";
+import { periodTypeNames } from "@/components/statistics/utils/common";
 import request from "@/utils/request";
 
 const topFollowersStorage = {};

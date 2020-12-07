@@ -8,7 +8,7 @@
     </div>
     <div v-else class="content">
       <div v-if="links.length" class="links-wrapper">
-        <LinkPost
+        <LinkItem
           v-for="link in links"
           :link="link"
           :key="link.id"
@@ -35,12 +35,12 @@
 
 <script>
 import Loader from "@/components/common/Loader";
-import LinkPost from "@/components/addLink/LinkPost";
+import LinkItem from "@/components/common/profile/links/LinkItem";
 export default {
   name: "LinksPage",
   components: {
     Loader,
-    LinkPost
+    LinkItem
   },
   props: ["private"],
   computed: {

@@ -58,7 +58,7 @@
 </template>
 
 <script>
-import Common from "../../common";
+import SettingsCommonMixin from "@/mixins/settings/common";
 
 const requestsPeriods = ["weekly", "bi-weekly", "monthly"];
 const periodNames = {
@@ -69,7 +69,7 @@ const periodNames = {
 
 export default {
   name: "AutoRequests",
-  mixins: [Common],
+  mixins: [SettingsCommonMixin],
   data() {
     return {
       periods: requestsPeriods,

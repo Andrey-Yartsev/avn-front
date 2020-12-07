@@ -2,7 +2,7 @@
 /* eslint-disable */
 
 // import playSound from "@/utils/playSound";
-import notifications from "@/components/pages/stream/notifications";
+import notifications from "@/components/pages/stream/utils/notifications";
 // import soundsPreloader from "@/utils/soundsPreloader";
 
 const notificationNames = notifications.map(v => v.name);

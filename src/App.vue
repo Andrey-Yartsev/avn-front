@@ -5,7 +5,7 @@
     <Toast v-if="showToast" @hide="showToast = false" />
     <router-view />
   </div>
-  <div v-else class="main-container" :class="containerClassName">
+  <div v-else class="main-container avn-style">
     <Loader v-if="loading" :fulllight="true" />
     <template v-else>
       <Loader
@@ -14,7 +14,7 @@
         :semidark="true"
       />
       <Header />
-      <HeaderStream />
+      <HeaderStream v-if="showHeaderStream" />
       <main id="content" :style="{ 'padding-right': `${scrollBarWidth}px` }">
         <router-view />
       </main>
@@ -53,7 +53,7 @@ import BrowserStore from "store";
 import Logger from "js-logger";
 import Loader from "@/components/common/Loader";
 import Header from "@/components/header/Index";
-import HeaderStream from "@/components/headerStream/Index";
+import HeaderStream from "@/components/header/HeaderStream";
 import Sidebar from "@/components/header/Sidebar";
 import ToastList from "@/components/common/ToastList";
 import Modals from "@/components/modals/Index";
@@ -64,10 +64,8 @@ import GenderFilterMobile from "@/components/common/GenderFilterMobile";
 import ModalRouter from "@/components/modal/Router";
 import Cookie from "@/utils/cookie";
 import rootClasses from "@/utils/rootClasses";
-import postMessageHandler from "@/utils/postMessage";
 import ws from "@/ws";
 import wsg from "@/ws/wsg";
-// import wsp from "@/ws/wsp";
 import BackRouter from "@/mixins/backRouter";
 import FrontUpdate from "@/mixins/frontUpdate";
 import ColorScheme from "@/mixins/colorScheme";
@@ -129,7 +127,6 @@ export default {
     return {
       showToast: false,
       wasLogout: false,
-      containerClassName: "",
       enterRouteName: ""
     };
   },
@@ -201,6 +198,15 @@ export default {
         this.user.studioAccess &&
         this.user.studioAccess.isLoggedFromStudio
       );
+    },
+    showHeaderStream() {
+      return (
+        this.$route.path !== "/stream" &&
+        !!(
+          this.$store.state.init?.data?.headerStream?.mobile ||
+          this.$store.state.init?.data?.headerStream?.desktop
+        )
+      );
     }
   },
   watch: {
@@ -250,11 +256,6 @@ export default {
     }
   },
   methods: {
-    setContainerClass() {
-      if (this.$root.isAvnApp) {
-        this.containerClassName = "avn-style";
-      }
-    },
     initLoggedInClass() {
       if (this.loggedIn) {
         htmlElement.classList.remove("not-authorized");
@@ -266,15 +267,7 @@ export default {
       if (this.webSocket && this.webSocket.connected) {
         this.webSocket.close();
       }
-      if (this.loggedIn) {
-        this.webSocket = ws;
-        // wsp.connect();
-      } else {
-        this.webSocket = wsg;
-        // if (wsp.connected) {
-        //   wsp.close();
-        // }
-      }
+      this.webSocket = this.loggedIn ? ws : wsg;
       this.webSocket.connect();
       this.$root.ws = this.webSocket;
     },
@@ -323,13 +316,7 @@ export default {
       });
     }
 
-    window.addEventListener("message", postMessageHandler);
-
     this.initTrial();
-  },
-
-  beforeDestroy() {
-    window.removeEventListener("message", postMessageHandler);
   },
 
   mounted() {
@@ -339,10 +326,6 @@ export default {
     }, 3000);
 
     this.initLoggedInClass();
-
-    this.$nextTick(() => {
-      this.setContainerClass();
-    });
   }
 };
 </script>

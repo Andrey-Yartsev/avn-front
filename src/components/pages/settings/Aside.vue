@@ -176,18 +176,18 @@
 </template>
 
 <script>
-import Mobile from "./mobile";
+import MobileMixin from "@/mixins/settings/mobile";
 import Footer from "@/components/footer/Index";
 import ProfileBg from "@/mixins/profileBg";
 import Avatar from "@/mixins/avatar";
 import Loader from "@/components/common/Loader";
 import User from "@/mixins/user";
-import nominationRoutes from "@/components/common/nominationSettingsRoutes";
+import nominationRoutes from "@/utils/nominationSettingsRoutes";
 
 export default {
   name: "SettingsAside",
 
-  mixins: [Mobile, ProfileBg, Avatar, User],
+  mixins: [MobileMixin, ProfileBg, Avatar, User],
 
   components: {
     Footer,
@@ -280,12 +280,10 @@ export default {
           }
         );
       }
-      if (process.env.VUE_APP_NAME === "avn") {
-        items.push({
-          name: "credits",
-          title: "Credits"
-        });
-      }
+      items.push({
+        name: "credits",
+        title: "Credits"
+      });
       if (this.isMonetizedUser) {
         items.push({
           name: "referrals",

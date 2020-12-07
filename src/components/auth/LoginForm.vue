@@ -158,8 +158,8 @@
 
 <script>
 import Recaptcha from "vue-recaptcha";
-import Common from "@/components/auth/common";
-import Login from "@/components/auth/login";
+import Common from "@/components/auth/mixins/common";
+import Login from "@/components/auth/mixins/login";
 import Form from "@/mixins/form";
 import BrowserStore from "store";
 import GoogleLoginButton from "./GoogleLogin";

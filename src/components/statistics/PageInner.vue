@@ -371,15 +371,15 @@ import ClickOutside from "vue-click-outside";
 
 import PostsModal from "./PostsModal";
 import MobileHeader from "@/components/header/Mobile";
-import CalcCount from "./calcCount";
-import BuildScale from "./buildScale";
-import ChartBuilding from "./chartBuilding";
-import ChartDonutBuilding from "./chartDonutBuilding";
-import ChartData from "./chartData";
+import CalcCountMixin from "@/components/statistics/mixins/calcCount";
+import ChartDonutBuildingMixin from "@/components/statistics/mixins/chartDonutBuilding";
+import BuildScaleMixin from "@/components/statistics/mixins/buildScale";
+import ChartBuildingMixin from "@/components/statistics/mixins/chartBuilding";
+import ChartDataMixin from "@/components/statistics/mixins/chartData";
 
 import Footer from "@/components/footer/Index";
 import MoneyTable from "./MoneyTable";
-import User from "@/mixins/user";
+import UserMixin from "@/mixins/user";
 
 import {
   chartTypes,
@@ -387,7 +387,7 @@ import {
   getPeriodType,
   chartDataSets,
   periodTypeNames
-} from "./utils";
+} from "@/components/statistics/utils/common";
 
 const chartStorage = {};
 Object.keys(chartTypes).forEach(chartType => {
@@ -405,12 +405,12 @@ for (let periodType of periodTypeNames) {
 export default {
   name: "statistics-page",
   mixins: [
-    User,
-    CalcCount,
-    BuildScale,
-    ChartBuilding,
-    ChartDonutBuilding,
-    ChartData
+    UserMixin,
+    CalcCountMixin,
+    BuildScaleMixin,
+    ChartBuildingMixin,
+    ChartDonutBuildingMixin,
+    ChartDataMixin
   ],
   directives: {
     ClickOutside

@@ -58,7 +58,7 @@ import {
   addMonths,
   startOfDay
 } from "date-fns";
-import { chartTypes } from "./utils";
+import { chartTypes } from "@/components/statistics/utils/common";
 
 const dataTypes = [
   "earnSubscribes",

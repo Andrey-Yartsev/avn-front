@@ -64,11 +64,11 @@
 </template>
 
 <script>
-import Access from "./access";
+import AccessMixin from "@/components/stream/mixins/access";
 
 export default {
   name: "Live",
-  mixins: [Access],
+  mixins: [AccessMixin],
   props: {
     post: {
       type: Object,

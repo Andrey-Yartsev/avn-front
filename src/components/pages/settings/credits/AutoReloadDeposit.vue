@@ -94,12 +94,12 @@
 
 <script>
 import Loader from "@/components/common/Loader";
-import PayAction from "./payAction";
+import PayActionMixin from "@/components/pages/settings/credits/mixins/payAction";
 import userMixin from "@/mixins/user";
 
 export default {
   name: "AutoReloadDeposit",
-  mixins: [PayAction, userMixin],
+  mixins: [PayActionMixin, userMixin],
   components: {
     Loader
   },

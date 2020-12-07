@@ -268,11 +268,7 @@ export default {
       );
     },
     canSendTips() {
-      return (
-        !this.isOwner(this.post.author.id) &&
-        this.post.author.canEarn &&
-        this.$root.showTips
-      );
+      return !this.isOwner(this.post.author.id) && this.post.author.canEarn;
     },
     showCommentPanel() {
       return (

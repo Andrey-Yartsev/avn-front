@@ -129,14 +129,14 @@
 </template>
 
 <script>
-import Common from "../common";
+import SettingsCommonMixin from "@/mixins/settings/common";
 import BlockedUsers from "../BlockedUsers";
 import ucFirst from "@/helpers/ucFirst";
 
 export default {
   name: "StorySettingsContent",
 
-  mixins: [Common],
+  mixins: [SettingsCommonMixin],
 
   components: {
     BlockedUsers

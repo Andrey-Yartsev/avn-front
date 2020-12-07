@@ -397,16 +397,14 @@ export default {
       if (this.message.isFree || this.message.isOpened) {
         return;
       }
-      if (process.env.VUE_APP_NAME === "avn") {
-        this.$store.dispatch("modal/show", {
-          name: "chatMessagePayConfirm",
-          data: {
-            price: this.message.price,
-            paymentType: "message",
-            messageId: this.message.id
-          }
-        });
-      }
+      this.$store.dispatch("modal/show", {
+        name: "chatMessagePayConfirm",
+        data: {
+          price: this.message.price,
+          paymentType: "message",
+          messageId: this.message.id
+        }
+      });
     },
     time(date) {
       return fromNow(date);

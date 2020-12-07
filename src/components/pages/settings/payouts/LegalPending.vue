@@ -30,11 +30,11 @@
 </template>
 
 <script>
-import Common from "../common";
-import PayoutsCommon from "./common";
+import SettingsCommonMixin from "@/mixins/settings/common";
+import PyoutsMixin from "@/components/pages/settings/payouts/mixins/common";
 
 export default {
-  mixins: [Common, PayoutsCommon],
+  mixins: [SettingsCommonMixin, PyoutsMixin],
   mounted() {
     this.$emit("titleChanged", "Personal Information");
   }

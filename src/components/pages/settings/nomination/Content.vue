@@ -134,13 +134,13 @@
 </template>
 
 <script>
-import Common from "../common";
+import SettingsCommonMixin from "@/mixins/settings/common";
 import Loader from "@/components/common/Loader";
 import User from "@/mixins/user";
 
 export default {
   name: "NominationSettingsContent",
-  mixins: [Common, User],
+  mixins: [SettingsCommonMixin, User],
   components: { Loader },
   data() {
     return {

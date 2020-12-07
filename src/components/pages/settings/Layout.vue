@@ -41,13 +41,13 @@
 <script>
 import Aside from "./Aside";
 import DefaultSection from "./default/Content";
-import Mobile from "./mobile";
+import MobileMixin from "@/mixins/settings/mobile";
 import User from "@/mixins/user";
 
 export default {
   name: "Settings",
 
-  mixins: [Mobile, User],
+  mixins: [MobileMixin, User],
 
   components: {
     Aside,

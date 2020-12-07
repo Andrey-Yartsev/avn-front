@@ -98,12 +98,12 @@
 </template>
 
 <script>
-import Common from "../common";
+import SettingsCommonMixin from "@/mixins/settings/common";
 import UsersTable from "./UsersTable";
 
 export default {
   name: "StorySettingsContent",
-  mixins: [Common],
+  mixins: [SettingsCommonMixin],
   components: {
     UsersTable
   },

@@ -44,11 +44,11 @@
 import Media from "@/components/post/parts/media/Index";
 import MediaPreview from "@/components/common/MediaPreview";
 import FileUpload from "@/mixins/fileUpload";
-import Common from "../common";
+import SettingsCommonMixin from "@/mixins/settings/common";
 
 export default {
   name: "TwitterNotificationCustomPreview",
-  mixins: [FileUpload, Common],
+  mixins: [FileUpload, SettingsCommonMixin],
   components: {
     Media,
     MediaPreview

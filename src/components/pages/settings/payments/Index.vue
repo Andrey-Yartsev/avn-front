@@ -1,11 +1,6 @@
 <template>
   <Layout ref="layout">
-    <Content
-      v-if="appName !== 'avn'"
-      slot="content"
-      @titleChanged="changeTitle"
-    />
-    <AddCard v-else slot="content" @titleChanged="changeTitle" />
+    <AddCard slot="content" @titleChanged="changeTitle" />
     <template slot="title">
       <span class="page-title__category">{{ $route.meta.title }}</span>
       <button
@@ -21,7 +16,6 @@
 
 <script>
 import Layout from "../Layout";
-import Content from "./Content";
 import User from "@/mixins/user";
 import AddCard from "./AddCard";
 
@@ -30,13 +24,7 @@ export default {
   mixins: [User],
   components: {
     Layout,
-    Content,
     AddCard
-  },
-  computed: {
-    appName() {
-      return process.env.VUE_APP_NAME;
-    }
   },
   methods: {
     changeTitle(title) {

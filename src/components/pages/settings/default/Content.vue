@@ -170,7 +170,7 @@
                       name="subscribePrice"
                       v-model="localUser.subscribePrice"
                       :disabled="!user.canEarn"
-                      v-validate="'subscription-price'"
+                      v-validate="'decimal-number'"
                     />
                   </span>
                   <div class="error-info" v-if="fieldError('subscribePrice')">
@@ -337,7 +337,7 @@
 
 <script>
 import ColorSelect from "./ColorSelect";
-import Common from "../common";
+import SettingsCommonMixin from "@/mixins/settings/common";
 import TextareaAutosize from "@/components/common/TextareaAutosize";
 import Form from "@/mixins/form";
 import DeleteRestore from "../DeleteRestore";
@@ -347,11 +347,12 @@ import ExpiredContent from "./ExpiredContent";
 import MultiMonthDiscount from "./MultiMonthDiscount";
 import UserDiscounts from "./UserDiscounts";
 import User from "@/mixins/user";
+import decimalNumberValidator from "@/validator/decimalNumber";
 
 export default {
   name: "ProfileSettingsContent",
 
-  mixins: [Common, Form, User],
+  mixins: [SettingsCommonMixin, Form, User],
 
   components: {
     ColorSelect,
@@ -451,6 +452,9 @@ export default {
         ""
       );
     }
+  },
+  created() {
+    this.$validator.extend("decimal-number", decimalNumberValidator);
   }
 };
 </script>

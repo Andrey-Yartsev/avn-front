@@ -40,9 +40,10 @@
 </template>
 
 <script>
-import Common from "./common";
+import SettingsCommonMixin from "@/mixins/settings/common";
+
 export default {
-  mixins: [Common],
+  mixins: [SettingsCommonMixin],
   computed: {
     restoring() {
       return this.$store.state.user.updateLoading;

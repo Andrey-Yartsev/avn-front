@@ -1,6 +1,13 @@
-import { chartOptions, mainColor, altColor } from "./chartVars";
+import {
+  chartOptions,
+  mainColor,
+  altColor
+} from "@/components/statistics/utils/chartVars";
 import { startOfWeek, addDays, getUnixTime, sub } from "date-fns";
-import { dataProviderKeys, getScaleData } from "./utils";
+import {
+  dataProviderKeys,
+  getScaleData
+} from "@/components/statistics/utils/common";
 
 export default {
   methods: {

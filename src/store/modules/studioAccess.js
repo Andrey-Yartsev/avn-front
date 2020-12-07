@@ -2,7 +2,7 @@
 
 import { createRequestAction } from "@/store/utils/storeRequest";
 import PostMixin from "@/store/mixins/posts";
-import mockData from "@/mock/studioAccess";
+// import mockData from "@/mock/studioAccess";
 
 const limit = 15;
 
@@ -45,9 +45,7 @@ const actions = {
       .then(r => {
         commit("checkResult", r);
       })
-      .catch(() => {
-        commit("checkResult", mockData);
-      });
+      .catch(() => {});
   },
   login({ dispatch }, userId) {
     return dispatch("_login", userId)

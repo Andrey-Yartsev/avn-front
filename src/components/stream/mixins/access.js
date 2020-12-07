@@ -1,6 +1,6 @@
 import StreamApi from "@/api/stream";
 import User from "@/mixins/user";
-import PayAction from "@/components/pages/settings/payments/payAction";
+import PayAction from "@/mixins/payAction";
 
 export default {
   mixins: [User, PayAction],

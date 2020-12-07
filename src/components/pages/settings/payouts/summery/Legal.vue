@@ -88,7 +88,7 @@
                       step="0.01"
                       name="subscribePrice"
                       v-model="localUser.subscribePrice"
-                      v-validate="'subscription-price'"
+                      v-validate="'decimal-number'"
                     />
                   </span>
                   <div class="error-info" v-if="fieldError('subscribePrice')">
@@ -117,15 +117,16 @@
 </template>
 
 <script>
-import Common from "../../common";
-import PayoutsCommon from "../common";
+import SettingsCommonMixin from "@/mixins/settings/common";
+import PayoutsMixin from "@/components/pages/settings/payouts/mixins/common";
 import LegalEdit from "./LegalEdit";
 import Form from "@/mixins/form";
 import { formatWithoutLocalization } from "@/utils/datetime";
+import decimalNumberValidator from "@/validator/decimalNumber";
 
 export default {
   name: "PayoutSettingsSummeryLegal",
-  mixins: [Common, PayoutsCommon, Form],
+  mixins: [SettingsCommonMixin, PayoutsMixin, Form],
   components: { LegalEdit },
   data() {
     return {
@@ -145,6 +146,9 @@ export default {
     ucFirst(name) {
       return name.charAt(0).toUpperCase() + name.slice(1);
     }
+  },
+  created() {
+    this.$validator.extend("decimal-number", decimalNumberValidator);
   }
 };
 </script>

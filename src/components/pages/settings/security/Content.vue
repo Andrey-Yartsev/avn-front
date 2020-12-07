@@ -183,14 +183,14 @@
 </template>
 
 <script>
-import Common from "../common";
+import SettingsCommonMixin from "@/mixins/settings/common";
 import Loader from "@/components/common/Loader";
 import { fromNow } from "@/helpers/datetime";
 
 export default {
   name: "SecuritySettingsContent",
 
-  mixins: [Common],
+  mixins: [SettingsCommonMixin],
 
   components: {
     Loader

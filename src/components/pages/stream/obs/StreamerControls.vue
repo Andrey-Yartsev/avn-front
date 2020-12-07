@@ -21,7 +21,6 @@
       {{ likesCount ? likesCount : "" }}
     </span>
     <span
-      v-if="$root.showTips"
       class="stream-btn bottom-btn"
       :class="{ selected: asideType === 'tip', disabled: true }"
     >

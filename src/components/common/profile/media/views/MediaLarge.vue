@@ -244,11 +244,7 @@ export default {
       return !!this.post.scheduledDate;
     },
     canSendTips() {
-      return (
-        !this.isOwner(this.post.author.id) &&
-        this.post.author.canEarn &&
-        this.$root.showTips
-      );
+      return !this.isOwner(this.post.author.id) && this.post.author.canEarn;
     },
     showCommentPanel() {
       return (
@@ -278,25 +274,23 @@ export default {
       if (this.$props.post.media.canView) {
         return;
       }
-      if (process.env.VUE_APP_NAME === "avn") {
-        // if (!this.user.isPaymentCardConnected) {
-        //   this.$store.dispatch("global/flashToast", {
-        //     text: "You should add card in payment settings",
-        //     type: "warning"
-        //   });
-        //   this.$router.push("/settings/payments");
-        //   return;
-        // }
+      // if (!this.user.isPaymentCardConnected) {
+      //   this.$store.dispatch("global/flashToast", {
+      //     text: "You should add card in payment settings",
+      //     type: "warning"
+      //   });
+      //   this.$router.push("/settings/payments");
+      //   return;
+      // }
 
-        this.$store.dispatch("modal/show", {
-          name: "mediaPayConfirm",
-          data: {
-            price: this.$props.post.price,
-            paymentType: "message",
-            messageId: this.$props.post.productId
-          }
-        });
-      }
+      this.$store.dispatch("modal/show", {
+        name: "mediaPayConfirm",
+        data: {
+          price: this.$props.post.price,
+          paymentType: "message",
+          messageId: this.$props.post.productId
+        }
+      });
     },
     getPostText() {
       return this.$props.post.text;

@@ -7,7 +7,7 @@ export const routes = [
     path: "/addPost",
     name: "PostAdd",
     component: () =>
-      import(/* webpackChunkName: "AddPostPage" */ "@/components/pages/addPost/Index"),
+      import(/* webpackChunkName: "AddPostPage" */ "@/components/pages/post/AddPost"),
     meta: {
       cssName: "addPost",
       disabledAddPostButton: true
@@ -18,7 +18,7 @@ export const routes = [
     path: "/post/edit/:id",
     name: "PostEdit",
     component: () =>
-      import(/* webpackChunkName: "EditPostPage" */ "@/components/pages/editPost/Index"),
+      import(/* webpackChunkName: "EditPostPage" */ "@/components/pages/post/EditPost"),
     meta: {
       cssName: "addPost",
       disabledAddPostButton: true
@@ -27,7 +27,7 @@ export const routes = [
   {
     beforeEnter: Post.page,
     path: "/post/:username/:postId",
-    name: "PostItem",
+    name: "PostUsernameItem",
     component: () =>
       import(/* webpackChunkName: "PostPage" */ "@/components/pages/post/Index"),
     meta: {

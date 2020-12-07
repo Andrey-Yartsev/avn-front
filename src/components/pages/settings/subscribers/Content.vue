@@ -236,7 +236,7 @@ export default {
     },
     openGroupMessageModal() {
       this.$store.dispatch("modal/show", {
-        name: "groupMessage"
+        name: "subscribersGroupMessage"
       });
     },
     changeActionPreffix(value) {

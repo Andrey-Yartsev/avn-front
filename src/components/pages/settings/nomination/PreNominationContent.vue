@@ -201,14 +201,14 @@
 </template>
 
 <script>
-import Common from "../common";
+import SettingsCommonMixin from "@/mixins/settings/common";
 import Loader from "@/components/common/Loader";
 import User from "@/mixins/user";
 import { gayDomain } from "@/helpers/domains";
 
 export default {
   name: "PreNominationSettingsContent",
-  mixins: [Common, User],
+  mixins: [SettingsCommonMixin, User],
   components: { Loader },
   data() {
     return {

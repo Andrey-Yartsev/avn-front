@@ -123,38 +123,14 @@
 <script>
 import Multiselect from "vue-multiselect";
 import TextareaAutosize from "@/components/common/TextareaAutosize";
-import { Validator, ValidationProvider } from "vee-validate";
 import Form from "@/mixins/form";
 import StatesApi from "@/api/states";
-
-const validateIPaddress = ipaddress => {
-  if (
-    /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(
-      ipaddress
-    )
-  ) {
-    return true;
-  }
-  return false;
-};
-
-Validator.extend("ips", {
-  getMessage: field => "The " + field + " value is not valid IPs",
-  validate: value => {
-    if (!value) {
-      return true;
-    }
-    const ips = value.split(",").map(v => v.trim());
-    return ips.every(ip => {
-      return validateIPaddress(ip);
-    });
-  }
-});
+import ipsValidator from "@/validator/ips";
 
 export default {
   name: "PrivacySettingsBlocking",
   mixins: [Form],
-  components: { Multiselect, TextareaAutosize, ValidationProvider },
+  components: { Multiselect, TextareaAutosize },
   props: {
     localUser: Object
   },
@@ -335,6 +311,9 @@ export default {
     if (this.localUser.blockedStates && this.localUser.blockedStates.length) {
       this.allSelectedStates = this.localUser.blockedStates;
     }
+  },
+  created() {
+    this.$validator.extend("ips", ipsValidator);
   }
 };
 </script>

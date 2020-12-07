@@ -128,22 +128,22 @@
 <script>
 import Loader from "@/components/common/Loader";
 import AccessFilter from "./AccessFilter";
-import Comments from "../../../common/streamComments/Index";
-import AddComment from "../../../common/streamComments/AddComment";
+import Comments from "@/components/common/streamComments/Index";
+import AddComment from "@/components/common/streamComments/AddComment";
 import StreamerControls from "./StreamerControls";
 import TipsGoalForm from "./TipsGoalForm";
 import StreamViewers from "./Viewers";
-import User from "@/mixins/user";
-import TipsGoal from "@/mixins/tipsGoal";
+import UserMixin from "@/mixins/user";
+import TipsGoalMixin from "@/mixins/tipsGoal";
 import StreamObsStatistic from "@/components/pages/stream/obs/StatisticObs";
 import StreamApi from "@/api/stream";
 import { intervalToDuration } from "date-fns";
-import LoadScripts from "@/components/statistics/loadScripts";
+import LoadScriptsMixin from "@/components/statistics/mixins/loadScripts";
 import NotificationsMenu from "../menu/Notifications";
 
 export default {
   name: "ObsChat",
-  mixins: [User, TipsGoal, LoadScripts],
+  mixins: [UserMixin, TipsGoalMixin, LoadScriptsMixin],
   components: {
     Loader,
     AccessFilter,

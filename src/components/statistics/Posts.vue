@@ -8,11 +8,10 @@
 import { getUnixTime, sub } from "date-fns";
 import BrowserStore from "store";
 import pluralize from "pluralize";
+import CalcCountMixin from "@/components/statistics/mixins/calcCount";
+import BuildScaleMixin from "@/components/statistics/mixins/buildScale";
 
-import CalcCount from "./calcCount";
-import BuildScale from "./buildScale";
-
-import { chartTypes, getScaleData } from "./utils";
+import { chartTypes, getScaleData } from "@/components/statistics/utils/common";
 
 const altColor = "#16181A";
 
@@ -25,7 +24,7 @@ Object.entries(chartTypes.posts).forEach(v => {
 
 export default {
   name: "StatisticsPosts",
-  mixins: [CalcCount, BuildScale],
+  mixins: [CalcCountMixin, BuildScaleMixin],
   props: {
     dataSet: {
       type: Array,

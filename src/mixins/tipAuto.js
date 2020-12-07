@@ -15,7 +15,7 @@ export default {
       return this.tipRouteParam || this.onTipRouteAction;
     },
     showTips() {
-      return this.profile.canEarn && this.$root.showTips;
+      return this.profile.canEarn;
     },
     clearOnTipRouteAction() {
       this.$store.commit("profile/home/resetOnTipRouteAction");

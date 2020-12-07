@@ -52,7 +52,7 @@ const modalTypes = [
     layoutOnlyModal: true
   },
   {
-    storeName: "groupMessage",
+    storeName: "subscribersGroupMessage",
     layoutOnlyModal: true
   },
   {
@@ -137,10 +137,6 @@ const modalTypes = [
   },
   {
     storeName: "editPost",
-    layoutOnlyModal: true
-  },
-  {
-    storeName: "addMedia",
     layoutOnlyModal: true
   },
   {

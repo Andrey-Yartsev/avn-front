@@ -27,8 +27,8 @@ import UserReportModal from "@/components/users/UserReportModal";
 import ResubscribeModal from "@/components/subscription/ResubscribeModal";
 import PaymentModal from "@/components/subscription/PaymentModal";
 import AddPostModal from "@/components/post/add/Modal";
-import GroupMessageModal from "@/components/groupMessage/Modal";
-import AddLinkModal from "@/components/addLink/Modal";
+import SubscribersGroupMessageModal from "@/components/pages/settings/subscribers/modals/GroupMessageModal";
+import AddLinkModal from "@/components/common/profile/links/LinkModal";
 import StreamModal from "@/components/stream/ViewStreamModal";
 import IframeModal from "@/components/modal/Iframe";
 import SubscribeModal from "@/components/subscription/SubscribeModal";
@@ -48,7 +48,6 @@ import ClipLikesModal from "@/components/common/profile/media/parts/modals/clipL
 import LoginModal from "@/components/auth/LoginModal";
 import SignupModal from "@/components/auth/SignupModal";
 import EditPostModal from "@/components/post/edit/Modal";
-import AddMediaModal from "@/components/addMedia/Modal";
 import EditMediaModal from "@/components/common/profile/media/edit/Modal";
 import AddGroupModal from "@/components/common/profile/groups/modals/add/Modal";
 import EditGroupModal from "@/components/common/profile/groups/modals/edit/Modal";
@@ -82,7 +81,7 @@ export default {
     CreateStoryModal,
     AddPostModal,
     AddLinkModal,
-    GroupMessageModal,
+    SubscribersGroupMessageModal,
     IframeModal,
     StreamModal,
     SubscribeModal,
@@ -105,7 +104,6 @@ export default {
     LoginModal,
     SignupModal,
     EditPostModal,
-    AddMediaModal,
     EditMediaModal,
     AddGroupModal,
     EditGroupModal,

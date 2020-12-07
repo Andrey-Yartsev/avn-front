@@ -27,11 +27,11 @@
 </template>
 
 <script>
-import Access from "@/components/stream/access";
+import AccessMixin from "@/components/stream/mixins/access";
 
 export default {
   name: "TopLivesList",
-  mixins: [Access],
+  mixins: [AccessMixin],
   props: {
     lives: {
       type: Array,

@@ -175,14 +175,14 @@ import MobileHeader from "@/components/header/Mobile";
 import ModalRouterParams from "@/mixins/modalRouter/params";
 import UserHeader from "@/components/header/User";
 import UserDropdown from "./UserDropdown";
-import Common from "./common";
+import CommonMixin from "@/components/chat/mixins/common";
 
 let focusIntervalId = 0;
 
 export default {
   name: "Chat",
 
-  mixins: [User, ModalRouterParams, Common],
+  mixins: [User, ModalRouterParams, CommonMixin],
 
   components: {
     Wrapper,

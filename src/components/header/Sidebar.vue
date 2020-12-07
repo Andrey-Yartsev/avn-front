@@ -230,7 +230,7 @@
 </template>
 
 <script>
-import nominationRoutes from "@/components/common/nominationSettingsRoutes";
+import nominationRoutes from "@/utils/nominationSettingsRoutes";
 
 export default {
   name: "Sidebar",

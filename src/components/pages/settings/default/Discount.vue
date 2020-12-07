@@ -154,13 +154,13 @@
 <script>
 import { Datetime } from "vue-datetime";
 import { formatISO, addMinutes, format, getTime } from "date-fns";
-import States from "../payouts/states";
+import StatesMixin from "@/components/pages/settings/payouts/mixins/states";
 import Form from "@/mixins/form";
-import PayoutsCommon from "../common";
+import SettingsCommonMixin from "@/mixins/settings/common";
 
 export default {
   name: "Discount",
-  mixins: [States, PayoutsCommon, Form],
+  mixins: [StatesMixin, SettingsCommonMixin, Form],
   components: { Datetime },
   data() {
     return {

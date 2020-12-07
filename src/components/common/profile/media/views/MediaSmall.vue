@@ -308,25 +308,23 @@ export default {
       if (post.media.canView) {
         return;
       }
-      if (process.env.VUE_APP_NAME === "avn") {
-        // if (!this.user.isPaymentCardConnected) {
-        //   this.$store.dispatch("global/flashToast", {
-        //     text: "You should add card in payment settings",
-        //     type: "warning"
-        //   });
-        //   this.$router.push("/settings/payments");
-        //   return;
-        // }
+      // if (!this.user.isPaymentCardConnected) {
+      //   this.$store.dispatch("global/flashToast", {
+      //     text: "You should add card in payment settings",
+      //     type: "warning"
+      //   });
+      //   this.$router.push("/settings/payments");
+      //   return;
+      // }
 
-        this.$store.dispatch("modal/show", {
-          name: "mediaPayConfirm",
-          data: {
-            price: post.price,
-            paymentType: "message",
-            messageId: post.productId
-          }
-        });
-      }
+      this.$store.dispatch("modal/show", {
+        name: "mediaPayConfirm",
+        data: {
+          price: post.price,
+          paymentType: "message",
+          messageId: post.productId
+        }
+      });
     }
   }
 };

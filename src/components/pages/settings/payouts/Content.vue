@@ -32,7 +32,7 @@ import Account from "./Account";
 import Legal from "./Legal";
 import LegalPending from "./LegalPending";
 import Bank from "./Bank.vue";
-import BankMixin from "./bank.js";
+import BankMixin from "@/components/pages/settings/payouts/mixins/bank";
 import Summery from "./Summery";
 import Unexpected from "./Unexpected";
 import IdDocsForm from "./IdDocsForm";

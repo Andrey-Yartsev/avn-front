@@ -75,7 +75,7 @@
         </label>
 
         <button
-          v-if="withTips && withUser && withUser.canEarn && $root.showTips"
+          v-if="withTips && withUser && withUser.canEarn"
           class="tips btn-el"
           @click.prevent="showTip = !showTip"
           :class="{ active: showTip, disabled: showPaid || editableMessage }"
@@ -126,7 +126,7 @@
         </div>
 
         <Tip
-          v-if="withUser && withUser.canEarn && $root.showTips"
+          v-if="withUser && withUser.canEarn"
           :user="withUser"
           ref="tip"
           @cancel="closeTip"
@@ -150,7 +150,7 @@
               placeholder="Enter price"
               v-model="price"
               :class="{ error: fieldError('paidPrice') }"
-              v-validate="'subscription-price'"
+              v-validate="'decimal-number'"
             />
             <div
               class="tooltip tooltip_error-field"
@@ -202,6 +202,7 @@ import FontSizeControls from "./FontSizeControls";
 import PaidBlock from "@/mixins/paidBlock";
 import { uniqId } from "@/utils/mediaFiles";
 import upload from "@/utils/upload";
+import decimalNumberValidator from "@/validator/decimalNumber";
 
 export default {
   name: "ChatAddMessageBox",
@@ -629,6 +630,9 @@ export default {
     if (this.initData) {
       this.init();
     }
+  },
+  created() {
+    this.$validator.extend("decimal-number", decimalNumberValidator);
   }
 };
 </script>

@@ -63,7 +63,7 @@ export const routes = [
   {
     beforeEnter: Profile.media,
     path: "/:username/media/:accessToken",
-    name: "ProfilePageAccessToken",
+    name: "ProfilePageMediaAccessToken",
     component: () =>
       import(/* webpackChunkName: "ProfilePage" */ "@/components/pages/profile/NotFoundWrapper"),
     meta: {
@@ -74,7 +74,7 @@ export const routes = [
   {
     beforeEnter: Profile.unlockPosts,
     path: "/:username/posts/:accessToken",
-    name: "ProfilePageAccessToken",
+    name: "ProfilePagePostAccessToken",
     component: () =>
       import(/* webpackChunkName: "ProfilePage" */ "@/components/pages/profile/NotFoundWrapper"),
     meta: {
@@ -85,7 +85,7 @@ export const routes = [
   {
     beforeEnter: Profile.contests,
     path: "/:username/c/:contestId?/:nomineeId?",
-    name: "SingleNomineePage",
+    name: "SingleNomineeContestPage",
     component: () =>
       import(/* webpackChunkName: "SingleNomineePage" */ "@/components/pages/contest/Index"),
     meta: {

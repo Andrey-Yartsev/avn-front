@@ -3,7 +3,7 @@ import {
   mainColor,
   colorScheme,
   colorSchemes
-} from "@/components/statistics/chartVars";
+} from "@/components/statistics/utils/chartVars";
 
 export default {
   methods: {

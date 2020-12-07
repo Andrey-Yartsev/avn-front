@@ -11,10 +11,7 @@
           <span class="stream-chart-legend-item-label">Likes</span>
           <span class="stream-chart-legend-item-value">{{ likes }}</span>
         </div>
-        <div
-          v-if="$root.showTips"
-          class="stream-chart-legend-item stream-chart-legend-item__tips"
-        >
+        <div class="stream-chart-legend-item stream-chart-legend-item__tips">
           <span class="stream-chart-legend-item-label">Tips</span>
           <span class="stream-chart-legend-item-value">{{ tips }}</span>
         </div>
@@ -57,10 +54,7 @@
               {{ likes }}
             </div>
           </div>
-          <div
-            v-if="$root.showTips"
-            class="stream-summary-data-item stream-summary-data-item__tips"
-          >
+          <div class="stream-summary-data-item stream-summary-data-item__tips">
             <div class="stream-summary-data-item__label">
               <span class="btn-icon icn-tips icn-item"></span>Tips
             </div>
