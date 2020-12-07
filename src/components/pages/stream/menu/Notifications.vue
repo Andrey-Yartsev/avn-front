@@ -34,8 +34,8 @@
     <div class="menu">
       <button
         type="button"
-        :class="['item', { active: isEnabled('newUser') }]"
-        @click="() => switchNotifications('newUser')"
+        :class="['item', { active: isEnabled('newLook') }]"
+        @click="() => switchNotifications('newLook')"
       >
         <span class="value">New user comes alert</span>
       </button>

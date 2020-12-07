@@ -1,8 +1,9 @@
 "use strict";
 
 import BrowserStore from "store";
+import playSound from "@/utils/playSound";
 
-const notificationNames = ["newUser"];
+const notificationNames = ["newLook"];
 
 const state = {};
 
@@ -19,6 +20,12 @@ const actions = {
       const isEnabled = !!BrowserStore.get("livesNotification" + name);
       commit("setEnabled", { name, isEnabled });
     });
+  },
+  play({ state }, name) {
+    if (!state[name]) {
+      return;
+    }
+    playSound(name);
   }
 };
 

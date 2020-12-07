@@ -3,7 +3,6 @@ import LivesApi from "@/api/lives";
 import PostMixin from "@/store/mixins/posts";
 import { createRequestAction } from "../utils/storeRequest";
 import notifications from "./lives/notifications";
-import playSound from "@/utils/playSound";
 
 const initState = {
   loading: false,
@@ -44,7 +43,8 @@ const initState = {
       description: null,
       amount: null,
       sources: []
-    }
+    },
+    newLook: 0
   }
 };
 
@@ -82,7 +82,7 @@ const mutations = {
       );
     });
 
-    if (prevLook.length) return;
+    if (prevLook.length) return false;
 
     state.currentLive.comments = [
       ...state.currentLive.comments,
@@ -95,8 +95,7 @@ const mutations = {
       }
     ];
     state.currentLive.looksCount += 1;
-
-    playSound("newUser");
+    state.currentLive.newLook++;
   },
 
   unlook(state, look) {

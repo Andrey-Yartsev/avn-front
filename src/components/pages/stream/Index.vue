@@ -28,12 +28,9 @@
               >Live Video</span
             >
           </button>
-          <div class="mediasHeaderControls">
-            <button
-              id="stop"
-              class="btn alt sm change-devices top"
-              @click="close"
-            >
+          <div class="mediasHeaderControls" v-if="isStarted">
+            <NotificationsMenu />
+            <button id="stop" class="btn alt sm top" @click="close">
               Stop
             </button>
           </div>
@@ -545,6 +542,9 @@ export default {
     },
     isTipsGoalExists() {
       return this.activeTipsGoal.description && this.activeTipsGoal.amount;
+    },
+    newLook() {
+      return this.$store.state.lives.currentLive.newLook;
     }
   },
   methods: {
@@ -1183,6 +1183,9 @@ export default {
       } else {
         this.newComment = "";
       }
+    },
+    newLook() {
+      this.$store.dispatch("lives/notifications/play", "newLook");
     }
   }
 };

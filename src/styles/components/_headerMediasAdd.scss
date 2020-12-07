@@ -148,24 +148,22 @@
 
 .mediasHeaderControls {
   margin-left: auto;
-
-  #stop {
-    display: none;
-
-    .stream_enabled & {
-
-      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-        display: block;
-      }
-    }
-  }
+  display: flex;
+  justify-content: end;
 
   .btn {
-
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       width: 72px;
     }
   }
+
+  .notifications {
+    margin-top: -17px;
+    .menu {
+      margin-top: -12px;
+    }
+  }
+  .root-btn:after {}
 }
 
 .stream-header {
