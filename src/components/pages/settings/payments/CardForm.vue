@@ -506,7 +506,7 @@ export default {
         .catch(err => {
           this.submitting = false;
           this.$store.dispatch("global/flashToast", {
-            text: err.message,
+            text: err.message || "Something goes wrong",
             type: "error"
           });
         });
