@@ -365,7 +365,7 @@
 
 <script>
 import ws from "@/ws";
-import moment from "moment";
+import { getUnixTime, sub, format } from "date-fns";
 import pluralize from "pluralize";
 import ClickOutside from "vue-click-outside";
 
@@ -464,9 +464,12 @@ export default {
         return "Today";
       }
       return (
-        moment()
-          .subtract(1, p.moment)
-          .format("D MMMM") + " - Today"
+        format(
+          sub(new Date(), {
+            [p.moment]: 1
+          }),
+          "d MMMM"
+        ) + " - Today"
       );
     }
   },
@@ -567,9 +570,7 @@ export default {
         "</span>";
     },
     buildScales() {
-      const now = moment()
-        .utc()
-        .unix();
+      const now = getUnixTime(new Date());
 
       Object.keys(chartTypes).forEach(chartType => {
         this.buildScale(

@@ -516,8 +516,7 @@ import MediaPreview from "@/components/common/MediaPreview";
 import FileUpload from "@/mixins/fileUpload";
 import ClickOutside from "vue-click-outside";
 import { Datetime } from "vue-datetime";
-import moment from "moment";
-import { formatISO, addMinutes, subMinutes } from "date-fns";
+import { formatISO, addMinutes, subMinutes, format } from "date-fns";
 import UserMixin from "@/mixins/user";
 import "vue-datetime/dist/vue-datetime.css";
 import VueTribute from "vue-tribute";
@@ -667,14 +666,17 @@ export default {
       if (this.$mq === "mobile") {
         return (
           "Post will be scheduled for " +
-          moment(this.datetime).format("MMM D, hh:mm a")
+          format(new Date(this.datetime), "MMM d, h:mm aaaa")
         );
       }
-      return "Scheduled for " + moment(this.datetime).format("MMM D, hh:mm a");
+      return (
+        "Scheduled for " + format(new Date(this.datetime), "MMM d, h:mm aaaa")
+      );
     },
     formattedDateExpired() {
       return (
-        "Expires at " + moment(this.datetimeExpired).format("MMM D, hh:mm a")
+        "Expires at " +
+        format(new Date(this.datetimeExpired), "MMM d, h:mm aaaa")
       );
     },
     minDate() {
@@ -802,13 +804,11 @@ export default {
     getPostData() {
       if (this.notEhoughData) return;
 
-      const scheduledDate = moment(this.datetime)
-        .utc()
-        .format("Y-MM-DD HH:mm:ss");
-
-      const expiredDate = moment(this.datetimeExpired)
-        .utc()
-        .format("Y-MM-DD HH:mm:ss");
+      const scheduledDate = format(new Date(this.datetime), "y-MM-d HH:mm:ss");
+      const expiredDate = format(
+        new Date(this.datetimeExpired),
+        "y-MM-d HH:mm:ss"
+      );
 
       const postData = {
         text: this.postMsg,

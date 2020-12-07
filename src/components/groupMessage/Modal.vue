@@ -147,8 +147,7 @@
 import Modal from "@/components/modal/Index";
 import AddMessageBox from "@/components/chat/AddMessageBox";
 import { Datetime } from "vue-datetime";
-import { formatISO, addMinutes } from "date-fns";
-import moment from "moment";
+import { formatISO, addMinutes, format } from "date-fns";
 import Loader from "@/components/common/Loader";
 // import scheduledMessages from "@/mock/scheduleMessages";
 
@@ -182,7 +181,8 @@ export default {
     },
     formattedDate() {
       return (
-        "Scheduled for " + moment(this.scheduledDate).format("MMM D, hh:mm a")
+        "Scheduled for " +
+        format(new Date(this.scheduledDate), "MMM d, h:mm aaaa")
       );
     }
   },
@@ -225,7 +225,7 @@ export default {
       document.body.classList.remove("open-timepicker");
     },
     scheduledFormattedDate(date) {
-      return "Scheduled for " + moment(date).format("MMM D, hh:mm a");
+      return "Scheduled for " + format(new Date(date), "MMM d, h:mm aaaa");
     },
     getScheduledMessages() {
       this.$store

@@ -58,7 +58,7 @@
 <script>
 import userMixin from "@/mixins/user";
 import Loader from "@/components/common/Loader";
-import moment from "moment";
+import { intervalToDuration } from "date-fns";
 import ChatMessage from "./Message";
 
 const bottomThreshold = 100; // pixels left to bottom of container
@@ -249,7 +249,7 @@ export default {
       if (messages.length === 1) {
         messages[messages.length - 1].lastMessageInGroup = true;
       } else {
-        const now = moment();
+        const now = new Date();
         for (let i = 0; i < messages.length; i++) {
           // if very last message
           if (i === messages.length - 1) {
@@ -264,21 +264,18 @@ export default {
           let prevAuthorChanges = false;
           let nextDayChanges = false;
 
-          let current = moment(messages[i].createdAt);
-          let diffTime2 = now.diff(current);
-          let oldMessage = moment.duration(diffTime2).days() > 0;
+          let current = new Date(messages[i].createdAt);
+          let oldMessage =
+            intervalToDuration({ start: current, end: now }).days > 0;
 
           if (messages[i + 1]) {
             if (messages[i].fromUser.id !== messages[i + 1].fromUser.id) {
               nextAuthorChanges = true;
             }
 
-            let next = moment(messages[i + 1].createdAt);
-
-            let diffTime = next.diff(current);
-            let duration = moment.duration(diffTime);
-
-            let days = duration.days();
+            let next = new Date(messages[i + 1].createdAt);
+            let days =
+              intervalToDuration({ start: current, end: next }).days > 0;
             if (days > 0) {
               nextDayChanges = true;
             }
@@ -293,17 +290,19 @@ export default {
             if (!prevAuthorChanges) {
               if (lastDate) {
                 // check for new day
-                let current = moment(messages[i].createdAt);
-                let last = moment(lastDate);
+                let current = new Date(messages[i].createdAt);
+                let last = new Date(lastDate);
 
                 lastDate = messages[i].createdAt;
 
-                let diffTime = current.diff(last);
-                let duration = moment.duration(diffTime);
+                let duration = intervalToDuration({
+                  start: last,
+                  end: current
+                });
 
-                let days = duration.days();
-                let hours = duration.hours();
-                let minutes = duration.minutes();
+                let days = duration.days;
+                let hours = duration.hours;
+                let minutes = duration.minutes;
 
                 if (nextDayChanges) {
                   messages[i].lastMessageInGroup = true;
@@ -369,9 +368,6 @@ export default {
           this.container.scrollTop = this.container.scrollHeight;
         }
       }
-    },
-    time2(date) {
-      return moment(date).format("DD/MM HH:mm:ss");
     },
     _scrollHandler() {
       this.saveScrollPosition();

@@ -423,8 +423,7 @@ import BirthDateSelect from "./BirthDateSelect";
 import Form from "@/mixins/form";
 import upload from "@/utils/upload";
 import { Datetime } from "vue-datetime";
-import { formatISO, subYears } from "date-fns";
-import moment from "moment";
+import { formatISO, subYears, format } from "date-fns";
 import "vue-datetime/dist/vue-datetime.css";
 import States from "./states";
 import UserMixin from "@/mixins/user";
@@ -499,7 +498,7 @@ export default {
       return true;
     },
     formattedBirthdate() {
-      return moment(this.birthDate).format("LL");
+      return format(new Date(this.birthDate), "MMMM d yyy");
     },
     saving() {
       return this.$store.state.payouts.legal.saveLoading;
@@ -579,7 +578,9 @@ export default {
       for (let f of fields) {
         if (this[f]) {
           data[f] =
-            f === "birthDate" ? moment(this[f]).format("YYYY-MM-DD") : this[f];
+            f === "birthDate"
+              ? format(new Date(this[f]), "yyyy-MM-d")
+              : this[f];
         }
       }
       if (!this.legalExisted) {

@@ -137,7 +137,7 @@
 </template>
 
 <script>
-import moment from "moment";
+import { format } from "date-fns";
 import User from "@/mixins/user";
 
 export default {
@@ -206,7 +206,7 @@ export default {
 
   methods: {
     dt(date) {
-      return moment(date).format("DD MMM");
+      return format(new Date(date), "dd MMM");
     },
     unblock(userId) {
       this.$store.dispatch(this.storePath + "/unblock", userId).then(() => {

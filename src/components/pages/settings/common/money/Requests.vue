@@ -63,7 +63,7 @@
 
 <script>
 import Loader from "@/components/common/Loader";
-import moment from "moment/moment";
+import { format } from "date-fns";
 
 export default {
   name: "SettingsMoneyRequests",
@@ -103,7 +103,7 @@ export default {
   },
   methods: {
     dt(date) {
-      return moment(date).format("DD MMM, hh:mm");
+      return format(new Date(date), "dd MMM, HH:mm");
     }
   },
   created() {

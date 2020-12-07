@@ -117,7 +117,7 @@
 </template>
 
 <script>
-import moment from "moment";
+import { format } from "date-fns";
 import Common from "../../common";
 import PayoutsCommon from "../common";
 import LegalEdit from "./LegalEdit";
@@ -140,7 +140,7 @@ export default {
   },
   methods: {
     dt(date) {
-      return moment(date).format("DD MMM YYYY");
+      return format(new Date(date), "dd MMM yyyy");
     },
     ucFirst(name) {
       return name.charAt(0).toUpperCase() + name.slice(1);

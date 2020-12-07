@@ -87,7 +87,7 @@
 </template>
 
 <script>
-import moment from "moment";
+import { format } from "date-fns";
 
 export default {
   computed: {
@@ -106,10 +106,10 @@ export default {
         });
     },
     dt1(date) {
-      return moment(date).format("MMM DD");
+      return format(new Date(date), "MMM dd");
     },
     dt2(date) {
-      return moment(date).format("HH:mm");
+      return format(new Date(date), "HH:mm");
     },
     init() {
       this.$store.dispatch("trial/getModels", {});

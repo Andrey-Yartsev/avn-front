@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import moment from "moment";
+import { getUnixTime, sub } from "date-fns";
 import BrowserStore from "store";
 import pluralize from "pluralize";
 
@@ -208,9 +208,7 @@ export default {
         last_year: {}
       };
       this.barCount = 108;
-      const now = moment()
-        .utc()
-        .unix();
+      const now = getUnixTime(new Date());
 
       let period = this.period;
 
@@ -226,10 +224,11 @@ export default {
         // fill chart by null points
         let y = 0;
         for (let j = this.barCount; j >= 1; j--) {
-          let currDate = moment
-            .unix(startDate)
-            .subtract((j * count) / this.barCount, units)
-            .unix();
+          let currDate = getUnixTime(
+            sub(new Date(startDate * 1000), {
+              [units]: (j * count) / this.barCount
+            })
+          );
           this.charts[period][type].dataProvider[y] = {};
           this.charts[period][type].dataProvider[y].date = currDate;
           y++;

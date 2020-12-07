@@ -416,7 +416,7 @@ import logoBase64 from "./logo";
 import Comments from "@/components/common/streamComments/Index";
 import StreamViewers from "@/components/pages/stream/Viewers";
 import { getCookie } from "@/components/pages/stream/debug";
-import moment from "moment";
+import { intervalToDuration } from "date-fns";
 import LoadScripts from "@/components/statistics/loadScripts";
 import { convertImgToBase64URL } from "@/utils/mediaFiles";
 import Multiselect from "vue-multiselect";
@@ -620,15 +620,17 @@ export default {
         return;
       }
 
-      const currentTime = moment.unix(_currentTime);
-      const streamStartTime = moment.unix(this.streamStartTime);
+      const currentTime = new Date(_currentTime * 1000);
+      const streamStartTime = new Date(this.streamStartTime * 1000);
 
-      const diffTime = currentTime.diff(streamStartTime);
-      const duration = moment.duration(diffTime);
+      const duration = intervalToDuration({
+        start: streamStartTime,
+        end: currentTime
+      });
 
-      let seconds = duration.seconds(),
-        minute = duration.minutes(),
-        hours = duration.hours();
+      let seconds = duration.seconds,
+        minute = duration.minutes,
+        hours = duration.hours;
 
       const _hours = hours < 10 ? `0${hours}` : `${hours}`;
       minute = minute < 10 ? `0${minute}` : `${minute}`;

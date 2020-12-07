@@ -383,8 +383,7 @@ import Draggable from "vuedraggable";
 import ThumbDropdown from "./ThumbDropdown.vue";
 import Multiselect from "vue-multiselect";
 import { Datetime } from "vue-datetime";
-import { formatISO, addMinutes } from "date-fns";
-import moment from "moment";
+import { formatISO, addMinutes, format } from "date-fns";
 
 // import mediaCategories from "@/mock/mediaCategories";
 
@@ -565,7 +564,7 @@ export default {
     formattedDate() {
       return (
         "Scheduled for " +
-        moment(this.media.scheduledDate).format("MMM D, hh:mm a")
+        format(new Date(this.media.scheduledDate), "MMM d, h:mm aaaa")
       );
     }
   },

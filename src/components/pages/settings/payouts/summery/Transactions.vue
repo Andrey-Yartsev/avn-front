@@ -82,7 +82,7 @@
 
 <script>
 import Loader from "@/components/common/Loader";
-import moment from "moment";
+import { format } from "date-fns";
 import InfinityScroll from "@/mixins/infinityScroll";
 
 export default {
@@ -104,7 +104,7 @@ export default {
   },
   methods: {
     dt(date) {
-      return moment(date).format("MMM DD, HH:mm");
+      return format(new Date(date), "MMM dd, HH:mm");
     },
     infinityScrollGetDataMethod() {
       this.$store.dispatch("payouts/transactions/fetch");
