@@ -8,7 +8,7 @@ const notificationNames = ["newLook"];
 const state = {};
 
 notificationNames.forEach(name => {
-  state[name] = false;
+  state[name] = true;
 });
 
 const actions = {
