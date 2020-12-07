@@ -42,14 +42,13 @@
       <template v-else>
         <div class="mediasTop">
           <div class="mediasTop__header stream-header">
-            <div
-              class="group-controls"
-              v-if="!stream.isTypeSelected && !filterSelected"
-            >
+            <div class="group-controls">
               <AccessFilter
+                v-if="!stream.isTypeSelected && !filterSelected"
                 :value="localStream.type"
                 @changed="visibilityChanged"
               />
+              <NotificationsMenu />
             </div>
             <button
               @click="stop"
@@ -140,6 +139,7 @@ import StreamObsStatistic from "@/components/pages/stream/obs/StatisticObs";
 import StreamApi from "@/api/stream";
 import moment from "moment";
 import LoadScripts from "@/components/statistics/loadScripts";
+import NotificationsMenu from "../menu/Notifications";
 
 export default {
   name: "ObsChat",
@@ -152,7 +152,8 @@ export default {
     StreamerControls,
     StreamViewers,
     TipsGoalForm,
-    StreamObsStatistic
+    StreamObsStatistic,
+    NotificationsMenu
   },
   data() {
     return {
@@ -482,6 +483,7 @@ export default {
   mounted() {
     this.$store.commit("obs/isRunning", true);
     this.$store.commit("chat/blockNewMessagesHandling", true);
+    this.$store.dispatch("lives/notifications/init");
   },
   beforeDestroy() {
     this.$store.commit("chat/blockNewMessagesHandling", false);

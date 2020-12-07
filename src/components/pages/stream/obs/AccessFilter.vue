@@ -4,6 +4,7 @@
     :class="{ shown }"
     v-click-outside="
       () => {
+        console.log('TRIG');
         shown = false;
       }
     "
