@@ -545,6 +545,9 @@ export default {
     },
     newLook() {
       return this.$store.state.lives.currentLive.newLook;
+    },
+    newTip() {
+      return this.$store.state.lives.currentLive.newTip;
     }
   },
   methods: {
@@ -1186,6 +1189,9 @@ export default {
     },
     newLook() {
       this.$store.dispatch("lives/notifications/play", "newLook");
+    },
+    newTip() {
+      this.$store.dispatch("lives/notifications/play", "newTip");
     }
   }
 };

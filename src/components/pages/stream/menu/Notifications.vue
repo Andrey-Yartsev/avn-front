@@ -33,11 +33,13 @@
     ></div>
     <div class="menu">
       <button
+        v-for="(v, k) in items"
+        :key="k"
         type="button"
-        :class="['item', { active: isEnabled('newLook') }]"
-        @click="() => switchNotifications('newLook')"
+        :class="['item', { active: isEnabled(v.name) }]"
+        @click="() => switchNotifications(v.name)"
       >
-        <span class="value">New user comes alert</span>
+        <span class="value">{{ v.title }}</span>
       </button>
     </div>
   </div>
@@ -45,6 +47,7 @@
 
 <script>
 import ClickOutside from "vue-click-outside";
+import notifications from "../notifications";
 
 export default {
   name: "StreamMenuNotifications",
@@ -55,6 +58,11 @@ export default {
     return {
       showMenu: false
     };
+  },
+  computed: {
+    items() {
+      return notifications;
+    }
   },
   methods: {
     switchNotifications(name) {

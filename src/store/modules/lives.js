@@ -44,7 +44,8 @@ const initState = {
       amount: null,
       sources: []
     },
-    newLook: 0
+    newLook: 0,
+    newTip: 0
   }
 };
 
@@ -135,6 +136,7 @@ const mutations = {
       }
     ];
     state.currentLive.amount += tip.amount;
+    state.currentLive.newTip++;
   },
 
   statistic(state, data) {

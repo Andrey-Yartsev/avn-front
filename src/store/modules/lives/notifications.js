@@ -2,8 +2,9 @@
 
 import BrowserStore from "store";
 import playSound from "@/utils/playSound";
+import notifications from "@/components/pages/stream/notifications";
 
-const notificationNames = ["newLook"];
+const notificationNames = notifications.map(v => v.name);
 
 const state = {};
 
