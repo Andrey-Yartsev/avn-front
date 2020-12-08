@@ -804,12 +804,6 @@ export default {
     getPostData() {
       if (this.notEhoughData) return;
 
-      const scheduledDate = format(new Date(this.datetime), "y-MM-d HH:mm:ss");
-      const expiredDate = format(
-        new Date(this.datetimeExpired),
-        "y-MM-d HH:mm:ss"
-      );
-
       const postData = {
         text: this.postMsg,
         tweetSend: this.tweetSend,
@@ -830,7 +824,10 @@ export default {
       };
 
       if (postData.isScheduled) {
-        postData.scheduledDate = scheduledDate;
+        postData.scheduledDate = format(
+          new Date(this.datetime),
+          "y-MM-d HH:mm:ss"
+        );
       }
 
       if (this.customThumb) {
@@ -838,7 +835,10 @@ export default {
       }
 
       if (this.datetimeExpired) {
-        postData.expiredDate = expiredDate;
+        postData.expiredDate = format(
+          new Date(this.datetimeExpired),
+          "y-MM-d HH:mm:ss"
+        );
         postData.expiredAction = this.expiredAction;
       } else if (!this.datetimeExpired && this.post.expiredDate) {
         postData.expiredDate = "";
