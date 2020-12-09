@@ -25,7 +25,7 @@
     "moment-timezone": "^0.5.32",
     "query-string": "^6.8.2",
     "smooth-scroll": "^16.1.0",
-    "streaming-module": "git+https://git.retloko.com/alien.pavlov/streaming-demo.git",
+    "streaming-module": "https://git.retloko.com/alien.pavlov/streaming-demo.git",
     "throttle-debounce": "^2.1.0",
     "tributejs": "^3.7.2",
     "truncate-html": "^1.0.3",
