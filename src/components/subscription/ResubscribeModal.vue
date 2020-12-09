@@ -28,7 +28,7 @@
 <script>
 import Modal from "@/components/modal/Index";
 import Content from "./SubscribeModalContent";
-import { formatDistanceToNowStrict } from "date-fns";
+import moment from "moment";
 
 export default {
   name: "SubscribeModal",
@@ -49,11 +49,9 @@ export default {
       return this.$store.state.modal.resubscribe.data;
     },
     daysLeft() {
-      const lastDay = new Date(this.profile.subscribedByExpireDate);
-      return formatDistanceToNowStrict(lastDay, {
-        unit: "day",
-        roundingMethod: "ceil"
-      });
+      const today = moment(Date.now());
+      const lastDay = moment(this.profile.subscribedByExpireDate);
+      return lastDay.diff(today, "days");
     }
   },
 

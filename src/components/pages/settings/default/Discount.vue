@@ -153,7 +153,8 @@
 
 <script>
 import { Datetime } from "vue-datetime";
-import { formatISO, addMinutes, format, getTime } from "date-fns";
+import { DateTime as LuxonDateTime } from "luxon";
+import moment from "moment";
 import States from "../payouts/states";
 import Form from "@/mixins/form";
 import PayoutsCommon from "../common";
@@ -184,23 +185,21 @@ export default {
       return this.$store.state.auth.user.subscribePrice;
     },
     minDate() {
-      const date = new Date();
-      return formatISO(addMinutes(date, 1));
+      return LuxonDateTime.local()
+        .plus({ minutes: 1 })
+        .toISO();
     },
     getTime() {
       if (!this.discount.period.to) {
         return "";
       }
-      return format(
-        new Date(this.discount.period.to),
-        "MMMM do yyyy, h:mm:ss aaaa"
-      );
+      return moment(this.discount.period.to).format("MMMM Do YYYY, h:mm:ss a");
     },
     isSwitcherDisabled() {
       return (
         !this.isDiscountInputCorrect ||
         !this.discount.period.to ||
-        (getTime(new Date(this.discount.period.to)) < Date.now() &&
+        (moment(this.discount.period.to).valueOf() < Date.now() &&
           !this.isEnabled)
       );
     },

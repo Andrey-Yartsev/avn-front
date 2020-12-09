@@ -149,7 +149,7 @@ import Modal from "@/components/modal/Index";
 import userMixin from "@/mixins/user";
 import ViewModule from "streaming-module/view_module";
 import StreamApi from "@/api/stream";
-import { intervalToDuration } from "date-fns";
+import moment from "moment";
 import Tip from "@/components/common/tip/User";
 import Comments from "@/components/common/streamComments/Index";
 import AddComment from "@/components/common/streamComments/AddComment";
@@ -241,15 +241,16 @@ export default {
         return;
       }
 
-      const start = new Date(
-        this.$store.state.modal.stream.data.stream.startedAt
+      const start = moment(
+        this.$store.state.modal.stream.data.stream.startedAt,
+        "YYYY-MM-DDTHH:mm:ssZ"
       );
-      const now = new Date();
+      const now = moment();
 
-      const duration = intervalToDuration({ start: start, end: now });
-      const h = duration.hours;
-      const m = duration.minutes;
-      const s = duration.seconds;
+      const delta = moment.duration(now - start);
+      const h = delta.hours();
+      const m = delta.minutes();
+      const s = delta.seconds();
 
       const HH = h >= 10 ? h : `0${h}`;
       const MM = m >= 10 ? m : `0${m}`;

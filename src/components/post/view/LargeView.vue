@@ -232,7 +232,7 @@ import Tip from "@/components/common/tip/User";
 import PostStat from "@/mixins/post/stat";
 import PostCommon from "@/mixins/post/common";
 import postOpen from "@/mixins/post/open";
-import { format } from "date-fns";
+import moment from "moment";
 import ModalRouterParams from "@/mixins/modalRouter/params";
 import PostTipsGoal from "@/components/post/parts/tipsGoal/Index";
 
@@ -262,10 +262,9 @@ export default {
       return !!this.post.scheduledDate;
     },
     formattedDate() {
-      return (
-        "Scheduled for " +
-        format(new Date(this.post.scheduledDate), "MMM d, h:mm aaaa")
-      );
+      return `Scheduled for ${moment(this.post.scheduledDate).format(
+        "MMM D, hh:mm a"
+      )}`;
     },
     canSendTips() {
       return (

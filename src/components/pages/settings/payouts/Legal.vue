@@ -423,10 +423,13 @@ import BirthDateSelect from "./BirthDateSelect";
 import Form from "@/mixins/form";
 import upload from "@/utils/upload";
 import { Datetime } from "vue-datetime";
-import { formatISO, subYears, format } from "date-fns";
+import { Settings, DateTime as LuxonDateTime } from "luxon";
+import moment from "moment";
 import "vue-datetime/dist/vue-datetime.css";
 import States from "./states";
 import UserMixin from "@/mixins/user";
+
+Settings.defaultLocale = "en";
 
 export default {
   name: "PayoutSettingsLegal",
@@ -498,14 +501,15 @@ export default {
       return true;
     },
     formattedBirthdate() {
-      return format(new Date(this.birthDate), "MMMM d yyy");
+      return moment(this.birthDate).format("LL");
     },
     saving() {
       return this.$store.state.payouts.legal.saveLoading;
     },
     maxDate() {
-      const date = new Date();
-      return formatISO(subYears(date, 18));
+      return LuxonDateTime.local()
+        .minus({ year: 18 })
+        .toISO();
     },
     legal() {
       return this.$store.state.payouts.legal.fetchResult;
@@ -578,9 +582,7 @@ export default {
       for (let f of fields) {
         if (this[f]) {
           data[f] =
-            f === "birthDate"
-              ? format(new Date(this[f]), "yyyy-MM-d")
-              : this[f];
+            f === "birthDate" ? moment(this[f]).format("YYYY-MM-DD") : this[f];
         }
       }
       if (!this.legalExisted) {
