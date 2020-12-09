@@ -65,7 +65,7 @@ import Footer from "@/components/footer/Index.vue";
 import Loader from "@/components/common/Loader";
 import User from "@/mixins/user";
 import Nominee from "./Nominee";
-import { utcToZonedTime, format } from "date-fns-tz";
+import moment from "moment-timezone";
 
 export default {
   name: "SingleNominee",
@@ -125,14 +125,16 @@ export default {
     // },
     periodText() {
       const d1 = this.contest.starts_at.replace(/(.*)-\d+:\d+/, "$1");
-      const m1 = utcToZonedTime(new Date(d1), "America/Los_Angeles");
+      // const m1 = moment(d1).tz(this.contest.timezone);
+      const m1 = moment(d1).tz("America/Los_Angeles");
       let r2 = null;
       if (this.contest.ends_at) {
         const d2 = this.contest.ends_at.replace(/(.*)-\d+:\d+/, "$1");
-        const m2 = utcToZonedTime(new Date(d2), "America/Los_Angeles");
-        r2 = format(m2, "MMM do hh:mm aaaa");
+        // const m2 = moment(d2).tz(this.contest.timezone);
+        const m2 = moment(d2).tz("America/Los_Angeles");
+        r2 = m2.format("MMM Do h:mm a");
       }
-      const r1 = format(m1, "MMM do hh:mm aaaa");
+      const r1 = m1.format("MMM Do h:mm a");
       let s = `${r1} PDT`;
       if (r2) {
         s += ` to ${r2} PDT`;
