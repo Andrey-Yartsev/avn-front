@@ -20,7 +20,10 @@ import {
 
 export const fromNow = time => {
   const today = new Date();
-  const day = new Date(time);
+  let day = new Date(time);
+  if (day.toString() === "Invalid Date") {
+    day = new Date();
+  }
 
   if (Math.abs(differenceInMilliseconds(today, day)) / 1000 / 60 / 60 < 24) {
     return formatDistanceToNow(day, { addSuffix: true, includeSeconds: false });
