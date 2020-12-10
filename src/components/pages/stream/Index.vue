@@ -1045,13 +1045,9 @@ export default {
 
         const defaultStreamTypes = ["subscribers", "followers", "public"];
 
-        console.log(type, defaultStreamTypes);
-
         if (!defaultStreamTypes.includes(type)) {
           type = "list";
         }
-
-        console.log(type);
 
         StreamApi.runStream({
           room,
