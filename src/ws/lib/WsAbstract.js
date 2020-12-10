@@ -1,5 +1,5 @@
 import { EventEmitter } from "events";
-import { format } from "date-fns";
+import moment from "moment";
 import Fingerprint from "fingerprintjs2";
 import Store from "@/store";
 import Logger from "js-logger";
@@ -20,7 +20,7 @@ export default class Ws extends EventEmitter {
   }
   start(reconnect) {
     this.connecting = true;
-    const tz = format(new Date(), "XX");
+    const tz = moment().format("ZZ");
     let ws;
 
     if (this.type === "ws") {

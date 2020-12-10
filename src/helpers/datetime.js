@@ -11,29 +11,21 @@ export const toHumanDuration = duration => {
   }
   return result;
 };
-import {
-  format,
-  differenceInMilliseconds,
-  formatDistanceToNow,
-  isSameYear
-} from "date-fns";
+import moment from "moment";
 
 export const fromNow = time => {
-  const today = new Date();
-  let day = new Date(time);
-  if (day.toString() === "Invalid Date") {
-    day = new Date();
+  const today = moment();
+  const day = moment(time);
+
+  if (today.diff(day) / 1000 / 60 / 60 < 24) {
+    return day.fromNow();
   }
 
-  if (Math.abs(differenceInMilliseconds(today, day)) / 1000 / 60 / 60 < 24) {
-    return formatDistanceToNow(day, { addSuffix: true, includeSeconds: false });
+  if (today.isSame(day, "year")) {
+    return day.format("MMMM D");
   }
 
-  if (isSameYear(new Date(), day)) {
-    return format(day, "MMMM d");
-  }
-
-  return format(day, "MMMM d yyyy");
+  return day.format("LL");
 };
 
 export default {};

@@ -49,7 +49,7 @@
 import Loader from "@/components/common/Loader";
 import LoadScripts from "./loadScripts";
 import BuildScale from "./buildScale";
-import { getUnixTime } from "date-fns";
+import moment from "moment";
 import ChartBuilding from "./chartBuilding";
 import ChartData from "./chartData";
 
@@ -70,7 +70,9 @@ export default {
       // dummy
     },
     _buildScale() {
-      const now = getUnixTime(new Date());
+      const now = moment()
+        .utc()
+        .unix();
       this.buildScale(
         document.getElementById("earnings_scale"),
         this.currentPeriodType,

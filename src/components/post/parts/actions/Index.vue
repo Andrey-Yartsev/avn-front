@@ -84,7 +84,7 @@ import RepostDropdown from "@/components/post/parts/repostDropdown/Index";
 import ClickOutside from "vue-click-outside";
 import { fromNow } from "@/helpers/datetime";
 import userMixin from "@/mixins/user";
-import { format } from "date-fns";
+import moment from "moment";
 
 export default {
   name: "Actions",
@@ -184,7 +184,7 @@ export default {
       });
     },
     getExpiredDate(date) {
-      return "Expires at " + format(new Date(date), "MMM d, h:mm aaaa");
+      return "Expires at " + moment(date).format("MMM D, hh:mm a");
     }
   },
   directives: {

@@ -77,7 +77,7 @@
 </template>
 
 <script>
-import { format } from "date-fns";
+import moment from "moment";
 
 export default {
   name: "SettingsReferralsList",
@@ -105,7 +105,7 @@ export default {
   },
   methods: {
     time(date) {
-      return format(new Date(date), "dd MMM");
+      return moment(date).format("DD MMM");
     }
   },
   mounted() {

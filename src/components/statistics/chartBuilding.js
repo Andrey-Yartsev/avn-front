@@ -1,5 +1,5 @@
 import { chartOptions, mainColor, altColor } from "./chartVars";
-import { startOfWeek, addDays, getUnixTime, sub } from "date-fns";
+import moment from "moment";
 import { dataProviderKeys, getScaleData } from "./utils";
 
 export default {
@@ -313,9 +313,9 @@ export default {
         if (barCount !== 7) {
           // throw new Error("We need 7 days for weekly period");
         }
-        const weekStart = startOfWeek(new Date());
+        const startOfWeek = moment().startOf("week");
         for (let j = 1; j <= 7; j++) {
-          let currDate = addDays(weekStart, j);
+          let currDate = moment(startOfWeek).add(j, "days");
           this[name + "Chart"].dataProvider.push(
             Object.assign(
               {
@@ -328,12 +328,14 @@ export default {
         return;
       }
 
+      // console.log("======================", units, barCount);
+
       for (let i = barCount; i >= 1; i--) {
-        let currDate = getUnixTime(
-          sub(new Date(startDate * 1000), {
-            [units]: (i * count) / barCount
-          })
-        );
+        let currDate = moment
+          .unix(startDate)
+          .subtract((i * count) / barCount, units)
+          .unix();
+
         this[name + "Chart"].dataProvider.push(
           Object.assign(
             {

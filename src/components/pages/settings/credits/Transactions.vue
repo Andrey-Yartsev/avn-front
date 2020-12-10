@@ -70,7 +70,7 @@
 
 <script>
 import Loader from "@/components/common/Loader";
-import { format } from "date-fns";
+import moment from "moment";
 
 export default {
   name: "CreditsSettingsTransactions",
@@ -96,7 +96,7 @@ export default {
 
   methods: {
     dt(date) {
-      return format(new Date(date), "dd MMM HH:mm");
+      return moment(date).format("DD MMM HH:mm");
     },
     dollar(amount) {
       amount = amount.toString();

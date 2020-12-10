@@ -47,17 +47,7 @@
 </template>
 
 <script>
-import {
-  getTime,
-  sub,
-  format,
-  isWithinInterval,
-  startOfMonth,
-  startOfYear,
-  addDays,
-  addMonths,
-  startOfDay
-} from "date-fns";
+import moment from "moment";
 import { chartTypes } from "./utils";
 
 const dataTypes = [
@@ -96,8 +86,8 @@ export default {
       const ranges = [];
       for (let i = 0; i < monthNumber; i++) {
         ranges.push([
-          sub(new Date(), { month: i + 1 }),
-          sub(new Date(), { month: i })
+          moment().subtract(i + 1, "month"),
+          moment().subtract(i, "month")
         ]);
       }
 
@@ -113,14 +103,9 @@ export default {
         });
 
         Object.entries(statData).forEach(([timestamp, data]) => {
-          const date = new Date(parseInt(timestamp) + 1000);
+          const date = moment.unix(timestamp);
           ranges.forEach((months, range) => {
-            if (
-              isWithinInterval(date, {
-                start: new Date(months[0]),
-                end: new Date(months[1])
-              })
-            ) {
+            if (date.isBetween(months[0], months[1])) {
               items[range] += parseFloat(data.total);
             }
           });
@@ -135,7 +120,7 @@ export default {
         let item = {};
         total = 0;
         item.id = i + 1;
-        item.date = sub(new Date(), { months: i });
+        item.date = moment().subtract(i, "month");
         lineTypes.forEach(lineType => {
           if (isFloat(data[lineType][i])) {
             data[lineType][i] = Number(data[lineType][i].toFixed(2));
@@ -165,14 +150,9 @@ export default {
 
       dataTypes.forEach(dataType => {
         Object.entries(this.finance[dataType]).forEach(([timestamp, value]) => {
-          const date = new Date(parseInt(timestamp) + 1000);
+          const date = moment.unix(timestamp);
           this.ranges.forEach((_ranges, range) => {
-            if (
-              isWithinInterval(date, {
-                start: new Date(_ranges[0]),
-                end: new Date(_ranges[1])
-              })
-            ) {
+            if (date.isBetween(_ranges[0], _ranges[1])) {
               items[range][dataType] += value;
             }
           });
@@ -279,47 +259,58 @@ export default {
         let step = Math.round(30 / rangeNumber);
         for (let i = 0; i < rangeNumber; i++) {
           ranges.push([
-            addDays(startOfMonth(new Date()), i * step),
-            addDays(startOfMonth(new Date()), (i + 1) * step)
+            moment()
+              .startOf("month")
+              .add(i * step, "day"),
+            moment()
+              .startOf("month")
+              .add((i + 1) * step, "day")
           ]);
         }
       } else if (this.currentPeriodType === "weekly") {
         rangeNumber = 7;
         for (let i = rangeNumber - 1; i >= 0; i--) {
           ranges.push([
-            sub(new Date(), { days: i + 1 }),
-            sub(new Date(), { days: i })
+            moment().subtract(i + 1, "day"),
+            moment().subtract(i, "day")
           ]);
         }
       } else if (this.currentPeriodType === "last_year") {
         rangeNumber = 12;
         for (let i = 0; i < rangeNumber; i++) {
-          let a = getTime(startOfYear(addMonths(new Date(), i - 1)));
-          if (a > getTime(new Date())) {
+          let a = moment()
+            .startOf("year")
+            .add(i - 1, "month");
+          if (a > moment()) {
             continue;
           }
-          ranges.push([a, startOfYear(addMonths(new Date(), i))]);
+          ranges.push([
+            a,
+            moment()
+              .startOf("year")
+              .add(i, "month")
+          ]);
         }
       } else {
-        ranges.push([startOfDay(new Date()), startOfDay(new Date())]);
+        ranges.push([moment().startOf("day"), moment().startOf("day")]);
       }
       return ranges;
     }
   },
   methods: {
     formatTimestamp(timestamp) {
-      const date = new Date(parseInt(timestamp) * 1000);
+      const date = moment.unix(timestamp);
       switch (this.currentPeriodType) {
         case "daily":
-          return format(date, "d MMM");
+          return date.format("D MMM");
         case "weekly":
-          return format(date, "d MMM");
+          return date.format("D MMM");
         case "monthly":
-          return format(date, "MMM yyyy");
+          return date.format("MMM YYYY");
         case "all":
-          return format(date, "yyyy");
+          return date.format("YYYY");
         default:
-          return format(date, "d MMM");
+          return date.format("D MMM");
       }
     },
     fetchFinance() {

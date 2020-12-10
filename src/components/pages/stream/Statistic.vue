@@ -132,7 +132,7 @@
 
 <script>
 import Loader from "@/components/common/Loader";
-import { format, fromUnixTime } from "date-fns";
+import moment from "moment";
 import ChartSettings from "./ChartSettings.js";
 
 export default {
@@ -199,10 +199,9 @@ export default {
     chartScaleUnits() {
       const arr = [];
       for (let i = 0; i <= this.scale; i++) {
-        let item = format(
-          fromUnixTime(Math.round(i * this.streamScaleUnit)),
-          this.format
-        );
+        let item = moment
+          .unix(Math.round(i * this.streamScaleUnit))
+          .format(this.format);
 
         arr.push(item);
       }
@@ -239,7 +238,7 @@ export default {
       const approx = {};
 
       data.forEach(item => {
-        const timestamp = format(new Date(item.message.timestamp), "t");
+        const timestamp = moment(item.message.timestamp).format("X");
         let diff = 0;
         let currIndex = 0;
 
