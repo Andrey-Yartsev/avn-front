@@ -54,5 +54,15 @@ export default {
         keepComments: !!haveToSaveComments
       })
     });
+  },
+  getServerData(streamType, token) {
+    return fetch(
+      `${
+        process.env.VUE_APP_API_URL
+      }/streams/url?access-token=${token}&extension=${JSON.stringify({
+        streamtype: streamType,
+        sbp: true
+      })}`
+    ).then(r => r.json());
   }
 };

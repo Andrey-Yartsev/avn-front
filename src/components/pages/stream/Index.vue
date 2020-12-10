@@ -409,7 +409,7 @@ import Loader from "@/components/common/Loader";
 import StreamStatistic from "@/components/pages/stream/Statistic";
 import Filters from "@/components/pages/stream/Filters";
 import userMixin from "@/mixins/user";
-import StreamModule from "streaming-module/stream_module";
+import { StreamModule } from "streaming-module";
 import StreamApi from "@/api/stream";
 import ClickOutside from "vue-click-outside";
 import logoBase64 from "./logo";
@@ -993,84 +993,133 @@ export default {
     this.streamModule = new StreamModule();
     window.streamModule = this.streamModule;
 
-    this.streamModule.init({
-      debug: getCookie("debug") === window.atob("bWFzdGVyb2ZwdXBwZXRz"),
-      thumbEnabled: true,
-      videoSave: true,
-      getApiUrl: StreamApi.getStreamPath(token),
-      videoElId: "myvideo",
-      token: (+new Date()).toString(36),
-      showErrorMessage: message => {
-        this.$store.dispatch("global/setError", { message });
-        console.trace(message);
-        if (message.match(/Some features are not supported/)) {
-          this.close();
-        }
-      },
-      showInfoMessage: message => {
-        // this.$store.dispatch("global/setError", { message });
-        // eslint-disable-next-line
-        console.trace(message);
-      },
-      onLocalStreamInit: () => {},
-      onRemoteStreamInit: () => {},
-      onStreamError: error => {
-        this.$root.ws.send({
-          act: "stream_log",
-          stream_id: this.startedStreamId,
-          stream_user_id: this.$store.state.auth.user.id,
-          user_action: "error",
-          stream_data: {
-            type: "common",
-            error_message: error,
-            view_category: this.streamVisibility.key,
-            microphone: this.streamAudio.deviceId === undefined ? "off" : "on",
-            date_time: new Date()
-          },
-          sess: this.$store.state.auth.token
-        });
-        // eslint-disable-next-line
-        this.$store.dispatch("global/setError", { message: error });
-        // eslint-disable-next-line
-        console.trace(error);
-        this.streamModule.config.onStreamEnd();
-      },
-      onStreamTick: start => {
-        this.tick(start);
-      },
-      onStreamStart: room => {
-        this.updateLikes();
-        let type = this.streamVisibility.key;
-        const defaultStreamTypes = ["subscribers", "followers", "public"];
-        if (!defaultStreamTypes.includes(type)) {
-          type = "list";
-        }
+    StreamApi.getServerData("webrtc", token).then(data => {
+      this.streamModule.init({
+        debug: getCookie("debug") === window.atob("bWFzdGVyb2ZwdXBwZXRz"),
+        thumbEnabled: true,
+        videoSave: true,
+        serverData: data,
+        videoElId: "myvideo",
+        token: (+new Date()).toString(36),
+        showErrorMessage: message => {
+          this.$store.dispatch("global/setError", { message });
+          console.trace(message);
+          if (message.match(/Some features are not supported/)) {
+            this.close();
+          }
+        },
+        showInfoMessage: message => {
+          // this.$store.dispatch("global/setError", { message });
+          // eslint-disable-next-line
+            console.trace(message);
+        },
+        onLocalStreamInit: () => {},
+        onRemoteStreamInit: () => {},
+        onStreamError: error => {
+          this.$root.ws.send({
+            act: "stream_log",
+            stream_id: this.startedStreamId,
+            stream_user_id: this.$store.state.auth.user.id,
+            user_action: "error",
+            stream_data: {
+              type: "common",
+              error_message: error,
+              view_category: this.streamVisibility.key,
+              microphone:
+                this.streamAudio.deviceId === undefined ? "off" : "on",
+              date_time: new Date()
+            },
+            sess: this.$store.state.auth.token
+          });
+          // eslint-disable-next-line
+            this.$store.dispatch("global/setError", { message: error });
+          // eslint-disable-next-line
+            console.trace(error);
+          this.streamModule.config.onStreamEnd();
+        },
+        onStreamTick: start => {
+          this.tick(start);
+        },
+        onStreamStart: room => {
+          this.updateLikes();
+          let type = this.streamVisibility.key;
 
-        StreamApi.runStream({
-          room,
-          type,
-          entityId: type === "list" ? this.streamVisibility.key : undefined
-        })
-          .then(res => {
-            return res.json();
+          const defaultStreamTypes = ["subscribers", "followers", "public"];
+
+          console.log(type, defaultStreamTypes);
+
+          if (!defaultStreamTypes.includes(type)) {
+            type = "list";
+          }
+
+          console.log(type);
+
+          StreamApi.runStream({
+            room,
+            type,
+            entityId: type === "list" ? this.streamVisibility.key : undefined
           })
-          .then(({ id }) => {
-            const token = this.$store.state.auth.token;
-            const userId = this.$store.state.auth.user.id;
+            .then(res => {
+              return res.json();
+            })
+            .then(({ id }) => {
+              const token = this.$store.state.auth.token;
+              const userId = this.$store.state.auth.user.id;
 
+              this.$root.ws.ws.send(
+                JSON.stringify({
+                  act: "stream_start",
+                  stream_id: id,
+                  stream_user_id: userId,
+                  sess: token
+                })
+              );
+              this.$root.ws.send({
+                act: "stream_log",
+                stream_id: id,
+                stream_user_id: this.$store.state.auth.user.id,
+                user_action: "start_success",
+                stream_data: {
+                  type: "common",
+                  view_category: this.streamVisibility.key,
+                  microphone:
+                    this.streamAudio.deviceId === undefined ? "off" : "on",
+                  date_time: new Date()
+                },
+                sess: this.$store.state.auth.token
+              });
+
+              this.startedStreamId = id;
+              this.startingStream = false;
+              this.streamModule.sendCustomMessage({
+                msgtype: "data.custom",
+                to: ["transcoder"],
+                data: this.user.hasWatermarkStream
+                  ? this.getWatermarkData()
+                  : {}
+              });
+              this.streamStartTime = new Date().getTime() / 1000;
+            });
+        },
+        onStreamEnd: () => {
+          const token = this.$store.state.auth.token;
+          const userId = this.$store.state.auth.user.id;
+
+          if (this.startedStreamId) {
             this.$root.ws.ws.send(
               JSON.stringify({
-                act: "stream_start",
-                stream_id: id,
+                act: "stream_stop",
+                stream_id: this.startedStreamId,
                 stream_user_id: userId,
                 sess: token
               })
             );
+
             this.$root.ws.send({
               act: "stream_log",
-              stream_id: id,
+              stream_id: this.startedStreamId,
               stream_user_id: this.$store.state.auth.user.id,
-              user_action: "start_success",
+              user_action: "stop_success",
               stream_data: {
                 type: "common",
                 view_category: this.streamVisibility.key,
@@ -1081,90 +1130,52 @@ export default {
               sess: this.$store.state.auth.token
             });
 
-            this.startedStreamId = id;
-            this.startingStream = false;
-            this.streamModule.sendCustomMessage({
-              msgtype: "data.custom",
-              to: ["transcoder"],
-              data: this.user.hasWatermarkStream ? this.getWatermarkData() : {}
+            this.finishing = true;
+
+            StreamApi.deleteStream(this.startedStreamId)
+              .then(() => {
+                this.finishing = false;
+              })
+              .catch(() => {
+                this.finishing = false;
+              });
+          }
+
+          this.isReadyToStart = true;
+          this.isStarted = false;
+          this.isStopped = true;
+          this.startingStream = false;
+        },
+        onCleanUp: () => {},
+        onViewersCountGet: looks => {
+          this.looksCount = looks;
+        },
+        onCustomDataGet: message => {
+          if (message.type === "click.position") {
+            const date = Date.now();
+            this.$store.commit("lives/addLike");
+            let pos =
+              message.position !== "btn"
+                ? this.getLikePosition(message.position)
+                : {
+                    x: this.$refs.likeBtn.getBoundingClientRect().left + 25,
+                    y: this.$refs.likeBtn.getBoundingClientRect().top + 25
+                  };
+
+            this.likes.push({
+              date,
+              ...pos
             });
-            this.streamStartTime = new Date().getTime() / 1000;
-          });
-      },
-      onStreamEnd: () => {
-        const token = this.$store.state.auth.token;
-        const userId = this.$store.state.auth.user.id;
+          }
 
-        if (this.startedStreamId) {
-          this.$root.ws.ws.send(
-            JSON.stringify({
-              act: "stream_stop",
-              stream_id: this.startedStreamId,
-              stream_user_id: userId,
-              sess: token
-            })
-          );
-
-          this.$root.ws.send({
-            act: "stream_log",
-            stream_id: this.startedStreamId,
-            stream_user_id: this.$store.state.auth.user.id,
-            user_action: "stop_success",
-            stream_data: {
-              type: "common",
-              view_category: this.streamVisibility.key,
-              microphone:
-                this.streamAudio.deviceId === undefined ? "off" : "on",
-              date_time: new Date()
-            },
-            sess: this.$store.state.auth.token
-          });
-
-          this.finishing = true;
-
-          StreamApi.deleteStream(this.startedStreamId)
-            .then(() => {
-              this.finishing = false;
-            })
-            .catch(() => {
-              this.finishing = false;
-            });
-        }
-
-        this.isReadyToStart = true;
-        this.isStarted = false;
-        this.isStopped = true;
-        this.startingStream = false;
-      },
-      onCleanUp: () => {},
-      onViewersCountGet: looks => {
-        this.looksCount = looks;
-      },
-      onCustomDataGet: message => {
-        if (message.type === "click.position") {
-          const date = Date.now();
-          this.$store.commit("lives/addLike");
-          let pos =
-            message.position !== "btn"
-              ? this.getLikePosition(message.position)
-              : {
-                  x: this.$refs.likeBtn.getBoundingClientRect().left + 25,
-                  y: this.$refs.likeBtn.getBoundingClientRect().top + 25
-                };
-
-          this.likes.push({
-            date,
-            ...pos
-          });
-        }
-
-        if (message.type === "plugin.list") {
-          this.filters = message.list.filter(
-            filter => filter.parent_id === "face_filters"
-          );
-        }
-      },
-      onDevicesReadyCallback
+          if (message.type === "plugin.list") {
+            this.filters = message.list.filter(
+              filter => filter.parent_id === "face_filters"
+            );
+          }
+        },
+        onDevicesReadyCallback
+      });
     });
   },
   beforeDestroy() {
