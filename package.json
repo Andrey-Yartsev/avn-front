@@ -26,7 +26,7 @@
     "moment": "^2.29.1",
     "query-string": "^6.8.2",
     "smooth-scroll": "^16.1.0",
-    "streaming-module": "git+https://stream.module:xkQgBGCxzJ87ed3@git.retloko.com/alien.pavlov/streaming-module.git#avn",
+    "streaming-module": "git+https://git.retloko.com/alien.pavlov/streaming-module.git",
     "throttle-debounce": "^2.1.0",
     "tributejs": "^3.7.2",
     "truncate-html": "^1.0.3",
