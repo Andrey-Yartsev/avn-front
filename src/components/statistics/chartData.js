@@ -293,10 +293,10 @@ export default {
           if (pointTime < firstBarTime) {
             // Необходимо проверить имеет ли точка время меньшее чем первый бар
             // И если так, мы игнорируем ее
-            console.log("Point is less then first bar time", {
-              pointTime: moment.unix(pointTime).format("DD.MM.YYYY"),
-              firstBarTime: moment.unix(firstBarTime).format("DD.MM.YYYY")
-            });
+            // console.log("Point is less then first bar time", {
+            //   pointTime: moment.unix(pointTime).format("DD.MM.YYYY"),
+            //   firstBarTime: moment.unix(firstBarTime).format("DD.MM.YYYY")
+            // });
             continue;
           }
 
@@ -331,7 +331,7 @@ export default {
         }
         for (let i in approx) {
           if (approx[i]) {
-            console.log(approx[i]);
+            // console.log(approx[i]);
             let val = approx[i];
             val = Math.round(approx[i] * 100) / 100;
             chart.dataProvider[i][dataProviderKey] = val;
