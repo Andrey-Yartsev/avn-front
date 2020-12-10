@@ -147,7 +147,7 @@ import { throttle } from "throttle-debounce";
 import Loader from "@/components/common/Loader";
 import Modal from "@/components/modal/Index";
 import userMixin from "@/mixins/user";
-import ViewModule from "streaming-module/view_module";
+import { ViewModule } from "streaming-module";
 import StreamApi from "@/api/stream";
 import moment from "moment";
 import Tip from "@/components/common/tip/User";
