@@ -121,7 +121,7 @@ import User from "@/mixins/user";
 import PostOpen from "@/mixins/post/open";
 import PostCommon from "@/mixins/post/common";
 import UserSuggestionsInline from "@/mixins/userSuggestionsInline";
-import moment from "moment";
+import { format } from "date-fns";
 import LinksPreviewList from "@/components/post/parts/linksPreviewList/Index";
 import PostTipsGoal from "@/components/post/parts/tipsGoal/Index";
 import PayAction from "@/components/pages/settings/payments/payAction";
@@ -181,9 +181,10 @@ export default {
       return this.$store.state.tip.funded;
     },
     formattedDate() {
-      return `Scheduled for ${moment(this.post.scheduledDate).format(
-        "MMM D, hh:mm a"
-      )}`;
+      return (
+        "Scheduled for " +
+        format(new Date(this.post.scheduledDate), "MMM d, h:mm aaaa")
+      );
     },
     isVisible() {
       return this.post.isVisible;

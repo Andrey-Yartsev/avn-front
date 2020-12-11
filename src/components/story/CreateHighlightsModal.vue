@@ -103,9 +103,9 @@
                     >
                       <div class="timestamp timestamp_unit">
                         <div class="timestamp__date">
-                          {{ moment(story.createdAt).format("DD") }}
+                          {{ getDay(story.createdAt) }}
                         </div>
-                        {{ moment(story.createdAt).format("MMM") }}
+                        {{ getMonth(story.createdAt) }}
                       </div>
                       <div class="postLink">
                         <figure class="explore-media">
@@ -138,7 +138,7 @@
 </template>
 
 <script>
-import moment from "moment";
+import { format } from "date-fns";
 import Modal from "@/components/modal/Index";
 import Loader from "@/components/common/Loader";
 
@@ -177,7 +177,12 @@ export default {
     }
   },
   methods: {
-    moment,
+    getDay(date) {
+      return format(new Date(date), "dd");
+    },
+    getMonth(date) {
+      return format(new Date(date), "MMM");
+    },
     check(id) {
       if (this.checked.indexOf(id) !== -1) {
         this.checked = this.checked.filter(el => el !== id);

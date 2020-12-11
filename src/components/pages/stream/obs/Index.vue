@@ -137,7 +137,7 @@ import User from "@/mixins/user";
 import TipsGoal from "@/mixins/tipsGoal";
 import StreamObsStatistic from "@/components/pages/stream/obs/StatisticObs";
 import StreamApi from "@/api/stream";
-import moment from "moment";
+import { intervalToDuration } from "date-fns";
 import LoadScripts from "@/components/statistics/loadScripts";
 import NotificationsMenu from "../menu/Notifications";
 
@@ -462,19 +462,17 @@ export default {
       if (!value) {
         return;
       }
-      const streamEndTime = moment.unix(
-        new Date(this.finishedStreamData.finishedAt).getTime()
-      );
-      const streamStartTime = moment.unix(
-        new Date(this.finishedStreamData.startedAt).getTime()
-      );
+      const streamEndTime = new Date(this.finishedStreamData.finishedAt);
+      const streamStartTime = new Date(this.finishedStreamData.startedAt);
 
-      const diffTime = streamEndTime.diff(streamStartTime);
-      const duration = moment.duration(diffTime / 1000);
+      const duration = intervalToDuration({
+        start: streamStartTime,
+        end: streamEndTime
+      });
 
-      let seconds = duration.seconds(),
-        minute = duration.minutes(),
-        hours = duration.hours();
+      let seconds = duration.seconds,
+        minute = duration.minutes,
+        hours = duration.hours;
 
       const _hours = hours < 10 ? `0${hours}` : `${hours}`;
       minute = minute < 10 ? `0${minute}` : `${minute}`;

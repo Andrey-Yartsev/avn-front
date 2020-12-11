@@ -178,7 +178,6 @@ import Tip from "@/components/common/tip/User";
 import PostStat from "@/mixins/post/stat";
 import PostCommon from "@/mixins/post/common";
 import postOpen from "@/mixins/post/open";
-import moment from "moment";
 import ModalRouterParams from "@/mixins/modalRouter/params";
 import UserSuggestionsInline from "@/mixins/userSuggestionsInline";
 import ClipCategories from "@/components/common/profile/media/parts/categories/Index";
@@ -243,11 +242,6 @@ export default {
     },
     delayedPost() {
       return !!this.post.scheduledDate;
-    },
-    formattedDate() {
-      return `Scheduled for ${moment(this.post.scheduledDate).format(
-        "MMM D, hh:mm a"
-      )}`;
     },
     canSendTips() {
       return (

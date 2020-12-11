@@ -1,4 +1,4 @@
-import moment from "moment";
+import { startOfWeek, sub, add, format, startOfDay } from "date-fns";
 import { getScaleData } from "./utils";
 
 export default {
@@ -6,7 +6,6 @@ export default {
     buildScale(container, period, now) {
       if ("today" !== period) {
         let scaleHtml = "";
-        let format = "YYYY-MM-DD";
 
         const {
           scaleCount,
@@ -17,11 +16,12 @@ export default {
         } = getScaleData(period);
 
         if (startFromFirstDayOfWeek) {
-          let startOfWeek = moment().startOf("week");
+          let weekStart = startOfWeek(new Date());
           for (let j = 1; j <= scaleCount; j++) {
-            let currLabel = moment(startOfWeek)
-              .add(j, units)
-              .format(displayFormat);
+            let currLabel = format(
+              add(weekStart, { [units]: j }),
+              displayFormat
+            );
             scaleHtml +=
               "<span class=statistics-chart-scale__item>" +
               currLabel +
@@ -29,10 +29,12 @@ export default {
           }
         } else {
           for (let j = scaleCount - 1; j >= 0; j--) {
-            let currLabel = moment
-              .unix(moment.utc(moment.unix(now).format(format)).unix())
-              .subtract(j * unitsInBar, units)
-              .format(displayFormat);
+            let currLabel = format(
+              sub(startOfDay(new Date(now + 1000)), {
+                [units]: j * unitsInBar
+              }),
+              displayFormat
+            );
             scaleHtml +=
               "<span class=statistics-chart-scale__item>" +
               currLabel +

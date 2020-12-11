@@ -147,8 +147,7 @@
 import Modal from "@/components/modal/Index";
 import AddMessageBox from "@/components/chat/AddMessageBox";
 import { Datetime } from "vue-datetime";
-import { DateTime as LuxonDateTime } from "luxon";
-import moment from "moment";
+import { formatISO, addMinutes, format } from "date-fns";
 import Loader from "@/components/common/Loader";
 // import scheduledMessages from "@/mock/scheduleMessages";
 
@@ -177,13 +176,13 @@ export default {
       return this.$store.state.auth.user;
     },
     minDate() {
-      return LuxonDateTime.local()
-        .plus({ minutes: 1 })
-        .toISO();
+      const date = new Date();
+      return formatISO(addMinutes(date, 5));
     },
     formattedDate() {
       return (
-        "Scheduled for " + moment(this.scheduledDate).format("MMM D, hh:mm a")
+        "Scheduled for " +
+        format(new Date(this.scheduledDate), "MMM d, h:mm aaaa")
       );
     }
   },
@@ -226,7 +225,7 @@ export default {
       document.body.classList.remove("open-timepicker");
     },
     scheduledFormattedDate(date) {
-      return "Scheduled for " + moment(date).format("MMM D, hh:mm a");
+      return "Scheduled for " + format(new Date(date), "MMM d, h:mm aaaa");
     },
     getScheduledMessages() {
       this.$store

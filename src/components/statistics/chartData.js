@@ -7,7 +7,7 @@ import {
   matchCodeByPrefix,
   getScaleData
 } from "./utils";
-import moment from "moment";
+import { getUnixTime } from "date-fns";
 import pluralize from "pluralize";
 // import { barCount } from "./chartVars";
 
@@ -137,16 +137,12 @@ export default {
     shiftTimeZone(statistics) {
       const data = {};
       Object.keys(statistics.data).forEach(time => {
-        const newTime = moment
-          .unix(time)
-          .local()
-          .unix();
+        const newTime = getUnixTime(new Date(time * 1000));
+
         data[newTime] = statistics.data[time];
       });
-      const time = moment
-        .unix(statistics.time)
-        .local()
-        .unix();
+      const time = getUnixTime(new Date(statistics.time * 1000));
+
       return {
         code: statistics.code,
         data,
@@ -257,22 +253,19 @@ export default {
 
       // console.log(chart.dataProvider);
 
-      // chart.dataProvider.forEach(v => {
-      //   console.log("Bar", moment.unix(v.date).format("DD.MM.YYYY"));
-      // });
-
       if (chart.dataProvider.length) {
         // Генерация пустых значений для dataProvider'а происходит в fillLineChartByEmptyPoints()
         date = chart.dataProvider[0].date;
         if (typeof date === "number") {
-          date = moment.unix(date);
+          date = new Date(date * 1000);
         }
 
         // if (!chart.dataProvider[0].date.unix) {
         //   console.log(dataProviderKey, chart.dataProvider[0].date);
         // }
         // // console.log(dataProviderKey, chart.dataProvider[0].date);
-        const firstBarTime = date.unix();
+        // const firstBarTime = date.unix();
+        const firstBarTime = getUnixTime(date);
 
         // console.log("firstBarTime: ", firstBarTime);
 
@@ -289,7 +282,6 @@ export default {
         // };
 
         for (let pointTime of Object.keys(statData)) {
-          // console.log("Point time", moment.unix(pointTime).toDate());
           if (pointTime < firstBarTime) {
             // Необходимо проверить имеет ли точка время меньшее чем первый бар
             // И если так, мы игнорируем ее
@@ -308,9 +300,9 @@ export default {
             // todo заменить barCount на динамичный
             date = chart.dataProvider[j].date;
             if (typeof date === "number") {
-              date = moment.unix(date);
+              date = new Date(date * 1000);
             }
-            let momentDiff = Math.abs(date.unix() - pointTime);
+            let momentDiff = Math.abs(getUnixTime(date) - pointTime);
             // Находим бар, имеющий координаты немного меньше или равные точке
             if (0 === j || diff >= momentDiff) {
               diff = momentDiff;

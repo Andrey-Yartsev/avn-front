@@ -516,8 +516,7 @@ import MediaPreview from "@/components/common/MediaPreview";
 import FileUpload from "@/mixins/fileUpload";
 import ClickOutside from "vue-click-outside";
 import { Datetime } from "vue-datetime";
-import moment from "moment";
-import { Settings, DateTime as LuxonDateTime } from "luxon";
+import { formatISO, addMinutes, subMinutes, format } from "date-fns";
 import UserMixin from "@/mixins/user";
 import "vue-datetime/dist/vue-datetime.css";
 import VueTribute from "vue-tribute";
@@ -525,8 +524,6 @@ import UserSuggestions from "@/mixins/userSuggestions";
 import LinksPreview from "./linksPreview";
 import Multiselect from "vue-multiselect";
 import TipsGoalForm from "@/components/post/parts/tipsGoal/TipsGoalForm";
-
-Settings.defaultLocale = "en";
 
 const tipsGoalSourceTypes = [
   { title: "Post tips", value: "localTips" },
@@ -669,36 +666,36 @@ export default {
       if (this.$mq === "mobile") {
         return (
           "Post will be scheduled for " +
-          moment(this.datetime).format("MMM D, hh:mm a")
+          format(new Date(this.datetime), "MMM d, h:mm aaaa")
         );
       }
-      return "Scheduled for " + moment(this.datetime).format("MMM D, hh:mm a");
+      return (
+        "Scheduled for " + format(new Date(this.datetime), "MMM d, h:mm aaaa")
+      );
     },
     formattedDateExpired() {
       return (
-        "Expires at " + moment(this.datetimeExpired).format("MMM D, hh:mm a")
+        "Expires at " +
+        format(new Date(this.datetimeExpired), "MMM d, h:mm aaaa")
       );
     },
     minDate() {
-      return LuxonDateTime.local()
-        .plus({ minutes: 1 })
-        .toISO();
+      const date = new Date();
+      return formatISO(addMinutes(date, 1));
     },
     maxDate() {
       if (!this.datetimeExpired) {
         return null;
       }
-      return LuxonDateTime.fromISO(this.datetimeExpired)
-        .minus({ minutes: 1 })
-        .toISO();
+      const date = new Date(this.datetimeExpired);
+      return formatISO(subMinutes(date, 1));
     },
     minDateExpired() {
       if (!this.datetime) {
         return this.minDate;
       }
-      return LuxonDateTime.fromISO(this.datetime)
-        .plus({ minutes: 1 })
-        .toISO();
+      const date = new Date(this.datetime);
+      return formatISO(addMinutes(date, 1));
     },
     isExtended() {
       return (
@@ -807,14 +804,6 @@ export default {
     getPostData() {
       if (this.notEhoughData) return;
 
-      const scheduledDate = moment(this.datetime)
-        .utc()
-        .format("Y-MM-DD HH:mm:ss");
-
-      const expiredDate = moment(this.datetimeExpired)
-        .utc()
-        .format("Y-MM-DD HH:mm:ss");
-
       const postData = {
         text: this.postMsg,
         tweetSend: this.tweetSend,
@@ -835,7 +824,7 @@ export default {
       };
 
       if (postData.isScheduled) {
-        postData.scheduledDate = scheduledDate;
+        postData.scheduledDate = this.datetime;
       }
 
       if (this.customThumb) {
@@ -843,7 +832,7 @@ export default {
       }
 
       if (this.datetimeExpired) {
-        postData.expiredDate = expiredDate;
+        postData.expiredDate = this.datetimeExpired;
         postData.expiredAction = this.expiredAction;
       } else if (!this.datetimeExpired && this.post.expiredDate) {
         postData.expiredDate = "";

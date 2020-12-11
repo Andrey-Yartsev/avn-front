@@ -1,4 +1,4 @@
-import moment from "moment";
+import { getUnixTime, addDays, startOfDay } from "date-fns";
 
 const chartTypes = {
   followers: {
@@ -75,10 +75,7 @@ const getScaleData = periodType => {
   if (!getPeriodType(periodType)) {
     throw new Error(`periodType ${periodType} does not exists`);
   }
-
-  const now = moment()
-    .utc()
-    .unix();
+  const now = getUnixTime(new Date());
 
   let units;
   let count; // количество единиц типа units назад от текущего времени
@@ -88,18 +85,13 @@ const getScaleData = periodType => {
   let unitsInBar = 1; // количество единиц типа units в одном делении линейки
   /// let barCount = 5;
   let startFromFirstDayOfWeek = false;
-  let displayFormat = "YYYY-MM-DD";
+  let displayFormat = "YYYY-MM-dd";
 
   switch (periodType) {
     case "today":
       count = 1439;
       units = "minutes";
-      startDate = moment(
-        moment
-          .unix(now)
-          .add(1, "d")
-          .format("YYYY-MM-DD")
-      ).unix();
+      startDate = getUnixTime(startOfDay(addDays(now * 1000, 1)));
       break;
     case "daily":
       count = 30;
@@ -107,14 +99,14 @@ const getScaleData = periodType => {
       barCount = 30;
       scaleCount = 15;
       unitsInBar = 2;
-      displayFormat = "D";
+      displayFormat = "d";
       break;
     case "weekly":
       count = 7;
       units = "days";
       barCount = 7;
       startFromFirstDayOfWeek = true;
-      displayFormat = "ddd";
+      displayFormat = "EEE";
       break;
     case "monthly":
       count = 12;
@@ -129,7 +121,7 @@ const getScaleData = periodType => {
       units = "years";
       barCount = 5;
       unitsInBar = 1;
-      displayFormat = "YYYY";
+      displayFormat = "yyyy";
       break;
   }
 
