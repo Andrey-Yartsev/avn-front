@@ -117,11 +117,11 @@
 </template>
 
 <script>
-import { format } from "date-fns";
 import Common from "../../common";
 import PayoutsCommon from "../common";
 import LegalEdit from "./LegalEdit";
 import Form from "@/mixins/form";
+import { formatWithoutLocalization } from "@/utils/datetime";
 
 export default {
   name: "PayoutSettingsSummeryLegal",
@@ -140,7 +140,7 @@ export default {
   },
   methods: {
     dt(date) {
-      return format(new Date(date), "dd MMM yyyy");
+      return formatWithoutLocalization(date);
     },
     ucFirst(name) {
       return name.charAt(0).toUpperCase() + name.slice(1);

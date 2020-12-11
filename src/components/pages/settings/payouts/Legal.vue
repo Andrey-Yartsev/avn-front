@@ -423,10 +423,11 @@ import BirthDateSelect from "./BirthDateSelect";
 import Form from "@/mixins/form";
 import upload from "@/utils/upload";
 import { Datetime } from "vue-datetime";
-import { formatISO, subYears, format } from "date-fns";
+import { formatISO, subYears } from "date-fns";
 import "vue-datetime/dist/vue-datetime.css";
 import States from "./states";
 import UserMixin from "@/mixins/user";
+import { formatWithoutLocalization } from "@/utils/datetime";
 
 export default {
   name: "PayoutSettingsLegal",
@@ -498,7 +499,7 @@ export default {
       return true;
     },
     formattedBirthdate() {
-      return format(new Date(this.birthDate), "MMMM d yyy");
+      return formatWithoutLocalization(this.birthDate);
     },
     saving() {
       return this.$store.state.payouts.legal.saveLoading;
