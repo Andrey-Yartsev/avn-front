@@ -101,8 +101,8 @@ import Footer from "@/components/footer/Index.vue";
 import Loader from "@/components/common/Loader";
 import User from "@/mixins/user";
 import Nominee from "./Nominee";
-import moment from "moment-timezone";
 import IntersectionObserver from "@/mixins/intersectionObserver";
+import { formatToPDT } from "@/utils/datetime";
 
 export default {
   name: "Contest",
@@ -140,9 +140,7 @@ export default {
       }
       return this.contests.map(item => {
         const d1 = item.starts_at.replace(/(.*)-\d+:\d+/, "$1");
-        // const m1 = moment(d1).tz(item.timezone);
-        const m1 = moment(d1).tz("America/Los_Angeles");
-        const r1 = m1.format("MMM Do h:mm a");
+        const r1 = formatToPDT(d1);
         let s = `${r1} PDT`;
         const title = item.name + " - " + s;
         return {
@@ -223,16 +221,12 @@ export default {
     },
     periodText() {
       const d1 = this.contest.starts_at.replace(/(.*)-\d+:\d+/, "$1");
-      // const m1 = moment(d1).tz(this.contest.timezone);
-      const m1 = moment(d1).tz("America/Los_Angeles");
       let r2 = null;
       if (this.contest.ends_at) {
         const d2 = this.contest.ends_at.replace(/(.*)-\d+:\d+/, "$1");
-        // const m2 = moment(d2).tz(this.contest.timezone);
-        const m2 = moment(d2).tz("America/Los_Angeles");
-        r2 = m2.format("MMM Do h:mm a");
+        r2 = formatToPDT(d2);
       }
-      const r1 = m1.format("MMM Do h:mm a");
+      const r1 = formatToPDT(d1);
       let s = `${r1} PDT`;
       if (r2) {
         s += ` to ${r2} PDT`;
