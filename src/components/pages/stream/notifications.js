@@ -6,5 +6,9 @@ export default [
   {
     name: "newTip",
     title: "New tip received alert"
+  },
+  {
+    name: "goalAchieved",
+    title: "Goal achieved alert"
   }
 ];

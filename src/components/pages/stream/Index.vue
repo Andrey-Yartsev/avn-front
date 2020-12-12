@@ -548,6 +548,9 @@ export default {
     },
     newTip() {
       return this.$store.state.lives.currentLive.newTip;
+    },
+    goalAchieved() {
+      return this.$store.state.lives.currentLive.goalAchieved;
     }
   },
   methods: {
@@ -1192,6 +1195,9 @@ export default {
     },
     newTip() {
       this.$store.dispatch("lives/notifications/play", "newTip");
+    },
+    goalAchieved() {
+      this.$store.dispatch("lives/notifications/play", "goalAchieved");
     }
   }
 };

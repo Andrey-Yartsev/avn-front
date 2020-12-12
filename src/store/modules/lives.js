@@ -45,7 +45,8 @@ const initState = {
       sources: []
     },
     newLook: 0,
-    newTip: 0
+    newTip: 0,
+    goalAchieved: 0
   }
 };
 
@@ -114,6 +115,11 @@ const mutations = {
         hideTime: Date.now() + 2 * 60 * 1000
       }
     ];
+
+    console.log(">>>", comment);
+    if (comment.goal_achieved) {
+      state.goal_achieved++;
+    }
   },
 
   goal(state, data) {
