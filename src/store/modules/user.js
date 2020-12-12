@@ -27,6 +27,13 @@ const actions = {
       );
       return res;
     });
+  },
+  extend({ dispatch, rootState }, props) {
+    const localUser = rootState.auth.user;
+    dispatch("update", {
+      ...localUser,
+      ...props
+    });
   }
 };
 

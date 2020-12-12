@@ -90,14 +90,14 @@ export default {
     allAction() {
       if (this.allDisabled) {
         notifications.forEach(v => {
-          this.$store.commit("lives/notifications/setEnabled", {
+          this.$store.dispatch("lives/notifications/setEnabled", {
             name: v.name,
             isEnabled: true
           });
         });
       } else {
         notifications.forEach(v => {
-          this.$store.commit("lives/notifications/setEnabled", {
+          this.$store.dispatch("lives/notifications/setEnabled", {
             name: v.name,
             isEnabled: false
           });

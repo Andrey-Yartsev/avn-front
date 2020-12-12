@@ -1,6 +1,5 @@
 "use strict";
 
-import BrowserStore from "store";
 import playSound from "@/utils/playSound";
 import notifications from "@/components/pages/stream/notifications";
 
@@ -13,12 +12,14 @@ notificationNames.forEach(name => {
 });
 
 const actions = {
-  switch({ commit, state }, name) {
+  switch({ commit, state, dispatch }, name) {
     commit("setEnabled", { name, isEnabled: !state[name] });
+    dispatch("save");
   },
-  init({ commit }) {
+  init({ commit, rootState }) {
     notificationNames.forEach(name => {
-      const isEnabled = !!BrowserStore.get("livesNotification" + name);
+      const streamSounds = rootState.auth.user.streamSounds || {};
+      const isEnabled = !!streamSounds[name];
       commit("setEnabled", { name, isEnabled });
     });
   },
@@ -27,13 +28,23 @@ const actions = {
       return;
     }
     playSound(name);
+  },
+  save({ dispatch }) {
+    const streamSounds = {};
+    notificationNames.forEach(name => {
+      streamSounds[name] = state[name];
+    });
+    dispatch("user/extend", { streamSounds }, { root: true });
+  },
+  setEnabled({ dispatch, commit }, props) {
+    commit("setEnabled", props);
+    dispatch("save");
   }
 };
 
 const mutations = {
   setEnabled(state, { name, isEnabled }) {
     state[name] = isEnabled;
-    BrowserStore.set("livesNotification" + name, isEnabled);
   }
 };
 
