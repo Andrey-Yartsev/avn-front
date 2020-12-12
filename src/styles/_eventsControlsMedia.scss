@@ -162,16 +162,21 @@
         }
       }
 
+      &:after {
+        display: none;
+        position: absolute;
+        content: "\e880";
+        @include icon-font;
+        right: 20px;
+        font-size: 24px;
+        top: 50%;
+        line-height: 0;
+        color: $secondary-color;
+      }
+
       &.active {
         &:after {
-          position: absolute;
-          content: "\e880";
-          @include icon-font;
-          right: 20px;
-          font-size: 24px;
-          top: 50%;
-          line-height: 0;
-          color: $secondary-color;
+          display: block;
         }
       }
     }
@@ -311,6 +316,11 @@
     .root-btn__inside {
       &:before {
         content: "\e88f";
+      }
+    }
+    .item {
+      &:after {
+
       }
     }
   }

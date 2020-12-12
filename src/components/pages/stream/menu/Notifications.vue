@@ -32,6 +32,9 @@
       "
     ></div>
     <div class="menu">
+      <button :class="['item', { active: allEnabled }]" @click="allAction">
+        <span class="value">{{ allTitle }}</span>
+      </button>
       <button
         v-for="(v, k) in items"
         :key="k"
@@ -62,6 +65,19 @@ export default {
   computed: {
     items() {
       return notifications;
+    },
+    allDisabled() {
+      return notifications.every(v => {
+        return !this.isEnabled(v.name);
+      });
+    },
+    allEnabled() {
+      return notifications.every(v => {
+        return this.isEnabled(v.name);
+      });
+    },
+    allTitle() {
+      return this.allDisabled ? "Enable all" : "Disable all";
     }
   },
   methods: {
@@ -70,6 +86,23 @@ export default {
     },
     isEnabled(name) {
       return this.$store.state.lives.notifications[name];
+    },
+    allAction() {
+      if (this.allDisabled) {
+        notifications.forEach(v => {
+          this.$store.commit("lives/notifications/setEnabled", {
+            name: v.name,
+            isEnabled: true
+          });
+        });
+      } else {
+        notifications.forEach(v => {
+          this.$store.commit("lives/notifications/setEnabled", {
+            name: v.name,
+            isEnabled: false
+          });
+        });
+      }
     }
   }
 };
