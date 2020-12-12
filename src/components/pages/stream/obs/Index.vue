@@ -229,6 +229,12 @@ export default {
           new Date(this.finishedStreamData.startedAt).getTime() >
         5000
       );
+    },
+    newLook() {
+      return this.$store.state.obs.newLook;
+    },
+    newTip() {
+      return this.$store.state.obs.newTip;
     }
   },
   methods: {
@@ -478,6 +484,13 @@ export default {
         hours > 0
           ? _hours + ":" + minute + ":" + seconds //
           : minute + ":" + seconds;
+    },
+    newLook() {
+      console.log("222");
+      this.$store.dispatch("lives/notifications/play", "newLook");
+    },
+    newTip() {
+      this.$store.dispatch("lives/notifications/play", "newTip");
     }
   },
   mounted() {

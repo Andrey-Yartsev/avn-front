@@ -10,7 +10,9 @@ const state = {
   viewers: [],
   tips: [],
   selfStreamFinished: false,
-  selfStreamFinishedData: null
+  selfStreamFinishedData: null,
+  newLook: 0,
+  newTip: 0
 };
 
 const actions = {
@@ -79,6 +81,8 @@ const mutations = {
       return;
     }
     state.viewers.push(look);
+    console.log("111");
+    state.newLook++;
   },
   unlook(state, look) {
     if (!state.started) {
@@ -93,6 +97,7 @@ const mutations = {
       return;
     }
     state.tips.push(tip);
+    state.newTip++;
   },
   reset(state) {
     state.likes = [];

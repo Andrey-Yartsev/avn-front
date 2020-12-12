@@ -27,6 +27,7 @@ const actions = {
     if (!state[name]) {
       return;
     }
+    console.log("play ", name);
     playSound(name);
   },
   save({ dispatch }) {
