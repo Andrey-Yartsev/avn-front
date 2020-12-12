@@ -503,8 +503,12 @@ export default {
           }
           this.submitting = false;
         })
-        .catch(() => {
+        .catch(err => {
           this.submitting = false;
+          this.$store.dispatch("global/flashToast", {
+            text: err.message || "Something goes wrong",
+            type: "error"
+          });
         });
     },
     reset() {

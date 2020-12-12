@@ -19,11 +19,6 @@ export default {
     }
     return false;
   },
-  getStreamClientPath(id, token) {
-    return `${
-      process.env.VUE_APP_API_URL
-    }/streams/${id}/url?access-token=${token}`;
-  },
   runStream(data) {
     return tokenRequest(`streams`, {
       method: "POST",
@@ -54,5 +49,25 @@ export default {
         keepComments: !!haveToSaveComments
       })
     });
+  },
+  getServerData(streamType, token) {
+    return fetch(
+      `${
+        process.env.VUE_APP_API_URL
+      }/streams/url?access-token=${token}&extension=${JSON.stringify({
+        streamtype: streamType,
+        sbp: true
+      })}`
+    ).then(r => r.json());
+  },
+  getStreamClientServerData(id, streamType, token) {
+    return fetch(
+      `${
+        process.env.VUE_APP_API_URL
+      }/streams/${id}/url?access-token=${token}&extension=${JSON.stringify({
+        streamtype: streamType,
+        sbp: true
+      })}`
+    ).then(r => r.json());
   }
 };

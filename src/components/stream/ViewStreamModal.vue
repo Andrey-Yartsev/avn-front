@@ -147,7 +147,7 @@ import { throttle } from "throttle-debounce";
 import Loader from "@/components/common/Loader";
 import Modal from "@/components/modal/Index";
 import userMixin from "@/mixins/user";
-import ViewModule from "streaming-module/view_module";
+import { ViewModule } from "streaming-module";
 import StreamApi from "@/api/stream";
 import moment from "moment";
 import Tip from "@/components/common/tip/User";
@@ -378,13 +378,16 @@ export default {
     this.$store.commit("lives/resetCurrentLive");
     const token = this.$store.state.auth.token;
     const id = this.$store.state.modal.stream.data.stream.id;
-
-    this.viewModule.config.getApiUrl = StreamApi.getStreamClientPath(id, token);
     this.viewModule.config.remoteVideo = document.getElementById("remotevideo");
-    this.viewModule.viewStream();
-
-    this.updateLikes();
     document.body.classList.add("stream-viewer");
+
+    StreamApi.getStreamClientServerData(id, "webrtc", token).then(
+      serverData => {
+        this.viewModule.setConfig("serverData", serverData);
+        this.viewModule.viewStream();
+        this.updateLikes();
+      }
+    );
   },
   created() {
     const onViewerKicked = () => {

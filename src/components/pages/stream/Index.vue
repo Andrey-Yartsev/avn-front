@@ -407,7 +407,7 @@ import Loader from "@/components/common/Loader";
 import StreamStatistic from "@/components/pages/stream/Statistic";
 import Filters from "@/components/pages/stream/Filters";
 import userMixin from "@/mixins/user";
-import StreamModule from "streaming-module/stream_module";
+import { StreamModule } from "streaming-module";
 import StreamApi from "@/api/stream";
 import ClickOutside from "vue-click-outside";
 import logoBase64 from "./logo";
@@ -693,7 +693,12 @@ export default {
               },
               sess: this.$store.state.auth.token
             });
-            this.streamModule.startStream();
+
+            const token = this.$store.state.auth.token;
+            StreamApi.getServerData("webrtc", token).then(serverData => {
+              this.streamModule.setConfig("serverData", serverData);
+              this.streamModule.startStream();
+            });
           }
         });
     },
@@ -998,7 +1003,6 @@ export default {
         : this.streamVisibilities[1];
 
     const { onDevicesReadyCallback } = this;
-    const token = this.$store.state.auth.token;
     this.streamModule = new StreamModule();
     window.streamModule = this.streamModule;
 
@@ -1006,7 +1010,6 @@ export default {
       debug: getCookie("debug") === window.atob("bWFzdGVyb2ZwdXBwZXRz"),
       thumbEnabled: true,
       videoSave: true,
-      getApiUrl: StreamApi.getStreamPath(token),
       videoElId: "myvideo",
       token: (+new Date()).toString(36),
       showErrorMessage: message => {
@@ -1019,7 +1022,7 @@ export default {
       showInfoMessage: message => {
         // this.$store.dispatch("global/setError", { message });
         // eslint-disable-next-line
-        console.trace(message);
+          console.trace(message);
       },
       onLocalStreamInit: () => {},
       onRemoteStreamInit: () => {},
@@ -1039,9 +1042,9 @@ export default {
           sess: this.$store.state.auth.token
         });
         // eslint-disable-next-line
-        this.$store.dispatch("global/setError", { message: error });
+          this.$store.dispatch("global/setError", { message: error });
         // eslint-disable-next-line
-        console.trace(error);
+          console.trace(error);
         this.streamModule.config.onStreamEnd();
       },
       onStreamTick: start => {
@@ -1050,7 +1053,9 @@ export default {
       onStreamStart: room => {
         this.updateLikes();
         let type = this.streamVisibility.key;
+
         const defaultStreamTypes = ["subscribers", "followers", "public"];
+
         if (!defaultStreamTypes.includes(type)) {
           type = "list";
         }
