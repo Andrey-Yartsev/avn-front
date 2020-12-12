@@ -116,9 +116,8 @@ const mutations = {
       }
     ];
 
-    console.log(">>>", comment);
     if (comment.goal_achieved) {
-      state.goal_achieved++;
+      state.currentLive.goalAchieved++;
     }
   },
 
