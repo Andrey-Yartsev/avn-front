@@ -81,7 +81,6 @@ const mutations = {
       return;
     }
     state.viewers.push(look);
-    console.log("111");
     state.newLook++;
   },
   unlook(state, look) {

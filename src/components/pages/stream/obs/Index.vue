@@ -486,7 +486,6 @@ export default {
           : minute + ":" + seconds;
     },
     newLook() {
-      console.log("222");
       this.$store.dispatch("lives/notifications/play", "newLook");
     },
     newTip() {
