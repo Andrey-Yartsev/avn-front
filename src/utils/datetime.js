@@ -1,5 +1,5 @@
 export const formatToPDT = date => {
-  return new Date(date).toLocaleString("en-US", {
+  return new Date(date).toLocaleDateString("en-US", {
     timeZone: "America/Los_Angeles",
     hour12: true,
     month: "short",
