@@ -11,6 +11,8 @@ notificationNames.forEach(name => {
   state[name] = true;
 });
 
+let saveTimeoutId = 0;
+
 const actions = {
   switch({ commit, state, dispatch }, name) {
     commit("setEnabled", { name, isEnabled: !state[name] });
@@ -27,7 +29,6 @@ const actions = {
     if (!state[name]) {
       return;
     }
-    console.log("play ", name);
     playSound(name);
   },
   save({ dispatch }) {
@@ -39,7 +40,10 @@ const actions = {
   },
   setEnabled({ dispatch, commit }, props) {
     commit("setEnabled", props);
-    dispatch("save");
+    clearTimeout(saveTimeoutId);
+    saveTimeoutId = setTimeout(() => {
+      dispatch("save");
+    }, 100);
   }
 };
 
