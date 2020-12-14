@@ -1,5 +1,11 @@
 export const formatToPDT = date => {
-  return new Date(date).toLocaleDateString("en-US", {
+  let newDate = new Date(date);
+  // replace datetime string format "2020-07-31 07:00:00+00" to valid "2020-07-31T07:00:00+00:00";
+  if (newDate.toString() === "Invalid Date" && typeof date === "string") {
+    const formattedString = date.replace(" ", "T") + ":00";
+    newDate = new Date(formattedString);
+  }
+  return newDate.toLocaleDateString("en-US", {
     timeZone: "America/Los_Angeles",
     hour12: true,
     month: "short",
