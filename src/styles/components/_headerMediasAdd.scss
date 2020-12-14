@@ -158,12 +158,19 @@
   }
 
   .notifications {
-    margin-top: -17px;
+    margin-top: -3px;
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+      margin-top: -17px;
+    }
     .menu {
-      margin-top: -12px;
+      margin-top: 12px;
     }
   }
-  .root-btn:after {}
+  @include media-breakpoint-up($desktop-breakpoint-dcrs) {
+    #stop {
+      display: none;
+    }
+  }
 }
 
 .stream-header {
