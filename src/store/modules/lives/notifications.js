@@ -1,7 +1,9 @@
 "use strict";
+/* eslint-disable */
 
-import playSound from "@/utils/playSound";
+// import playSound from "@/utils/playSound";
 import notifications from "@/components/pages/stream/notifications";
+// import soundsPreloader from "@/utils/soundsPreloader";
 
 const notificationNames = notifications.map(v => v.name);
 
@@ -13,19 +15,55 @@ notificationNames.forEach(name => {
 
 let saveTimeoutId = 0;
 
+const audios = {};
+const sounds = notificationNames.map(name => {
+  return {
+    name,
+    path: `/static/sound/${name}.mp3`
+  };
+});
+
+const preloadSounds = () => {
+  sounds.forEach(({ path, name }) => {
+    audios[name] = new Audio(path);
+    audios[name].play().catch(e => {});
+    audios[name].pause();
+    audios[name].currentTime = 0;
+  });
+  removeListeners();
+};
+
+const removeListeners = () => {
+  document.body.removeEventListener("touchstart", preloadSounds, false);
+  document.body.removeEventListener("click", preloadSounds, false);
+};
+
+const playSound = name => {
+  audios[name].play();
+};
+
 const actions = {
   switch({ commit, state, dispatch }, name) {
     commit("setEnabled", { name, isEnabled: !state[name] });
     dispatch("save");
   },
   init({ commit, rootState }) {
+    if (!rootState.auth.user) {
+      return;
+    }
     notificationNames.forEach(name => {
       const streamSounds = rootState.auth.user.streamSounds || {};
       const isEnabled = !!streamSounds[name];
       commit("setEnabled", { name, isEnabled });
     });
+    document.body.addEventListener("touchstart", preloadSounds, false);
+    document.body.addEventListener("click", preloadSounds, false);
   },
-  play({ state }, name) {
+  play({ state, rootState }, name) {
+    if (!rootState.auth.user) {
+      alert("Can't play by non authorized user");
+      return;
+    }
     if (!state[name]) {
       return;
     }
