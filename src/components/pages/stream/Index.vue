@@ -126,45 +126,12 @@
                   </button>
                 </div>
               </div>
-              <div
+              <AudiosMenu
                 v-if="streamAudio"
-                v-click-outside="hideStreamAudioMenu"
-                :class="[
-                  'btn-media-event has-dropdown microphone',
-                  {
-                    shown: shownStreamAudioMenu,
-                    'device-disabled': streamAudio.deviceId === undefined
-                  }
-                ]"
-              >
-                <button
-                  type="button"
-                  class="root-btn"
-                  @click="showStreamAudioMenu"
-                >
-                  <span class="root-btn__inside" />
-                </button>
-                <div class="menu-overlay" @click="hideStreamAudioMenu"></div>
-                <div class="menu">
-                  <button
-                    v-for="(audio, key) in streamAudios"
-                    v-bind:key="audio.deviceId"
-                    type="button"
-                    :data-type="audio.deviceId"
-                    :class="[
-                      'item',
-                      { active: streamAudio.deviceId === audio.deviceId }
-                    ]"
-                    @click="() => setStreamAudio(audio)"
-                  >
-                    <span class="value">{{
-                      !audio.deviceId
-                        ? "Disable Microphone"
-                        : audio.label || `Microphone ${key}`
-                    }}</span>
-                  </button>
-                </div>
-              </div>
+                :streamAudio="streamAudio"
+                :streamAudios="streamAudios"
+                @setStreamAudio="setStreamAudio"
+              />
               <NotificationsMenu />
             </div>
           </div>
@@ -419,6 +386,7 @@ import LoadScripts from "@/components/statistics/loadScripts";
 import { convertImgToBase64URL } from "@/utils/mediaFiles";
 import Multiselect from "vue-multiselect";
 import NotificationsMenu from "./menu/Notifications";
+import AudiosMenu from "./menu/AudiosMenu";
 
 const tipsGoalSourceTypes = [
   { title: "Live stream tips", value: "localTips" },
@@ -493,7 +461,8 @@ export default {
     Comments,
     StreamViewers,
     Multiselect,
-    NotificationsMenu
+    NotificationsMenu,
+    AudiosMenu
   },
   computed: {
     likesCount() {
