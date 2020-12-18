@@ -76,6 +76,7 @@
                   </button>
                 </div>
               </div>
+
               <div
                 v-if="
                   $mq === 'mobile' && streamVideos && streamVideos.length > 1
@@ -87,45 +88,13 @@
                   <div class="root-btn__inside"></div>
                 </button>
               </div>
-              <div
-                v-if="
-                  $mq === 'desktop' && streamVideos && streamVideos.length > 1
-                "
-                v-click-outside="hideStreamVideoMenu"
-                :class="[
-                  'btn-media-event has-dropdown camera',
-                  {
-                    shown: shownStreamVideoMenu,
-                    'device-disabled': streamVideo.deviceId === 'disabled'
-                  }
-                ]"
-              >
-                <button
-                  type="button"
-                  class="root-btn"
-                  @click="showStreamVideoMenu"
-                >
-                  <span class="root-btn__inside" />
-                </button>
-                <div class="menu-overlay" @click="hideStreamVideoMenu"></div>
-                <div class="menu">
-                  <button
-                    v-for="(video, key) in streamVideos"
-                    v-bind:key="video.deviceId"
-                    type="button"
-                    :data-type="video.deviceId"
-                    :class="[
-                      'item',
-                      { active: streamVideo.deviceId === video.deviceId }
-                    ]"
-                    @click="() => setStreamVideo(video)"
-                  >
-                    <span class="value">{{
-                      video.label || `Camera ${key}`
-                    }}</span>
-                  </button>
-                </div>
-              </div>
+
+              <VideosMenu
+                v-if="streamAudio"
+                :streamVideo="streamVideo"
+                :streamVideos="streamVideos"
+                @setStreamVideo="setStreamVideo"
+              />
               <AudiosMenu
                 v-if="streamAudio"
                 :streamAudio="streamAudio"
@@ -386,6 +355,7 @@ import { convertImgToBase64URL } from "@/utils/mediaFiles";
 import Multiselect from "vue-multiselect";
 import NotificationsMenu from "./menu/Notifications";
 import AudiosMenu from "./menu/AudiosMenu";
+import VideosMenu from "./menu/VideosMenu";
 import BrowserStore from "store";
 
 const tipsGoalSourceTypes = [
@@ -403,6 +373,17 @@ export default {
     ClickOutside
   },
   mixins: [userMixin, LoadScriptsMixin],
+  components: {
+    Loader,
+    StreamStatistic,
+    Filters,
+    Comments,
+    StreamViewers,
+    Multiselect,
+    NotificationsMenu,
+    AudiosMenu,
+    VideosMenu
+  },
   data() {
     return {
       streamVisibility: {},
@@ -451,16 +432,6 @@ export default {
       // tipsGoalSources: [],
       // tipsGoalSourceTypes: tipsGoalSourceTypes
     };
-  },
-  components: {
-    Loader,
-    StreamStatistic,
-    Filters,
-    Comments,
-    StreamViewers,
-    Multiselect,
-    NotificationsMenu,
-    AudiosMenu
   },
   computed: {
     likesCount() {
@@ -540,7 +511,7 @@ export default {
     setStreamVideo(value) {
       this.streamModule.switchDevices(false, value.deviceId);
       this.streamVideo = value;
-      this.shownStreamVideoMenu = false;
+      BrowserStore.set("streamVideo", value.label);
       setTimeout(() => {
         this.isMirror =
           this.streamModule.cameraFacingMode === "user" &&
@@ -557,12 +528,6 @@ export default {
 
       const newVideoDevice = this.streamVideos[camIndex];
       this.setStreamVideo(newVideoDevice);
-    },
-    showStreamAudioMenu() {
-      this.shownStreamAudioMenu = true;
-    },
-    hideStreamAudioMenu() {
-      this.shownStreamAudioMenu = false;
     },
     setStreamAudio(value) {
       this.streamModule.switchDevices(value.deviceId, false);
@@ -585,23 +550,8 @@ export default {
 
       this.streamVideos = videoDevices;
       this.streamVideo = defaultVideoDevice;
-      this.streamAudios = [{ deviceId: undefined }, ...audioDevices];
 
-      let streamAudioLabel = BrowserStore.get("streamAudio");
-      if (typeof streamAudioLabel === "undefined") {
-        if (this.streamAudios[1]) {
-          streamAudioLabel = this.streamAudios[1].label;
-        } else {
-          streamAudioLabel = "";
-        }
-      }
-      if (streamAudioLabel === "") {
-        this.streamAudio = this.streamAudios[0];
-      } else {
-        this.streamAudio = this.streamAudios.find(
-          v => v.label === streamAudioLabel
-        );
-      }
+      this.initAudios(audioDevices);
 
       setTimeout(() => {
         this.isMirror =
@@ -967,6 +917,24 @@ export default {
         watermarkData.logo = this.base64watermark;
       }
       return watermarkData;
+    },
+    initAudios(audioDevices) {
+      this.streamAudios = [{ deviceId: undefined }, ...audioDevices];
+      let streamAudioLabel = BrowserStore.get("streamAudio");
+      if (typeof streamAudioLabel === "undefined") {
+        if (this.streamAudios[1]) {
+          streamAudioLabel = this.streamAudios[1].label;
+        } else {
+          streamAudioLabel = "";
+        }
+      }
+      if (streamAudioLabel === "") {
+        this.streamAudio = this.streamAudios[0];
+      } else {
+        this.streamAudio = this.streamAudios.find(
+          v => v.label === streamAudioLabel
+        );
+      }
     }
   },
   mounted() {
@@ -992,12 +960,15 @@ export default {
     this.streamModule = new StreamModule();
     window.streamModule = this.streamModule;
 
+    const videoLabel = BrowserStore.get("streamVideo") || "";
+
     this.streamModule.init({
       debug: getCookie("debug") === window.atob("bWFzdGVyb2ZwdXBwZXRz"),
       thumbEnabled: true,
       videoSave: true,
       videoElId: "myvideo",
       token: (+new Date()).toString(36),
+      videoLabel,
       showErrorMessage: message => {
         this.$store.dispatch("global/setError", { message });
         console.trace(message);

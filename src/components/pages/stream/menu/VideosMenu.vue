@@ -1,15 +1,16 @@
 <template>
   <div
+    v-if="$mq === 'desktop' && streamVideos && streamVideos.length > 1"
     v-click-outside="
       () => {
         showMenu = false;
       }
     "
     :class="[
-      'btn-media-event has-dropdown microphone',
+      'btn-media-event has-dropdown camera',
       {
         shown: showMenu,
-        'device-disabled': streamAudio.deviceId === undefined
+        'device-disabled': streamVideo.deviceId === 'disabled'
       }
     ]"
   >
@@ -34,18 +35,14 @@
     ></div>
     <div class="menu">
       <button
-        v-for="(audio, key) in streamAudios"
-        v-bind:key="audio.deviceId"
+        v-for="(video, key) in streamVideos"
+        v-bind:key="video.deviceId"
         type="button"
-        :data-type="audio.deviceId"
-        :class="['item', { active: streamAudio.deviceId === audio.deviceId }]"
-        @click="() => setStreamAudio(audio)"
+        :data-type="video.deviceId"
+        :class="['item', { active: streamVideo.deviceId === video.deviceId }]"
+        @click="() => setStreamVideo(video)"
       >
-        <span class="value">{{
-          !audio.deviceId
-            ? "Disable Microphone"
-            : audio.label || `Microphone ${key}`
-        }}</span>
+        <span class="value">{{ video.label || `Camera ${key}` }}</span>
       </button>
     </div>
   </div>
@@ -55,13 +52,13 @@
 import ClickOutside from "vue-click-outside";
 
 export default {
-  name: "StreamMenuVideos",
+  name: "StreamMenuAudios",
   directives: {
     ClickOutside
   },
   props: {
-    streamAudios: Array,
-    streamAudio: null
+    streamVideos: Array,
+    streamVideo: null
   },
   data() {
     return {
@@ -69,9 +66,9 @@ export default {
     };
   },
   methods: {
-    setStreamAudio(audio) {
+    setStreamVideo(video) {
       this.showMenu = false;
-      this.$emit("setStreamAudio", audio);
+      this.$emit("setStreamVideo", video);
     }
   }
 };
