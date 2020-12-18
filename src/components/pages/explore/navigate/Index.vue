@@ -1,9 +1,5 @@
 <template>
   <nav class="content-nav">
-    <button>asd</button>
-    <button @click="newLook">newLook</button>
-    <button @click="newLook">newLook</button>
-    {{ $store.state.lives.notifications }}
     <router-link to="/explore/all" data-type="all" class="content-nav__item">
       <span class="hidden-mobile content-nav__item-label">Explore all</span>
       <span class="hidden-desktop content-nav__item-label">All</span>
@@ -64,16 +60,6 @@ export default {
         this.$store.state.init.data?.enableContests
       );
     }
-  },
-  methods: {
-    newLook() {
-      setTimeout(() => {
-        this.$store.dispatch("lives/notifications/play", "newLook");
-      }, 5000);
-    }
-  },
-  mounted() {
-    this.$store.dispatch("lives/notifications/init");
   }
 };
 </script>
