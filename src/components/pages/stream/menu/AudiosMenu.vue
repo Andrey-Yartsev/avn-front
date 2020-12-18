@@ -70,6 +70,7 @@ export default {
   },
   methods: {
     setStreamAudio(audio) {
+      this.showMenu = false;
       this.$emit("setStreamAudio", audio);
     }
   }

@@ -386,6 +386,7 @@ import { convertImgToBase64URL } from "@/utils/mediaFiles";
 import Multiselect from "vue-multiselect";
 import NotificationsMenu from "./menu/Notifications";
 import AudiosMenu from "./menu/AudiosMenu";
+import BrowserStore from "store";
 
 const tipsGoalSourceTypes = [
   { title: "Live stream tips", value: "localTips" },
@@ -413,8 +414,6 @@ export default {
 
       streamAudios: undefined,
       streamAudio: undefined,
-      shownStreamAudioMenu: false,
-      shownNotificationsMenu: false,
 
       isReadyToStart: false,
       isStarted: false,
@@ -568,7 +567,11 @@ export default {
     setStreamAudio(value) {
       this.streamModule.switchDevices(value.deviceId, false);
       this.streamAudio = value;
-      this.shownStreamAudioMenu = false;
+      if (!value.deviceId) {
+        BrowserStore.set("streamAudio", "");
+      } else {
+        BrowserStore.set("streamAudio", value.label);
+      }
     },
     onDevicesReadyCallback() {
       const {
@@ -583,7 +586,22 @@ export default {
       this.streamVideos = videoDevices;
       this.streamVideo = defaultVideoDevice;
       this.streamAudios = [{ deviceId: undefined }, ...audioDevices];
-      this.streamAudio = this.streamAudios[1];
+
+      let streamAudioLabel = BrowserStore.get("streamAudio");
+      if (typeof streamAudioLabel === "undefined") {
+        if (this.streamAudios[1]) {
+          streamAudioLabel = this.streamAudios[1].label;
+        } else {
+          streamAudioLabel = "";
+        }
+      }
+      if (streamAudioLabel === "") {
+        this.streamAudio = this.streamAudios[0];
+      } else {
+        this.streamAudio = this.streamAudios.find(
+          v => v.label === streamAudioLabel
+        );
+      }
 
       setTimeout(() => {
         this.isMirror =
