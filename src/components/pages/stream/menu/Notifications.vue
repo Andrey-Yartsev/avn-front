@@ -83,6 +83,7 @@ export default {
   methods: {
     switchNotifications(name) {
       this.$store.dispatch("lives/notifications/switch", name);
+      this.showMenu = false;
     },
     isEnabled(name) {
       return this.$store.state.lives.notifications[name];
