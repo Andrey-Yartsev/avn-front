@@ -661,7 +661,6 @@
 
 .chatMessageControlsWrapper {
   .messageControlsContainer {
-    padding-top: 3px;
     display: flex;
     flex-flow: row nowrap;
     @include media-breakpoint-up($tablet-breakpoint) {

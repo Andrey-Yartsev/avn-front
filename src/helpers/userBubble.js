@@ -12,9 +12,10 @@ const _hide = () => {
 };
 
 const _open = ({ a, username }) => {
-  if (!window.userBubble) {
-    window.userBubble = document.getElementById("user-bubble");
-  }
+  // if (!window.userBubble) {
+  //   window.userBubble = document.getElementById("user-bubble");
+  // }
+  window.userBubble = document.getElementById("user-bubble");
   const bubble = window.userBubble;
   const r = a.getBoundingClientRect();
   let up = false;
