@@ -45,7 +45,7 @@ const mutations = {
 createRequestAction({
   requestType: "any",
   prefix: "_fetch",
-  apiPath: "users-header/{username}",
+  apiPath: "users/{username}",
   state,
   mutations,
   actions,
