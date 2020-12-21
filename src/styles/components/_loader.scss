@@ -4,6 +4,9 @@
   text-align: center;
   padding-top: 20px;
   padding-bottom: 20px;
+  &-relative {
+    position: relative;
+  }
 
   &_collapsed {
     height: 0;

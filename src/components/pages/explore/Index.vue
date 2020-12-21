@@ -135,12 +135,7 @@
               "
             />
           </router-link>
-          <div
-            class="row-btn"
-            v-if="
-              !infinityScrollLoading && (isEnableVoting || isEnableGayVoting)
-            "
-          >
+          <div class="row-btn" v-if="isEnableVoting || isEnableGayVoting">
             <template v-if="!user">
               <router-link
                 to="/avn_awards/voting"
@@ -275,7 +270,10 @@
                 </template>
               </template>
             </div>
-            <div class="loader-infinity" v-if="infinityScrollLoading">
+            <div
+              class="loader-infinity loader-infinity-relative"
+              v-if="infinityScrollLoading"
+            >
               <Loader :fullscreen="false" :inline="true" />
             </div>
             <div class="msg-no-content show" v-if="shouldShowNoPosts">
