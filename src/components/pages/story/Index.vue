@@ -332,6 +332,7 @@
         @click="closePage"
       />
       <div
+        v-if="currentStory && currentStory.mediaType === 'video'"
         :class="['play-button-wrapper', { hidden: !showVideoPlay }]"
         ref="videoPlayButton"
       >
