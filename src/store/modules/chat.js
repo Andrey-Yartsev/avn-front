@@ -221,7 +221,10 @@ const actions = {
       } else {
         if (state.activeUserId === withUser.id) {
           commit("addMessage", message);
-          // dispatch("markChatAsViewed", withUser.id);
+          markAsRead(dispatch, {
+            userId: withUser.id,
+            messageId: message.id
+          });
         }
       }
     }
