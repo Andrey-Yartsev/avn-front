@@ -138,6 +138,12 @@
           </span>
         </div>
         -->
+        <Loader
+          v-if="isTryToConnect"
+          text="Connecting to the stream..."
+          class="text-light"
+          :semidark="true"
+        />
       </div>
     </template>
   </Modal>
@@ -175,7 +181,8 @@ export default {
     showCommentForm: false,
     showTip: false,
     connected: false,
-    shownComments: []
+    shownComments: [],
+    streamError: null
   }),
   computed: {
     throttledLike() {
@@ -207,6 +214,9 @@ export default {
     },
     comentsCount() {
       return window.screen.availWidth > 1920 ? 10 : 5;
+    },
+    isTryToConnect() {
+      return !this.connected && !this.streamIsFinished && !this.streamError;
     }
   },
   methods: {
@@ -450,6 +460,7 @@ export default {
       onSetupStreamingSession: () => {},
 
       onStreamError: error => {
+        this.streamError = error;
         if (error.match(/403/)) {
           this.$store.dispatch("global/setError", {
             message: "You have been blocked on this stream"
@@ -499,6 +510,7 @@ export default {
   beforeDestroy() {
     this.$store.commit("lives/goal", {});
     this.connected = false;
+    this.streamError = null;
     this.shouldUpdateTimer = false;
     window.clearInterval(this.likesInterval);
     document.body.classList.remove("stream-viewer");
