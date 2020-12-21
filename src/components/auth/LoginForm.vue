@@ -152,6 +152,11 @@
           </p>
         </div>
       </div>
+      <Loader
+        v-if="type !== 'page' && loginInProgress"
+        :fullscreen="false"
+        :inline="true"
+      />
     </div>
   </div>
 </template>
@@ -163,6 +168,7 @@ import Login from "@/components/auth/mixins/login";
 import Form from "@/mixins/form";
 import BrowserStore from "store";
 import GoogleLoginButton from "./GoogleLogin";
+import Loader from "@/components/common/Loader";
 
 export default {
   name: "LoginForm",
@@ -171,7 +177,8 @@ export default {
 
   components: {
     Recaptcha,
-    GoogleLoginButton
+    GoogleLoginButton,
+    Loader
   },
 
   props: {
@@ -213,7 +220,10 @@ export default {
       if (this.type === "page") {
         return null;
       }
-      return { "auth-block auth-block_sm-size": true };
+      return {
+        "auth-block auth-block_sm-size": true,
+        "auth-block-disabled": this.loginInProgress
+      };
     },
     otpAuth() {
       return this.$store.state.auth.otpAuth;
@@ -250,6 +260,8 @@ export default {
                   this.loginInProgress = false;
                 }, 1000);
               });
+          } else {
+            this.loginInProgress = false;
           }
         });
       }, 100);

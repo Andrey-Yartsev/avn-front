@@ -143,6 +143,11 @@
         or older and I agree to the following <a href="/terms">terms.</a>
       </p>
     </div>
+    <Loader
+      v-if="type !== 'page' && isSaving"
+      :fullscreen="false"
+      :inline="true"
+    />
   </div>
 </template>
 
@@ -152,6 +157,7 @@ import Common from "@/components/auth/mixins/common";
 import Signup from "@/components/auth/mixins/signup";
 import Form from "@/mixins/form";
 import GoogleLoginButton from "./GoogleLogin";
+import Loader from "@/components/common/Loader";
 
 export default {
   name: "SignUp",
@@ -166,7 +172,8 @@ export default {
 
   components: {
     Recaptcha,
-    GoogleLoginButton
+    GoogleLoginButton,
+    Loader
   },
 
   props: {
@@ -202,7 +209,10 @@ export default {
       if (this.type === "page") {
         return null;
       }
-      return { "auth-block auth-block_sm-size": true };
+      return {
+        "auth-block auth-block_sm-size": true,
+        "auth-block-disabled": this.isSaving
+      };
     },
     callback() {
       return this.$store.state.modal.signup.data.callback;
@@ -230,29 +240,30 @@ export default {
       }
     },
     signUp() {
-      this.$validator.validate().then(result => {
-        if (result) {
-          if (this.isSaving) return;
-          this.isSaving = true;
-          this.$store
-            .dispatch("signUp/" + this.signupAction, {
-              name: this.name,
-              username: this.username,
-              email: this.email,
-              password: this.password,
-              captcha: this.captcha
-            })
-            .then(() => {
-              this.callback && this.callback();
-              this.isSaving = false;
-            })
-            .catch(() => {
-              this.isSaving = false;
-            });
-        } else {
-          this.isSaving = false;
-        }
-      });
+      this.isSaving = true;
+      setTimeout(() => {
+        this.$validator.validate().then(result => {
+          if (result) {
+            this.$store
+              .dispatch("signUp/" + this.signupAction, {
+                name: this.name,
+                username: this.username,
+                email: this.email,
+                password: this.password,
+                captcha: this.captcha
+              })
+              .then(() => {
+                this.callback && this.callback();
+                this.isSaving = false;
+              })
+              .catch(() => {
+                this.isSaving = false;
+              });
+          } else {
+            this.isSaving = false;
+          }
+        });
+      }, 100);
     }
   }
 };
