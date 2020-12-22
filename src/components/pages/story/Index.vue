@@ -415,7 +415,8 @@ export default {
       activeTip: false,
       activeComments: true,
       forceWaitingEvent: false,
-      showSwipeFooter: false
+      showSwipeFooter: false,
+      firstIndexInitialized: false
     };
   },
   computed: {
@@ -960,12 +961,16 @@ export default {
       }
     },
     stories() {
+      if (this.firstIndexInitialized) {
+        return;
+      }
       const index = this.stories.findIndex(element => element.isLook === false);
       if (index !== -1) {
         this.currIndex = index;
       } else {
         this.currIndex = 0;
       }
+      this.firstIndexInitialized = true;
     },
     currIndex() {
       this.showSwipeFooter = false;
