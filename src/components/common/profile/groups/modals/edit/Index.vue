@@ -247,6 +247,7 @@ import UserSuggestions from "@/mixins/userSuggestions";
 import FileUpload from "@/mixins/fileUpload";
 import MediaPreview from "@/components/common/MediaPreview";
 import Draggable from "vuedraggable";
+import ConvertTextMixin from "@/mixins/convertText";
 
 const InitialState = {
   expanded: false,
@@ -269,7 +270,7 @@ const InitialState = {
 
 export default {
   name: "EditGroup",
-  mixins: [UserMixin, UserSuggestions, FileUpload],
+  mixins: [UserMixin, UserSuggestions, FileUpload, ConvertTextMixin],
   data() {
     return {
       ...InitialState
@@ -351,18 +352,6 @@ export default {
     }
   },
   methods: {
-    getConvertedText(text) {
-      const pattern =
-        '<span class="emoji-outer emoji-sizer"><span class="emoji-inner emoji.+?" data-code="(.+?)"></span></span>';
-      let convertedText = text.replace(
-        new RegExp(pattern, "ug"),
-        (m, unicode) => {
-          return unicode;
-        }
-      );
-      convertedText = convertedText.replace(/<br \/>/g, "\n");
-      return convertedText.replace(/(<([^>]+)>)/gi, "");
-    },
     initData() {
       const { description, ...rest } = this.data;
       this.group = rest;

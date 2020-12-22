@@ -384,6 +384,7 @@ import ThumbDropdown from "./ThumbDropdown.vue";
 import Multiselect from "vue-multiselect";
 import { Datetime } from "vue-datetime";
 import { formatISO, addMinutes, format } from "date-fns";
+import ConvertTextMixin from "@/mixins/convertText";
 
 // import mediaCategories from "@/mock/mediaCategories";
 
@@ -421,7 +422,7 @@ const InitialState = {
 
 export default {
   name: "EditMedia",
-  mixins: [UserMixin, UserSuggestions, FileUpload],
+  mixins: [UserMixin, UserSuggestions, FileUpload, ConvertTextMixin],
   data() {
     return {
       ...InitialState
@@ -614,18 +615,6 @@ export default {
     },
     removePreview() {
       this.media.removeVideoPreview = !this.media.removeVideoPreview;
-    },
-    getConvertedText(text) {
-      const pattern =
-        '<span class="emoji-outer emoji-sizer"><span class="emoji-inner emoji.+?" data-code="(.+?)"></span></span>';
-      let convertedText = text.replace(
-        new RegExp(pattern, "ug"),
-        (m, unicode) => {
-          return unicode;
-        }
-      );
-      convertedText = convertedText.replace(/<br \/>/g, "\n");
-      return convertedText.replace(/(<([^>]+)>)/gi, "");
     },
     initData() {
       const {

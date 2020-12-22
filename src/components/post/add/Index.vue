@@ -524,6 +524,7 @@ import UserSuggestions from "@/mixins/userSuggestions";
 import LinksPreview from "./linksPreview";
 import Multiselect from "vue-multiselect";
 import TipsGoalForm from "@/components/post/parts/tipsGoal/TipsGoalForm";
+import ConvertTextMixin from "@/mixins/convertText";
 
 const tipsGoalSourceTypes = [
   { title: "Post tips", value: "localTips" },
@@ -563,7 +564,7 @@ const InitialState = {
 
 export default {
   name: "AddPost",
-  mixins: [FileUpload, UserMixin, UserSuggestions],
+  mixins: [FileUpload, UserMixin, UserSuggestions, ConvertTextMixin],
   data() {
     return {
       ...InitialState,
@@ -896,18 +897,6 @@ export default {
     getText() {
       return this.postMsg;
     },
-    getConvertedText() {
-      const pattern =
-        '<span class="emoji-outer emoji-sizer"><span class="emoji-inner emoji.+?" data-code="(.+?)"></span></span>';
-      let text = this.post.text.replace(
-        new RegExp(pattern, "ug"),
-        (m, unicode) => {
-          return unicode;
-        }
-      );
-      text = text.replace(/<br \/>/g, "\n");
-      return text.replace(/(<([^>]+)>)/gi, "");
-    },
     openStream() {
       if (this.preloadedMedias.length || this.postMsg.length || this.datetime)
         return;
@@ -958,7 +947,7 @@ export default {
         this.datetimeExpired = this.post.expiredDate;
         this.expiredAction =
           this.post.expiredAction || InitialState.expiredAction;
-        this.postMsg = this.getConvertedText();
+        this.postMsg = this.getConvertedText(this.post.text);
         this.tweetSend = this.post.tweetSend;
         this.isFree = this.post.isFree;
         this.preloadedMedias = (this.post.media || []).map(media => ({

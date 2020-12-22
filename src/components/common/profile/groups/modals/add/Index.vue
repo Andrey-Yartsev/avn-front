@@ -267,6 +267,7 @@ import Loader from "@/components/common/Loader";
 import Draggable from "vuedraggable";
 import MediaPreview from "@/components/common/MediaPreview";
 import FileUpload from "@/mixins/fileUpload";
+import ConvertTextMixin from "@/mixins/convertText";
 import ClickOutside from "vue-click-outside";
 import UserMixin from "@/mixins/user";
 import VueTribute from "vue-tribute";
@@ -293,7 +294,7 @@ const InitialState = {
 
 export default {
   name: "AddGroup",
-  mixins: [FileUpload, UserMixin, UserSuggestions],
+  mixins: [FileUpload, UserMixin, UserSuggestions, ConvertTextMixin],
   data() {
     return {
       ...InitialState
@@ -446,18 +447,6 @@ export default {
     },
     getTitle() {
       return this.title;
-    },
-    getConvertedText() {
-      const pattern =
-        '<span class="emoji-outer emoji-sizer"><span class="emoji-inner emoji.+?" data-code="(.+?)"></span></span>';
-      let description = this.post.description.replace(
-        new RegExp(pattern, "ug"),
-        (m, unicode) => {
-          return unicode;
-        }
-      );
-      description = description.replace(/<br \/>/g, "\n");
-      return description.replace(/(<([^>]+)>)/gi, "");
     }
   },
   watch: {
@@ -471,7 +460,7 @@ export default {
           return;
         }
         this.title = this.post.title;
-        this.description = this.getConvertedText();
+        this.description = this.getConvertedText(this.post.description);
         this.price = this.post.price;
         this.isActive = this.post.isActive;
         this.isPublic = this.post.isPublic;

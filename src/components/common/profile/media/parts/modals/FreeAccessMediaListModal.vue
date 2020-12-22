@@ -78,6 +78,7 @@
 <script>
 import Modal from "@/components/modal/Index";
 import SearchBubble from "../searchUsers/Index";
+import ConvertTextMixin from "@/mixins/convertText";
 
 export default {
   name: "FreeAccessMediaListModal",
@@ -85,6 +86,7 @@ export default {
     Modal,
     SearchBubble
   },
+  mixins: [ConvertTextMixin],
   data() {
     return {
       freeAccessUsers: [
@@ -154,7 +156,9 @@ export default {
       return {
         media: {
           ...this.data.post,
-          freeAccessUsers: this.freeAccessUsers.map(item => item.id)
+          text: this.getConvertedText(this.data.post.text),
+          freeAccessUsers: this.freeAccessUsers.map(item => item.id),
+          freeAccessGroups: this.data.post.freeAccessGroups.map(item => item.id)
         },
         productId: this.data.post.productId
       };
