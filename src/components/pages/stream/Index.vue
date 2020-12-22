@@ -935,6 +935,7 @@ export default {
           v => v.label === streamAudioLabel
         );
       }
+      this.streamModule.switchDevices(this.streamAudio.deviceId, false);
     }
   },
   mounted() {
