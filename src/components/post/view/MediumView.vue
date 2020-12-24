@@ -4,16 +4,13 @@
       'post',
       {
         'open-dropdown-inside': showDropdown || showFooterDropdown,
-        post_preparation: !post.isMediaReady,
-        outofviewport: isVisible === false
+        post_preparation: !post.isMediaReady
       }
     ]"
     :data-id="post.id"
     :id="'p' + post.id"
-    v-observe-visibility="visibilityChanged"
   >
-    <div v-if="isVisible === false" :style="{ height: `${height}px` }" />
-    <div class="post-wrapper" v-else>
+    <div class="post-wrapper">
       <div class="post-details">
         <Header
           :post="post"
@@ -216,16 +213,16 @@ export default {
       // this.showAddCommentForm = !this.showAddCommentForm;
       // this.showTip = false;
     },
-    visibilityChanged(isVisible, entry) {
-      if (this.$mq === "desktop" || this.isReposted) {
-        return;
-      }
-      this.$emit("visibilityChanged", {
-        isVisible,
-        id: parseInt(entry.target.id.replace(/p(\d+)/, "$1"))
-      });
-      this.height = entry.boundingClientRect.height;
-    },
+    // visibilityChanged(isVisible, entry) {
+    //   if (this.$mq === "desktop" || this.isReposted) {
+    //     return;
+    //   }
+    //   this.$emit("visibilityChanged", {
+    //     isVisible,
+    //     id: parseInt(entry.target.id.replace(/p(\d+)/, "$1"))
+    //   });
+    //   this.height = entry.boundingClientRect.height;
+    // },
     truncateToggle() {
       this.showTruncatedText = !this.showTruncatedText;
     },
