@@ -10,12 +10,7 @@
       >
         <template v-if="post.innerPost">
           <div class="innerPost_wrapper">
-            <Post
-              :post="post.innerPost"
-              :from="from"
-              :isReposted="true"
-              @visibilityChanged="visibilityChanged"
-            />
+            <Post :post="post.innerPost" :from="from" :isReposted="true" />
           </div>
         </template>
       </Post>

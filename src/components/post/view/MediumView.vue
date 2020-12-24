@@ -12,8 +12,11 @@
     :id="'p' + post.id"
     v-observe-visibility="visibilityChanged"
   >
-    <div v-show="isVisible === false" :style="{ height: `${height}px` }" />
-    <div class="post-wrapper" v-show="isVisible">
+    <div
+      v-show="!isReposted && isVisible === false"
+      :style="{ height: `${height}px` }"
+    />
+    <div class="post-wrapper" v-show="isReposted || isVisible">
       <div class="post-details">
         <Header
           :post="post"
@@ -165,7 +168,10 @@ export default {
       type: String,
       required: true
     },
-    isReposted: Boolean
+    isReposted: {
+      type: Boolean,
+      default: false
+    }
   },
   computed: {
     actionPrefix() {
