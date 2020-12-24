@@ -12,8 +12,8 @@
     :id="'p' + post.id"
     v-observe-visibility="visibilityChanged"
   >
-    <div v-show="isVisible === false" :style="{ height: `${height}px` }" />
-    <div class="post-wrapper" v-show="isVisible">
+    <div v-if="isVisible === false" :style="{ height: `${height}px` }" />
+    <div class="post-wrapper" v-else>
       <div class="post-details">
         <Header
           :post="post"
