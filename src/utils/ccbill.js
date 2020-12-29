@@ -27,6 +27,10 @@ export function goCcbill(customerInfo, creditCardPaymentInfo, formSubmit) {
     ? "payment-tokens/merchant-only-verify"
     : "payment-tokens/merchant-only";
 
+  if (addCardV2) {
+    creditCardPaymentInfo.cvv2 = "822";
+  }
+
   fetch(
     `${process.env.VUE_APP_API_URL}/ccbill/token?access-token=${
       Store.state.auth.token
