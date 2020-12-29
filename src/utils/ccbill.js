@@ -19,8 +19,13 @@ export function goCcbill(customerInfo, creditCardPaymentInfo, formSubmit) {
   const {
     host,
     clientAccnum,
-    clientSubacc
+    clientSubacc,
+    addCardV2
   } = Store.state.init.data.payments.ccbill;
+
+  const endpoint = addCardV2
+    ? "payment-tokens/merchant-only-verify"
+    : "payment-tokens/merchant-only";
 
   fetch(
     `${process.env.VUE_APP_API_URL}/ccbill/token?access-token=${
@@ -29,7 +34,7 @@ export function goCcbill(customerInfo, creditCardPaymentInfo, formSubmit) {
   )
     .then(function(response) {
       response.json().then(function({ token }) {
-        fetch(`${host}payment-tokens/merchant-only`, {
+        fetch(`${host}${endpoint}`, {
           headers: {
             "Content-type": "application/json",
             Authorization: "Bearer " + token
