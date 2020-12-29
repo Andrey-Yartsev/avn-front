@@ -15,7 +15,7 @@ function ccbillResponseHandler(response, formSubmit) {
   }
 }
 
-export function goCcbill(customerInfo, creditCardPaymentInfo, formSubmit) {
+export function goCcbill(customerInfo, creditCardPaymentInfo, cvc, formSubmit) {
   const {
     host,
     clientAccnum,
@@ -28,7 +28,7 @@ export function goCcbill(customerInfo, creditCardPaymentInfo, formSubmit) {
     : "payment-tokens/merchant-only";
 
   if (addCardV2) {
-    creditCardPaymentInfo.cvv2 = "822";
+    creditCardPaymentInfo.cvv2 = cvc;
   }
 
   fetch(

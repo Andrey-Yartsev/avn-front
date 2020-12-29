@@ -380,7 +380,7 @@ export default {
           nameOnCard: this.userinfo.name
         };
 
-        goCcbill(customerInfo, creditCardPaymentInfo, this.submitCCB);
+        goCcbill(customerInfo, creditCardPaymentInfo, this.cvc, this.submitCCB);
       } else {
         this.tokens.ccb.status = "reject";
       }
