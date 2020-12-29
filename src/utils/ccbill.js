@@ -41,7 +41,8 @@ export function goCcbill(customerInfo, creditCardPaymentInfo, cvc, formSubmit) {
         fetch(`${host}${endpoint}`, {
           headers: {
             "Content-type": "application/json",
-            Authorization: "Bearer " + token
+            Authorization: "Bearer " + token,
+            Accept: "application/vnd.mcn.transaction-service.api.v.2+json"
           },
           body: JSON.stringify({
             clientAccnum,
