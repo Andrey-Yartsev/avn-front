@@ -34,7 +34,7 @@
     </div>
     <div
       class="contest-table-winnerInfo"
-      v-if="!opened && !data.hasFinished && data.reduceAccrue"
+      v-if="opened && !data.hasFinished && data.reduceAccrue"
     >
       {{ reduceAccrueMessage }}
     </div>
