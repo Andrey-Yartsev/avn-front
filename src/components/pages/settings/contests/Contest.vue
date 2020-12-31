@@ -34,10 +34,9 @@
     </div>
     <div
       class="contest-table-winnerInfo"
-      v-if="!opened && !data.hasFinished && data.disableJoin"
+      v-if="!opened && !data.hasFinished && data.reduceAccrue"
     >
-      Congrats on winning the last contest! You’re ineligible to enter this
-      contest but you will be able to enter the next one.
+      {{ reduceAccrueMessage }}
     </div>
     <div class="contest-table-details" v-if="opened">
       <p class="finished-title" v-if="data.hasFinished">
@@ -230,6 +229,21 @@ export default {
     },
     user() {
       return this.$store.state.auth.user;
+    },
+    reduceAccrueMessage() {
+      if (!this.data.reduceAccrue) {
+        return "";
+      }
+      switch (this.data.reduceAccrue) {
+        case 1:
+          return "Congrats on winning the last contest! You're eligible to enter this contest but in the spirit of competition your fan votes for this contest will only count 50% towards your ranking. For example, for every 2 votes you receive 1 will count towards your ranking. The payout amount for votes will remain unchanged. Good luck!";
+        case 2:
+          return "Congrats on winning the last 2 contests! You're eligible to enter this contest but in the spirit of competition your fan votes for this contest will only count 25% towards your ranking. For example, for every 4 votes you receive 1 will count towards your ranking. The payout amount for votes will remain unchanged. Good luck!";
+        case 3:
+          return "Congrats on winning the last 3 contests! You're eligible to enter this contest but in the spirit of competition your fan votes for this contest will only count 13.5% towards your ranking. For example, for every 8 votes you receive 1 will count towards your ranking. The payout amount for votes will remain unchanged. Good luck!";
+        default:
+          return "";
+      }
     }
   },
   watch: {
