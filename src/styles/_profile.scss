@@ -741,6 +741,10 @@
     visibility: visible;
     opacity: 1;
   }
+  .tip-form_profile {
+    display: flex;
+    align-items: center;
+  }
 }
 
 .price-amount-field,
