@@ -12,11 +12,8 @@
     :id="'p' + post.id"
     v-observe-visibility="visibilityChanged"
   >
-    <div
-      v-show="!isReposted && isVisible === false"
-      :style="{ height: `${height}px` }"
-    />
-    <div class="post-wrapper" v-show="isReposted || isVisible">
+    <div v-if="isVisible === false" :style="{ height: `${height}px` }" />
+    <div v-else class="post-wrapper" :style="{ height: contentHeight }">
       <div class="post-details">
         <Header
           :post="post"
@@ -146,7 +143,8 @@ export default {
       // isVisible: undefined,
       height: undefined,
       truncateText: false,
-      showTruncatedText: false
+      showTruncatedText: false,
+      contentHeight: "auto"
     };
   },
   components: {
@@ -230,6 +228,11 @@ export default {
         isVisible,
         id: parseInt(entry.target.id.replace(/p(\d+)/, "$1"))
       });
+      if (isVisible) {
+        this.contentHeight = "auto";
+      } else {
+        this.contentHeight = entry.boundingClientRect.height + "px";
+      }
       this.height = entry.boundingClientRect.height;
     },
     truncateToggle() {
