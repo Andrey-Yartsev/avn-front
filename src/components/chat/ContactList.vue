@@ -241,9 +241,13 @@ export default {
   },
   mounted() {
     this.mobileContainer = document.getElementById("chatCollectionContent");
-    this.mobileContainer.addEventListener("scroll", e => {
-      this.mobileScrollHandler(e);
-    });
+    this.mobileContainer.addEventListener("scroll", this.mobileScrollHandler);
+  },
+  beforeDestroy() {
+    this.mobileContainer?.removeEventListener(
+      "scroll",
+      this.mobileScrollHandler
+    );
   }
 };
 </script>

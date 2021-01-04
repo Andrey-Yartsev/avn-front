@@ -392,9 +392,10 @@ export default {
       this.scrollTimeoutId = setTimeout(() => this._scrollHandler(), 100);
     },
     initMobileScroll() {
-      this.$refs.messagesMobileContainer.addEventListener("scroll", () => {
-        this.scrollHandle();
-      });
+      this.$refs.messagesMobileContainer.addEventListener(
+        "scroll",
+        this.scrollHandle
+      );
     },
     saveScrollPosition() {
       this.scrollPosition =
@@ -422,6 +423,12 @@ export default {
     setTimeout(() => {
       this.scrollToLast();
     }, 100);
+  },
+  beforeDestroy() {
+    this.$refs.messagesMobileContainer?.removeEventListener(
+      "scroll",
+      this.scrollHandle
+    );
   }
 };
 </script>
