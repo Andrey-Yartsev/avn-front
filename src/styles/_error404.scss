@@ -12,6 +12,23 @@
       margin-bottom: 2px;
     }
   }
+
+  &.flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .container {
+      display: flex;
+      flex-flow: column nowrap;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  .resetPasswordLink {
+    margin: 10px auto;
+    padding-bottom: 10px;
+  }
 }
 
 

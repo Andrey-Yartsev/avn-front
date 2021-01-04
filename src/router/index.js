@@ -81,13 +81,27 @@ const routes = [
   {
     beforeEnter: Auth.dummy,
     path: "/password-confirmed",
-    name: "PasswordConfirmed",
+    name: "ConfirmPage",
     component: () =>
-      import(/* webpackChunkName: "PasswordConfirmedPage" */ "@/components/pages/passwordConfirmed/Index"),
+      import(/* webpackChunkName: "ConfirmPage" */ "@/components/pages/confirm/Index"),
     meta: {
       noAuthHeader: true,
       cssName: "staticPage",
-      noAuthSection: true
+      noAuthSection: true,
+      confirmType: "password"
+    }
+  },
+  {
+    beforeEnter: Auth.dummy,
+    path: "/email-confirm-error",
+    name: "ConfirmPage",
+    component: () =>
+      import(/* webpackChunkName: "ConfirmPage" */ "@/components/pages/confirm/Index"),
+    meta: {
+      noAuthHeader: true,
+      cssName: "staticPage",
+      noAuthSection: true,
+      confirmType: "email"
     }
   },
   {
