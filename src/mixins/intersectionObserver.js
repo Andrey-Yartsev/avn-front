@@ -8,10 +8,7 @@ export default {
   watch: {
     allDataRecieved(newValue) {
       if (newValue) {
-        const target = this.$refs.scrollObserver;
-        if (target && this.observer) {
-          this.observer.unobserve(target);
-        }
+        this.destroyObserver();
       }
     }
   },
@@ -28,7 +25,9 @@ export default {
           }
         });
       };
-      this.observer = new IntersectionObserver(callback);
+      this.observer = new IntersectionObserver(callback, {
+        rootMargin: "300px"
+      });
       const target = this.$refs.scrollObserver;
       if (target) {
         this.observer.observe(target);

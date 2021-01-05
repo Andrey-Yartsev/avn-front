@@ -274,7 +274,11 @@
               class="loader-infinity loader-infinity-relative"
               v-if="infinityScrollLoading"
             >
-              <Loader :fullscreen="false" :inline="true" />
+              <Loader
+                :fullscreen="false"
+                :inline="true"
+                :small="$mq === 'mobile'"
+              />
             </div>
             <div class="msg-no-content show" v-if="shouldShowNoPosts">
               <div class="msg-no-content__text">

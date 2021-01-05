@@ -66,8 +66,15 @@
               </div>
             </div>
           </div>
-          <div class="loader-infinity" v-if="infinityScrollLoading">
-            <Loader :fullscreen="false" :inline="true" />
+          <div
+            class="loader-infinity loader-infinity-relative"
+            v-if="infinityScrollLoading"
+          >
+            <Loader
+              :fullscreen="false"
+              :inline="true"
+              :small="$mq === 'mobile'"
+            />
           </div>
         </div>
         <div
