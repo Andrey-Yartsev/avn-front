@@ -2,6 +2,7 @@
 import PostApi from "@/api/post";
 import PostMixin from "@/store/mixins/posts";
 import { createRequestAction } from "../../utils/storeRequest";
+import Store from "@/store";
 
 const initState = {
   loading: false,
@@ -51,8 +52,8 @@ const actions = {
     const clipCategory = (data && data.clipCategory) || "";
     const { limit, offset, marker } = state;
     let source = state.source;
-    if (source === "feed") {
-      source = "media";
+    if (source === "feed" && !Store.state.auth.user) {
+      source = "";
     }
     commit("postsRequest");
 
