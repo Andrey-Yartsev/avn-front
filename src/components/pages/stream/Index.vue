@@ -327,7 +327,6 @@
           close({}, haveToSave, haveToSaveComments)
       "
       :duration="time"
-      :streamDuration="streamDuration"
       :streamStartTime="streamStartTime"
       v-if="isStopped && isStoppedByButton"
       :canBeSaved="canBeSaved"

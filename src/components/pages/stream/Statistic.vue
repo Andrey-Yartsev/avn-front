@@ -16,8 +16,10 @@
           }}</span>
         </div>
         <div class="stream-chart-legend-item stream-chart-legend-item__tips">
-          <span class="stream-chart-legend-item-label">Tips</span>
-          <span class="stream-chart-legend-item-value">{{ this.tips }}</span>
+          <span class="stream-chart-legend-item-label">Tips count</span>
+          <span class="stream-chart-legend-item-value">{{
+            this.tipsCount
+          }}</span>
         </div>
         <div
           class="stream-chart-legend-item stream-chart-legend-item__comments"
@@ -69,9 +71,9 @@
           </div>
           <div class="stream-summary-data-item stream-summary-data-item__tips">
             <div class="stream-summary-data-item__label">
-              <span class="btn-icon icn-tips icn-item"></span>Tips
+              <span class="btn-icon icn-tips icn-item"></span>Tips amount
             </div>
-            <div class="stream-summary-data-item__value">{{ this.tips }}</div>
+            <div class="stream-summary-data-item__value">${{ this.tips }}</div>
           </div>
           <div
             class="stream-summary-data-item stream-summary-data-item__comments"
@@ -149,10 +151,6 @@ export default {
       type: String,
       isRequired: true
     },
-    streamDuration: {
-      type: Number,
-      isRequired: true
-    },
     streamStartTime: {
       type: Number,
       isRequired: true
@@ -171,6 +169,17 @@ export default {
     }
   },
   computed: {
+    streamDuration() {
+      const [seconds, minutes, hours] = this.duration.split(":").reverse();
+      let duration = parseInt(seconds);
+      if (minutes) {
+        duration += parseInt(minutes) * 60;
+      }
+      if (hours) {
+        duration += parseInt(hours) * 3600;
+      }
+      return duration;
+    },
     comments() {
       return this.$store.state.lives.currentLive.statistic
         .stream_comment_search_all.data;
@@ -181,6 +190,10 @@ export default {
           return m + +i.message.data_tips_amount;
         }, 0)
         .toFixed(2);
+    },
+    tipsCount() {
+      return this.$store.state.lives.currentLive.statistic.stream_tip_search_all
+        .data.length;
     },
     likes() {
       return this.$store.state.lives.currentLive.statistic
@@ -212,6 +225,8 @@ export default {
       this.streamScaleUnit = this.streamDuration / this.scale;
       this.streamUnitTime = this.streamDuration / this.barCount;
       this.CHART = global.AmCharts.makeChart("stream-chart", chartSettings);
+
+      this.CHART.dataProvider = [];
 
       for (let i = 0; i < this.barCount; i += 1) {
         this.CHART.dataProvider.push({
@@ -252,6 +267,9 @@ export default {
       });
 
       for (let i in approx) {
+        if (!this.CHART.dataProvider[i]) {
+          this.CHART.dataProvider[i] = {};
+        }
         this.CHART.dataProvider[i][code] = approx[i];
       }
 

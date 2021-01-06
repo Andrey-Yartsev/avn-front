@@ -634,7 +634,17 @@
   align-items: center;
   margin: 0 0 10px;
 
+  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+    @media screen and (orientation: landscape) {
+      width: 480px;
+    }
+  }
+
   &-item {
+    flex: 1 0 25%;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
 
     &-label {
       font-size: 13px;
