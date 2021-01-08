@@ -19,7 +19,7 @@ const audios = {};
 const sounds = notificationNames.map(name => {
   return {
     name,
-    path: `/static/sound/${name}.mp3`
+    path: `/static/sound/${name}.wav`
   };
 });
 
