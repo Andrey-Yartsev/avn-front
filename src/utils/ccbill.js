@@ -12,7 +12,10 @@ function ccbillResponseHandler(response, formSubmit, requestData) {
       });
   } else {
     console.log({ response });
-    formSubmit({ status: "reject", data: { error: response, requestData } });
+    formSubmit({
+      status: "reject",
+      data: { error: { ...response }, requestData: JSON.parse(requestData) }
+    });
   }
 }
 
@@ -69,7 +72,10 @@ export function goCcbill(customerInfo, creditCardPaymentInfo, cvc, formSubmit) {
             console.log({ error });
             formSubmit({
               status: "reject",
-              data: { error: error.message, requestData }
+              data: {
+                error: error.message,
+                requestData: JSON.parse(requestData)
+              }
             });
           });
       });
