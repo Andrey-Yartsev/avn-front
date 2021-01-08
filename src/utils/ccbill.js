@@ -11,7 +11,8 @@ function ccbillResponseHandler(response, formSubmit, requestData) {
         formSubmit({ status: "reject", data: { error: error.message } });
       });
   } else {
-    console.log({ response, json: response.json() });
+    console.log({ response });
+    response.json().then(res => console.log({ res }));
     formSubmit({
       status: "reject",
       data: {
