@@ -1,6 +1,6 @@
 import Store from "@/store";
 
-function ccbillResponseHandler(response, formSubmit) {
+function ccbillResponseHandler(response, formSubmit, requestData) {
   if (response.status == 200 && response.ok) {
     response
       .text()
@@ -11,7 +11,8 @@ function ccbillResponseHandler(response, formSubmit) {
         formSubmit({ status: "reject", data: { error: error.message } });
       });
   } else {
-    formSubmit({ status: "reject", data: { error: response } });
+    console.log({ response });
+    formSubmit({ status: "reject", data: { error: response, requestData } });
   }
 }
 
@@ -31,6 +32,21 @@ export function goCcbill(customerInfo, creditCardPaymentInfo, cvc, formSubmit) {
     creditCardPaymentInfo.cvv2 = cvc;
   }
 
+  const requestData = JSON.stringify({
+    clientAccnum,
+    clientSubacc,
+    subscriptionId: 0,
+    browserHttpAcceptLanguage: global.navigator.language,
+    browserHttpUserAgent: global.navigator.userAgent,
+    browserHttpAccept:
+      "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,* /*;q=0.8",
+    browserHttpAcceptEncoding: "gzip, deflate",
+    customerInfo,
+    paymentInfo: {
+      creditCardPaymentInfo
+    }
+  });
+
   fetch(
     `${process.env.VUE_APP_API_URL}/ccbill/token?access-token=${
       Store.state.auth.token
@@ -44,26 +60,17 @@ export function goCcbill(customerInfo, creditCardPaymentInfo, cvc, formSubmit) {
             Authorization: "Bearer " + token,
             Accept: "application/vnd.mcn.transaction-service.api.v.2+json"
           },
-          body: JSON.stringify({
-            clientAccnum,
-            clientSubacc,
-            subscriptionId: 0,
-            browserHttpAcceptLanguage: global.navigator.language,
-            browserHttpUserAgent: global.navigator.userAgent,
-            browserHttpAccept:
-              "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,* /*;q=0.8",
-            browserHttpAcceptEncoding: "gzip, deflate",
-            customerInfo,
-            paymentInfo: {
-              creditCardPaymentInfo
-            }
-          }),
+          body: requestData,
           mode: "cors",
           method: "POST"
         })
-          .then(res => ccbillResponseHandler(res, formSubmit))
+          .then(res => ccbillResponseHandler(res, formSubmit, requestData))
           .catch(function(error) {
-            formSubmit({ status: "reject", data: { error: error.message } });
+            console.log({ error });
+            formSubmit({
+              status: "reject",
+              data: { error: error.message, requestData }
+            });
           });
       });
     })
