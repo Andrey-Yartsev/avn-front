@@ -571,6 +571,9 @@ export default {
       this.currIndex += 1;
     },
     runProgress() {
+      if (!this.currentStory) {
+        return;
+      }
       const { isLook, mediaType, id } = this.currentStory;
 
       if (this.isAuth() && !isLook) {
@@ -687,6 +690,7 @@ export default {
         });
 
         this.currActiveIndex = -1;
+        this.currIndex = 0;
         this.goTo(`/stories/${userId}`);
       } else {
         this.closePage();
