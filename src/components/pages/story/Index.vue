@@ -968,12 +968,13 @@ export default {
       if (this.firstIndexInitialized) {
         return;
       }
-      const index = this.stories.findIndex(element => element.isLook === false);
-      if (index !== -1) {
-        this.currIndex = index;
-      } else {
-        this.currIndex = 0;
-      }
+      // const index = this.stories.findIndex(element => element.isLook === false);
+      // if (index !== -1) {
+      //   this.currIndex = index;
+      // } else {
+      //   this.currIndex = 0;
+      // }
+      this.currIndex = 0;
       this.firstIndexInitialized = true;
     },
     currIndex() {
