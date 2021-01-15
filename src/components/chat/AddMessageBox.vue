@@ -225,6 +225,11 @@ import upload from "@/utils/upload";
 import decimalNumberValidator from "@/validator/decimalNumber";
 import AudioMessageMixin from "@/components/chat/mixins/audio";
 import Vue2TouchEvents from "vue2-touch-events";
+import AudioRecorder from "audio-recorder-polyfill";
+
+if (!window.MediaRecorder) {
+  window.MediaRecorder = AudioRecorder;
+}
 
 Vue.use(Vue2TouchEvents);
 
