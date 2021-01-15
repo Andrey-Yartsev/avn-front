@@ -38,7 +38,7 @@ export default {
       this.stream = stream;
       this.recorder = new MediaRecorder(stream);
       const audioChunks = [];
-      this.recorder.ondataavailable = e => {
+      this.recorder.addEventListener("dataavailable", e => {
         audioChunks.push(e.data);
         if (this.recorder.state == "inactive") {
           let blob = new Blob(audioChunks, { type: "audio/mpeg" });
@@ -47,7 +47,7 @@ export default {
           blob.name = "Audio message.mp3";
           this.addMediaFiles({ target: { files: [blob] } });
         }
-      };
+      });
       this.recorder.start();
     },
     audioRecording() {
