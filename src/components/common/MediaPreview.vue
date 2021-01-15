@@ -111,10 +111,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss" scoped>
-.audio {
-  width: 100%;
-  overflow: initial;
-}
-</style>

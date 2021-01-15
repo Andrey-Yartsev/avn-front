@@ -55,6 +55,10 @@
           <span class="toggle-element_switcher" />
         </label>
       </span>
+      <div v-if="isAudioRecording" class="audioRecordingBox">
+        <div class="audioRecordingBox__progress"></div>
+        <div class="audioRecordingBox__label">Recording</div>
+      </div>
       <div class="chatForm">
         <label
           class="add-media-input"
@@ -92,6 +96,21 @@
           v-tooltip="'Price'"
         >
           <span class="icn-item icn-price icn-size_lg"></span>
+        </button>
+
+        <button
+          class="audioMessage btn-el"
+          :class="{ active: true, disabled: preloadedMedias.length }"
+          @click="audioRecording"
+          v-touch:start="startAudioRecording"
+          v-touch:end="stopAudioRecording"
+          v-tooltip="isAudioRecording ? 'Stop recording' : 'Audio message'"
+        >
+          <span
+            v-if="isAudioRecording && $mq === 'desktop'"
+            class="icn-item icn-stop icn-size_lg"
+          ></span>
+          <span v-else class="icn-item icn-microphone icn-size_lg"></span>
         </button>
 
         <div
@@ -191,6 +210,7 @@
 </template>
 
 <script>
+import Vue from "vue";
 import MediaPreview from "@/components/common/MediaPreview";
 import PdfPreview from "@/components/common/PdfPreview";
 import FileUpload from "@/mixins/fileUpload";
@@ -203,11 +223,15 @@ import PaidBlock from "@/mixins/paidBlock";
 import { uniqId } from "@/utils/mediaFiles";
 import upload from "@/utils/upload";
 import decimalNumberValidator from "@/validator/decimalNumber";
+import AudioMessageMixin from "@/components/chat/mixins/audio";
+import Vue2TouchEvents from "vue2-touch-events";
+
+Vue.use(Vue2TouchEvents);
 
 export default {
   name: "ChatAddMessageBox",
 
-  mixins: [FileUpload, User, Form, PaidBlock],
+  mixins: [FileUpload, User, Form, PaidBlock, AudioMessageMixin],
 
   components: {
     MediaPreview,

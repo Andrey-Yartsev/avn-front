@@ -485,5 +485,18 @@
     }
   }
 
+  &-microphone {
+    &:after {
+      content: "\e8af";
+    }
+  }
+
+  &-stop {
+    color: $primary-color;
+    &:after {
+      content: '\e808';
+    }
+  }
+
 
 }

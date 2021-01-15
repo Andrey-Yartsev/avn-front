@@ -38,6 +38,27 @@
    .info-message {
      text-align: center;
    }
+
+   .audioRecordingBox {
+     height: 67px;
+     display: flex;
+     position: relative;
+     align-items: center;
+     justify-content: center;
+     overflow: hidden;
+     &__progress {
+       position: absolute;
+       background-color: rgba($gray, 0.3);
+       width: 100%;
+       height: 100%;
+       transform: translateX(-100%);
+       animation: progressBar 10s linear forwards;
+     }
+     &__label {
+       font-size: 1rem;
+       color: $primary-color
+     }
+   }
 }
 
 .chatForm {
@@ -97,7 +118,8 @@
     }
   }
 
-  .getPaid {
+  .getPaid,
+  .audioMessage {
     margin: 0;
     margin-right: 0.6em;
     flex-grow: 0;

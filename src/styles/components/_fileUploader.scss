@@ -127,6 +127,14 @@
       }
     }
   }
+  &.audio {
+    width: 100%;
+    overflow: initial;
+    flex: 1 0 100%;
+    audio {
+      width: 100%;
+    }
+  }
 }
 
 .filename {
@@ -260,7 +268,7 @@
 }
 
 .audio-file-preview {
-  padding-right: 60px;
+  padding-right: 70px;
 
   .attachment-status {
     left: auto;

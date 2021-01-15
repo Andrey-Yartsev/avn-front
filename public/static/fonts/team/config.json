@@ -1683,6 +1683,18 @@
       "css": "pencil",
       "code": 9998,
       "src": "fontawesome"
+    },
+    {
+      "uid": "lnyme20kl7kh26it9yrqk7at10k6i0sf",
+      "css": "award",
+      "code": 59399,
+      "src": "modernpics"
+    },
+    {
+      "uid": "b624a1e512819d410ddbee84e6918b9d",
+      "css": "stop",
+      "code": 59400,
+      "src": "fontawesome"
     }
   ]
 }
