@@ -280,6 +280,18 @@
     }
   }
 
+  &.streamSettings {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+      width: 100px;
+      margin-left: auto;
+    }
+    .root-btn__inside {
+      &:before {
+        content: "\e8a9";
+      }
+    }
+  }
+
   &.stream-visibility {
     .root-btn__inside {
       &:before {

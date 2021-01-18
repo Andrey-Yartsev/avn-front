@@ -30,6 +30,11 @@
             TIP Countdown: ${{ activeTipsGoal.amount.toFixed(2) }} for
             {{ activeTipsGoal.description }}
           </div>
+          <StreamTypeMenu
+            v-if="showSettingsMenu"
+            :streamType="streamType"
+            @setStreamType="setStreamType"
+          />
           <span
             role="button"
             id="close-stream-window"
@@ -128,6 +133,14 @@
             ></span>
           </span>
         </div>
+        <div class="mediasBottom" v-if="showSettingsMenu">
+          <button
+            class="btn alt lg block change-devices btn-center btn_fix-width-lg btn_not-bold btn_white btn_white-alfabg"
+            @click="connectToStream"
+          >
+            Join live video
+          </button>
+        </div>
         <!--
         <div v-else class="bottom-btns">
           <span role="button" class="bottom-btn" @click="openCommentForm">
@@ -161,6 +174,9 @@ import Comments from "@/components/common/streamComments/Index";
 import AddComment from "@/components/common/streamComments/AddComment";
 import { getCookie } from "@/components/pages/stream/utils/debug";
 import PaidBlock from "@/mixins/paidBlock";
+import StreamTypeMenu from "@/components/stream/StreamTypeMenu";
+
+const Hls = window.Hls;
 
 export default {
   name: "ViewStremModal",
@@ -169,7 +185,8 @@ export default {
     Loader,
     Tip,
     Comments,
-    AddComment
+    AddComment,
+    StreamTypeMenu
   },
   mixins: [userMixin, PaidBlock],
   data: () => ({
@@ -182,7 +199,9 @@ export default {
     showTip: false,
     connected: false,
     shownComments: [],
-    streamError: null
+    streamError: null,
+    streamType: "webrtc",
+    tryToJoin: false
   }),
   computed: {
     throttledLike() {
@@ -216,7 +235,20 @@ export default {
       return window.screen.availWidth > 1920 ? 10 : 5;
     },
     isTryToConnect() {
-      return !this.connected && !this.streamIsFinished && !this.streamError;
+      return (
+        !this.connected &&
+        !this.streamIsFinished &&
+        !this.streamError &&
+        this.tryToJoin
+      );
+    },
+    showSettingsMenu() {
+      return (
+        !this.connected &&
+        !this.streamIsFinished &&
+        !this.streamError &&
+        !this.tryToJoin
+      );
     }
   },
   methods: {
@@ -228,6 +260,10 @@ export default {
       }, 5000);
     },
     stopWatching() {
+      if (!this.viewModule) {
+        this.close();
+        return;
+      }
       const token = this.$store.state.auth.token;
       const id = this.$store.state.modal.stream.data.stream?.id;
       const userId = this.$store.state.modal.stream.data.stream.user.id;
@@ -381,131 +417,228 @@ export default {
     closeTip() {
       this.showTip = false;
       this.$refs.tip.reset();
+    },
+    connectToStream() {
+      this.tryToJoin = true;
+      //ex created
+      const onViewerKicked = () => {
+        this.$store.commit("lives/resetCurrentLive");
+
+        this.$store.dispatch("global/flashToast", {
+          text: "You were kicked by the broadcaster",
+          type: "error"
+        });
+        this.stopWatching();
+        this.$root.$emit("homePageReload");
+        this.$router.push("/");
+      };
+
+      this.viewModule = new ViewModule();
+      window.viewModule = this.viewModule; // export viewModule var to global space
+
+      this.viewModule.init({
+        debug: getCookie("debug") === window.atob("bWFzdGVyb2ZwdXBwZXRz"),
+        getApiUrl: undefined,
+        remoteVideo: document.getElementById("remotevideo"),
+        showLikes: false,
+        hlsPlayer: Hls,
+        showErrorMessage: message => {
+          this.$store.dispatch("global/setError", { message });
+        },
+        showInfoMessage: message => {
+          this.$store.dispatch("global/setError", { message });
+        },
+        onStreamEnd: (isError, isClient) => {
+          this.shouldUpdateTimer = false;
+          this.time = undefined;
+          this.connected = false;
+
+          if (!isClient) {
+            this.streamIsFinished = true;
+          }
+
+          if (isError) {
+            this.$store.dispatch("global/setError", {
+              message: "An error occurred"
+            });
+            this.close();
+          }
+        },
+        onViewerKicked: () => {
+          onViewerKicked();
+        },
+        onStreamInit: () => {
+          const token = this.$store.state.auth.token;
+          const id = this.$store.state.modal.stream.data.stream.id;
+          const userId = this.$store.state.modal.stream.data.stream.user.id;
+
+          this.$root.ws.send({
+            act: "stream_look",
+            stream_id: id,
+            stream_user_id: userId,
+            sess: token
+          });
+        },
+
+        onSetupStreamingSession: () => {},
+
+        onStreamError: error => {
+          this.streamError = error;
+          if (error.match(/403/)) {
+            this.$store.dispatch("global/setError", {
+              message: "You have been blocked on this stream"
+            });
+          } else {
+            this.$store.dispatch("global/setError", { message: error });
+          }
+        },
+
+        onInit: () => {},
+
+        onVideoPlaying: () => {
+          this.connected = true;
+          this.shouldUpdateTimer = true;
+          this.updateTimer();
+        },
+
+        onCleanUp: () => {},
+
+        onCustomDataGet: message => {
+          if (message.type === "kick.user" && this.user.id === message.userId) {
+            onViewerKicked();
+          }
+        }
+      });
+
+      // ex mounted
+      this.$store.commit("lives/resetCurrentLive");
+      const token = this.$store.state.auth.token;
+      const id = this.$store.state.modal.stream.data.stream.id;
+      this.viewModule.config.remoteVideo = document.getElementById(
+        "remotevideo"
+      );
+      document.body.classList.add("stream-viewer");
+
+      StreamApi.getStreamClientServerData(id, this.streamType, token).then(
+        serverData => {
+          this.viewModule.setConfig("serverData", serverData);
+          this.viewModule.viewStream();
+          this.updateLikes();
+        }
+      );
+    },
+    setStreamType(type) {
+      this.streamType = type;
     }
   },
   mounted() {
-    this.$store.commit("lives/resetCurrentLive");
-    const token = this.$store.state.auth.token;
-    const id = this.$store.state.modal.stream.data.stream.id;
-    this.viewModule.config.remoteVideo = document.getElementById("remotevideo");
-    document.body.classList.add("stream-viewer");
-
-    StreamApi.getStreamClientServerData(id, "webrtc", token).then(
-      serverData => {
-        this.viewModule.setConfig("serverData", serverData);
-        this.viewModule.viewStream();
-        this.updateLikes();
-      }
-    );
+    // this.$store.commit("lives/resetCurrentLive");
+    // const token = this.$store.state.auth.token;
+    // const id = this.$store.state.modal.stream.data.stream.id;
+    // this.viewModule.config.remoteVideo = document.getElementById("remotevideo");
+    // document.body.classList.add("stream-viewer");
+    // StreamApi.getStreamClientServerData(id, this.streamType, token).then(
+    //   serverData => {
+    //     this.viewModule.setConfig("serverData", serverData);
+    //     this.viewModule.viewStream();
+    //     this.updateLikes();
+    //   }
+    // );
   },
   created() {
-    const onViewerKicked = () => {
-      this.$store.commit("lives/resetCurrentLive");
-
-      this.$store.dispatch("global/flashToast", {
-        text: "You were kicked by the broadcaster",
-        type: "error"
-      });
-      this.stopWatching();
-      this.$root.$emit("homePageReload");
-      this.$router.push("/");
-    };
-
-    this.viewModule = new ViewModule();
-    window.viewModule = this.viewModule; // export viewModule var to global space
-
-    this.viewModule.init({
-      debug: getCookie("debug") === window.atob("bWFzdGVyb2ZwdXBwZXRz"),
-      getApiUrl: undefined,
-      remoteVideo: document.getElementById("remotevideo"),
-      showLikes: false,
-      showErrorMessage: message => {
-        this.$store.dispatch("global/setError", { message });
-      },
-      showInfoMessage: message => {
-        this.$store.dispatch("global/setError", { message });
-      },
-      onStreamEnd: (isError, isClient) => {
-        this.shouldUpdateTimer = false;
-        this.time = undefined;
-        this.connected = false;
-
-        if (!isClient) {
-          this.streamIsFinished = true;
-        }
-
-        if (isError) {
-          this.$store.dispatch("global/setError", {
-            message: "An error occurred"
-          });
-          this.close();
-        }
-      },
-      onViewerKicked: () => {
-        onViewerKicked();
-      },
-      onStreamInit: () => {
-        const token = this.$store.state.auth.token;
-        const id = this.$store.state.modal.stream.data.stream.id;
-        const userId = this.$store.state.modal.stream.data.stream.user.id;
-
-        this.$root.ws.send({
-          act: "stream_look",
-          stream_id: id,
-          stream_user_id: userId,
-          sess: token
-        });
-      },
-
-      onSetupStreamingSession: () => {},
-
-      onStreamError: error => {
-        this.streamError = error;
-        if (error.match(/403/)) {
-          this.$store.dispatch("global/setError", {
-            message: "You have been blocked on this stream"
-          });
-        } else {
-          this.$store.dispatch("global/setError", { message: error });
-        }
-      },
-
-      // onRemoteVideoUnavailable: () => {
-      //   this.connected = false;
-      //   if (!this.$store.state.modal.stream.data.stream) {
-      //     return;
-      //   }
-      //   this.$store.dispatch("global/setError", {
-      //     message: "No remote video available"
-      //   });
-      // },
-
-      onInit: () => {},
-
-      onVideoPlaying: () => {
-        this.connected = true;
-        this.shouldUpdateTimer = true;
-        this.updateTimer();
-      },
-
-      onCleanUp: () => {},
-
-      onCustomDataGet: message => {
-        if (message.type === "kick.user" && this.user.id === message.userId) {
-          onViewerKicked();
-        }
-
-        // if (message.type === "video") {
-        //   document.getElementById("video-muted").innerText = message.is_mute
-        //     ? "Video muted"
-        //     : "Video not muted";
-        // } else if (message.type === "audio") {
-        //   document.getElementById("audio-muted").innerText = message.is_mute
-        //     ? "Audio muted"
-        //     : "Audio not muted";
-        // }
-      }
-    });
+    // const onViewerKicked = () => {
+    //   this.$store.commit("lives/resetCurrentLive");
+    //   this.$store.dispatch("global/flashToast", {
+    //     text: "You were kicked by the broadcaster",
+    //     type: "error"
+    //   });
+    //   this.stopWatching();
+    //   this.$root.$emit("homePageReload");
+    //   this.$router.push("/");
+    // };
+    // this.viewModule = new ViewModule();
+    // window.viewModule = this.viewModule; // export viewModule var to global space
+    // this.viewModule.init({
+    //   debug: getCookie("debug") === window.atob("bWFzdGVyb2ZwdXBwZXRz"),
+    //   getApiUrl: undefined,
+    //   remoteVideo: document.getElementById("remotevideo"),
+    //   showLikes: false,
+    //   showErrorMessage: message => {
+    //     this.$store.dispatch("global/setError", { message });
+    //   },
+    //   showInfoMessage: message => {
+    //     this.$store.dispatch("global/setError", { message });
+    //   },
+    //   onStreamEnd: (isError, isClient) => {
+    //     this.shouldUpdateTimer = false;
+    //     this.time = undefined;
+    //     this.connected = false;
+    //     if (!isClient) {
+    //       this.streamIsFinished = true;
+    //     }
+    //     if (isError) {
+    //       this.$store.dispatch("global/setError", {
+    //         message: "An error occurred"
+    //       });
+    //       this.close();
+    //     }
+    //   },
+    //   onViewerKicked: () => {
+    //     onViewerKicked();
+    //   },
+    //   onStreamInit: () => {
+    //     const token = this.$store.state.auth.token;
+    //     const id = this.$store.state.modal.stream.data.stream.id;
+    //     const userId = this.$store.state.modal.stream.data.stream.user.id;
+    //     this.$root.ws.send({
+    //       act: "stream_look",
+    //       stream_id: id,
+    //       stream_user_id: userId,
+    //       sess: token
+    //     });
+    //   },
+    //   onSetupStreamingSession: () => {},
+    //   onStreamError: error => {
+    //     this.streamError = error;
+    //     if (error.match(/403/)) {
+    //       this.$store.dispatch("global/setError", {
+    //         message: "You have been blocked on this stream"
+    //       });
+    //     } else {
+    //       this.$store.dispatch("global/setError", { message: error });
+    //     }
+    //   },
+    //   // onRemoteVideoUnavailable: () => {
+    //   //   this.connected = false;
+    //   //   if (!this.$store.state.modal.stream.data.stream) {
+    //   //     return;
+    //   //   }
+    //   //   this.$store.dispatch("global/setError", {
+    //   //     message: "No remote video available"
+    //   //   });
+    //   // },
+    //   onInit: () => {},
+    //   onVideoPlaying: () => {
+    //     this.connected = true;
+    //     this.shouldUpdateTimer = true;
+    //     this.updateTimer();
+    //   },
+    //   onCleanUp: () => {},
+    //   onCustomDataGet: message => {
+    //     if (message.type === "kick.user" && this.user.id === message.userId) {
+    //       onViewerKicked();
+    //     }
+    //     // if (message.type === "video") {
+    //     //   document.getElementById("video-muted").innerText = message.is_mute
+    //     //     ? "Video muted"
+    //     //     : "Video not muted";
+    //     // } else if (message.type === "audio") {
+    //     //   document.getElementById("audio-muted").innerText = message.is_mute
+    //     //     ? "Audio muted"
+    //     //     : "Audio not muted";
+    //     // }
+    //   }
+    // });
   },
   beforeDestroy() {
     this.$store.commit("lives/goal", {});
