@@ -441,7 +441,7 @@ export default {
         remoteVideo: document.getElementById("remotevideo"),
         showLikes: false,
         hlsPlayer: Hls,
-        withCredentials: this.isWithCredentials(),
+        withCredentials: this.streamType !== "hls",
         showErrorMessage: message => {
           this.$store.dispatch("global/setError", { message });
         },
@@ -529,13 +529,6 @@ export default {
     },
     setStreamType(type) {
       this.streamType = type;
-    },
-    isWithCredentials() {
-      if (process.env.NODE_ENV !== "production") {
-        return this.streamType !== "hls";
-      } else {
-        return this.streamType === "hls";
-      }
     }
   },
   mounted() {
