@@ -9,14 +9,18 @@
           :searchable="false"
           class="voting-select"
         />
-        <div class="subtitle">Click on image to Vote</div>
+        <div v-if="!isGay" class="subtitle">Click on image to Vote</div>
       </div>
-      <h2>Please choose your top {{ maxVotes }}</h2>
-      <div>
+      <h2 v-if="!isGay">Please choose your top {{ maxVotes }}</h2>
+      <div v-if="!isGay">
         Voting ends on {{ getEndVotingDate }} 2021 12:00PM. You can cast
         {{ maxVotes }} votes per day for this category. You have
         {{ remaining }} votes remaining
       </div>
+      <h2 v-else class="closedAwardsTitle">
+        Voting is now closed. Winners will be announced at the 2021 GayVN
+        Awards.
+      </h2>
       <div class="title-block">
         <h1>{{ currentCategory ? currentCategory.title : "..." }}</h1>
         <button
@@ -52,7 +56,11 @@
             :small="true"
           />
           <div class="inner">
-            <span class="btn-vote" @click="vote(nominee.nomineeId)" />
+            <span
+              v-if="!isGay"
+              class="btn-vote"
+              @click="vote(nominee.nomineeId)"
+            />
             <span
               class="btn"
               v-if="showFinishBtn(nominee.nomineeId)"
@@ -223,6 +231,9 @@ export default {
   },
   methods: {
     vote(id, initVote) {
+      if (this.isGay) {
+        return;
+      }
       if (!this.user) {
         this.$store.dispatch("modal/show", {
           name: "login"
