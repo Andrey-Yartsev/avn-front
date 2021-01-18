@@ -175,11 +175,10 @@ import AddComment from "@/components/common/streamComments/AddComment";
 import { getCookie } from "@/components/pages/stream/utils/debug";
 import PaidBlock from "@/mixins/paidBlock";
 import StreamTypeMenu from "@/components/stream/StreamTypeMenu";
-
-const Hls = window.Hls;
+import Hls from "hls.js";
 
 export default {
-  name: "ViewStremModal",
+  name: "ViewStreamModal",
   components: {
     Modal,
     Loader,
