@@ -433,7 +433,7 @@ export default {
         this.$router.push("/");
       };
 
-      this.viewModule = new ViewModule();
+      this.viewModule = new ViewModule(this.streamType);
       window.viewModule = this.viewModule; // export viewModule var to global space
 
       this.viewModule.init({
@@ -442,6 +442,7 @@ export default {
         remoteVideo: document.getElementById("remotevideo"),
         showLikes: false,
         hlsPlayer: Hls,
+        withCredentials: this.streamType !== "hls",
         showErrorMessage: message => {
           this.$store.dispatch("global/setError", { message });
         },
