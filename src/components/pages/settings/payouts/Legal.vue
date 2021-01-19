@@ -49,7 +49,6 @@
                     type="datetime"
                     v-model="birthDate"
                     input-class=""
-                    v-validate="'required'"
                     use12-hour
                     :max-datetime="maxDate"
                     :flow="['year', 'month', 'date']"
@@ -71,7 +70,7 @@
                 <span class="select-wrapper">
                   <select
                     :disabled="legalExists"
-                    name="type"
+                    name="legal-type"
                     id="legal-type"
                     required
                     v-model="type"
@@ -170,8 +169,8 @@
                 <span class="select-wrapper">
                   <select
                     :disabled="legalExists"
-                    name="type"
-                    id="legal-type"
+                    name="document-type"
+                    id="document-type"
                     required
                     v-model="backsideDocRequired"
                     v-validate="'required'"
@@ -512,7 +511,7 @@ export default {
       return this.$store.state.payouts.legal.fetchResult;
     },
     legalExists() {
-      return this.legal && this.legal.type;
+      return !!this.legal?.type;
     },
     showABNOptions() {
       return (
