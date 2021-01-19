@@ -152,13 +152,13 @@
                       >GayVN Awards Voting
                     </router-link>
                   </template>
-                  <router-link
+                  <!-- <router-link
                     v-else
                     class="user-menu-item user-menu-item__award-gayvn icn-item"
                     to="/gayvn_awards/nominations"
                   >
                     GayVN Awards
-                  </router-link>
+                  </router-link> -->
                 </template>
               </template>
 
