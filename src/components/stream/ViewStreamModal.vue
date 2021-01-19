@@ -199,7 +199,7 @@ export default {
     connected: false,
     shownComments: [],
     streamError: null,
-    streamType: "webrtc",
+    streamType: "hls",
     tryToJoin: false
   }),
   computed: {

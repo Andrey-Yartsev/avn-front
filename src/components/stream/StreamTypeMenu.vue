@@ -57,7 +57,7 @@ export default {
   props: {
     streamType: {
       type: String,
-      default: "webrtc"
+      default: "hls"
     }
   },
   data() {
