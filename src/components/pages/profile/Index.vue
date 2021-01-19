@@ -339,6 +339,7 @@ import MediaPage from "@/components/common/profile/media/Index";
 import GroupsPage from "@/components/common/profile/groups/Index";
 import TipAuto from "@/mixins/tipAuto";
 import VotingMixin from "@/mixins/voting";
+import AccessMixin from "@/components/stream/mixins/access";
 
 export default {
   name: "ProfileHome",
@@ -350,7 +351,8 @@ export default {
     WsMixin,
     Visibility,
     TipAuto,
-    VotingMixin
+    VotingMixin,
+    AccessMixin
   ],
 
   components: {
@@ -395,7 +397,11 @@ export default {
       return this.$route.params.username;
     },
     pageName() {
-      return this.$route.params.page;
+      let name = this.$route.params.page;
+      if (name === "live") {
+        name = "posts";
+      }
+      return name;
     },
     isPostPage() {
       return !this.pageName || this.pageName === "posts";
@@ -729,9 +735,25 @@ export default {
       this.$nextTick(() => {
         this.initPosts();
       });
+    },
+    tryToOpenLive() {
+      if (this.$route.params.page !== "live") {
+        return;
+      }
+      if (this.profile?.currentStream?.id) {
+        this.tryOpenStream(this.profile, this.profile.currentStream, stream => {
+          this.openStream(stream);
+        });
+      } else {
+        this.$store.dispatch("global/flashToast", {
+          text: "User is not currently broadcasting",
+          type: "warning"
+        });
+      }
     }
   },
   created() {
+    this.tryToOpenLive();
     this.initContent();
     if (this.profile) {
       this.$store.dispatch("gender/initProfile", this.profile);
