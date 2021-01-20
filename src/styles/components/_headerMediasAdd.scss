@@ -158,12 +158,22 @@
   }
 
   .notifications {
-    margin-top: -3px;
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       margin-top: -17px;
     }
-    .menu {
-      margin-top: 12px;
+    @include media-breakpoint-down($tablet-breakpoint-dcrs) {
+      .menu {
+        margin-top: -12px;
+      }
+    }
+
+    @include media-breakpoint-up($desktop-breakpoint-dcrs) {
+      margin-top: -3px;
+      .menu {
+        left: 20%;
+        margin-right: 30px;
+        margin-top: 6px;
+      }
     }
   }
   @include media-breakpoint-up($desktop-breakpoint-dcrs) {
